@@ -1,7 +1,9 @@
 package diamang.dbcp;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -22,5 +24,24 @@ public class DbcpBean {
 	public static Connection getConn() throws SQLException {
 		Connection con=ds.getConnection();
 		return con;
+	}
+	
+	public static void closeConn(Connection con) {
+		try {
+			if(con!=null) {
+				con.close();
+			}
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+		}
+	}
+	public static void closeConn(Connection con,Statement stmt,ResultSet rs) {
+		try {
+			if(rs!=null) rs.close();
+			if(stmt!=null) stmt.close();
+			if(con!=null) con.close();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+		}
 	}
 }
