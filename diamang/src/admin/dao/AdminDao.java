@@ -16,6 +16,7 @@ public class AdminDao {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
+			System.out.println(pstmt.executeUpdate());
 			return pstmt.executeUpdate();
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());

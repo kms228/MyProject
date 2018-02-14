@@ -15,25 +15,40 @@ import admin.dao.AdminDao;
 public class LoginController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		
 		String cmd = request.getParameter("cmd");
+		
 		if(cmd.equals("login")) {
 			login(request,response);
+			System.out.println("loginController:로그인을 위한 입력한 정보확인");
+		
+		}else if(cmd.equals("logout")) {
+			System.out.println("loginController:명령:로그아웃");
+			HttpSession session = request.getSession();
+			session.invalidate();
+			System.out.println("loginController:명령:로그아웃 후 기본페이지로 이동");
+			response.sendRedirect(request.getContextPath()+"/admin/layout_kms.jsp?page=page/home_kms.jsp");
 		}
 	}
 	protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
+		System.out.println(id);
+		System.out.println(pwd);
 		AdminDao dao = new AdminDao();
 		int n = dao.login(id, pwd);
-		if(n==1) {//회원인경우
+		
+		if(n>0) {//회원인경우
 			HttpSession session = request.getSession();
 			session.setAttribute("id",id);
 			//layout 페이지로 이동하기
-			response.sendRedirect(request.getContextPath()+"/admin/layout_kms.jsp?page=loginOk&id"+id);
+			System.out.println("loginController:로그인 후 페이지 이동 전");
+			response.sendRedirect(request.getContextPath()+"/admin/layout_kms.jsp?page=page/loginOk.jsp");
+			System.out.println("loginController:로그인 후 페이지 이동 후");
 		}else if(n==0) {//회원이아닌경우
 			request.setAttribute("errMsg", "아이디 또는 비밀번호가 일치하지 않아요.");
 			request.getRequestDispatcher("/admin/page/layout_kms.jsp").forward(request, response);
+		
 		}else {//오류가 발생된 경우
 			request.setAttribute("errMsg", "오류로 인해 로그인에 실패했습니다..");
 			request.getRequestDispatcher("/admin/page/layout_kms.jsp").forward(request, response);
