@@ -8,6 +8,7 @@
 			<h4>로그인(세션)안하면 뜨는기본화면</h4>			
 		</c:when>
 		<c:otherwise>
+			<br><br><br>
 			<h3>${sessionScope.id }님 환영합니다.</h3>
 		</c:otherwise>
 	</c:choose>
