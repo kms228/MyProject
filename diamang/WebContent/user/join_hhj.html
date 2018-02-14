@@ -14,6 +14,9 @@
 		var regid=/^[A-Za-z0-9+]*$/;
 		var pwd=document.frm.pwd;
 		var pwd2=document.frm.pwd2;
+		var name=document.frm.name;
+		var birthday=document.frm.birthday;
+		var email=document.frm.email;
 		//아이디 한글X
 		if(!regid.test(id.value)){
 			alert("아이디는 영어와 숫자로 입력해주세요.");
@@ -38,6 +41,24 @@
 			pwd2.focus();
 			return false;
 		}	
+		//이름 빈칸검사
+		if(name.value.length==0){
+			alert("이름을 입력하세요.");
+			name.focus();
+			return false;
+		}
+		//생년월일 빈칸검사
+		if(bithday.value.length==0){
+			alert("생년월일을 입력하세요.");
+			birthday.focus();
+			return false;
+		}
+		//이메일 검사
+		if(email.value.length==0){
+			alert("이메일을 입력하세요.");
+			email.focus();
+			return false;
+		}
 	}//function
 	
 	//////////////ajax
@@ -46,21 +67,42 @@
 		var id = document.getElementsByName("id")[0].value;
 		xhr=new XMLHttpRequest();
 		xhr.onreadystatechange=callback;
-		xhr.open("get","",true);
+		xhr.open("get","idcheck.jsp?id="+id,true);
 		xhr.send();
 	}
 	function callback(){
 		if(xhr.readyState==4 && xhr.status==200){
-			var idspan=xhr.responseText;
-			var json=eval('('+idsapn+')');
-			var idcheck=document.getElementById("idcheck");
+			var result=xhr.responseText;
+			var json=eval('('+result+')');
+			var idsapn=document.getElementById("idsapn");
 			if(json.using==true){
-				idcheck.innerHTML="사용중인 아이디입니다.";
+				idsapn.innerHTML="사용중인 아이디입니다.";
 			}else{
-				idcheck.innerHTML="사용가능한 아이디입니다.";
+				idsapn.innerHTML="사용가능한 아이디입니다.";
 			}
 		}
 	}
+	var xhr2 = null;
+	function emailcheck() {
+		var id = document.getElementsByName("email")[0].value;
+		xhr=new XMLHttpRequest();
+		xhr.onreadystatechange=callback;
+		xhr.open("get","emailcheck.jsp?id="+id,true);
+		xhr.send();
+	}
+	function callback(){
+		if(xhr.readyState==4 && xhr.status==200){
+			var result=xhr.responseText;
+			var json=eval('('+result+')');
+			var emailsapn=document.getElementById("emailsapn");
+			if(json.using==true){
+				emailsapn.innerHTML="사용중인 이메일입니다.";
+			}else{
+				emailsapn.innerHTML="사용가능한 이메일입니다ㅋ.";
+			}
+		}
+	}
+	
 	
 	
 	
@@ -70,15 +112,21 @@
 <body>
 <div>
 <h1>회원가입</h1>
-<form method="post" action="??" >
+<form method="post" name="frm" onsubmit="return join()" action="??" >
 
 <p><label for="id">아이디 </label><input type="text" name="id">
-<input type="button" value="중복검사" onclick="idcheck()"><span id="idsapn" style="font-size: 12px;color:red"></span></p>
+<input type="button" value="중복검사" onclick="idcheck()">
+<span id="idsapn" style="font-size: 12px;color:red"></span></p>
+
 <p><label for="pwd">비밀번호 </label><input type="password" name="pwd"><span id="pwdsapn"></span></p>
 <p><label for="pwd2">비밀번호 확인 </label><input type="password" name="pwd2"><span id="pwd2span"></span></p>
 <p><label for="name">이름 </label><input type="text" name="name"><span id="namesapn"></span></p>
 <p><label for="birthday">생일년월일</label><input type="text" name="birthday"></p>
-<p><label for="email">이메일주소</label><input type="text" name="email"></p>
+
+<p><label for="email">이메일주소</label><input type="text" name="email">
+<input type="button" value="중복검사" onclick="emailcheck()">
+<span id="emailsapn" style="font-size: 12px;color:red"></span></p>
+
 <p><label for="address">집주소</label><input type="text" name="address"></p>
 <p><label for="phone">핸드폰번호</label><input type="text" name="phone"></p>
 <br>
