@@ -6,7 +6,7 @@
 	System.out.println(id);
 	if(id==null){
 %>
-		<h3>admin페이지</h3>
+		<h1>body</h1>
 		<h4>로그인 ㄱㄱ</h4>			
 <%
 	}else{

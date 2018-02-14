@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import admin.dao.AdminDao;
 @WebServlet("/login.do")
@@ -18,15 +19,17 @@ public class LoginController extends HttpServlet {
 		String pwd = request.getParameter("pwd");
 		AdminDao dao = new AdminDao();
 		int n = dao.login(id, pwd);
-		if(n>0) {
-		//	request.setAttribute();
-			
-		//	RequestDispatcher rd = request.getRequestDispatcher();
-		//	rd.forward(request, response);
-		}else {
-			
-		
-		
+		if(n==1) {//회원인경우
+			HttpSession session = request.getSession();
+			session.setAttribute("id",id);
+			//layout 페이지로 이동하기
+			response.sendRedirect(request.getContextPath()+"/admin/page/layout_kms.jsp?page=loginOk");
+		}else if(n==0) {//회원이아닌경우
+			request.setAttribute("errMsg", "아이디 또는 비밀번호가 일치하지 않아요.");
+			request.getRequestDispatcher("/admin/page/layout_kms.jsp").forward(request, response);
+		}else {//오류가 발생된 경우
+			request.setAttribute("errMsg", "오류로 인해 로그인에 실패했습니다..");
+			request.getRequestDispatcher("/admin/page/layout_kms.jsp").forward(request, response);
 		}
 	}
 }
