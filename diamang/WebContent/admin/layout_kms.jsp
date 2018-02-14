@@ -11,7 +11,7 @@
 <%
 	String spage=request.getParameter("page");
 	if(spage==null){
-		spage="home.jsp";
+		spage="home_kms.jsp";
 	}
 %>
 <div id="wrap">
