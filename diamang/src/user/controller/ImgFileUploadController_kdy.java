@@ -1,4 +1,4 @@
-package user.diamang.controller;
+package user.controller;
 
 import java.io.IOException;
 
@@ -36,6 +36,8 @@ public class ImgFileUploadController_kdy extends HttpServlet{
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		String snum = req.getParameter("rv_num");
+		int star = Integer.parseInt(req.getParameter("star"));
+		System.out.println(star);
 		
 		int num = 0;
 		int ref = 0;

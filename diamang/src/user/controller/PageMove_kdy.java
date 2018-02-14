@@ -1,4 +1,4 @@
-package user.diamang.controller;
+package user.controller;
 
 import java.io.IOException;
 

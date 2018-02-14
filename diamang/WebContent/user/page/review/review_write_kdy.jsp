@@ -12,9 +12,17 @@
 	</div>
 	<div>
 		제목<input type="text" name="title"><br>
+		별점
+		<input type="radio" name="star" value="1">☆
+		<input type="radio" name="star" value="2">☆☆
+		<input type="radio" name="star" value="3">☆☆☆
+		<input type="radio" name="star" value="4">☆☆☆☆
+		<input type="radio" name="star" value="5">☆☆☆☆☆
+		<br>
 		<textarea rows="10" cols="60" name="content"></textarea><br>
 		첨부파일1<input type="file" name="file1"><br>
 		<input type="submit" value="등록">
+		
 	</div>
 	</form>
 <script>
