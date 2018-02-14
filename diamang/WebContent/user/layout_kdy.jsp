@@ -13,7 +13,7 @@
 		<jsp:include page="page/header_kdy.jsp"></jsp:include>
 	</div>
 	<div id="content">
-		<jsp:include page="page/main_kdy.jsp"></jsp:include>
+		<jsp:include page="${cmd }"></jsp:include>
 	</div>
 	<div id="footer">
 		<jsp:include page="page/footer_kdy.jsp"></jsp:include>	
