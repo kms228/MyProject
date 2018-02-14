@@ -8,12 +8,18 @@
 <link rel="stylesheet" type="text/css" href="css/common_kdy.css">
 </head>
 <body>
+<%
+	String spage=request.getParameter("page");
+	if(spage==null){
+		spage="home.jsp";
+	}
+%>
 <div id="wrap">
 	<div id="header">
 		<jsp:include page="page/header_kms.jsp"></jsp:include>
 	</div>
 	<div id="body">
-		<jsp:include page="page/body_kms.jsp"></jsp:include>
+		<jsp:include page="<%=spage %>"></jsp:include>
 	</div>
 	<div id="footer">
 		<jsp:include page="page/footer_kms.jsp"></jsp:include>	
