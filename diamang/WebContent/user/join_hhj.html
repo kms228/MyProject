@@ -47,7 +47,7 @@
 		xhr=new XMLHttpRequest();
 		xhr.onreadystatechange=callback;
 		xhr.open("get","",true);
-		xhr.send()
+		xhr.send();
 	}
 	function callback(){
 		if(xhr.readyState==4 && xhr.status==200){
