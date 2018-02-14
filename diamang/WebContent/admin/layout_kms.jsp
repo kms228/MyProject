@@ -6,22 +6,26 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../css/common_kms.css">
+<link rel="stylesheet" type="text/css" href="css/common_kms.css">
 </head>
 <body>
-
-<%
+<%--
 	String spage=request.getParameter("page");
 	if(spage==null){
 		spage="page/home_kms.jsp";
 	}
-%>
-<div id="wrap">
+--%>
+<c:set var="spage" value="${param.page }"/>
+<c:if test="${empty spage }">
+	<c:set var="spage" value="page/home_kms.jsp"/>
+</c:if>
+
+<div id="wrap">	
 	<div id="header">
 		<jsp:include page="page/header_kms.jsp"></jsp:include>
 	</div>
 	<div id="body">
-		<jsp:include page="<%=spage %>"></jsp:include>
+		<jsp:include page="${spage }"></jsp:include>
 	</div>
 	<div id="footer">
 		<jsp:include page="page/footer_kms.jsp"></jsp:include>	
