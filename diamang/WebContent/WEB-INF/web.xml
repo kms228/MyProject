@@ -17,7 +17,7 @@
 	
 	<servlet-mapping>
 		<servlet-name>pageMove</servlet-name>
-		<url-pattern>/main.do</url-pattern>
+		<url-pattern>/move.do</url-pattern>
 	</servlet-mapping>
 
 </web-app>

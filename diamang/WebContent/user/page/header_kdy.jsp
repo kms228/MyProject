@@ -11,7 +11,7 @@
 	<li><a href="">목걸이</a></li>
 	<li><a href="">반지</a></li>
 	<li><a href="">커플</a></li>
-	<li><a href="">리뷰</a></li>
+	<li><a href="<%=request.getContextPath() %>/move.do?cmd=review_main">리뷰</a></li>
 </ul>
 	<br>
 <div>

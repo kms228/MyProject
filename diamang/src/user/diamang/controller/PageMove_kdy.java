@@ -14,9 +14,17 @@ public class PageMove_kdy extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 		System.out.println(1);
 		String cmd = req.getParameter("cmd");
+		String url = "page/main_kdy.jsp";
 		if(cmd==null) {
 			System.out.println(2);
-			String url = "page/main_kdy.jsp";
+			req.setAttribute("cmd", url);
+			req.getRequestDispatcher("/user/layout_kdy.jsp").forward(req, resp);
+		}else if(cmd.equals("review_main")) {
+			url = "page/review/review_main_kdy.jsp";
+			req.setAttribute("cmd", url);
+			req.getRequestDispatcher("/user/layout_kdy.jsp").forward(req, resp);
+		}else if(cmd.equals("review_write")){
+			url = "page/review/review_write_kdy.jsp";
 			req.setAttribute("cmd", url);
 			req.getRequestDispatcher("/user/layout_kdy.jsp").forward(req, resp);
 		}
