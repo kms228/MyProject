@@ -8,8 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/main.do")
-public class pageMove_kdy extends HttpServlet {
+public class PageMove_kdy extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
@@ -17,10 +16,9 @@ public class pageMove_kdy extends HttpServlet {
 		String cmd = req.getParameter("cmd");
 		if(cmd==null) {
 			System.out.println(2);
-			String url = req.getContextPath()+"/user/page/main_kdy.jsp";
+			String url = "page/main_kdy.jsp";
 			req.setAttribute("cmd", url);
-			req.getRequestDispatcher("user/layout_kdy.jsp").forward(req, resp);
-			System.out.println(3);
+			req.getRequestDispatcher("/user/layout_kdy.jsp").forward(req, resp);
 		}
 	}
 }
