@@ -6,6 +6,18 @@
 <style>
 	#iteminfo{width:100%; height:100px;border:1px solid gray;}
 </style>
+<script>
+	var xhr=null;
+	function add(){
+		var id = "<%=(String)session.getAttribute("id")%>"
+		if(id==null){
+			var commId = document.getElementById("commId").value;
+			var commPwd = document.getElementById("commPwd").value;
+		}
+		var comments = document.getElementById("comments").value;
+	}
+
+</script>
 <div>
 	<div id="iteminfo">
 	<input type="button" value="상품상세보기">
@@ -36,5 +48,13 @@
 		</table>
 		<a href="<%=request.getContextPath()%>/review_list.do">목록</a>&nbsp;&nbsp;	
 		<a href="<%=request.getContextPath()%>/imgUpload.do?rv_num=${vo.rv_num}&ref=${vo.ref}&lev=${vo.lev}&step=${vo.step}">답글</a>
+	</div>
+	<div id="commList"></div>
+	<div id="commAdd">
+	<c:if test="${empty sessionScope.id }">
+			아이디<input type="text" id="commId">&nbsp;&nbsp;비밀번호<input type="password" id="commPwd">  
+		</c:if><br>
+		<textarea rows="4" cols="120" id="comments"></textarea>
+		<input type="button" value="등록" onclick="add()">
 	</div>
 </div>
