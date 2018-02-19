@@ -6,8 +6,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/common_kms.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/admin/css/common_kms.css">
+
+<c:if test="${!empty errMsg }">
+	<script type="text/javascript">alert("${errMsg}");</script>
+</c:if>
 </head>
+
 <body>
 <%--
 	String spage=request.getParameter("page");
@@ -15,12 +20,14 @@
 		spage="page/home_kms.jsp";
 	}
 --%>
+
+<div id="wrap">	
 <c:set var="spage" value="${param.page }"/>
+<c:set var="errMsg" value="${param.errMsg }"/>
 <c:if test="${empty spage }">
 	<c:set var="spage" value="page/home_kms.jsp"/>
 </c:if>
 
-<div id="wrap">	
 	<div id="header">
 		<jsp:include page="page/header_kms.jsp"></jsp:include>
 	</div>
