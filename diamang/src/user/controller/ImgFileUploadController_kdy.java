@@ -29,7 +29,6 @@ public class ImgFileUploadController_kdy extends HttpServlet{
 		req.setCharacterEncoding("utf-8");
 		System.out.println("imgFileUploadController Á¢¼Ó");
 		String uploadPath=req.getServletContext().getRealPath("user/upload");
-		System.out.println(uploadPath);
 		MultipartRequest mr=new MultipartRequest(
 				req,
 				uploadPath,
@@ -64,7 +63,7 @@ public class ImgFileUploadController_kdy extends HttpServlet{
 			lev = Integer.parseInt(mr.getParameter("lev"));
 			step = Integer.parseInt(mr.getParameter("step"));
 		}
-		RvBoardVo_kdy vo = new RvBoardVo_kdy(rv_num, 0, title, content, null, 0, ref, lev, step, star);
+		RvBoardVo_kdy vo = new RvBoardVo_kdy(rv_num, 1, title, content, null, 0, ref, lev, step, star);
 		RvBoardDao_kdy dao=new RvBoardDao_kdy();
 		int n = dao.insert(vo);
 		String result = "fail";

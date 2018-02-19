@@ -21,11 +21,11 @@ public class RvBoardDao_kdy {
 		ResultSet rs= null;
 		
 		try {
-			//con = DbcpBean.getConn();
+			con = DbcpBean.getConn();
 			
-			Class.forName("oracle.jdbc.OracleDriver");
-			String url="jdbc:oracle:thin:@localhost:1521:xe";
-			con=DriverManager.getConnection(url,"scott","tiger");
+//			Class.forName("oracle.jdbc.OracleDriver");
+//			String url="jdbc:oracle:thin:@localhost:1521:xe";
+//			con=DriverManager.getConnection(url,"scott","tiger");
 			
 			String sql = "select NVL(max(rv_num),0) maxnum from review";
 			pstmt = con.prepareStatement(sql);
@@ -33,76 +33,76 @@ public class RvBoardDao_kdy {
 			rs.next();
 			int maxnum=rs.getInt("maxnum");
 			return maxnum;
-		}catch (ClassNotFoundException ce) {
-			System.out.println((ce.getMessage()));
-			return -1;
+//		}catch (ClassNotFoundException ce) {
+//			System.out.println((ce.getMessage()));
+//			return -1;
 		}catch (SQLException se) {
 			System.out.println(se.getMessage());
 			return -1;
 		}finally {
-			try {
-				if(rs!=null) rs.close();
-				if(pstmt!=null) pstmt.close();
-				if(con!=null) con.close();
-			}catch(SQLException se) {
-				System.out.println(se.getMessage());
-			}
-			//DbcpBean.closeConn(con,pstmt,rs);
+//			try {
+//				if(rs!=null) rs.close();
+//				if(pstmt!=null) pstmt.close();
+//				if(con!=null) con.close();
+//			}catch(SQLException se) {
+//				System.out.println(se.getMessage());
+//			}
+			DbcpBean.closeConn(con,pstmt,rs);
 		}
 	}
 	
 	//전체 글 갯수 구하는 메소드
 	public int getCount() {
 		
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs= null;
+//		
+//		try {
+//			Class.forName("oracle.jdbc.OracleDriver");
+//			String url="jdbc:oracle:thin:@localhost:1521:xe";
+//			con=DriverManager.getConnection(url,"scott","tiger");
+//			
+//			String sql = "select NVL(count(rv_num),0) cnt from review";
+//			pstmt = con.prepareStatement(sql);
+//			rs=pstmt.executeQuery();
+//			rs.next();
+//			int cnt=rs.getInt("cnt");
+//			return cnt;
+//		}catch (ClassNotFoundException ce) {
+//			System.out.println((ce.getMessage()));
+//			return -1;
+//		}catch (SQLException se) {
+//			System.out.println(se.getMessage());
+//			return -1;
+//		}finally {
+//			try {
+//				if(rs!=null) rs.close();
+//				if(pstmt!=null) pstmt.close();
+//				if(con!=null) con.close();
+//			}catch(SQLException se) {
+//				System.out.println(se.getMessage());
+//			}
+//		}
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs= null;
 		
 		try {
-			Class.forName("oracle.jdbc.OracleDriver");
-			String url="jdbc:oracle:thin:@localhost:1521:xe";
-			con=DriverManager.getConnection(url,"scott","tiger");
-			
+			con = DbcpBean.getConn();
 			String sql = "select NVL(count(rv_num),0) cnt from review";
 			pstmt = con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			rs.next();
 			int cnt=rs.getInt("cnt");
 			return cnt;
-		}catch (ClassNotFoundException ce) {
-			System.out.println((ce.getMessage()));
-			return -1;
 		}catch (SQLException se) {
 			System.out.println(se.getMessage());
 			return -1;
 		}finally {
-			try {
-				if(rs!=null) rs.close();
-				if(pstmt!=null) pstmt.close();
-				if(con!=null) con.close();
-			}catch(SQLException se) {
-				System.out.println(se.getMessage());
-			}
+			DbcpBean.closeConn(con,pstmt,rs);
 		}
-		
-//		Connection con = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs= null;
-//		
-//		try {
-//			con = DbcpBean.getConn();
-//			String sql = "select NVL(count(num),0) cnt from guestboard";
-//			pstmt = con.prepareStatement(sql);
-//			rs=pstmt.executeQuery();
-//			rs.next();
-//			int cnt=rs.getInt("cnt");
-//			return cnt;
-//		}catch (SQLException se) {
-//			System.out.println(se.getMessage());
-//			return -1;
-//		}finally {
-//			DbcpBean.closeConn(con,pstmt,rs);
-//		}
 	}
 	
 	//리스트 보여주는 메소드
@@ -112,11 +112,55 @@ public class RvBoardDao_kdy {
 		PreparedStatement pstmt=null;
 		ResultSet rs= null;
 		
+//		try {
+//			Class.forName("oracle.jdbc.OracleDriver");
+//			String url="jdbc:oracle:thin:@localhost:1521:xe";
+//			con=DriverManager.getConnection(url,"scott","tiger");
+//			
+//			String sql = "select * from(" + 
+//					"select aa.*, rownum rnum from(" + 
+//					"select * from review order by ref desc,step asc)aa" + 
+//					") where rnum>=? and rnum<=?";
+//			pstmt = con.prepareStatement(sql);
+//			pstmt.setInt(1, startRow);
+//			pstmt.setInt(2, endRow);
+//			rs=pstmt.executeQuery();	
+//			ArrayList<RvBoardVo_kdy> list=new ArrayList<>();
+//			while(rs.next()) {
+//				int rv_num=rs.getInt("rv_num");
+//				int mnum = rs.getInt("mnum");
+//				MembersDao_kdy dao = new MembersDao_kdy();
+//				MembersVo_kdy vo = dao.MembersInfo(mnum);
+//				String writer = vo.getName();
+//				String title=rs.getString("title");
+//				String content = rs.getString("content");
+//				Date regdate = rs.getDate("regdate");
+//				int hit = rs.getInt("hit");
+//				int ref=rs.getInt("ref");
+//				int lev=rs.getInt("lev");
+//				int step=rs.getInt("step");
+//				RvBoardVo_kdy vo2 = new RvBoardVo_kdy(rv_num, mnum, title, writer, content, regdate, hit, ref, lev, step, 0);
+//				list.add(vo2);
+//			}
+//			return list;
+//		}catch (ClassNotFoundException ce) {
+//			System.out.println((ce.getMessage()));
+//			return null;
+//		}catch (SQLException se) {
+//			System.out.println(se.getMessage());
+//			return null;
+//		}finally {
+//			try {
+//				if(rs!=null) rs.close();
+//				if(pstmt!=null) pstmt.close();
+//				if(con!=null) con.close();
+//			}catch(SQLException se) {
+//				System.out.println(se.getMessage());
+//			}
+//		}
+		
 		try {
-			Class.forName("oracle.jdbc.OracleDriver");
-			String url="jdbc:oracle:thin:@localhost:1521:xe";
-			con=DriverManager.getConnection(url,"scott","tiger");
-			
+			con=DbcpBean.getConn();
 			String sql = "select * from(" + 
 					"select aa.*, rownum rnum from(" + 
 					"select * from review order by ref desc,step asc)aa" + 
@@ -143,52 +187,12 @@ public class RvBoardDao_kdy {
 				list.add(vo2);
 			}
 			return list;
-		}catch (ClassNotFoundException ce) {
-			System.out.println((ce.getMessage()));
-			return null;
-		}catch (SQLException se) {
+		}catch(SQLException se) {
 			System.out.println(se.getMessage());
 			return null;
 		}finally {
-			try {
-				if(rs!=null) rs.close();
-				if(pstmt!=null) pstmt.close();
-				if(con!=null) con.close();
-			}catch(SQLException se) {
-				System.out.println(se.getMessage());
-			}
+			DbcpBean.closeConn(con,pstmt,rs);
 		}
-		
-//		try {
-//			con=DbcpBean.getConn();
-//			String sql = "select * from(" + 
-//					"select aa.*, rownum rnum from(" + 
-//					"select * from review order by ref desc,step asc)aa" + 
-//					") where rnum>=? and rnum<=?";
-//			pstmt = con.prepareStatement(sql);
-//			pstmt.setInt(1, startRow);
-//			pstmt.setInt(2, endRow);
-//			rs=pstmt.executeQuery();	
-//			ArrayList<RvBoardVo_kdy> list=new ArrayList<>();
-//			while(rs.next()) {
-//				int rv_num=rs.getInt("rv_num");
-//				String title=rs.getString("title");
-//				String content = rs.getString("content");
-//				Date regdate = rs.getDate("regdate");
-//				int hit = rs.getInt("hit");
-//				int ref=rs.getInt("ref");
-//				int lev=rs.getInt("lev");
-//				int step=rs.getInt("step");
-//				RvBoardVo_kdy vo = new RvBoardVo_kdy(rv_num, 0, title, content, regdate, hit, ref, lev, step, 0);
-//				list.add(vo);
-//			}
-//			return list;
-//		}catch(SQLException se) {
-//			System.out.println(se.getMessage());
-//			return null;
-//		}finally {
-//			DbcpBean.closeConn(con,pstmt,rs);
-//		}
 	}
 	
 	//id로 회원 번호를 찾는 메소드
@@ -196,11 +200,9 @@ public class RvBoardDao_kdy {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
 		try {
-			Class.forName("oracle.jdbc.OracleDriver");
-			String url="jdbc:oracle:thin:@localhost:1521:xe";
-			con=DriverManager.getConnection(url,"scott","tiger");
-			
+			con = DbcpBean.getConn();
 			String sql = "select mnum from members where id = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -211,22 +213,44 @@ public class RvBoardDao_kdy {
 			}else {
 				return -1;
 			}
-		}catch (ClassNotFoundException ce) {
-			System.out.println((ce.getMessage()));
-			return -1;
 		}catch (SQLException se) {
 			System.out.println(se.getMessage());
 			return -1;
 		}finally {
-			try {
-				if(rs!=null) rs.close();
-				if(pstmt!=null) pstmt.close();
-				if(con!=null) con.close();
-			}catch(SQLException se) {
-				System.out.println(se.getMessage());
-			}
-			//DbcpBean.closeConn(con,pstmt,rs);
+			DbcpBean.closeConn(con,pstmt,rs);
 		}
+		
+//		try {
+//			Class.forName("oracle.jdbc.OracleDriver");
+//			String url="jdbc:oracle:thin:@localhost:1521:xe";
+//			con=DriverManager.getConnection(url,"scott","tiger");
+//			
+//			String sql = "select mnum from members where id = ?";
+//			pstmt = con.prepareStatement(sql);
+//			pstmt.setString(1, id);
+//			rs= pstmt.executeQuery();
+//			if(rs.next()) {
+//				int mnum = rs.getInt("mnum");
+//				return mnum;
+//			}else {
+//				return -1;
+//			}
+//		}catch (ClassNotFoundException ce) {
+//			System.out.println((ce.getMessage()));
+//			return -1;
+//		}catch (SQLException se) {
+//			System.out.println(se.getMessage());
+//			return -1;
+//		}finally {
+//			try {
+//				if(rs!=null) rs.close();
+//				if(pstmt!=null) pstmt.close();
+//				if(con!=null) con.close();
+//			}catch(SQLException se) {
+//				System.out.println(se.getMessage());
+//			}
+//			//DbcpBean.closeConn(con,pstmt,rs);
+//		}
 	}
 	
 	//업로드할 글 내용 DB에 삽입하는 메소드
@@ -235,60 +259,12 @@ public class RvBoardDao_kdy {
 		PreparedStatement pstmt = null;
 		PreparedStatement pstmt2 = null;
 		
-		try {
-			
-			Class.forName("oracle.jdbc.OracleDriver");
-			String url="jdbc:oracle:thin:@localhost:1521:xe";
-			con=DriverManager.getConnection(url,"scott","tiger");
-			
-			int boardNum=getMaxNum()+1;
-			int Rv_num=vo.getRv_num();
-			int ref=vo.getRef();
-			int lev=vo.getLev();
-			int step=vo.getStep();
-			if(Rv_num==0) {//새글인 경우
-				ref=boardNum;
-			}else{
-			String sql1 = "update review set step=step+1 where ref=? and step>?";
-			pstmt = con.prepareStatement(sql1);
-			pstmt.setInt(1, ref);
-			pstmt.setInt(2, step);
-			pstmt.executeQuery();
-			lev = lev+1;
-			step = step+1;
-			}
-			String sql2="insert into review  values(?,?,?,?,sysdate,?,?,?,?,?)";
-			pstmt2=con.prepareStatement(sql2);
-			pstmt2.setInt(1, boardNum);
-			pstmt2.setInt(2, vo.getMnum());
-			pstmt2.setString(3, vo.getTitle());
-			pstmt2.setString(4, vo.getContent());
-			pstmt2.setInt(5, vo.getHit());
-			pstmt2.setInt(6, ref);
-			pstmt2.setInt(7, lev);
-			pstmt2.setInt(8, step);
-			pstmt2.setInt(9, vo.getStar());
-			return pstmt2.executeUpdate();
-			
-		}catch (ClassNotFoundException ce) {
-			System.out.println((ce.getMessage()));
-			return -1;
-		}catch (SQLException se) {
-			System.out.println(se.getMessage());
-			return -1;
-		}finally {
-			try {
-				if(pstmt!=null) pstmt.close();
-				if(pstmt2!=null) pstmt2.close();
-				if(con!=null) con.close();
-			}catch(SQLException se) {
-				System.out.println(se.getMessage());
-			}
-			//DbcpBean.closeConn(con,pstmt,rs);
-		}
-		
 //		try {
-//			con = DbcpBean.getConn();
+//			
+//			Class.forName("oracle.jdbc.OracleDriver");
+//			String url="jdbc:oracle:thin:@localhost:1521:xe";
+//			con=DriverManager.getConnection(url,"scott","tiger");
+//			
 //			int boardNum=getMaxNum()+1;
 //			int Rv_num=vo.getRv_num();
 //			int ref=vo.getRef();
@@ -318,12 +294,60 @@ public class RvBoardDao_kdy {
 //			pstmt2.setInt(9, vo.getStar());
 //			return pstmt2.executeUpdate();
 //			
-//		}catch(SQLException se) {
+//		}catch (ClassNotFoundException ce) {
+//			System.out.println((ce.getMessage()));
+//			return -1;
+//		}catch (SQLException se) {
 //			System.out.println(se.getMessage());
 //			return -1;
 //		}finally {
-//			DbcpBean.closeConn(con, pstmt2, null);
-//			DbcpBean.closeConn(con, pstmt, null);
+//			try {
+//				if(pstmt!=null) pstmt.close();
+//				if(pstmt2!=null) pstmt2.close();
+//				if(con!=null) con.close();
+//			}catch(SQLException se) {
+//				System.out.println(se.getMessage());
+//			}
+//			//DbcpBean.closeConn(con,pstmt,rs);
 //		}
+		
+		try {
+			con = DbcpBean.getConn();
+			int boardNum=getMaxNum()+1;
+			int Rv_num=vo.getRv_num();
+			int ref=vo.getRef();
+			int lev=vo.getLev();
+			int step=vo.getStep();
+			if(Rv_num==0) {//새글인 경우
+				ref=boardNum;
+			}else{
+			String sql1 = "update review set step=step+1 where ref=? and step>?";
+			pstmt = con.prepareStatement(sql1);
+			pstmt.setInt(1, ref);
+			pstmt.setInt(2, step);
+			pstmt.executeQuery();
+			lev = lev+1;
+			step = step+1;
+			}
+			String sql2="insert into review  values(?,?,?,?,sysdate,?,?,?,?,?)";
+			pstmt2=con.prepareStatement(sql2);
+			pstmt2.setInt(1, boardNum);
+			pstmt2.setInt(2, vo.getMnum());
+			pstmt2.setString(3, vo.getTitle());
+			pstmt2.setString(4, vo.getContent());
+			pstmt2.setInt(5, vo.getHit());
+			pstmt2.setInt(6, ref);
+			pstmt2.setInt(7, lev);
+			pstmt2.setInt(8, step);
+			pstmt2.setInt(9, vo.getStar());
+			return pstmt2.executeUpdate();
+			
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			DbcpBean.closeConn(con, pstmt2, null);
+			DbcpBean.closeConn(con, pstmt, null);
+		}
 	}
 }

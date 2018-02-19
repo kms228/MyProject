@@ -11,18 +11,17 @@ public class MembersVo_kdy {
 	private String email;
 	private String address;
 	private String phone;
-	private int gradeNum;
-	private int accAmt;
+	private int gnum;
 	
 	
 	@Override
 	public String toString() {
-		return "MemversVo [mnum=" + mnum + ", id=" + id + ", pwd=" + pwd + ", name=" + name + ", birthday=" + birthday
-				+ ", email=" + email + ", address=" + address + ", phone=" + phone + ", gradeNum=" + gradeNum
-				+ ", accAmt=" + accAmt + "]";
+		return "MembersVo_kdy [mnum=" + mnum + ", id=" + id + ", pwd=" + pwd + ", name=" + name + ", birthday=" + birthday
+				+ ", email=" + email + ", address=" + address + ", phone=" + phone + ", gradeNum=" + gnum
+				+ ", accAmt=" + "]";
 	}
 	public MembersVo_kdy(int mnum, String id, String pwd, String name, Date birthday, String email, String address,
-			String phone, int gradeNum, int accAmt) {
+			String phone, int gnum) {
 		super();
 		this.mnum = mnum;
 		this.id = id;
@@ -32,8 +31,7 @@ public class MembersVo_kdy {
 		this.email = email;
 		this.address = address;
 		this.phone = phone;
-		this.gradeNum = gradeNum;
-		this.accAmt = accAmt;
+		this.gnum = gnum;
 	}
 	public int getMnum() {
 		return mnum;
@@ -83,19 +81,11 @@ public class MembersVo_kdy {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public int getGradeNum() {
-		return gradeNum;
+	public int getGnum() {
+		return gnum;
 	}
-	public void setGradeNum(int gradeNum) {
-		this.gradeNum = gradeNum;
+	public void setgNum(int gnum) {
+		this.gnum = gnum;
 	}
-	public int getAccAmt() {
-		return accAmt;
-	}
-	public void setAccAmt(int accAmt) {
-		this.accAmt = accAmt;
-	}
-
-	
 	
 }
