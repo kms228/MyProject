@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,9 +17,11 @@
 	</tr>
 	</thead>
 	<tbody>
-	<tr>
-		<td>0</td><td>0</td><td>0</td><td>0</td>
-	</tr>	
+	<c:forEach var="vo" items="${list }">
+		<tr>
+			<td>${vo.gnum }</td><td>${vo.grade }</td><td>${vo.drate }</td><td>${vo.gnumcnt }</td>
+		</tr>
+	</c:forEach>
 	</tbody>
 	<tfoot>
 		<tr><td colspan="4"><input type="button" value="등급 추가"></td></tr>
@@ -28,7 +31,13 @@
 <table border="1" width="100%">
 	<thead>
 		<tr>
-			<th>회원등급 기본설정</th><th>회원가입 시 회원등급을 <select><option>일반회원</option><option>vip</option></select>(으)로 설정합니다.
+			<th>회원등급 기본설정</th>
+			<th>회원가입 시 회원등급을 
+				<select>
+				<c:forEach var="vo" items="${list }">
+					<option>${vo.grade }</option>
+				</c:forEach>
+				</select>(으)로 설정합니다.
 			</th>
 		</tr>
 	</thead>

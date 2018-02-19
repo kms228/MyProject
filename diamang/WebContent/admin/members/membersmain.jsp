@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -27,7 +28,7 @@ caption {
 	</thead>
 	<tbody>
 	<tr>
-		<td></td><td></td>
+		<td>${vo1.recent}</td><td>${vo1.allmembers }</td>
 	</tr>
 	</tbody>
 </table>
@@ -38,13 +39,14 @@ caption {
 		<th>가입일시</th><th>아이디</th><th>이메일</th><th>이름</th><th>등급</th>
 	</tr>
 	</thead>
-	<tbody>
+	<tbody>		
+	<c:forEach var="vo2" items="${list }">
 	<tr>
-		<td></td><td></td><td></td><td></td><td></td>
-	</tr>	
+		<td>${vo2.joindate}</td><td>${vo2.id}</td><td>${vo2.email}</td><td>${vo2.name}</td><td>${vo2.grade}</td>
+	</tr>
+	</c:forEach>
 	</tbody>
 </table>
-
 </div>
 </body>
 </html>
