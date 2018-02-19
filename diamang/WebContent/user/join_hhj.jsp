@@ -15,6 +15,18 @@
 		var name=document.frm.name;
 		var birthday=document.frm.birthday;
 		var email=document.frm.email;
+		
+		
+		
+		
+ 
+
+		//아이디 공백검사
+		if(id.value.length==0){
+			alert("아이디를 입력해주세요.");
+			birthday.focus();
+			return false;
+		}
 		//아이디 한글X
 		if(!regid.test(id.value)){
 			alert("아이디는 영어와 숫자로 입력해주세요.");
@@ -51,12 +63,21 @@
 			birthday.focus();
 			return false;
 		}
+
 		//이메일 검사 향후 조건바뀜
 		if(email.value.length==0){
 			alert("이메일을 입력하세요.");
 			email.focus();
 			return false;
 		}
+		//이메일 조건 검사
+		if(email.value.indexOf("@")==-1||email.value.indexOf(".")==-1){
+			alert("이메일주소는 @가 포함되어야 합니다.");
+			email.focus();
+			return false;
+		}
+		
+		
 		//집주소검사 향후 바뀔수있슴
 		if(address.value.length==0){
 			alert("집주소를 입력하세요.");
@@ -69,7 +90,11 @@
 			phone.focus();
 			return false;
 		}
-			
+		//약관동의 검사
+		if(document.frm.check.checked==false) {
+			alert("약관에 동의해주세요.");
+			return false;
+		    }
 	}//function
 	
 	//////////////ajax
@@ -88,7 +113,9 @@
 			var idsapn=document.getElementById("idsapn");
 			console.log(json.using);
 			if(json.using==true){
-				idsapn.innerHTML="XXX";
+				idsapn.innerHTML="중복된 아이디입니다.";
+			}else if(id.value.length<5){
+				idsapn.innerHTML="아이디는 6자리이상 영문+숫자로 입력해주세요.";
 			}else{
 				idsapn.innerHTML="사용가능한 아이디입니다.";
 			}
@@ -109,7 +136,9 @@
 			var emailsapn=document.getElementById("emailsapn");
 			console.log(json1.using2);
 			if(json1.using2==true){
-				emailsapn.innerHTML="XXX";
+				emailsapn.innerHTML="중복된이메일 입니다.";
+			}else if(email.value.indexOf("@")==-1||email.value.indexOf(".")==-1){
+				emailsapn.innerHTML="@와.이 포함된 형식의 이메일을 입력해주세요.";
 			}else{
 				emailsapn.innerHTML="사용가능한 이메일입니다ㅋ.";
 			}
@@ -123,8 +152,7 @@
 <h1>회원가입</h1>
 <form method="post" name="frm" onsubmit="return join()" action="<%=request.getContextPath()%>/JoinController.do?cmd=insertOk" >
 
-<p><label for="id">아이디 </label><input type="text" name="id" id="id">
-<input type="button" value="중복검사" onclick="idcheck()">
+<p><label for="id">아이디 </label><input type="text" name="id" id="id" onkeyup="idcheck()">
 <span id="idsapn" style="font-size: 12px;color:red"></span></p>
 
 <p><label for="pwd">비밀번호 </label><input type="password" name="pwd" id="pwd"><span id="pwdsapn"></span></p>
@@ -132,8 +160,7 @@
 <p><label for="name">이름 </label><input type="text" name="name" id="name">
 <p><label for="birthday">생일년월일</label><input type="text" name="birthday" id="birthday"></p>
 
-<p><label for="email">이메일주소</label><input type="text" name="email" id="email" >
-<input type="button" value="중복검사" onclick="emailcheck()">
+<p><label for="email">이메일주소</label><input type="text" name="email" id="email" onkeyup="emailcheck()" >
 <span id="emailsapn" style="font-size: 12px;color:red"></span></p>
 
 <p><label for="address">집주소</label><input type="text" name="address" id="address"></p>
@@ -141,7 +168,7 @@
 <br>
 *이용약관<br>
 <textarea rows="5" cols="50" readonly="readonly">이용약관블라블라</textarea><br>
-<input type="checkbox" value="약관동의" name="check">위 개인정보취급방침에 대한 고지를 확인하였으며, 이에 동의합니다.<br><br>
+<input type="checkbox" value="약관동의" name="check" checked="checked">위 개인정보취급방침에 대한 고지를 확인하였으며, 이에 동의합니다.<br><br>
  
  
  <input type="submit" onclick="join()" value="가입하기" >

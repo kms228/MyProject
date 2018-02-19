@@ -13,7 +13,7 @@ import user.dao.RvBoardDao_kdy;
 import user.vo.RvBoardVo_kdy;
 
 @WebServlet("/review_list.do")
-public class RvListController extends HttpServlet {
+public class RvListController_kdy extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 				//페이지 번호
@@ -41,6 +41,6 @@ public class RvListController extends HttpServlet {
 				req.setAttribute("startPage", startPage);
 				req.setAttribute("endPage", endPage);
 				req.setAttribute("pageNum", pageNum);
-				req.getRequestDispatcher("move.do?cmd=review_main").forward(req, resp);
+				req.getRequestDispatcher("/move.do?cmd=review_main").forward(req, resp);
 	}
 }
