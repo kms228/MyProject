@@ -11,8 +11,17 @@
 	<div id="iteminfo">
 	<input type="button" value="상품정보선택">
 	</div>
+	<!-- 부모 글에 대한 정보 !-->
+	<input type="hidden" name="rv_num" value="${param.rv_num }">
+	<input type="hidden" name="ref" value="${param.ref }">
+	<input type="hidden" name="lev" value="${param.lev }">
+	<input type="hidden" name="step" value="${param.step }">
 	<div>
 		제목<input type="text" name="title"><br>
+		<c:if test="${empty sessionScope.id }">
+			작성자<input type="text" name="writer"><br>
+			이메일<input type="text" name="email">
+		</c:if><br>
 		별점
 		<input type="radio" name="star" value="1">☆
 		<input type="radio" name="star" value="2">☆☆
@@ -22,6 +31,9 @@
 		<br>
 		<textarea rows="10" cols="60" name="content"></textarea><br>
 		첨부파일1<input type="file" name="file1"><br>
+		<c:if test="${empty sessionScope.id }">
+			비밀번호<input type="password" name="pwd">
+		</c:if><br>
 		<input type="submit" value="등록">
 		
 	</div>

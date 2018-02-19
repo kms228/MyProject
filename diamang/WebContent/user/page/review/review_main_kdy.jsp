@@ -23,7 +23,7 @@
 				</c:forEach>
 				[re]
 			</c:if>
-			<a href="<%=request.getContextPath()%>/move.do?cmd=rv_detail&rv_num=${vo.rv_num }">${vo.title }</a>
+			<a href="<%=request.getContextPath()%>/rv_detail.do?rv_num=${vo.rv_num }">${vo.title }</a>
 			</td>
 			<td>${vo.writer }</td>
 			<td>${vo.regdate }</td>

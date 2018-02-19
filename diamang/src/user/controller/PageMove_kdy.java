@@ -32,8 +32,8 @@ public class PageMove_kdy extends HttpServlet {
 			url = "page/review/result_kdy.jsp";
 			req.setAttribute("cmd", url);
 			req.getRequestDispatcher("user/layout_kdy.jsp").forward(req, resp);
-		}else if(cmd.equals("rv_detail")) { //리뷰 페이지의 상세 글보기 페이지로
-			url = "page/review/review_detail.jsp";
+		}else if(cmd.equals("review_detail")) { //리뷰 페이지의 상세 글보기 페이지로
+			url = "page/review/review_detail_kdy.jsp";
 			req.setAttribute("cmd", url);
 			req.getRequestDispatcher("user/layout_kdy.jsp").forward(req, resp);
 		}
