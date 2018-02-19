@@ -18,11 +18,11 @@
 	boolean using2 = false;
 	try{
 		con=DbcpBean.getConn();
+		System.out.println(email);
 		String sql = "select * from members where email=?";
 		pstmt=con.prepareStatement(sql);
 		pstmt.setString(1,email);
 		rs=pstmt.executeQuery();
-		System.out.println(sql);
 		if(rs.next()){
 			using2=true;
 		}		

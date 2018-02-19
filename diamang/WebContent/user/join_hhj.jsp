@@ -88,7 +88,7 @@
 			var idsapn=document.getElementById("idsapn");
 			console.log(json.using);
 			if(json.using==true){
-				idsapn.innerHTML="XXX";
+				idsapn.innerHTML="중복된 아이디입니다.";
 			}else{
 				idsapn.innerHTML="사용가능한 아이디입니다.";
 			}
@@ -109,7 +109,7 @@
 			var emailsapn=document.getElementById("emailsapn");
 			console.log(json1.using2);
 			if(json1.using2==true){
-				emailsapn.innerHTML="XXX";
+				emailsapn.innerHTML="중복된이메일 입니다.";
 			}else{
 				emailsapn.innerHTML="사용가능한 이메일입니다ㅋ.";
 			}

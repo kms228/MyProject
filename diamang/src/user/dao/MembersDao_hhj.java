@@ -4,9 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import javax.servlet.annotation.WebServlet;
+
 import diamang.dbcp.DbcpBean;
 import user.vo.MemversVo;
-
 public class MembersDao_hhj {
 	public int insert(MemversVo user) {
 		Connection con = null;
