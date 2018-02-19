@@ -48,17 +48,30 @@
 			return false;
 		}
 		//생년월일 빈칸검사
-		if(bithday.value.length==0){
+		if(birthday.value.length==0){
 			alert("생년월일을 입력하세요.");
 			birthday.focus();
 			return false;
 		}
-		//이메일 검사
+		//이메일 검사 향후 조건바뀜
 		if(email.value.length==0){
 			alert("이메일을 입력하세요.");
 			email.focus();
 			return false;
 		}
+		//집주소검사 향후 바뀔수있슴
+		if(address.value.length==0){
+			alert("집주소를 입력하세요.");
+			address.focus();
+			return false;
+		}
+		//핸드폰검사	
+		if(phone.value.length==0 && phone.value.length<10){
+			alert("핸드폰번 11자리 이상 입력하세요");
+			phone.focus();
+			return false;
+		}
+			
 	}//function
 	
 	//////////////ajax
@@ -66,11 +79,11 @@
 	function idcheck() {
 		var id = document.getElementsByName("id")[0].value;
 		xhr=new XMLHttpRequest();
-		xhr.onreadystatechange=callback;
+		xhr.onreadystatechange=callback1;
 		xhr.open("get","idcheck.jsp?id="+id,true);
 		xhr.send();
 	}
-	function callback(){
+	function callback1(){
 		if(xhr.readyState==4 && xhr.status==200){
 			var result=xhr.responseText;
 			var json=eval('('+result+')');
@@ -84,18 +97,18 @@
 	}
 	var xhr2 = null;
 	function emailcheck() {
-		var id = document.getElementsByName("email")[0].value;
-		xhr=new XMLHttpRequest();
-		xhr.onreadystatechange=callback;
-		xhr.open("get","emailcheck.jsp?id="+id,true);
-		xhr.send();
+		var email = document.getElementsByName("email")[0].value;
+		xhr2=new XMLHttpRequest();
+		xhr2.onreadystatechange=callback;
+		xhr2.open("get","emailcheck.jsp?email="+email,true);
+		xhr2.send();
 	}
 	function callback(){
-		if(xhr.readyState==4 && xhr.status==200){
-			var result=xhr.responseText;
+		if(xhr2.readyState==4 && xhr2.status==200){
+			var result=xhr2.responseText;
 			var json=eval('('+result+')');
 			var emailsapn=document.getElementById("emailsapn");
-			if(json.using==true){
+			if(json.email==true){
 				emailsapn.innerHTML="사용중인 이메일입니다.";
 			}else{
 				emailsapn.innerHTML="사용가능한 이메일입니다ㅋ.";
@@ -121,14 +134,14 @@
 <p><label for="pwd">비밀번호 </label><input type="password" name="pwd"><span id="pwdsapn"></span></p>
 <p><label for="pwd2">비밀번호 확인 </label><input type="password" name="pwd2"><span id="pwd2span"></span></p>
 <p><label for="name">이름 </label><input type="text" name="name"><span id="namesapn"></span></p>
-<p><label for="birthday">생일년월일</label><input type="text" name="birthday"></p>
+<p><label for="birthday">생일년월일</label><input type="text" name="birthday" id="birthday"></p>
 
-<p><label for="email">이메일주소</label><input type="text" name="email">
+<p><label for="email">이메일주소</label><input type="text" name="email" id="email">
 <input type="button" value="중복검사" onclick="emailcheck()">
 <span id="emailsapn" style="font-size: 12px;color:red"></span></p>
 
-<p><label for="address">집주소</label><input type="text" name="address"></p>
-<p><label for="phone">핸드폰번호</label><input type="text" name="phone"></p>
+<p><label for="address">집주소</label><input type="text" name="address" id="address"></p>
+<p><label for="phone">핸드폰번호</label><input type="text" name="phone" id="phone"></p>
 <br>
 *이용약관<br>
 <textarea rows="5" cols="50" readonly="readonly">이용약관블라블라</textarea><br>

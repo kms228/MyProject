@@ -11,18 +11,18 @@
     pageEncoding="UTF-8"%>
 
 <%
-	String id = request.getParameter("email");
+	String email = request.getParameter("email");
 	Connection con = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs =null;
-	boolean using = false;
+	boolean email1 = false;
 	try{
 		con=DbcpBean.getConn();
 		String sql = "select * from members where email=? ";
 		pstmt=con.prepareStatement(sql);
 		rs=pstmt.executeQuery();
 		if(rs.next()){
-			using=true;
+			email1=true;
 		}		
 	}catch(SQLException se){
 		System.out.println(se.getMessage());
@@ -30,7 +30,7 @@
 		DbcpBean.closeConn(con, pstmt, rs);
 	}
 	JSONObject json = new JSONObject();
-	json.put("using",using);
+	json.put("email1",email1);
 	
 	response.setContentType("text/plain;charset=utf-8");
 	PrintWriter pw = response.getWriter();
