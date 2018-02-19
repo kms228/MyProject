@@ -1,12 +1,11 @@
 
 /* Drop Tables */
 
-DROP TABLE deliver CASCADE CONSTRAINTS;
-DROP TABLE payment CASCADE CONSTRAINTS;
+DROP TABLE orderlist CASCADE CONSTRAINTS;
 DROP TABLE buyboard CASCADE CONSTRAINTS;
-DROP TABLE field CASCADE CONSTRAINTS;
-DROP TABLE wishilist CASCADE CONSTRAINTS;
+DROP TABLE wishlist CASCADE CONSTRAINTS;
 DROP TABLE item CASCADE CONSTRAINTS;
+DROP TABLE field CASCADE CONSTRAINTS;
 DROP TABLE class CASCADE CONSTRAINTS;
 DROP TABLE qna CASCADE CONSTRAINTS;
 DROP TABLE image CASCADE CONSTRAINTS;
@@ -22,9 +21,13 @@ DROP TABLE grade CASCADE CONSTRAINTS;
 CREATE TABLE buyboard
 (
 	buy_num number NOT NULL,
-	pnum number(10) NOT NULL,
 	mnum number NOT NULL,
 	buy_date date NOT NULL,
+	state varchar2(20),
+	addr nvarchar2(120),
+	caddr varchar2(45),
+	accprice number,
+	drate number(10,4),
 	PRIMARY KEY (buy_num)
 );
 
@@ -34,16 +37,6 @@ CREATE TABLE class
 	classnum number NOT NULL,
 	name varchar2(15),
 	PRIMARY KEY (classnum)
-);
-
-
-CREATE TABLE deliver
-(
-	dnum number NOT NULL,
-	buy_num number NOT NULL,
-	dstate varchar2(15),
-	daddr varchar2(120),
-	PRIMARY KEY (dnum)
 );
 
 
@@ -58,10 +51,10 @@ CREATE TABLE field
 
 CREATE TABLE grade
 (
-	gradeNum number(5) NOT NULL,
+	gnum nvarchar2(15) NOT NULL,
+	grade varchar2(15),
 	drate number(10,4),
-	name varchar2(12) NOT NULL,
-	PRIMARY KEY (gradeNum)
+	PRIMARY KEY (gnum)
 );
 
 
@@ -84,7 +77,7 @@ CREATE TABLE item
 	stock number,
 	savename varchar2(70),
 	orgname varchar2(70),
-	classnum number NOT NULL,
+	fieldnum number NOT NULL,
 	PRIMARY KEY (pnum)
 );
 
@@ -99,19 +92,19 @@ CREATE TABLE members
 	email varchar2(40) NOT NULL UNIQUE,
 	address varchar2(150) NOT NULL,
 	phone varchar2(20) NOT NULL,
-	gradeNum number(5) NOT NULL,
-	accAmt number(6) DEFAULT 0,
+	gnum nvarchar2(15) NOT NULL,
 	PRIMARY KEY (mnum)
 );
 
 
-CREATE TABLE payment
+CREATE TABLE orderlist
 (
-	pnum number NOT NULL,
-	buy_num number NOT NULL,
-	pcnt number(4,0),
+	order_num number NOT NULL,
+	amount number(4,0),
 	price number,
-	PRIMARY KEY (pnum)
+	pnum number(10) NOT NULL,
+	buy_num number NOT NULL,
+	PRIMARY KEY (order_num)
 );
 
 
@@ -123,7 +116,7 @@ CREATE TABLE qna
 	content varchar2(500),
 	regdate date,
 	hit number,
-	ref number,
+	refer number,
 	lev number,
 	step number
 );
@@ -137,7 +130,7 @@ CREATE TABLE review
 	content varchar2(500),
 	regdate date,
 	hit number,
-	ref number,
+	refer number,
 	lev number,
 	step number,
 	star number,
@@ -145,7 +138,7 @@ CREATE TABLE review
 );
 
 
-CREATE TABLE wishilist
+CREATE TABLE wishlist
 (
 	num number NOT NULL,
 	mnum number NOT NULL,
@@ -158,13 +151,7 @@ CREATE TABLE wishilist
 
 /* Create Foreign Keys */
 
-ALTER TABLE deliever
-	ADD FOREIGN KEY (buy_num)
-	REFERENCES buyboard (buy_num)
-;
-
-
-ALTER TABLE payment
+ALTER TABLE orderlist
 	ADD FOREIGN KEY (buy_num)
 	REFERENCES buyboard (buy_num)
 ;
@@ -177,24 +164,24 @@ ALTER TABLE field
 
 
 ALTER TABLE item
-	ADD FOREIGN KEY (classnum)
-	REFERENCES class (classnum)
+	ADD FOREIGN KEY (fieldnum)
+	REFERENCES field (fieldnum)
 ;
 
 
 ALTER TABLE members
-	ADD FOREIGN KEY (gradeNum)
-	REFERENCES grade (gradeNum)
+	ADD FOREIGN KEY (gnum)
+	REFERENCES grade (gnum)
 ;
 
 
-ALTER TABLE buyboard
+ALTER TABLE orderlist
 	ADD FOREIGN KEY (pnum)
 	REFERENCES item (pnum)
 ;
 
 
-ALTER TABLE wishilist
+ALTER TABLE wishlist
 	ADD FOREIGN KEY (pnum)
 	REFERENCES item (pnum)
 ;
@@ -218,7 +205,7 @@ ALTER TABLE review
 ;
 
 
-ALTER TABLE wishilist
+ALTER TABLE wishlist
 	ADD FOREIGN KEY (mnum)
 	REFERENCES members (mnum)
 ;
@@ -228,6 +215,3 @@ ALTER TABLE image
 	ADD FOREIGN KEY (rv_num)
 	REFERENCES review (rv_num)
 ;
-
-
-
