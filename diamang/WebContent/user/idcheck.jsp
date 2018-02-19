@@ -18,7 +18,8 @@
 	boolean using = false;
 	try{
 		con=DbcpBean.getConn();
-		String sql = "select * from members where id=? ";
+		String sql = "select * from members where id='?'";
+		System.out.println(id);
 		pstmt=con.prepareStatement(sql);
 		rs=pstmt.executeQuery();
 		if(rs.next()){

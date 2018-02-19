@@ -99,7 +99,7 @@ CREATE TABLE members
 	email varchar2(40) NOT NULL UNIQUE,
 	address varchar2(150) NOT NULL,
 	phone varchar2(20) NOT NULL,
-	gradeNum number(5) NOT NULL,
+	GNum number(5) NOT NULL,
 	accAmt number(6) DEFAULT 0,
 	PRIMARY KEY (mnum)
 );

@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+    <style type="text/css">
 		p label {width: 150px; display: inline-block;}
 </style>
 
@@ -88,8 +86,9 @@
 			var result=xhr.responseText;
 			var json=eval('('+result+')');
 			var idsapn=document.getElementById("idsapn");
+			console.log(json.using);
 			if(json.using==true){
-				idsapn.innerHTML="사용중인 아이디입니다.";
+				idsapn.innerHTML="XXX";
 			}else{
 				idsapn.innerHTML="사용가능한 아이디입니다.";
 			}
@@ -106,37 +105,34 @@
 	function callback(){
 		if(xhr2.readyState==4 && xhr2.status==200){
 			var result=xhr2.responseText;
-			var json=eval('('+result+')');
+			var json1=eval('('+result+')');
 			var emailsapn=document.getElementById("emailsapn");
-			if(json.email==true){
-				emailsapn.innerHTML="사용중인 이메일입니다.";
+			console.log(json1.using2);
+			if(json1.using2==true){
+				emailsapn.innerHTML="XXX";
 			}else{
 				emailsapn.innerHTML="사용가능한 이메일입니다ㅋ.";
 			}
 		}
 	}
-	
-	
-	
-	
 </script>
 
 </head>
 <body>
 <div>
 <h1>회원가입</h1>
-<form method="post" name="frm" onsubmit="return join()" action="<%=request.getContextPath()%>" >
+<form method="post" name="frm" onsubmit="return join()" action="<%=request.getContextPath()%>/JoinController.do?cmd=insertOk" >
 
-<p><label for="id">아이디 </label><input type="text" name="id">
+<p><label for="id">아이디 </label><input type="text" name="id" id="id">
 <input type="button" value="중복검사" onclick="idcheck()">
 <span id="idsapn" style="font-size: 12px;color:red"></span></p>
 
-<p><label for="pwd">비밀번호 </label><input type="password" name="pwd"><span id="pwdsapn"></span></p>
-<p><label for="pwd2">비밀번호 확인 </label><input type="password" name="pwd2"><span id="pwd2span"></span></p>
-<p><label for="name">이름 </label><input type="text" name="name"><span id="namesapn"></span></p>
+<p><label for="pwd">비밀번호 </label><input type="password" name="pwd" id="pwd"><span id="pwdsapn"></span></p>
+<p><label for="pwd2">비밀번호 확인 </label><input type="password" name="pwd2"></p>
+<p><label for="name">이름 </label><input type="text" name="name" id="name">
 <p><label for="birthday">생일년월일</label><input type="text" name="birthday" id="birthday"></p>
 
-<p><label for="email">이메일주소</label><input type="text" name="email" id="email">
+<p><label for="email">이메일주소</label><input type="text" name="email" id="email" >
 <input type="button" value="중복검사" onclick="emailcheck()">
 <span id="emailsapn" style="font-size: 12px;color:red"></span></p>
 
