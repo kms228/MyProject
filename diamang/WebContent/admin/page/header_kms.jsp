@@ -4,10 +4,10 @@
 <div>
 	<h1 align="center">쇼핑몰관리24</h1>
 	<br>
-	<a href="#">상점관리</a>
-	<a href="#">고객관리</a>
-	<a href="#">상품관리</a>
-	<a href="#">배송관리</a>
+	<a href="#">상점관리</a><span>|&nbsp;</span>
+	<a href="#">고객관리</a><span>|&nbsp;</span>
+	<a href="<c:url value='/item?cmd=check'/>">상품관리</a><span>|&nbsp;</span>
+	<a href="#">배송관리</a><span>|&nbsp;</span>
 	<a href="#">게시판관리</a>
 	<c:choose >
 		<c:when test="${empty sessionScope.id }">
@@ -25,7 +25,7 @@
 			<%-- 로그아웃 --%>
 			<div id="logout">
 				<div>
-					${id }님 반갑습니다.
+					${id }님 환영합니다.
 					<a href="<c:url value='/login.do?cmd=logout'/>">로그아웃</a>
 				</div> 
 			</div>
