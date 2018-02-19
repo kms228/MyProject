@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,7 +16,14 @@
 		<th>개인정보</th><td><select><option>아이디</option><option>이름</option><option>이메일</option></select>&nbsp;&nbsp;<input type="text"></td>
 	</tr>
 	<tr>
-		<th>회원등급</th><td><select><option>전체</option><option>1</option><option>2</option><option>3</option></select></td>
+		<th>회원등급</th>
+		<td>
+			<select>
+				<c:forEach var="vo" items="${list }">
+				<option>${vo.grade }</option>
+				</c:forEach>
+			</select>
+		</td>
 	</tr>
 	<tr>
 		<th>주문상품</th><td><input type="text"><input type="button" value="상품검색"></td>

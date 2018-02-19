@@ -111,7 +111,7 @@ CREATE TABLE orderlist
 CREATE TABLE qna
 (
 	mnum number NOT NULL,
-	num number,
+	qnum number,
 	title varchar2(30),
 	content varchar2(500),
 	regdate date,
@@ -119,6 +119,7 @@ CREATE TABLE qna
 	refer number,
 	lev number,
 	step number
+	PRIMARY KEY (qnum)
 );
 
 
