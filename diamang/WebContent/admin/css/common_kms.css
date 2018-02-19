@@ -3,7 +3,7 @@
 *{margin:0px; padding:0px;}
 #wrap{width:1000px;margin:auto;}
 #header{width:100%;height:150px; background-color:#ffffff;}
-	#header a{text-decoration: none;margin-right: 15px;}
+	#header a{text-decoration: none;margin-right: 15px; color: black;}
 	#header #login{float: right;}
 	#header #logout{float:right;}
 	#header h1{padding: 30px;}	

@@ -92,7 +92,12 @@ CREATE TABLE members
 	email varchar2(40) NOT NULL UNIQUE,
 	address varchar2(150) NOT NULL,
 	phone varchar2(20) NOT NULL,
+<<<<<<< HEAD
+	GNum number(5) NOT NULL,
+	accAmt number(6) DEFAULT 0,
+=======
 	gnum nvarchar2(15) NOT NULL,
+>>>>>>> branch 'master' of https://github.com/kms228/MyProject.git
 	PRIMARY KEY (mnum)
 );
 

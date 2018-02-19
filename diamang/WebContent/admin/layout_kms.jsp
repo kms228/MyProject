@@ -7,15 +7,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/admin/css/common_kms.css">
-
 <c:if test="${!empty errMsg }">
-	<script type="text/javascript">alert("${errMsg}");</script>
+	<script type="text/javascript">
+		alert("${requestScope.errMsg}");
+	</script>
 </c:if>
 </head>
 
 <body>
 <%--
-	String spage=request.getParameter("page");
+	tring spage=request.getParameter("page");
 	if(spage==null){
 		spage="page/home_kms.jsp";
 	}

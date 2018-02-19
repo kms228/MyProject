@@ -15,26 +15,29 @@
 	Connection con = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs =null;
-	boolean email1 = false;
+	boolean using2 = false;
 	try{
 		con=DbcpBean.getConn();
-		String sql = "select * from members where email=? ";
+		String sql = "select * from members where email=?";
 		pstmt=con.prepareStatement(sql);
+		pstmt.setString(1,email);
 		rs=pstmt.executeQuery();
+		System.out.println(sql);
 		if(rs.next()){
-			email1=true;
+			using2=true;
 		}		
+		System.out.println(rs.next());
 	}catch(SQLException se){
 		System.out.println(se.getMessage());
 	}finally{
 		DbcpBean.closeConn(con, pstmt, rs);
 	}
-	JSONObject json = new JSONObject();
-	json.put("email1",email1);
+	JSONObject json1 = new JSONObject();
+	json1.put("using2",using2);
 	
 	response.setContentType("text/plain;charset=utf-8");
 	PrintWriter pw = response.getWriter();
-	pw.print(json);
+	pw.print(json1);
 	pw.close();
 
 
