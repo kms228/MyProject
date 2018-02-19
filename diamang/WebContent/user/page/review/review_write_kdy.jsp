@@ -5,6 +5,7 @@
 	#iteminfo{width:100%; height:100px;border:1px solid gray;}
 </style>
 <div>
+	<%-- 글쓰기 폼 --%>
 	<form method="post" action="<%=request.getContextPath() %>/imgUpload.do" enctype="multipart/form-data"
 			onsubmit="return check()">
 	<div id="iteminfo">
@@ -30,6 +31,7 @@
 		var title = document.getElementsByName("title")[0].value;
 		var content = document.getElementsByName("content")[0].value;
 		
+		//제목, 내용 비입력 체크
 		if(title==""){
 			alert("제목을 입력해주세요");
 			return false;
