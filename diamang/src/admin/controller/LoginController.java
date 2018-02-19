@@ -34,7 +34,8 @@ public class LoginController extends HttpServlet {
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
 		System.out.println("loginController.id : "+id);
-		System.out.println("loginController.pwd : "+pwd);
+		System.out.println("loginCo"
+				+ "ntroller.pwd : "+pwd);
 		AdminDao dao = new AdminDao();
 		int n = dao.login(id, pwd);
 		
@@ -43,19 +44,18 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("id",id);
 			//layout 페이지로 이동하기
 			System.out.println("loginController:로그인 완료 후 페이지이동");
-			response.sendRedirect(request.getContextPath()+"/admin/layout_kms.jsp?page=page/loginOk.jsp");
+			response.sendRedirect(request.getContextPath()+"/admin/layout_kms.jsp?page=page/home_kms.jsp");
 		
 		}else if(n==0) {//회원이아닌경우
 			System.out.println("loginController:아이디 또는 비밀번호가 불일치");
-			System.out.println("errMsg 적용");
 			request.setAttribute("errMsg", "아이디 또는 비밀번호가 일치하지 않아요.");
-			
 			request.getRequestDispatcher("/admin/layout_kms.jsp?page=page/home_kms.jsp").forward(request, response);
-			System.out.println("errMsg 적용 후 페이지 이동완료");
+			System.out.println("loginController:errMsg 적용 후 페이지 이동완료");
+		
 		}else {//오류가 발생된 경우
 			System.out.println("loginController:로그인오류");
 			request.setAttribute("errMsg", "오류로 인해 로그인에 실패했습니다..");
-			request.getRequestDispatcher("/admin/layout_kms.jsp").forward(request, response);
+			request.getRequestDispatcher("/admin/layout_kms.jsp?page=page/home_kms.jsp").forward(request, response);
 		}
 	}
 }
