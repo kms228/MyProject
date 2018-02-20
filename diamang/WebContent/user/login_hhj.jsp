@@ -41,17 +41,18 @@
 <p><label for="pwd">
 PWD </label><input type="password" name="pwd" id="pwd" onclick="pwd()"> <input type="submit" onclick="enter()" value="Login"></p>
 <input type="checkbox" value="saveid" >아이디저장
+</form>
 </c:when>
 <c:otherwise>
 
 [${id }님 어서오시옵소서.]<br>
 <a href="<%=request.getContextPath()%>/JoinController.do?cmd=logout">로그아웃</a>
+<a href="<%=request.getContextPath()%>/JoinController.do?cmd=update&id=${id}">정보수정</a>
 
 </c:otherwise>
 </c:choose>
 
 
-</form>
 </div>
 </body>
 </html>
