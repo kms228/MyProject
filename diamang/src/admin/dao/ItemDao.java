@@ -11,6 +11,12 @@ import admin.vo.ItemVo;
 import diamang.dbcp.DbcpBean;
 
 public class ItemDao {
+	private static ItemDao instance = new ItemDao();
+	private ItemDao() {}
+	public static ItemDao getInstance() {
+		return instance;
+	}
+	
 	//상품추가
 	public int insert(ItemVo vo) {
 		Connection con = null;

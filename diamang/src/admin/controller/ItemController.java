@@ -2,6 +2,7 @@ package admin.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
@@ -26,7 +27,25 @@ public class ItemController extends HttpServlet {
 		String cmd = (String)request.getParameter("cmd");
 		if(cmd.equals("insert")) {
 			insert(request,response);
+		}else if(cmd.equals("itemMenu")) {
+			itemMenu(request, response);
+		}
+	}
+	protected void itemMenu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ItemDao dao = ItemDao.getInstance();
+		int num = Integer.parseInt(request.getParameter("num"));
+		int n = dao.delete(num);
+		response.setContentType("text/xml;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		pw.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+		pw.println("<result>");
+		if(n>0) {
+			pw.println("<code>success</code>");
+		}else {
+			pw.println("<code>fail</code>");
 		}		
+		pw.println("</result>");
+		pw.close();
 	}
 	
 	private int insert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -60,7 +79,7 @@ public class ItemController extends HttpServlet {
 			//전송된 정보 VO객체에 담기
 			ItemVo vo=new ItemVo(0, item_name, price, null, stock, savename, orgname, fieldnum);
 			//DB에 파일정보 저장하기
-			ItemDao dao=new ItemDao();
+			ItemDao dao = ItemDao.getInstance();
 			return dao.insert(vo);
 			
 		}catch(Exception e) {
