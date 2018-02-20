@@ -6,6 +6,11 @@
 	#header a{text-decoration: none;margin-right: 15px; color: black;}
 	#header #login{float: right;}
 	#header #logout{float:right;}
-	#header h1{padding: 30px;}	
+	#header h1{padding: 30px;}
+	#header a:hover{font-weight: bold;}
 #body{width:100%;height:800px;background-color:#f2f2f2;}
+	#body a{text-decoration: none;margin-right: 15px; color: black;}
+	#body li{list-style: none; text-align: center;}
+	.list li:hover{ background-color:#ffffff; font-weight: bold;}
 #footer{width:100%;height:200px; background-color:#ffffff;}
+.searchSelect table{width:600px; height: 120px;}

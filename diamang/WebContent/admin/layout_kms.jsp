@@ -20,6 +20,8 @@
 	if(spage==null){
 		spage="page/home_kms.jsp";
 	}
+	
+	
 --%>
 
 <div id="wrap">	
