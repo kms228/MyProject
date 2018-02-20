@@ -2,6 +2,7 @@ package admin.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
@@ -25,11 +26,21 @@ public class ItemController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cmd = (String)request.getParameter("cmd");
 		if(cmd.equals("insert")) {
-			insert(request,response);
-		}		
+			response.sendRedirect(request.getContextPath()+"/admin/layout_kms.jsp?page=item/insertItem_kms.jsp");
+		}else if(cmd.equals("itemMenu")) {
+			System.out.println("itemController:itemMenu");
+			itemMenu(request, response);
+		}
 	}
 	
-	private int insert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void itemMenu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/xml;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		pw.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+		pw.close();
+	}
+	
+	private int insertOk(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		MultipartRequest mr = null;
 		int sizeLimit = 10 * 1024 * 1024;
@@ -60,7 +71,7 @@ public class ItemController extends HttpServlet {
 			//전송된 정보 VO객체에 담기
 			ItemVo vo=new ItemVo(0, item_name, price, null, stock, savename, orgname, fieldnum);
 			//DB에 파일정보 저장하기
-			ItemDao dao=new ItemDao();
+			ItemDao dao = ItemDao.getInstance();
 			return dao.insert(vo);
 			
 		}catch(Exception e) {
