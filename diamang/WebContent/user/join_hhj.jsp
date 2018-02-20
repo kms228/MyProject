@@ -152,12 +152,12 @@
 <h1>회원가입</h1>
 <form method="post" name="frm" onsubmit="return join()" action="<%=request.getContextPath()%>/JoinController.do?cmd=insertOk" >
 
-<p><label for="id">아이디 </label><input type="text" name="id" id="id" onkeyup="idcheck()">
+<p><label for="id">아이디 </label><input type="text" name="id" id="id"  onkeyup="idcheck()">
 <span id="idsapn" style="font-size: 12px;color:red"></span></p>
 
 <p><label for="pwd">비밀번호 </label><input type="password" name="pwd" id="pwd"><span id="pwdsapn"></span></p>
 <p><label for="pwd2">비밀번호 확인 </label><input type="password" name="pwd2"></p>
-<p><label for="name">이름 </label><input type="text" name="name" id="name">
+<p><label for="name">이름 </label><input type="text" name="name" id="name"></p>
 <p><label for="birthday">생일년월일</label><input type="text" name="birthday" id="birthday"></p>
 
 <p><label for="email">이메일주소</label><input type="text" name="email" id="email" onkeyup="emailcheck()" >
