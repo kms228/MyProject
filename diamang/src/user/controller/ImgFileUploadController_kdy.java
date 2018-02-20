@@ -40,7 +40,13 @@ public class ImgFileUploadController_kdy extends HttpServlet{
 		String title = mr.getParameter("title");
 		String content = mr.getParameter("content");
 		String snum = mr.getParameter("rv_num");
-		int star = Integer.parseInt(mr.getParameter("star"));
+		String sstar = mr.getParameter("star");
+		int star = 0;
+		if(sstar!=null) {
+			star = Integer.parseInt(sstar);
+		}
+	
+		String pwd = mr.getParameter("pwd");
 		HttpSession session = req.getSession();
 		String id = (String)session.getAttribute("id");
 		
@@ -50,7 +56,6 @@ public class ImgFileUploadController_kdy extends HttpServlet{
 //		if(mnum<0) {
 //			System.out.println("id 검색 오류");
 //		}
-		int mnum = 0; //임시
 		
 		int rv_num = 0;
 		int ref = 0;
@@ -63,7 +68,7 @@ public class ImgFileUploadController_kdy extends HttpServlet{
 			lev = Integer.parseInt(mr.getParameter("lev"));
 			step = Integer.parseInt(mr.getParameter("step"));
 		}
-		RvBoardVo_kdy vo = new RvBoardVo_kdy(rv_num, 1, title, content, null, 0, ref, lev, step, star);
+		RvBoardVo_kdy vo = new RvBoardVo_kdy(rv_num, 7, title, content, null, 0, ref, lev, step, star,pwd);
 		RvBoardDao_kdy dao=new RvBoardDao_kdy();
 		int n = dao.insert(vo);
 		String result = "fail";

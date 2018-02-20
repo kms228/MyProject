@@ -51,7 +51,7 @@ CREATE TABLE field
 
 CREATE TABLE grade
 (
-	gnum nvarchar2(15) NOT NULL,
+	gnum number NOT NULL,
 	grade varchar2(15),
 	drate number(10,4),
 	PRIMARY KEY (gnum)
@@ -92,12 +92,8 @@ CREATE TABLE members
 	email varchar2(40) NOT NULL UNIQUE,
 	address varchar2(150) NOT NULL,
 	phone varchar2(20) NOT NULL,
-<<<<<<< HEAD
-	GNum number(5) NOT NULL,
-	accAmt number(6) DEFAULT 0,
-=======
-	gnum nvarchar2(15) NOT NULL,
->>>>>>> branch 'master' of https://github.com/kms228/MyProject.git
+	gnum number NOT NULL,
+	joindate date NOT NULL,
 	PRIMARY KEY (mnum)
 );
 
@@ -115,15 +111,16 @@ CREATE TABLE orderlist
 
 CREATE TABLE qna
 (
+	qnum number NOT NULL,
 	mnum number NOT NULL,
-	num number,
 	title varchar2(30),
 	content varchar2(500),
 	regdate date,
 	hit number,
 	refer number,
 	lev number,
-	step number
+	step number,
+	PRIMARY KEY (qnum)
 );
 
 
