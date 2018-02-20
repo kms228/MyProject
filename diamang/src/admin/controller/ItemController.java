@@ -26,29 +26,21 @@ public class ItemController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cmd = (String)request.getParameter("cmd");
 		if(cmd.equals("insert")) {
-			insert(request,response);
+			response.sendRedirect(request.getContextPath()+"/admin/layout_kms.jsp?page=item/insertItem_kms.jsp");
 		}else if(cmd.equals("itemMenu")) {
+			System.out.println("itemController:itemMenu");
 			itemMenu(request, response);
 		}
 	}
-	protected void itemMenu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ItemDao dao = ItemDao.getInstance();
-		int num = Integer.parseInt(request.getParameter("num"));
-		int n = dao.delete(num);
+	
+	private void itemMenu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/xml;charset=utf-8");
 		PrintWriter pw = response.getWriter();
 		pw.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-		pw.println("<result>");
-		if(n>0) {
-			pw.println("<code>success</code>");
-		}else {
-			pw.println("<code>fail</code>");
-		}		
-		pw.println("</result>");
 		pw.close();
 	}
 	
-	private int insert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private int insertOk(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		MultipartRequest mr = null;
 		int sizeLimit = 10 * 1024 * 1024;

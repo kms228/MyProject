@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/admin/css/common_kms.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/admin/css/common_kms.css?ver=1">
 <c:if test="${!empty errMsg }">
 	<script type="text/javascript">
 		alert("${requestScope.errMsg}");
