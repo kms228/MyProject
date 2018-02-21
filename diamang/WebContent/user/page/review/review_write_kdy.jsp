@@ -20,7 +20,6 @@
 		제목<input type="text" name="title"><br>
 		<c:if test="${empty sessionScope.id }">
 			작성자<input type="text" name="writer"><br>
-			이메일<input type="text" name="email">
 		</c:if><br>
 		별점
 		<input type="radio" name="star" value="1">☆

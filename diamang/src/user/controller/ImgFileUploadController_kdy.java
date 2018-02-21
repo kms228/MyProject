@@ -69,7 +69,7 @@ public class ImgFileUploadController_kdy extends HttpServlet{
 			lev = Integer.parseInt(mr.getParameter("lev"));
 			step = Integer.parseInt(mr.getParameter("step"));
 		}
-		RvBoardVo_kdy vo = new RvBoardVo_kdy(rv_num, 7, title, content, null, 0, ref, lev, step, star,pwd);
+		RvBoardVo_kdy vo = new RvBoardVo_kdy(rv_num, 5, title, content, null, 0, ref, lev, step, star,pwd);
 		RvBoardDao_kdy dao=new RvBoardDao_kdy();
 		int n = dao.insert(vo);
 		String result = "fail";

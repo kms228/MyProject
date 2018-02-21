@@ -10,4 +10,4 @@
 		<h1>글쓰기 실패</h1>
 	</c:otherwise>
 </c:choose>
-<a href="<%=request.getContextPath() %>/">글 목록으로 이동</a>
+<a href="<%=request.getContextPath()%>/review_list.do">글 목록으로 이동</a>

@@ -67,6 +67,8 @@
 			commList.innerHTML="";
 			for(var i=0;i<json.list.length;i++){
 				var div = document.createElement("div");
+				var num = json.list[i].num;
+				var rv_num = json.list[i].rv_num;
 				var id = json.list[i].commId;
 				var p = document.createElement("p");
 				p.style.fontSize="15px";
@@ -85,9 +87,100 @@
 				div.appendChild(p);
 				div.appendChild(p2);
 				div.appendChild(p3);
-				div.innerHTML+="<a href=\"javascript:delete()\">삭제</a>&nbsp;"+
-								"<a href=\"javascript:update()\">수정</a>";
+				div.innerHTML+="<a href=\"javascript:remove('"+num+"')\">삭제</a>&nbsp;"+
+								"<a href=\"javascript:change('"+num+"','"+rv_num+"')\">수정</a>";
 				commList.appendChild(div);
+			}
+		}
+	}
+	var xhr2=null;
+	function remove(num){
+		xhr2=new XMLHttpRequest();
+		xhr2.onreadystatechange=removeComm;
+		var url = "<%=request.getContextPath()%>/comm.do?cmd=remove&num="+num;
+		xhr2.open('get',url,true);
+		xhr2.send();
+	}
+	
+	function removeComm(){
+		if(xhr2.readyState==4 && xhr2.status==200){
+			var result=xhr2.responseText;
+			var json = JSON.parse(result);
+			if(json.result=='success'){
+				getlist();
+			}else{
+				alert("댓글 삭제 실패");
+			}
+		}
+	}
+	var xhr3=null;
+	function change(num, rv_num){
+		xhr3=new XMLHttpRequest();
+		xhr3.onreadystatechange=changeComm;
+		var url="<%=request.getContextPath()%>/comm.do?cmd=change&num="+num+"&rv_num="+rv_num;
+		xhr3.open('get',url,true);
+		xhr3.send();
+	}
+	
+	function changeComm() {
+		if(xhr3.readyState==4 && xhr3.status==200){
+			var result = xhr3.responseText;
+			var json = JSON.parse(result);
+			var i = json.index;
+			var num = json.num;
+			var commDiv = document.getElementsByClassName("comm")[i-1];
+			var p = commDiv.getElementsByTagName("p");
+			var commId = p[0].firstChild.nodeValue;
+			var comment = p[2].firstChild.nodeValue;
+			for(var j=1;j<p.length;){
+				commDiv.removeChild(p[j]);
+			}
+			var atag = commDiv.getElementsByTagName("a");
+			for(var z=0;z<atag.length;){
+				commDiv.removeChild(atag[z]);
+			}
+			var commentArea = document.createElement("textarea");
+			commentArea.className="commentArea";
+			var cancel = document.createElement("a");
+			var submit = document.createElement("a");
+			var scancel =document.createTextNode("취소");
+			var ssubmit =document.createTextNode("등록");
+			
+			cancel.href="javascript:getlist()";
+			submit.href="javascript:update('"+num+"')";
+			cancel.appendChild(scancel);
+			submit.appendChild(ssubmit);
+			
+			commDiv.appendChild(commentArea);
+			commDiv.appendChild(cancel);
+			commDiv.appendChild(submit);
+		}
+	}
+
+	var xhr4=null;
+	function update(num){
+		var comment = document.getElementsByClassName("commentArea")[0];
+		if(comment.value==""||(/^\s*$/).test(comment.value)){
+			alert("수정할 내용을 입력하세요");
+			comment.value="";
+			return;
+		}
+		xhr4=new XMLHttpRequest();
+		xhr4.onreadystatechange=updateOk;
+		var url = "<%=request.getContextPath()%>/comm.do?cmd=update";
+		xhr4.open('post',url,true);
+		xhr4.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		var params = "comment="+(comment.value)+"&num="+num;
+		xhr4.send(params);
+	}
+	function updateOk(){
+		if(xhr4.readyState==4 && xhr4.status==200){
+			var result = xhr4.responseText;
+			var json = JSON.parse(result);
+			if(json.result=='success'){
+				getlist();
+			}else{
+				alert("수정실패");
 			}
 		}
 	}
