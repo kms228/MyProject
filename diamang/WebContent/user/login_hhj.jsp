@@ -39,8 +39,13 @@
 <form method="post" name="frm" onsubmit="return enter()" action="<%=request.getContextPath()%>/JoinController.do?cmd=login">
 <p><label for="id">ID </label><input type="text" name="id" id="id" onclick="login()"></p>
 <p><label for="pwd">
-PWD </label><input type="password" name="pwd" id="pwd" onclick="pwd()"> <input type="submit" onclick="enter()" value="Login"></p>
-<input type="checkbox" value="saveid" >아이디저장
+PWD </label><input type="password" name="pwd" id="pwd"> <input type="submit" value="Login"></p>
+<input type="checkbox" value="saveid" >아이디저장<br>
+
+<a href="<%=request.getContextPath()%>/user/join_hhj.jsp">회원가입</a>
+<a href="<%=request.getContextPath()%>/user/idfind_hhj.jsp">아이디찾기</a>
+<a href="<%=request.getContextPath()%>/user/join_hhj.jsp">비번찾기</a>
+
 </form>
 </c:when>
 <c:otherwise>
