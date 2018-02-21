@@ -20,6 +20,9 @@ public class PageMove_kdy extends HttpServlet {
 			System.out.println(2);
 			req.setAttribute("cmd", url);
 			req.getRequestDispatcher("/user/layout_kdy.jsp").forward(req, resp);
+		}else if(cmd.equals("main")){//메인으로 돌아올 때
+			req.setAttribute("cmd", url);
+			req.getRequestDispatcher("/user/layout_kdy.jsp").forward(req, resp);
 		}else if(cmd.equals("review_main")) { //리뷰 페이지로
 			url = "page/review/review_main_kdy.jsp";
 			req.setAttribute("cmd", url);
@@ -31,11 +34,21 @@ public class PageMove_kdy extends HttpServlet {
 		}else if(cmd.equals("result")) { //리뷰 페이지의 결과 페이지로
 			url = "page/review/result_kdy.jsp";
 			req.setAttribute("cmd", url);
-			req.getRequestDispatcher("user/layout_kdy.jsp").forward(req, resp);
+			req.getRequestDispatcher("/user/layout_kdy.jsp").forward(req, resp);
 		}else if(cmd.equals("review_detail")) { //리뷰 페이지의 상세 글보기 페이지로
 			url = "page/review/review_detail_kdy.jsp";
 			req.setAttribute("cmd", url);
-			req.getRequestDispatcher("user/layout_kdy.jsp").forward(req, resp);
+			req.getRequestDispatcher("/user/layout_kdy.jsp").forward(req, resp);
+		}else if(cmd.equals("login")) { //로그인 페이지로
+			url = "login_hhj.jsp";
+			req.setAttribute("cmd", url);
+			req.getRequestDispatcher("/user/layout_kdy.jsp").forward(req, resp);
+		}else if(cmd.equals("logout")) { //로그아웃 페이지로
+			
+		}else if(cmd.equals("join")) { //회원가입 페이지로
+			url = "join_hhj.jsp";
+			req.setAttribute("cmd", url);
+			req.getRequestDispatcher("/user/layout_kdy.jsp").forward(req, resp);
 		}
 	}
 }
