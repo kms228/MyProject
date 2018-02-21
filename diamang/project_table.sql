@@ -21,7 +21,7 @@ DROP TABLE grade CASCADE CONSTRAINTS;
 CREATE TABLE buyboard
 (
 	buy_num number NOT NULL,
-	mnum number NOT NULL,
+	mnum number NOT NULL CONSTRAINT FK_buyboard REFERENCES members(mnum) on delete cascade,
 	buy_date date NOT NULL,
 	state varchar2(20),
 	addr nvarchar2(120),
@@ -43,7 +43,7 @@ CREATE TABLE class
 CREATE TABLE field
 (
 	fieldnum number NOT NULL,
-	classnum number NOT NULL,
+	classnum number NOT NULL CONSTRAINT FK_field REFERENCES class(classnum) on delete cascade,
 	name varchar2(15),
 	PRIMARY KEY (fieldnum)
 );
@@ -61,7 +61,7 @@ CREATE TABLE grade
 CREATE TABLE image
 (
 	num number NOT NULL,
-	rv_num number NOT NULL,
+	rv_num number NOT NULL constraint FK_image references review(rv_num) on delete cascade,
 	orgname varchar2(30),
 	savename varchar2(70),
 	PRIMARY KEY (num)
@@ -77,7 +77,7 @@ CREATE TABLE item
 	stock number,
 	savename varchar2(70),
 	orgname varchar2(70),
-	fieldnum number NOT NULL,
+	fieldnum number NOT NULL CONSTRAINT FK_item REFERENCES field(fieldnum) on delete cascade,
 	PRIMARY KEY (pnum)
 );
 
@@ -92,7 +92,7 @@ CREATE TABLE members
 	email varchar2(40) NOT NULL UNIQUE,
 	address varchar2(150) NOT NULL,
 	phone varchar2(20) NOT NULL,
-	gnum number NOT NULL,
+	gnum number NOT NULL constraint fk_members references grade(gnum) on delete cascade,
 	joindate date NOT NULL,
 	PRIMARY KEY (mnum)
 );
@@ -103,8 +103,8 @@ CREATE TABLE orderlist
 	order_num number NOT NULL,
 	amount number(4,0),
 	price number,
-	pnum number(10) NOT NULL,
-	buy_num number NOT NULL,
+	pnum number(10) NOT NULL CONSTRAINT FK_orderlist REFERENCES item(pnum) on delete cascade,
+	buy_num number NOT NULL CONSTRAINT FK_orderlist REFERENCES buyboard(buy_num) on delete cascade,
 	PRIMARY KEY (order_num)
 );
 
@@ -112,7 +112,7 @@ CREATE TABLE orderlist
 CREATE TABLE qna
 (
 	qnum number NOT NULL,
-	mnum number NOT NULL,
+	mnum number NOT NULL constraint FK_qna references members(mnum) on delete  cascade ,
 	title varchar2(30),
 	content varchar2(500),
 	regdate date,
@@ -127,7 +127,7 @@ CREATE TABLE qna
 CREATE TABLE review
 (
 	rv_num number NOT NULL,
-	mnum number NOT NULL,
+	mnum number NOT NULL constraint FK_review references members(mnum) on delete cascade,
 	title varchar2(30),
 	content varchar2(500),
 	regdate date,
@@ -217,3 +217,6 @@ ALTER TABLE image
 	ADD FOREIGN KEY (rv_num)
 	REFERENCES review (rv_num)
 ;
+
+
+
