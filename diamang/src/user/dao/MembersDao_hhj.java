@@ -6,13 +6,28 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-import javax.servlet.annotation.WebServlet;
 
 import diamang.dbcp.DbcpBean;
-import shs.admin.vo.members.MembersVo;
-import user.controller.JoinController_hhj;
 import user.vo.MemversVo;
 public class MembersDao_hhj {
+	
+	public int delete(int mnum) {
+		Connection con =null;
+		PreparedStatement pstmt = null;
+		String sql ="delete from members where mnum=?";
+		try {
+			con=DbcpBean.getConn();
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1,mnum);
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			DbcpBean.closeConn(con, pstmt, null);
+		}
+	}
+	
 	
 	public int update(MemversVo update) {
 		Connection con = null;

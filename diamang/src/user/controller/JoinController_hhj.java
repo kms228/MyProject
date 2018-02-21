@@ -36,9 +36,27 @@ public class JoinController_hhj extends HttpServlet{
 			update(request,response);
 		}else if(cmd.equals("updateOk")) {
 			updateOk(request,response);
+		}else if(cmd.equals("delete")) {
+			delete(request,response);
 		}
 	
 	}//service
+	private void delete(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		MembersDao_hhj dao = new MembersDao_hhj();
+		int mnum =Integer.parseInt(request.getParameter("mnum"));
+		int n = dao.delete(mnum);
+		System.out.println(mnum);
+		System.out.println(n);
+		if (n>0) {		
+			response.sendRedirect(request.getContextPath()+"/user/login_hhj.jsp");
+			request.setAttribute("delete", "삭제 성공");
+		}else{
+			request.setAttribute("fail", "삭제 실패");
+			request.getRequestDispatcher("/user/삭제실패창만들어").forward(request, response);
+		}
+	}
 	
 	private void updateOk(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
