@@ -30,6 +30,9 @@ public class ItemController extends HttpServlet {
 		}else if(cmd.equals("itemMenu")) {
 			System.out.println("itemController:itemMenu");
 			itemMenu(request, response);
+		}else if(cmd.equals("insertOk")) {
+			System.out.println("itemController:insertOk");
+			insertOk(request, response);
 		}
 	}
 	

@@ -2,18 +2,21 @@
 @charset "UTF-8";
 *{margin:0px; padding:0px;}
 #wrap{width:1000px;margin:auto;}
+
 #header{width:100%;height:200px; background-color:#ffffff;}
 	#header a{text-decoration: none;margin-right: 15px; color: black;}
 	#header #login{float: right;}
 	#header #logout{float:right;}
 	#header h1{padding: 30px;}
 	#header a:hover{font-weight: bold;}
+	
 #body{width:100%;height:700px;background-color:#f2f2f2;}
 	#body a{text-decoration: none;margin-right: 15px; color: black;}
 	#body li{list-style: none; text-align: center;}
 	.list ul :hover{ background-color:#ffffff; font-weight: bold;}
+	.searchSelect table{width:600px; height: 120px;}
+	.sectionBar {margin: 0 0 -1px 0; border: 1px solid #cdcdcd; background-color: #f7f7f7;}
+	.sectionArea table tbody tr th{width : 250px;}
+	.sectionArea table tbody tr td{width : 750px;}
+	
 #footer{width:100%;height:200px; background-color:#ffffff;}
-.searchSelect table{width:600px; height: 120px;}
-.sectionBar {margin: 0 0 -1px 0; border: 1px solid #cdcdcd; background-color: #f7f7f7;}
-.sectionArea table tbody tr th{width : 250px;}
-.sectionArea table tbody tr td{width : 750px;}
