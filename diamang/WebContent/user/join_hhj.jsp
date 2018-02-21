@@ -4,7 +4,7 @@
     <style type="text/css">
 		p label {width: 150px; display: inline-block;}
 </style>
-
+<head>
 <script type="text/javascript">
 	function join() {
 		//아이디검사
@@ -15,11 +15,6 @@
 		var name=document.frm.name;
 		var birthday=document.frm.birthday;
 		var email=document.frm.email;
-		
-		
-		
-		
- 
 
 		//아이디 공백검사
 		if(id.value.length==0){
@@ -152,26 +147,26 @@
 <h1>회원가입</h1>
 <form method="post" name="frm" onsubmit="return join()" action="<%=request.getContextPath()%>/JoinController.do?cmd=insertOk" >
 
-<p><label for="id">아이디 </label><input type="text" name="id" id="id" onkeyup="idcheck()">
+<p><label for="id">아이디 </label><input type="text" name="id" id="id"  onkeyup="idcheck()">
 <span id="idsapn" style="font-size: 12px;color:red"></span></p>
 
 <p><label for="pwd">비밀번호 </label><input type="password" name="pwd" id="pwd"><span id="pwdsapn"></span></p>
 <p><label for="pwd2">비밀번호 확인 </label><input type="password" name="pwd2"></p>
-<p><label for="name">이름 </label><input type="text" name="name" id="name">
-<p><label for="birthday">생일년월일</label><input type="text" name="birthday" id="birthday"></p>
+<p><label for="name">이름 </label><input type="text" name="name" id="name" placeholder="예시)이나영"></p>
+<p><label for="birthday">생일년월일</label><input type="text" name="birthday" id="birthday" placeholder="예시) 920228"></p>
 
-<p><label for="email">이메일주소</label><input type="text" name="email" id="email" onkeyup="emailcheck()" >
+<p><label for="email">이메일주소</label><input type="text" name="email" id="email" placeholder="예시)test@naver.com" onkeyup="emailcheck()" >
 <span id="emailsapn" style="font-size: 12px;color:red"></span></p>
 
-<p><label for="address">집주소</label><input type="text" name="address" id="address"></p>
-<p><label for="phone">핸드폰번호</label><input type="text" name="phone" id="phone"></p>
+<p><label for="address">집주소</label><input type="text" name="address" id="address" placeholder="예시)서울시 의정부 의정부동 213-12"></p>
+<p><label for="phone">핸드폰번호</label><input type="text" name="phone" id="phone" placeholder="예시) 01038371731"></p>
 <br>
 *이용약관<br>
 <textarea rows="5" cols="50" readonly="readonly">이용약관블라블라</textarea><br>
 <input type="checkbox" value="약관동의" name="check" checked="checked">위 개인정보취급방침에 대한 고지를 확인하였으며, 이에 동의합니다.<br><br>
  
  
- <input type="submit" onclick="join()" value="가입하기" >
+ <input type="submit" value="가입하기" >
  <input type="reset" value="취소">
 
 </form>

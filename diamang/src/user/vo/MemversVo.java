@@ -9,13 +9,13 @@ public class MemversVo {
 	private String email;
 	private String address;
 	private String phone;
-	private int gNum;
+	private String gNum;
 	private String joindate;
 	
 	public MemversVo () {}
 	
 	public MemversVo(int mnum, String id, String pwd, String name, String birthday, String email, String address,
-			String phone, int gNum, String joindate) {
+			String phone, String gNum, String joindate) {
 		super();
 		this.mnum = mnum;
 		this.id = id;
@@ -76,10 +76,10 @@ public class MemversVo {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public int getGNum() {
+	public String getGNum() {
 		return gNum;
 	}
-	public void setGNum(int gNum) {
+	public void setGNum(String gNum) {
 		this.gNum = gNum;
 	}
 

@@ -24,5 +24,5 @@ public class BoardController extends HttpServlet{
 
 	private void goQna(HttpServletRequest req, HttpServletResponse resp) {
 		
-	}
+	}	
 }

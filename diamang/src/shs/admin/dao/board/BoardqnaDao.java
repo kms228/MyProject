@@ -10,6 +10,26 @@ import diamang.dbcp.DbcpBean;
 import shs.admin.vo.board.BoardqnaVo;
 
 public class BoardqnaDao {
+	// 전체 글의 갯수 구하기
+	public int getCount() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DbcpBean.getConn();
+			String sql = "select NVL(count(num),0) cnt from qna";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.next();
+			int cnt = rs.getInt("cnt");
+			return cnt;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		} finally {
+			DbcpBean.closeConn(con, pstmt, rs);
+		}
+	}	
 	public ArrayList<BoardqnaVo> getList(){
 		Connection con=null;
 		PreparedStatement pstmt=null;
