@@ -8,8 +8,11 @@ function selectRing(){
 	xhr1.onreadystatechange=ring;
 	xhr1.open('get','<%=request.getContextPath()%>/item?cmd=selectRing',true);	
 	xhr1.send();
-	var resultOf = document.getElementById("resultOf");
-	resultOf.innerHTML+="(대분류)반지 > ";
+	var resultOf2 = document.getElementById("resultOf2");
+	var resultOf3 = document.getElementById("resultOf3");
+	resultOf3.innerHTML="";
+	resultOf2.innerHTML="";
+	resultOf2.innerHTML="(대분류)반지 > ";
 	
 }
 function ring(){
@@ -21,23 +24,23 @@ function ring(){
 		listOf.innerHTML="";
 		
 		var li1 = document.createElement("li");
-		var a = document.createElement("a");
-		
-		a.href="#";
-	    var aText = document.createTextNode("14k/18k");
-	    listOf.appendChild(li1).appendChild(a).appendChild(aText);
+		var label = document.createElement("label");
+		label.setAttribute("name", "111");
+		label.setAttribute("onclick", "naming('14k/18k')");
+		var labelText = document.createTextNode("14k/18k");
+	    listOf.appendChild(li1).appendChild(label).appendChild(labelText);
 	    
 		
 	    var li2 = li1.cloneNode(true);
-	    li2.innerHTML="<a href='#2'>다이아</a>";
+	    li2.innerHTML="<label name='222' onclick='naming(\"다이아\")'>다이아</label>"
 	    listOf.appendChild(li2);
 	    
 	    var li3 = li1.cloneNode(true);
-	    li3.innerHTML="<a href='#3'>탄색성</a>";
+	    li3.innerHTML="<label name='333' onclick='naming(\"탄생석\")'>탄생석</label>"
 	    listOf.appendChild(li3);
 	    
 	    var li4 = li1.cloneNode(true);
-	    li4.innerHTML="<a href='#4'>실버</a>";
+	    li4.innerHTML="<label name='333' onclick='naming(\"실버\")'>실버</label>"
 	    listOf.appendChild(li4);
 	}
 }
@@ -48,6 +51,11 @@ function selectNeck(){
 	xhr2.onreadystatechange=neck;
 	xhr2.open('get','<%=request.getContextPath()%>/item?cmd=selectNeck',true);
 	xhr2.send();
+	var resultOf2 = document.getElementById("resultOf2");
+	var resultOf3 = document.getElementById("resultOf3");
+	resultOf3.innerHTML="";
+	resultOf2.innerHTML="";
+	resultOf2.innerHTML="(대분류)목걸이 > ";
 }
 function neck(){
 	if(xhr2.readyState==4 && xhr2.status==200){
@@ -57,17 +65,18 @@ function neck(){
 		listOf.innerHTML="";
 		
 		var li1 = document.createElement("li");
-		var a = document.createElement("a");
-		a.href="#";
-	    var aText = document.createTextNode("14k/18k");
-	    listOf.appendChild(li1).appendChild(a).appendChild(aText);
+		var label = document.createElement("label");
+		label.setAttribute("name", "111");
+		label.setAttribute("onclick", "naming('14k/18k')");
+		var labelText = document.createTextNode("14k/18k");
+	    listOf.appendChild(li1).appendChild(label).appendChild(labelText);
 		
 	    var li2 = li1.cloneNode(true);
-	    li2.innerHTML="<a href='#2'>다이아</a>";
+	    li2.innerHTML="<label name='222' onclick='naming(\"다이아\")'>다이아</label>"
 	    listOf.appendChild(li2);
 	    
 	    var li3 = li1.cloneNode(true);
-	    li3.innerHTML="<a href='#3'>탄생석</a>";
+	    li3.innerHTML="<label name='333' onclick='naming(\"탄생석\")'>탄생석</label>"
 	    listOf.appendChild(li3);
 	    
 	}
@@ -79,6 +88,11 @@ function selectEar(){
 	xhr3.onreadystatechange=ear;
 	xhr3.open('get','<%=request.getContextPath()%>/item?cmd=selectEar',true);
 	xhr3.send();
+	var resultOf2 = document.getElementById("resultOf2");
+	var resultOf3 = document.getElementById("resultOf3");
+	resultOf3.innerHTML="";
+	resultOf2.innerHTML="";
+	resultOf2.innerHTML="(대분류)귀걸이 > ";
 }
 function ear(){
 	if(xhr3.readyState==4 && xhr3.status==200){
@@ -88,13 +102,14 @@ function ear(){
 		listOf.innerHTML="";
 		
 		var li1 = document.createElement("li");
-		var a = document.createElement("a");
-		a.href="#";
-	    var aText = document.createTextNode("14k/18k");
-	    listOf.appendChild(li1).appendChild(a).appendChild(aText);
+		var label = document.createElement("label");
+		label.setAttribute("name", "111");
+		label.setAttribute("onclick", "naming('14k/18k')");
+		var labelText = document.createTextNode("14k/18k");
+	    listOf.appendChild(li1).appendChild(label).appendChild(labelText);
 	    
 	    var li2 = li1.cloneNode(true);
-	    li2.innerHTML="<a href='#2'>탄생석</a>";
+	    li2.innerHTML="<label name='333' onclick='naming(\"탄생석\")'>탄생석</label>"
 	    listOf.appendChild(li2);
 	}
 }
@@ -105,6 +120,9 @@ function selectCoup(){
 	xhr4.onreadystatechange=coup;
 	xhr4.open('get','<%=request.getContextPath()%>/item?cmd=selectCoup',true);
 	xhr4.send();
+	var resultOf2 = document.getElementById("resultOf2");
+	resultOf2.innerHTML="";
+	resultOf2.innerHTML="(대분류)커플링 > ";
 }
 function coup(){
 	if(xhr4.readyState==4 && xhr4.status==200){
@@ -114,19 +132,26 @@ function coup(){
 		listOf.innerHTML="";
 		
 		var li1 = document.createElement("li");
-		var a = document.createElement("a");
-		a.href="#";
-	    var aText = document.createTextNode("14k/18k");
-	    listOf.appendChild(li1).appendChild(a).appendChild(aText);
+		var label = document.createElement("label");
+		label.setAttribute("name", "111");
+		label.setAttribute("onclick", "naming('14k/18k')");
+		//label.onclick=naming("14k/18k");
+		var labelText = document.createTextNode("14k/18k");
+	    listOf.appendChild(li1).appendChild(label).appendChild(labelText);
 		
 	    var li2 = li1.cloneNode(true);
-	    li2.innerHTML="<a href='#2'>다이아</a>";
+	    li2.innerHTML="<label name='222' onclick='naming(\"다이아\")'>다이아</label>"
 	    listOf.appendChild(li2);
 	    
 	    var li3 = li1.cloneNode(true);
-	    li3.innerHTML="<a href='#3'>실버</a>";
+	    li3.innerHTML="<label name='333' onclick='naming(\"실버\")'>실버</label>"
 	    listOf.appendChild(li3);
 	}
+}
+function naming(name){
+	var resultOf3 = document.getElementById("resultOf3");
+	resultOf3.innerHTML="";
+	resultOf3.innerHTML=name;
 }
 </script>
 <form method="post" action="<c:url value='/item?cmd=insertOk'/>" enctype="multipart/form-data">
@@ -142,9 +167,12 @@ function coup(){
 			<tbody>
 				<tr>
 					<th scope="row">상품명</th>
-					<td><input type="text" name="item_name" placeholder="예시) 18k 1g 정수 심플링 반지" style="width: 340px;"></td>
+					<td><input type="text" name="item_name"  placeholder="예시) 18k 1g 정수 심플링 반지" style="width: 340px;"></td>
 				</tr>
-				
+				<tr>
+					<th scope="row">수량</th>
+					<td><input type="text" name="stock" placeholder="예시) 8">EA</td>
+				</tr>	
 			</tbody>
 		</table>
 	</div>
@@ -209,7 +237,9 @@ function coup(){
 								</tr>
 							</tbody>
 						</table>
-						<div id="resultOf"><span style="font-weight: bold">선택된 상품분류 </span></div>
+						<div id="resultOf1"><span style="font-weight: bold"> 선택된 상품분류 </span>
+							<span id="resultOf2"></span><span id="resultOf3"></span>
+						</div>
 					</div>
 					</td>
 				</tr>
