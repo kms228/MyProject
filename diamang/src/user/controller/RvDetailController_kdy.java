@@ -21,6 +21,7 @@ public class RvDetailController_kdy extends HttpServlet{
 		dao.updateHit(rv_num);
 		RvBoardVo_kdy vo = dao.getInfo(rv_num);
 		req.setAttribute("vo", vo);
+		req.setAttribute("rv_num", rv_num);
 		req.getRequestDispatcher("/move.do?cmd=review_detail").forward(req, resp);
 		
 	}

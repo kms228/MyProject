@@ -20,7 +20,8 @@ public class ImgFileUploadController_kdy extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/user/page/review/review_write_kdy.jsp").forward(req, resp);
+		//req.getRequestDispatcher("/user/page/review/review_write_kdy.jsp").forward(req, resp);
+		req.getRequestDispatcher("/move.do?cmd=review_write").forward(req, resp);
 	}
 	
 	//글 업로드
