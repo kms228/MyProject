@@ -149,6 +149,15 @@ CREATE TABLE wishlist
 	PRIMARY KEY (num)
 );
 
+CREATE TABLE itemImage
+(
+	num number NOT NULL,
+	pnum number NOT NULL constraint FK_itemImage references item(pnum) on delete cascade,
+	savefilename varchar2(70) NOT NULL,
+	PRIMARY KEY (num)
+);
+
+
 
 
 /* Create Foreign Keys */

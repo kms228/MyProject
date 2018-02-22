@@ -32,15 +32,15 @@ function ring(){
 	    
 		
 	    var li2 = li1.cloneNode(true);
-	    li2.innerHTML="<label name='222' onclick='naming(\"다이아\")'>다이아</label>"
+	    li2.innerHTML="<label onclick='naming(\"다이아\")'>다이아</label>"
 	    listOf.appendChild(li2);
 	    
 	    var li3 = li1.cloneNode(true);
-	    li3.innerHTML="<label name='333' onclick='naming(\"탄생석\")'>탄생석</label>"
+	    li3.innerHTML="<label onclick='naming(\"탄생석\")'>탄생석</label>"
 	    listOf.appendChild(li3);
 	    
 	    var li4 = li1.cloneNode(true);
-	    li4.innerHTML="<label name='333' onclick='naming(\"실버\")'>실버</label>"
+	    li4.innerHTML="<label onclick='naming(\"실버\")'>실버</label>"
 	    listOf.appendChild(li4);
 	}
 }
@@ -72,11 +72,11 @@ function neck(){
 	    listOf.appendChild(li1).appendChild(label).appendChild(labelText);
 		
 	    var li2 = li1.cloneNode(true);
-	    li2.innerHTML="<label name='222' onclick='naming(\"다이아\")'>다이아</label>"
+	    li2.innerHTML="<label onclick='naming(\"다이아\")'>다이아</label>"
 	    listOf.appendChild(li2);
 	    
 	    var li3 = li1.cloneNode(true);
-	    li3.innerHTML="<label name='333' onclick='naming(\"탄생석\")'>탄생석</label>"
+	    li3.innerHTML="<label onclick='naming(\"탄생석\")'>탄생석</label>"
 	    listOf.appendChild(li3);
 	    
 	}
@@ -109,7 +109,7 @@ function ear(){
 	    listOf.appendChild(li1).appendChild(label).appendChild(labelText);
 	    
 	    var li2 = li1.cloneNode(true);
-	    li2.innerHTML="<label name='333' onclick='naming(\"탄생석\")'>탄생석</label>"
+	    li2.innerHTML="<label onclick='naming(\"탄생석\")'>탄생석</label>"
 	    listOf.appendChild(li2);
 	}
 }
@@ -140,11 +140,11 @@ function coup(){
 	    listOf.appendChild(li1).appendChild(label).appendChild(labelText);
 		
 	    var li2 = li1.cloneNode(true);
-	    li2.innerHTML="<label name='222' onclick='naming(\"다이아\")'>다이아</label>"
+	    li2.innerHTML="<label onclick='naming(\"다이아\")'>다이아</label>"
 	    listOf.appendChild(li2);
 	    
 	    var li3 = li1.cloneNode(true);
-	    li3.innerHTML="<label name='333' onclick='naming(\"실버\")'>실버</label>"
+	    li3.innerHTML="<label onclick='naming(\"실버\")'>실버</label>"
 	    listOf.appendChild(li3);
 	}
 }
@@ -155,6 +155,7 @@ function naming(name){
 }
 </script>
 <form method="post" action="<c:url value='/item?cmd=insertOk'/>" enctype="multipart/form-data">
+<input type="hidden" value="" name="fieldnum">
 <h1>상품관리 > 상품등록</h1><br>
 <!-- 기본정보/상품명/상세설명 -->
 <div id="qa1" class="section">
@@ -187,7 +188,7 @@ function naming(name){
 			<tbody>
 				<tr>
 					<th scope="row">판매 가격</th>
-					<td><input type="text" name="item_name" placeholder="예시) 55000" style="width: 140px;">KRW</td>
+					<td><input type="text" name="price" placeholder="예시) 55000" style="width: 140px;">KRW</td>
 				</tr>
 				
 			</tbody>
@@ -257,11 +258,11 @@ function naming(name){
 			<tbody>
 				<tr>
 					<th>대표 이미지</th>
-					<td><input type="file"></td>
+					<td><input type="file" name="file1"></td>
 				</tr>
 				<tr>
 					<th>상세 이미지</th>
-					<td><input type="file"></td>
+					<td><input type="file" name="file2"></td>
 				</tr>
 			</tbody>
 		</table>
