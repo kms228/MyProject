@@ -220,9 +220,9 @@ function naming(name,sfieldnum){
 											<div class="list">
 												<ul>
 												<!-- li{list-style:none} -->
-													<li><a href="javascript:selectRing();">반지 ></a></li>
+													<li><a href="javascript:selectRing();">반&nbsp;&nbsp;&nbsp;지 ></a></li>
 													<li><a href="javascript:selectNeck();">목걸이 ></a></li>	
-													<li><a href="javascript:selectEar();">반지 ></a></li>
+													<li><a href="javascript:selectEar();">귀걸이 ></a></li>
 													<li><a href="javascript:selectCoup();">커플링 ></a></li>
 													
 												</ul>

@@ -18,4 +18,7 @@
    .sectionArea table tbody tr th{width : 250px;}
    .sectionArea table tbody tr td{width : 750px;}
    #resultOf1{margin : 10px;}
+   #itemListTable{width : 1000px;}
+   #itemListTable tr td{text-align: center;}
+   
 #footer{width:100%;height:200px; background-color:#ffffff; }
