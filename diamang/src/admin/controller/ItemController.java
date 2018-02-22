@@ -46,6 +46,7 @@ public class ItemController extends HttpServlet {
 	}
 	//상품추가
 	private void itemInsert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("itemController : itemInsert");
 		request.setCharacterEncoding("UTF-8");
 		String uploadPath = request.getServletContext().getRealPath("/upload");
 		MultipartRequest mr=new MultipartRequest(
@@ -55,10 +56,14 @@ public class ItemController extends HttpServlet {
 	            "utf-8",   //인코딩방식
 	            new DefaultFileRenamePolicy());
 		
+		System.out.println(1);
+		
 		String item_name = mr.getParameter("item_name");
-		int price = Integer.parseInt(request.getParameter("price"));
-		int stock = Integer.parseInt(request.getParameter("stock"));
-		int fieldnum = Integer.parseInt(request.getParameter("fieldnum"));
+		int price = Integer.parseInt(mr.getParameter("price"));
+		int stock = Integer.parseInt(mr.getParameter("stock"));
+		int fieldnum = Integer.parseInt(mr.getParameter("fieldnum"));
+		
+		System.out.println(2);
 		
 		ItemVo vo = new ItemVo(0, item_name, price, null, stock, fieldnum);
 		ItemDao dao = ItemDao.getInstance();
@@ -71,9 +76,13 @@ public class ItemController extends HttpServlet {
 		ItemImageVo imgvo1 = new ItemImageVo(0, pnum, savefilename1);
 		int i = imgDao.itemImageInsert(imgvo1);
 		
+		System.out.println(3);
+		
 		String savefilename2 = mr.getFilesystemName("file2");
 		ItemImageVo imgvo2 = new ItemImageVo(0, pnum, savefilename2);
 		int j = imgDao.itemImageInsert(imgvo2);
+		
+		System.out.println(4);
 		
 		if(i>0 && j>0) {
 			 response.sendRedirect(request.getContextPath()+"/item?cmd=insert");

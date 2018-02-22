@@ -35,6 +35,7 @@ public class ItemDao {
 			
 			String sql2 = "select pnum from item where item_name=?";
 			pstmt2 = con.prepareStatement(sql2);
+			pstmt2.setString(1, vo.getItem_name());
 			rs = pstmt2.executeQuery();
 			rs.next();
 			return rs.getInt(1);
