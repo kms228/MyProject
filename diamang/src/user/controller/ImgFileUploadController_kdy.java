@@ -29,6 +29,7 @@ public class ImgFileUploadController_kdy extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		System.out.println("imgFileUploadController 접속");
+		//첨부파일 업로드
 		String uploadPath=req.getServletContext().getRealPath("user/upload");
 		MultipartRequest mr=new MultipartRequest(
 				req,
@@ -37,19 +38,24 @@ public class ImgFileUploadController_kdy extends HttpServlet{
 				"utf-8",
 				new DefaultFileRenamePolicy()
 				);
-		
+		//글 내용 가져오기
 		String title = mr.getParameter("title");
 		String content = mr.getParameter("content");
 		String snum = mr.getParameter("rv_num");
 		String sstar = mr.getParameter("star");
+		String writer="";
+		String pwd="";
 		int star = 0;
 		if(sstar!=null) {
 			star = Integer.parseInt(sstar);
 		}
-	
-		String pwd = mr.getParameter("pwd");
+		//세션 검사
 		HttpSession session = req.getSession();
 		String id = (String)session.getAttribute("id");
+		if(id==null) { //비회원
+			writer = mr.getParameter("writer");
+			pwd= mr.getParameter("pwd");
+		}
 		
 		//id로 회원 번호 찾는 메소드 불러오기
 //		RvBoardDao_kdy dao=new RvBoardDao_kdy();
@@ -69,7 +75,7 @@ public class ImgFileUploadController_kdy extends HttpServlet{
 			lev = Integer.parseInt(mr.getParameter("lev"));
 			step = Integer.parseInt(mr.getParameter("step"));
 		}
-		RvBoardVo_kdy vo = new RvBoardVo_kdy(rv_num, 7, title, content, null, 0, ref, lev, step, star,pwd);
+		RvBoardVo_kdy vo = new RvBoardVo_kdy(rv_num, 5, title, content, null, 0, ref, lev, step, star,pwd);
 		RvBoardDao_kdy dao=new RvBoardDao_kdy();
 		int n = dao.insert(vo);
 		String result = "fail";

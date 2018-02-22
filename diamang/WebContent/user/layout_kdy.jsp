@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="user/css/common_kdy.css">
+<link rel="stylesheet" type="text/css" href="user/css/common_kdy.css?ver=1">
 </head>
 <body>
 <div id="wrap">

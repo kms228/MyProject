@@ -18,9 +18,15 @@
 	<input type="hidden" name="step" value="${param.step }">
 	<div>
 		제목<input type="text" name="title"><br>
+		작성자<input type="hidden" name="writer"><br>
+		비밀번호<input type="hidden" name="pwd"><br>
 		<c:if test="${empty sessionScope.id }">
-			작성자<input type="text" name="writer"><br>
-			이메일<input type="text" name="email">
+			<script>
+				var writer = document.getElementsByClassName("writer")[0];
+				var pwd = document.getElementsByClassName("pwd")[0];
+				writer.type="text";
+				pwd.type="password";
+			</script>
 		</c:if><br>
 		별점
 		<input type="radio" name="star" value="1">☆
@@ -31,11 +37,7 @@
 		<br>
 		<textarea rows="10" cols="60" name="content"></textarea><br>
 		첨부파일1<input type="file" name="file1"><br>
-		<c:if test="${empty sessionScope.id }">
-			비밀번호<input type="password" name="pwd">
-		</c:if><br>
 		<input type="submit" value="등록">
-		
 	</div>
 	</form>
 <script>

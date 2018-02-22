@@ -16,18 +16,21 @@ public class PagingBot {
 	public PagingVo calPaging(String pageNum, int boardCount) {//pageNum: 해당 페이지. rowCount: 게시판의 글 개수.
 		//파라미터로 pageNum을 받았다면 대입함.
 		int integerPageNum = 1;
-		if(pageNum != "0" || pageNum != null) {
+		if(pageNum != null) {
 			integerPageNum = Integer.parseInt(pageNum);
 		}
 		int startRow = (integerPageNum - 1) * pageRowVolume + 1;// 시작행 번호
-		int endRow = startRow + (pageRowVolume-1);// 끝행 번호				
-		int pageCount = (int) Math.ceil(boardCount / pageRowVolume);
+		int endRow = startRow + (pageRowVolume-1);// 끝행 번호
+		int pageCount = boardCount/pageRowVolume;
+		if(boardCount%pageRowVolume!=0) {
+			pageCount=pageCount +1;
+		}		
 		int startPage = ((integerPageNum - 1) / currentPageVolume * currentPageVolume) + 1;// 시작페이지
 		int endPage = startPage + (currentPageVolume-1); // 끝페이지
 		if (pageCount < endPage) {
 			endPage = pageCount;
 		}
-		PagingVo vo = new PagingVo(integerPageNum, startRow, endRow, pageCount, startPage, endPage);
+		PagingVo vo = new PagingVo(pageRowVolume,currentPageVolume,integerPageNum, startRow, endRow, pageCount, startPage, endPage);
 		return vo;
 	}
 }

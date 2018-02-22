@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
@@ -17,6 +18,22 @@
 			document.getElementById(buy_date).setAttribute("selected","selected");
 		}
 	}
+	var page = function(num){
+		var url = "prepareProduct.do?cmd=search&pageNum="+ num;
+		
+		var optValue = "${search.optValue}";
+		var buy_date = "${search.buy_date}";
+		var item_name = "${search.item_name}";				
+		url = url+"&optName=${search.optName}";
+		url = url+"&optValue=${search.optValue}";				
+		url = url+"&item_name=${search.item_name}";			
+		if(!(buy_date === "")){
+			url = url+"&buy_date=${search.buy_date}";	
+		} else {
+			url = url+"&buy_date=nothing"
+		}
+		location.href=url;
+	}
 </script>
 </head>
 <body>
@@ -29,12 +46,12 @@
 							<option value="order_num" id="order_num">주문번호</option>
 							<option value="name" id="name">주문자명</option>
 							<option value="id" id="id">주문자아이디</option>
-					</select> <input type="text" size="30" name="optValue" value="${search.optValue }"></td>
+					</select><input type="text" size="30" name="optValue" value="${search.optValue }"></td>
 				</tr>
 				<tr>
 					<th>기간</th>
 					<td><select name="buy_date">
-							<option value="nothing" id="">전체</option>
+							<option value="nothing" id="nothing">전체</option>
 							<option value="1" id="1">오늘</option>
 							<option value="7" id="7">7일</option>
 							<option value="15" id="15">15일</option>							
@@ -51,55 +68,56 @@
 				value="초기화">
 		</div>
 	</form>
-	<table>
+	<table border="1">
 	<thead>
 		<tr>
-			<th>주문일</th><th>상품번호</th><th>주문자</th><th>상품명</th><th>수량</th><th>상품구매금액</th><th>총금액</th><th>배송중 처리</th>
+			<th>주문일</th><th>구매번호</th><th>주문번호</th><th>상품번호</th><th>주문자</th><th>상품명</th><th>수량</th><th>상품구매금액</th><th>총금액</th><th>배송중 처리</th>
 		</tr>
 	</thead>
-	<tbody>
+	<tbody>	
 		<c:if test="${list == null }">
 		<tr>
-			<td colspan="8" align="center">검색된 주문내역이 없습니다.</td>	
+			<td colspan="10" align="center">검색된 주문내역이 없습니다.</td>	
 		</tr>
 		</c:if>		
 		<c:forEach var="vo" items="${list }">
 		<tr>
-			<td>${vo.buy_date }</td><td>${vo.pnum }</td><td>${vo.name }</td><td>${vo.item_name }</td><td>${vo.amount }</td><td>${vo.price }</td><td>${vo.accprice }</td><td>0</td>
+			<td rowspan="1">${vo.buy_date }</td><td>${vo.order_num }</td><td>${vo.buy_num}</td><td>${vo.pnum }</td><td>${vo.name }</td><td>${vo.item_name }</td><td>${vo.amount }</td><td>${vo.price }</td><td>${vo.accprice }</td><td>0</td>
 		</tr>
 		</c:forEach>
 	</tbody>	
 </table>
 <!-- 페이징처리 -->
+<c:if test="${pageVo!=null }">
 <div>
 	<c:choose>
-		<c:when test="${startPage>10 }">
-			<a href="<%=request.getContextPath()%>/board/list.do?pageNum=${startPage-1}">[이전]</a>
+		<c:when test="${pageVo.startPage>pageVo.currentPageVolume }">
+			<a href="javascript:page(${pageVo.startPage-1})">[이전]</a>
 		</c:when>
 		<c:otherwise>
 			[이전]	
 		</c:otherwise>
-	</c:choose>
-	
-	<c:forEach var="i" begin="${startPage }"  end="${endPage }">
+	</c:choose>	
+	<c:forEach var="i" begin="${pageVo.startPage }"  end="${pageVo.endPage }">
 		<c:choose>
-			<c:when test="${pageNum==i }">
-				<a href="<%=request.getContextPath()%>/board/list.do?pageNum=${i}"><span style="color:blue">[${i }]</span></a>
+			<c:when test="${pageVo.pageNum==i }">
+				<a href="javascript:page(${i })"><span style="color:blue">[${i }]</span></a>
 			</c:when>
 			<c:otherwise>
-				<a href="<%=request.getContextPath()%>/board/list.do?pageNum=${i}"><span style="color:gray">[${i }]</span></a>
+				<a href="javascript:page(${i })"><span style="color:gray">[${i }]</span></a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
 	<c:choose>
-		<c:when test="${endPage<pageCount }">
-			<a href="<%=request.getContextPath()%>/board/list.do?pageNum=${endPage+1}">[다음]</a>
+		<c:when test="${pageVo.endPage<pageVo.pageCount }">
+			<a href="javascript:page(${pageVo.endPage+1 })">[다음]</a>
 		</c:when>
 		<c:otherwise>
 			[다음]	
 		</c:otherwise>	
 	</c:choose>	
 </div>
+</c:if>
 <div>
 <h2>도움말</h2>
 <ul>
