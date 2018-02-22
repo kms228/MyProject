@@ -18,28 +18,60 @@ public class ItemDao {
 	}
 	
 	//상품추가
-	public int insert(ItemVo vo) {
+	public int itemInsert(ItemVo vo) {
 		Connection con = null;
-		PreparedStatement pstmt = null;
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
+		ResultSet rs = null;
 		try {
-			String sql = "insert into item values(item_sq.nextval,?,?,sysdate,?,?,?,?)";
+			String sql1 = "insert into item values(item_sq.nextval,?,?,sysdate,?,?)";
 			con = DbcpBean.getConn();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, vo.getItem_name());
-			pstmt.setInt(2, vo.getPrice());
-			pstmt.setInt(3, vo.getStock());
-			pstmt.setString(4, vo.getSavename());
-			pstmt.setString(5, vo.getOrgname());
-			pstmt.setInt(6, vo.getFieldnum());
-			return pstmt.executeUpdate();
+			pstmt1 = con.prepareStatement(sql1);
+			pstmt1.setString(1, vo.getItem_name());
+			pstmt1.setInt(2, vo.getPrice());
+			pstmt1.setInt(3, vo.getStock());
+			pstmt1.setInt(4, vo.getFieldnum());
+			pstmt1.executeUpdate();
+			
+			String sql2 = "select pnum from item where item_name=?";
+			pstmt2 = con.prepareStatement(sql2);
+			rs = pstmt2.executeQuery();
+			rs.next();
+			return rs.getInt(1);
+			
 			
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
 			return -1;
 		}finally {
-			DbcpBean.closeConn(con, pstmt, null);
+			DbcpBean.closeConn(con, pstmt1, null);
+			DbcpBean.closeConn(null, pstmt2, rs);
 		}
 	}
+/*	
+	public int getNum(String name) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int pnum=0;
+		try {
+			String sql = "select pnum from item where item_name=?";
+			con = DbcpBean.getConn();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				pnum = rs.getInt(1);
+			}
+			return pnum;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			DbcpBean.closeConn(con, pstmt, rs);
+		}
+	}
+*/	
 	//상품전체리스트보기
 	public ArrayList<ItemVo> listAll(){
 		Connection con = null;
@@ -57,10 +89,8 @@ public class ItemDao {
 				int price = rs.getInt(3);
 				Date regdate = rs.getDate(4);
 				int stock = rs.getInt(5);
-				String savename = rs.getString(6);
-				String orgname = rs.getString(7);
-				int fieldnum = rs.getInt(8);
-				ItemVo vo = new ItemVo(pnum, item_name, price, regdate, stock, savename, orgname, fieldnum);
+				int fieldnum = rs.getInt(6);
+				ItemVo vo = new ItemVo(pnum, item_name, price, regdate, stock, fieldnum);
 				list.add(vo);
 			}
 			return list;
@@ -105,10 +135,8 @@ public class ItemDao {
 				int price = rs.getInt(3);
 				Date regdate = rs.getDate(4);
 				int stock = rs.getInt(5);
-				String savename = rs.getString(6);
-				String orgname = rs.getString(7);
-				int fieldnum = rs.getInt(8);
-				ItemVo vo = new ItemVo(pnum, item_name, price, regdate, stock, savename, orgname, fieldnum);
+				int fieldnum = rs.getInt(6);
+				ItemVo vo = new ItemVo(pnum, item_name, price, regdate, stock, fieldnum);
 				return vo;
 			}
 			return null;
@@ -126,15 +154,13 @@ public class ItemDao {
 		PreparedStatement pstmt = null;
 		try {
 			con = DbcpBean.getConn();
-			String sql = "update item set item_name=?,price=?,regdate=sysdate,stock=?,savename=?,orgname=?,fieldnum=? where pnum=?";
+			String sql = "update item set item_name=?,price=?,regdate=sysdate,stock=?,fieldnum=? where pnum=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, vo.getItem_name());
 			pstmt.setInt(2, vo.getPrice());
 			pstmt.setInt(3, vo.getStock());
-			pstmt.setString(4, vo.getSavename());
-			pstmt.setString(5, vo.getOrgname());
-			pstmt.setInt(6, vo.getFieldnum());
-			pstmt.setInt(7,vo.getPnum());
+			pstmt.setInt(4, vo.getFieldnum());
+			pstmt.setInt(5, vo.getPnum());
 			return pstmt.executeUpdate();
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
