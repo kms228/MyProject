@@ -8,23 +8,18 @@ public class ItemVo {
 	private int price;
 	private Date regdate;
 	private int stock;
-	private String savename;
-	private String orgname;
 	private int fieldnum;
 	
 	public ItemVo() {}
 
-	public ItemVo(int pnum, String item_name, int price, Date regdate, int stock, String savename, String orgname,
-			int fieldnum) {
+	public ItemVo(int pnum, String item_name, int price, Date regdate, int stock, int fieldnum) {
 		super();
 		this.pnum = pnum;//1
 		this.item_name = item_name;//2
 		this.price = price;//3
 		this.regdate = regdate;//4
 		this.stock = stock;//5
-		this.savename = savename;//6
-		this.orgname = orgname;//7
-		this.fieldnum = fieldnum;//8
+		this.fieldnum = fieldnum;//6
 	}
 
 	public int getPnum() {
@@ -67,22 +62,6 @@ public class ItemVo {
 		this.stock = stock;
 	}
 
-	public String getSavename() {
-		return savename;
-	}
-
-	public void setSavename(String savename) {
-		this.savename = savename;
-	}
-
-	public String getOrgname() {
-		return orgname;
-	}
-
-	public void setOrgname(String orgname) {
-		this.orgname = orgname;
-	}
-
 	public int getFieldnum() {
 		return fieldnum;
 	}
@@ -94,7 +73,7 @@ public class ItemVo {
 	@Override
 	public String toString() {
 		return "ItemVo [pnum=" + pnum + ", item_name=" + item_name + ", price=" + price + ", regdate=" + regdate
-				+ ", stock=" + stock + ", savename=" + savename + ", orgname=" + orgname + ", fieldnum=" + fieldnum
+				+ ", stock=" + stock + ", fieldnum=" + fieldnum
 				+ "]";
 	}
 	

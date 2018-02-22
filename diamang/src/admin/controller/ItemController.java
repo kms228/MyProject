@@ -1,10 +1,10 @@
 package admin.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import admin.dao.IteamImageDao;
 import admin.dao.ItemDao;
+import admin.vo.ItemImageVo;
 import admin.vo.ItemVo;
 import diamang.dbcp.DbcpBean;
 
@@ -30,9 +32,9 @@ public class ItemController extends HttpServlet {
 		}else if(cmd.equals("itemMenu")) {
 			System.out.println("itemController:itemMenu");
 			itemMenu(request, response);
-		}else if(cmd.equals("insertOk")) {
-			System.out.println("itemController:insertOk");
-			insertOk(request, response);
+		}else if(cmd.equals("itemInsert")) {
+			System.out.println("itemController:itemInsertOk");
+			itemInsert(request, response);
 		}
 	}
 	
@@ -42,47 +44,41 @@ public class ItemController extends HttpServlet {
 		pw.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
 		pw.close();
 	}
-	
-	private int insertOk(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	//상품추가
+	private void itemInsert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		MultipartRequest mr = null;
-		int sizeLimit = 10 * 1024 * 1024;
-		String uploadPath = request.getRealPath("/upload");
-				
-		Connection con = null;
-		PreparedStatement pstmt = null;
+		String uploadPath = request.getServletContext().getRealPath("/upload");
+		MultipartRequest mr=new MultipartRequest(
+	            request, //request객체
+	            uploadPath,   //업로드할 파일 경로
+	            1024*1024*20,   //최대 업로드 크기(바이트 단위로 설정)
+	            "utf-8",   //인코딩방식
+	            new DefaultFileRenamePolicy());
 		
-		try {
-			mr=new MultipartRequest(
-					request,  //request객체
-					uploadPath, //업로드할 파일 경로
-					sizeLimit, //최대 업로드 크기(바이트 단위로 설정)
-					"utf-8", //인코딩방식
-					new DefaultFileRenamePolicy() //동일한 파일이름이 들어오면 파일명뒤에 1,2,..숫자 붙이기
-				);
-			
-			String item_name = mr.getParameter("item_name");
-			int price = Integer.parseInt(mr.getParameter("price"));
-			int stock = Integer.parseInt(mr.getParameter("stock"));
-			int fieldnum = Integer.parseInt(mr.getParameter("fieldnum"));
-			//전송한 파일명 얻어오기
-			String orgname=mr.getOriginalFileName("file1");
-			String savename=mr.getFilesystemName("file1");
-			//파일크기 구하기 (java.io.File)
-			File f=new File(uploadPath + File.separator + savename);
-			//long filesize=f.length();
-			//전송된 정보 VO객체에 담기
-			ItemVo vo=new ItemVo(0, item_name, price, null, stock, savename, orgname, fieldnum);
-			//DB에 파일정보 저장하기
-			ItemDao dao = ItemDao.getInstance();
-			return dao.insert(vo);
-			
-		}catch(Exception e) {
-			System.out.println(e.getMessage());
-			return -1;
-			
-		}finally {
-			DbcpBean.closeConn(con, pstmt, null);
+		String item_name = mr.getParameter("item_name");
+		int price = Integer.parseInt(request.getParameter("price"));
+		int stock = Integer.parseInt(request.getParameter("stock"));
+		int fieldnum = Integer.parseInt(request.getParameter("fieldnum"));
+		
+		ItemVo vo = new ItemVo(0, item_name, price, null, stock, fieldnum);
+		ItemDao dao = ItemDao.getInstance();
+		//방금 insert한 상품의 pnum구하기
+		int pnum = dao.itemInsert(vo);
+		
+		IteamImageDao imgDao = IteamImageDao.getInstance();
+		
+		String savefilename1 = mr.getFilesystemName("file1");
+		ItemImageVo imgvo1 = new ItemImageVo(0, pnum, savefilename1);
+		int i = imgDao.itemImageInsert(imgvo1);
+		
+		String savefilename2 = mr.getFilesystemName("file2");
+		ItemImageVo imgvo2 = new ItemImageVo(0, pnum, savefilename2);
+		int j = imgDao.itemImageInsert(imgvo2);
+		
+		if(i>0 && j>0) {
+			 response.sendRedirect(request.getContextPath()+"/item?cmd=insert");
+		}else {
+			System.out.println("파일추가실패");
 		}
-	}	
+	}		
 }

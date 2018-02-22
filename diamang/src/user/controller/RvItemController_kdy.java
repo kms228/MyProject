@@ -19,6 +19,6 @@ public class RvItemController_kdy extends HttpServlet{
 		String id = (String)session.getAttribute("id");
 		MembersDao_kdy dao=new MembersDao_kdy();
 		int mnum = dao.searchMnum(id);
-		System.out.println(mnum);
+		
 	}
 }
