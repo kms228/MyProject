@@ -103,8 +103,9 @@ CREATE TABLE orderlist
 	order_num number NOT NULL,
 	amount number(4,0),
 	price number,
-	pnum number(10) NOT NULL CONSTRAINT FK_orderlist REFERENCES item(pnum) on delete cascade,
-	buy_num number NOT NULL CONSTRAINT FK_orderlist REFERENCES buyboard(buy_num) on delete cascade,
+	pnum number(10) NOT NULL CONSTRAINT FK_orderlist1 REFERENCES item(pnum) on delete cascade,
+	buy_num number NOT NULL CONSTRAINT FK_orderlist2 REFERENCES buyboard(buy_num) on delete cascade,
+	review number(5),
 	PRIMARY KEY (order_num)
 );
 
