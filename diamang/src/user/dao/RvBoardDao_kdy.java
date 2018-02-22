@@ -134,32 +134,6 @@ public class RvBoardDao_kdy {
 		}
 	}
 	
-	//id로 회원 번호를 찾는 메소드
-	public int searchMnum(String id) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			con = DbcpBean.getConn();
-			String sql = "select mnum from members where id = ?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
-			rs= pstmt.executeQuery();
-			if(rs.next()) {
-				int mnum = rs.getInt("mnum");
-				return mnum;
-			}else {
-				return -1;
-			}
-		}catch (SQLException se) {
-			System.out.println(se.getMessage());
-			return -1;
-		}finally {
-			DbcpBean.closeConn(con,pstmt,rs);
-		}
-	}
-	
 	//업로드할 글 내용 DB에 삽입하는 메소드
 	public int insert(RvBoardVo_kdy vo) {
 		Connection con = null;

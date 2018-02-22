@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import user.dao.MembersDao_kdy;
 import user.dao.RvBoardDao_kdy;
 import user.vo.RvBoardVo_kdy;
 
@@ -58,7 +59,7 @@ public class ImgFileUploadController_kdy extends HttpServlet{
 		}
 		
 		//id로 회원 번호 찾는 메소드 불러오기
-//		RvBoardDao_kdy dao=new RvBoardDao_kdy();
+//		MembersDao_kdy dao=new MembersDao_kdy();
 //		int mnum = dao.searchMnum(id);
 //		if(mnum<0) {
 //			System.out.println("id 검색 오류");

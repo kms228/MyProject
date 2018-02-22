@@ -4,12 +4,21 @@
 <style>
 	#iteminfo{width:100%; height:100px;border:1px solid gray;}
 </style>
+<script>
+	<!-- 상품 정보 선택하는 팝업 열기 위한 스크립트 !-->
+	function itemInfo(){
+		window.open("<%=request.getContextPath()%>/itemInfo.do","_blank","width=600px,height=400px");
+	}
+</script>
 <div>
 	<%-- 글쓰기 폼 --%>
 	<form method="post" action="<%=request.getContextPath() %>/imgUpload.do" enctype="multipart/form-data"
 			onsubmit="return check()">
 	<div id="iteminfo">
-	<input type="button" value="상품정보선택">
+	<input type="button" value="상품정보선택" onclick="itemInfo()">
+	
+	
+	
 	</div>
 	<!-- 부모 글에 대한 정보 !-->
 	<input type="hidden" name="rv_num" value="${param.rv_num }">

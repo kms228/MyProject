@@ -105,6 +105,7 @@ CREATE TABLE orderlist
 	price number,
 	pnum number(10) NOT NULL CONSTRAINT FK_orderlist REFERENCES item(pnum) on delete cascade,
 	buy_num number NOT NULL CONSTRAINT FK_orderlist REFERENCES buyboard(buy_num) on delete cascade,
+	review number(5),
 	PRIMARY KEY (order_num)
 );
 
@@ -148,6 +149,15 @@ CREATE TABLE wishlist
 	regdate date NOT NULL,
 	PRIMARY KEY (num)
 );
+
+CREATE TABLE itemImage
+(
+	num number NOT NULL,
+	pnum number NOT NULL constraint FK_itemImage references item(pnum) on delete cascade,
+	savefilename varchar2(70) NOT NULL,
+	PRIMARY KEY (num)
+);
+
 
 
 

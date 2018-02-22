@@ -25,22 +25,21 @@ function ring(){
 		
 		var li1 = document.createElement("li");
 		var label = document.createElement("label");
-		label.setAttribute("name", "111");
-		label.setAttribute("onclick", "naming('14k/18k')");
+		label.setAttribute("onclick", "naming('14k/18k',11)");
 		var labelText = document.createTextNode("14k/18k");
 	    listOf.appendChild(li1).appendChild(label).appendChild(labelText);
 	    
 		
 	    var li2 = li1.cloneNode(true);
-	    li2.innerHTML="<label name='222' onclick='naming(\"다이아\")'>다이아</label>"
+	    li2.innerHTML="<label onclick='naming(\"다이아\",12)'>다이아</label>"
 	    listOf.appendChild(li2);
 	    
 	    var li3 = li1.cloneNode(true);
-	    li3.innerHTML="<label name='333' onclick='naming(\"탄생석\")'>탄생석</label>"
+	    li3.innerHTML="<label onclick='naming(\"탄생석\",13)'>탄생석</label>"
 	    listOf.appendChild(li3);
 	    
 	    var li4 = li1.cloneNode(true);
-	    li4.innerHTML="<label name='333' onclick='naming(\"실버\")'>실버</label>"
+	    li4.innerHTML="<label onclick='naming(\"실버\",14)'>실버</label>"
 	    listOf.appendChild(li4);
 	}
 }
@@ -66,17 +65,16 @@ function neck(){
 		
 		var li1 = document.createElement("li");
 		var label = document.createElement("label");
-		label.setAttribute("name", "111");
-		label.setAttribute("onclick", "naming('14k/18k')");
+		label.setAttribute("onclick", "naming('14k/18k',21)");
 		var labelText = document.createTextNode("14k/18k");
 	    listOf.appendChild(li1).appendChild(label).appendChild(labelText);
 		
 	    var li2 = li1.cloneNode(true);
-	    li2.innerHTML="<label name='222' onclick='naming(\"다이아\")'>다이아</label>"
+	    li2.innerHTML="<label onclick='naming(\"다이아\",22)'>다이아</label>"
 	    listOf.appendChild(li2);
 	    
 	    var li3 = li1.cloneNode(true);
-	    li3.innerHTML="<label name='333' onclick='naming(\"탄생석\")'>탄생석</label>"
+	    li3.innerHTML="<label onclick='naming(\"탄생석\",23)'>탄생석</label>"
 	    listOf.appendChild(li3);
 	    
 	}
@@ -103,13 +101,12 @@ function ear(){
 		
 		var li1 = document.createElement("li");
 		var label = document.createElement("label");
-		label.setAttribute("name", "111");
-		label.setAttribute("onclick", "naming('14k/18k')");
+		label.setAttribute("onclick", "naming('14k/18k',31)");
 		var labelText = document.createTextNode("14k/18k");
 	    listOf.appendChild(li1).appendChild(label).appendChild(labelText);
 	    
 	    var li2 = li1.cloneNode(true);
-	    li2.innerHTML="<label name='333' onclick='naming(\"탄생석\")'>탄생석</label>"
+	    li2.innerHTML="<label onclick='naming(\"탄생석\",32)'>탄생석</label>"
 	    listOf.appendChild(li2);
 	}
 }
@@ -133,140 +130,143 @@ function coup(){
 		
 		var li1 = document.createElement("li");
 		var label = document.createElement("label");
-		label.setAttribute("name", "111");
-		label.setAttribute("onclick", "naming('14k/18k')");
+		label.setAttribute("onclick", "naming('14k/18k',41)");
 		//label.onclick=naming("14k/18k");
 		var labelText = document.createTextNode("14k/18k");
 	    listOf.appendChild(li1).appendChild(label).appendChild(labelText);
 		
 	    var li2 = li1.cloneNode(true);
-	    li2.innerHTML="<label name='222' onclick='naming(\"다이아\")'>다이아</label>"
+	    li2.innerHTML="<label onclick='naming(\"다이아\",42)'>다이아</label>"
 	    listOf.appendChild(li2);
 	    
 	    var li3 = li1.cloneNode(true);
-	    li3.innerHTML="<label name='333' onclick='naming(\"실버\")'>실버</label>"
+	    li3.innerHTML="<label onclick='naming(\"실버\",43)'>실버</label>"
 	    listOf.appendChild(li3);
 	}
 }
-function naming(name){
+function naming(name,sfieldnum){
 	var resultOf3 = document.getElementById("resultOf3");
 	resultOf3.innerHTML="";
 	resultOf3.innerHTML=name;
+	var fieldnum = document.getElementById("fieldnum");
+	fieldnum.setAttribute("value", sfieldnum);
+	//console.log(sfieldnum);
 }
 </script>
-<form method="post" action="<c:url value='/item?cmd=insertOk'/>" enctype="multipart/form-data">
-<h1>상품관리 > 상품등록</h1><br>
-<!-- 기본정보/상품명/상세설명 -->
-<div id="qa1" class="section">
-	
-	<div class="sectionBar">
-		<h3>기본 정보</h3>
+<form method="post" action="<c:url value='/item?cmd=itemInsert'/>" enctype="multipart/form-data">
+	<input type="hidden" name="fieldnum" id="fieldnum">
+	<h1>상품관리 > 상품등록</h1><br>
+	<!-- 기본정보/상품명/상세설명 -->
+	<div id="qa1" class="section">
+		
+		<div class="sectionBar">
+			<h3>기본 정보</h3>
+		</div>
+		<div class="sectionArea">
+			<table border="1">
+				<tbody>
+					<tr>
+						<th scope="row">상품명</th>
+						<td><input type="text" name="item_name"  placeholder="예시) 18k 1g 정수 심플링 반지" style="width: 340px;"></td>
+					</tr>
+					<tr>
+						<th scope="row">수량</th>
+						<td><input type="text" name="stock" placeholder="예시) 8">EA</td>
+					</tr>	
+				</tbody>
+			</table>
+		</div>
 	</div>
-	<div class="sectionArea">
-		<table border="1">
-			<tbody>
-				<tr>
-					<th scope="row">상품명</th>
-					<td><input type="text" name="item_name"  placeholder="예시) 18k 1g 정수 심플링 반지" style="width: 340px;"></td>
-				</tr>
-				<tr>
-					<th scope="row">수량</th>
-					<td><input type="text" name="stock" placeholder="예시) 8">EA</td>
-				</tr>	
-			</tbody>
-		</table>
+	<!--  판매정보/판매가격 -->
+	<div id="qa2" class="section">
+		<div class="sectionBar"><br>
+			<h3>판매 정보</h3>
+		</div>
+		<div class="sectionArea">
+			<table border="1">
+				<tbody>
+					<tr>
+						<th scope="row">판매 가격</th>
+						<td><input type="text" name="price" placeholder="예시) 55000" style="width: 140px;">KRW</td>
+					</tr>
+					
+				</tbody>
+			</table>
+		</div>
 	</div>
-</div>
-<!--  판매정보/판매가격 -->
-<div id="qa2" class="section">
-	<div class="sectionBar"><br>
-		<h3>판매 정보</h3>
-	</div>
-	<div class="sectionArea">
-		<table border="1">
-			<tbody>
-				<tr>
-					<th scope="row">판매 가격</th>
-					<td><input type="text" name="item_name" placeholder="예시) 55000" style="width: 140px;">KRW</td>
-				</tr>
-				
-			</tbody>
-		</table>
-	</div>
-</div>
-<!-- 표시설정/상품분류 -->
-<div id="qa3" class="section">
-	<div class="sectionBar"><br>
-		<h3>표시 정보</h3>
-	</div>
-	<div class="sectionArea">
-		<table border="1">
-			<tbody>
-				<tr>
-					<th scope="row">상품 분류</th>
-					<td>
-					<div class="searchSelect">
-						<table border="1">
-							
-							<thead>
-								<tr>
-									<th scope="col">대분류</th>
-									<th scope="col">중분류</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<div class="list">
-											<ul>
-											<!-- li{list-style:none} -->
-												<li><a href="javascript:selectRing();">반지 ></a></li>
-												<li><a href="javascript:selectNeck();">목걸이 ></a></li>	
-												<li><a href="javascript:selectEar();">반지 ></a></li>
-												<li><a href="javascript:selectCoup();">커플링 ></a></li>
-											</ul>
-										</div>
-									</td>
-									<td>
-										<div class="list">
-											<ul id="listOf">
-												
-											</ul>
-										</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-						<div id="resultOf1"><span style="font-weight: bold"> 선택된 상품분류 </span>
-							<span id="resultOf2"></span><span id="resultOf3"></span>
+	<!-- 표시설정/상품분류 -->
+	<div id="qa3" class="section">
+		<div class="sectionBar"><br>
+			<h3>표시 정보</h3>
+		</div>
+		<div class="sectionArea">
+			<table border="1">
+				<tbody>
+					<tr>
+						<th scope="row">상품 분류</th>
+						<td>
+						<div class="searchSelect">
+							<table border="1">
+								
+								<thead>
+									<tr>
+										<th scope="col">대분류</th>
+										<th scope="col">중분류</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<div class="list">
+												<ul>
+												<!-- li{list-style:none} -->
+													<li><a href="javascript:selectRing();">반지 ></a></li>
+													<li><a href="javascript:selectNeck();">목걸이 ></a></li>	
+													<li><a href="javascript:selectEar();">반지 ></a></li>
+													<li><a href="javascript:selectCoup();">커플링 ></a></li>
+												</ul>
+											</div>
+										</td>
+										<td>
+											<div class="list">
+												<ul id="listOf">
+													
+												</ul>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<div id="resultOf1"><span style="font-weight: bold"> 선택된 상품분류 </span>
+								<span id="resultOf2"></span><span id="resultOf3"></span>
+							</div>
 						</div>
-					</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
-</div>
-<!-- 이미지정보/상품이미지등록 -->
-<div id="qa4" class="section">
-	<div class="sectionBar"><br>
-		<h3>이미지 정보</h3>
+	<!-- 이미지정보/상품이미지등록 -->
+	<div id="qa4" class="section">
+		<div class="sectionBar"><br>
+			<h3>이미지 정보</h3>
+		</div>
+		<div class="sectionArea">
+			<table border="1">
+				<tbody>
+					<tr>
+						<th>대표 이미지</th>
+						<td><input type="file" name="file1"></td>
+					</tr>
+					<tr>
+						<th>상세 이미지</th>
+						<td><input type="file" name="file2"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
-	<div class="sectionArea">
-		<table border="1">
-			<tbody>
-				<tr>
-					<th>대표 이미지</th>
-					<td><input type="file"></td>
-				</tr>
-				<tr>
-					<th>상세 이미지</th>
-					<td><input type="file"></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-</div>
-<br>
-<div align="center"><input type="submit" value="등록"> <input type="reset" value="취소"></div>
+	<br>
+	<div align="center"><input type="submit" value="등록"> <input type="reset" value="취소"></div>
 </form>
