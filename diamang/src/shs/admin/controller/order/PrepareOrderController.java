@@ -36,7 +36,7 @@ public class PrepareOrderController extends HttpServlet{
 		String pageNum = req.getParameter("pageNum");
 		SearchOptionVo vo = new SearchOptionVo(optName, optValue, buy_date, item_name);		
 		PrepareproductDao dao = new PrepareproductDao();
-		PagingBot bot = new PagingBot(5,10);
+		PagingBot bot = new PagingBot(20,10);
 		PagingVo pageVo =  bot.calPaging(pageNum, dao.getCount(vo));
 		ArrayList<PrepProdVo> list = dao.search(vo, pageVo);
 		req.setAttribute("pageVo", pageVo);

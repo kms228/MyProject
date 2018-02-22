@@ -1,7 +1,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -71,7 +72,7 @@
 	<table border="1">
 	<thead>
 		<tr>
-			<th>주문일</th><th>구매번호</th><th>주문번호</th><th>상품번호</th><th>주문자</th><th>상품명</th><th>수량</th><th>상품구매금액</th><th>총금액</th><th>배송중 처리</th>
+			<th>주문일</th><th>주문번호</th><th>주문자</th><th>구매번호</th><th>상품번호</th><th>상품명</th><th>수량</th><th>상품구매금액</th><th>총금액</th><th>배송중 처리</th><th>배송취소 처리</th>
 		</tr>
 	</thead>
 	<tbody>	
@@ -79,10 +80,27 @@
 		<tr>
 			<td colspan="10" align="center">검색된 주문내역이 없습니다.</td>	
 		</tr>
-		</c:if>		
-		<c:forEach var="vo" items="${list }">
+		</c:if>				
+		<c:set var="n" value="-1"/>
+		<c:set var="cnt" value="-1"/>
+		<c:forEach var="vo" items="${list }">		
 		<tr>
-			<td rowspan="1">${vo.buy_date }</td><td>${vo.order_num }</td><td>${vo.buy_num}</td><td>${vo.pnum }</td><td>${vo.name }</td><td>${vo.item_name }</td><td>${vo.amount }</td><td>${vo.price }</td><td>${vo.accprice }</td><td>0</td>
+		<c:choose>			
+			<c:when test="${n != vo.buy_num && vo.ordercnt != 0}">				
+				<td rowspan="${vo.ordercnt+1 }">${vo.buy_date }</td><td rowspan="${vo.ordercnt+1 }">${vo.buy_num}</td><td rowspan="${vo.ordercnt+1 }">${vo.name }</td><td>${vo.order_num }</td><td>${vo.pnum }</td><td>${vo.item_name }</td><td>${vo.amount }</td><td>${vo.price }</td><td rowspan="${vo.ordercnt+1 }">${vo.accprice }</td><td align="center" rowspan="${vo.ordercnt+1 }"><input type="button" value="배송중"></td><td align="center" rowspan="${vo.ordercnt+1 }"><input type="button" value="배송취소"></td>
+				<c:set var="n" value="${vo.buy_num }"/>
+				<c:set var="cnt" value="${vo.ordercnt }"/>
+			</c:when>	
+			<c:otherwise>
+					<td>${vo.order_num }</td><td>${vo.pnum }</td><td>${vo.item_name }</td><td>${vo.amount }</td><td>${vo.price }</td>
+					<c:set var="cnt" value="${cnt-1 }" />																						
+			</c:otherwise>
+		</c:choose>
+		<c:if test="${cnt==1 }">
+			<tr>
+				<td colspan="5">연락처 : ${vo.caddr}<br>배송지 : ${vo.addr }</td>
+			</tr>
+		</c:if>
 		</tr>
 		</c:forEach>
 	</tbody>	

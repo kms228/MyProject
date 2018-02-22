@@ -10,11 +10,14 @@ public class PrepProdVo {
 	private String buy_date;
 	private int accprice;
 	private String name;
+	private int ordercnt;
+	private String addr;
+	private String caddr;
 			
 	public PrepProdVo() {}
 
 	public PrepProdVo(int buy_num, int order_num, int amount, int pnum, int price, String item_name, String buy_date,
-			int accprice, String name) {
+			int accprice, String name, int ordercnt, String addr, String caddr) {
 		this.buy_num = buy_num;
 		this.order_num = order_num;
 		this.amount = amount;
@@ -24,6 +27,9 @@ public class PrepProdVo {
 		this.buy_date = buy_date;
 		this.accprice = accprice;
 		this.name = name;
+		this.ordercnt = ordercnt;
+		this.addr = addr;
+		this.caddr = caddr;
 	}
 
 	public int getBuy_num() {
@@ -96,5 +102,29 @@ public class PrepProdVo {
 
 	public void setName(String name) {
 		this.name = name;
-	};		
+	}
+
+	public int getOrdercnt() {
+		return ordercnt;
+	}
+
+	public void setOrdercnt(int ordercnt) {
+		this.ordercnt = ordercnt;
+	}
+
+	public String getAddr() {
+		return addr;
+	}
+
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+
+	public String getCaddr() {
+		return caddr;
+	}
+
+	public void setCaddr(String caddr) {
+		this.caddr = caddr;
+	}						
 }
