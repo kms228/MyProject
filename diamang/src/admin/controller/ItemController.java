@@ -29,13 +29,16 @@ public class ItemController extends HttpServlet {
 		String cmd = (String)request.getParameter("cmd");
 		if(cmd.equals("insert")) {
 			response.sendRedirect(request.getContextPath()+"/admin/layout_kms.jsp?page=item/insertItem_kms.jsp");
+			
 		}else if(cmd.equals("itemMenu")) {
 			System.out.println("itemController:itemMenu");
 			itemMenu(request, response);
+			
 		}else if(cmd.equals("itemInsert")) {
-			System.out.println("itemController:itemInsertOk");
+			System.out.println("itemController:itemInsert");
 			itemInsert(request, response);
 		}
+		
 	}
 	
 	private void itemMenu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,6 +49,7 @@ public class ItemController extends HttpServlet {
 	}
 	//상품추가
 	private void itemInsert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("itemController : itemInsert");
 		request.setCharacterEncoding("UTF-8");
 		String uploadPath = request.getServletContext().getRealPath("/upload");
 		MultipartRequest mr=new MultipartRequest(
@@ -56,17 +60,15 @@ public class ItemController extends HttpServlet {
 	            new DefaultFileRenamePolicy());
 		
 		String item_name = mr.getParameter("item_name");
-		int price = Integer.parseInt(request.getParameter("price"));
-		int stock = Integer.parseInt(request.getParameter("stock"));
-		int fieldnum = Integer.parseInt(request.getParameter("fieldnum"));
-		
+		int price = Integer.parseInt(mr.getParameter("price"));
+		int stock = Integer.parseInt(mr.getParameter("stock"));
+		int fieldnum = Integer.parseInt(mr.getParameter("fieldnum"));
 		ItemVo vo = new ItemVo(0, item_name, price, null, stock, fieldnum);
 		ItemDao dao = ItemDao.getInstance();
+
 		//방금 insert한 상품의 pnum구하기
 		int pnum = dao.itemInsert(vo);
-		
 		IteamImageDao imgDao = IteamImageDao.getInstance();
-		
 		String savefilename1 = mr.getFilesystemName("file1");
 		ItemImageVo imgvo1 = new ItemImageVo(0, pnum, savefilename1);
 		int i = imgDao.itemImageInsert(imgvo1);
@@ -76,7 +78,9 @@ public class ItemController extends HttpServlet {
 		int j = imgDao.itemImageInsert(imgvo2);
 		
 		if(i>0 && j>0) {
-			 response.sendRedirect(request.getContextPath()+"/item?cmd=insert");
+			response.sendRedirect(request.getContextPath()+"/item?cmd=insert");
+			System.out.println("파일추가성공");
+			
 		}else {
 			System.out.println("파일추가실패");
 		}
