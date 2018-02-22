@@ -2,9 +2,6 @@ package admin.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,11 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import admin.dao.IteamImageDao;
 import admin.dao.ItemDao;
-import admin.vo.ItemImageVo;
+import admin.dao.ItemImg1Dao;
+import admin.dao.ItemImg2Dao;
+import admin.vo.ItemImg1Vo;
+import admin.vo.ItemImg2Vo;
 import admin.vo.ItemVo;
-import diamang.dbcp.DbcpBean;
 
 
 @WebServlet("/item")
@@ -37,6 +35,9 @@ public class ItemController extends HttpServlet {
 		}else if(cmd.equals("itemInsert")) {
 			System.out.println("itemController:itemInsert");
 			itemInsert(request, response);
+		
+		}else if(cmd.equals("list")) {
+			response.sendRedirect(request.getContextPath()+"/admin/layout_kms.jsp?page=item/itemList.jsp");
 		}
 		
 	}
@@ -68,14 +69,15 @@ public class ItemController extends HttpServlet {
 
 		//방금 insert한 상품의 pnum구하기
 		int pnum = dao.itemInsert(vo);
-		IteamImageDao imgDao = IteamImageDao.getInstance();
+		ItemImg1Dao imgDao = ItemImg1Dao.getInstance();
 		String savefilename1 = mr.getFilesystemName("file1");
-		ItemImageVo imgvo1 = new ItemImageVo(0, pnum, savefilename1);
-		int i = imgDao.itemImageInsert(imgvo1);
+		ItemImg1Vo imgvo1 = new ItemImg1Vo(0, pnum, savefilename1);
+		int i = imgDao.itemImg1Insert(imgvo1);
 		
+		ItemImg2Dao imgDao2 = ItemImg2Dao.getInstance();
 		String savefilename2 = mr.getFilesystemName("file2");
-		ItemImageVo imgvo2 = new ItemImageVo(0, pnum, savefilename2);
-		int j = imgDao.itemImageInsert(imgvo2);
+		ItemImg2Vo imgvo2 = new ItemImg2Vo(0, pnum, savefilename2);
+		int j = imgDao2.itemImg2Insert(imgvo2);
 		
 		if(i>0 && j>0) {
 			response.sendRedirect(request.getContextPath()+"/item?cmd=insert");

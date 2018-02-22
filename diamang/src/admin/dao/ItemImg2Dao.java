@@ -6,23 +6,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import admin.vo.ItemImageVo;
+import admin.vo.ItemImg2Vo;
 import diamang.dbcp.DbcpBean;
 
-public class IteamImageDao {
+public class ItemImg2Dao {
 	
-	private static IteamImageDao instance = new IteamImageDao();
-	private IteamImageDao() {}
-	public static IteamImageDao getInstance() {
+	private static ItemImg2Dao instance = new ItemImg2Dao();
+	private ItemImg2Dao() {}
+	public static ItemImg2Dao getInstance() {
 		return instance;
 	}
 	
 	//상품추가
-	public int itemImageInsert(ItemImageVo vo) {
+	public int itemImg2Insert(ItemImg2Vo vo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			String sql = "insert into itemImage values(itemImg_sq.nextval,?,?)";
+			String sql = "insert into itemImg2 values(itemImg_sq.nextval,?,?)";
 			con = DbcpBean.getConn();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, vo.getPnum());
@@ -38,22 +38,22 @@ public class IteamImageDao {
 	}
 	
 	//상품전체리스트보기
-	public ArrayList<ItemImageVo> listAll(){
+	public ArrayList<ItemImg2Vo> listAll(){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = DbcpBean.getConn();
-			String sql = "select * from itemImage";
+			String sql = "select * from itemImg2";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			ArrayList<ItemImageVo> list = new ArrayList<>();
+			ArrayList<ItemImg2Vo> list = new ArrayList<>();
 			while(rs.next()) {
 				int num = rs.getInt(1);
 				int pnum = rs.getInt(2);
 				String savefilename = rs.getString(3);
 				
-				ItemImageVo vo = new ItemImageVo(num, pnum, savefilename);
+				ItemImg2Vo vo = new ItemImg2Vo(num, pnum, savefilename);
 				list.add(vo);
 			}
 			return list;
@@ -70,7 +70,7 @@ public class IteamImageDao {
 		PreparedStatement pstmt = null;
 		try {
 			con = DbcpBean.getConn();
-			String sql = "delete from itemImage where num=?";
+			String sql = "delete from itemImg2 where num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			return pstmt.executeUpdate();
@@ -82,20 +82,20 @@ public class IteamImageDao {
 		}
 	}
 	//상품검색(상품번호)
-	public ItemImageVo getinfo(int num) {
+	public ItemImg2Vo getinfo(int num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = DbcpBean.getConn();
-			String sql = "select * from itemImage where num=?";
+			String sql = "select * from itemImg2 where num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				int pnum = rs.getInt(2);
 				String savefilename = rs.getString(3);
-				ItemImageVo vo = new ItemImageVo(num, pnum, savefilename);
+				ItemImg2Vo vo = new ItemImg2Vo(num, pnum, savefilename);
 				return vo;
 			}
 			return null;
@@ -107,13 +107,13 @@ public class IteamImageDao {
 		}
 	}
 	//상품정보수정
-	public int update(ItemImageVo vo) {
+	public int update(ItemImg2Vo vo) {
 		System.out.println(vo.toString());
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = DbcpBean.getConn();
-			String sql = "update itemImage set pnum=?,savefilename=? where num=?";
+			String sql = "update itemImg2 set pnum=?,savefilename=? where num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, vo.getPnum());
 			pstmt.setString(2, vo.getSavefilename());

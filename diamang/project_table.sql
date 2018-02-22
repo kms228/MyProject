@@ -150,6 +150,23 @@ CREATE TABLE wishlist
 	PRIMARY KEY (num)
 );
 
+CREATE TABLE itemImg1
+(
+	num number NOT NULL,
+	pnum number NOT NULL constraint FK_itemImg1 references item(pnum) on delete cascade,
+	savename varchar2(70),
+	PRIMARY KEY (num)
+);
+
+CREATE TABLE itemImg2
+(
+	num number NOT NULL,
+	pnum number NOT NULL constraint FK_itemImg2 references item(pnum) on delete cascade,
+	savename varchar2(70),
+	PRIMARY KEY (num)
+);
+
+
 
 
 /* Create Foreign Keys */
