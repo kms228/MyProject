@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
-	#iteminfo{width:100%; height:100px;border:1px solid gray;}
+	#iteminfo{width:100%;border:1px solid gray;}
+	#iteminfo div{display:inline-block;}
 </style>
 <script>
 	<!-- 상품 정보 선택하는 팝업 열기 위한 스크립트 !-->
@@ -15,9 +16,17 @@
 	<form method="post" action="<%=request.getContextPath() %>/imgUpload.do" enctype="multipart/form-data"
 			onsubmit="return check()">
 	<div id="iteminfo">
-	<input type="button" value="상품정보선택" onclick="itemInfo()">
-	
-	
+	<input type="button" value="상품정보선택" onclick="itemInfo()"><br>
+	<div id="img">
+	</div>
+	<div id="info">
+	<%--<p>상품 이름</p>
+		<p>가격</p>
+		<p>버튼</p>
+		<input type="button" value="상품상세보기"  onclick = "itemInfo()" id="button1">
+		<input type="button" value="상품정보선택"  onclick = "itemInfo()" id="button2">
+		 --%>
+	</div>
 	
 	</div>
 	<!-- 부모 글에 대한 정보 !-->

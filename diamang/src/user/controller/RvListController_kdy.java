@@ -35,7 +35,7 @@ public class RvListController_kdy extends HttpServlet {
 				if(pageCount<endPage) {
 					endPage=pageCount;
 				}
-				
+				req.setCharacterEncoding("utf-8");
 				req.setAttribute("list", list);
 				req.setAttribute("pageCount", pageCount);
 				req.setAttribute("startPage", startPage);
