@@ -43,8 +43,8 @@ PWD </label><input type="password" name="pwd" id="pwd"> <input type="submit" val
 <input type="checkbox" value="saveid" >아이디저장<br>
 
 <a href="<%=request.getContextPath()%>/user/join_hhj.jsp">회원가입</a>
-<a href="<%=request.getContextPath()%>/user/idfind_hhj.jsp">아이디찾기</a>
-<a href="<%=request.getContextPath()%>/user/join_hhj.jsp">비번찾기</a>
+<a href="<%=request.getContextPath()%>/user/findid_hhj.jsp">아이디찾기</a>
+<a href="<%=request.getContextPath()%>/user/findpwd_hhj.jsp">비번찾기</a>
 
 </form>
 </c:when>
