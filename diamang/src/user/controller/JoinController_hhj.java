@@ -100,12 +100,12 @@ public class JoinController_hhj extends HttpServlet{
 		int n = dao.delete(mnum);
 		System.out.println(mnum);
 		System.out.println(n);
-		if (n>0) {		
-			response.sendRedirect(request.getContextPath()+"/user/login_hhj.jsp");
-			request.setAttribute("delete", "삭제 성공");
+		if (n>0) {
+			request.setAttribute("result", "success");
+			request.getRequestDispatcher("user/deleteResult.jsp").forward(request, response);
 		}else{
-			request.setAttribute("fail", "삭제 실패");
-			request.getRequestDispatcher("/user/삭제실패창만들어").forward(request, response);
+			request.setAttribute("result", "fail");
+			request.getRequestDispatcher("user/deleteResult.jsp").forward(request, response);
 		}
 	}
 	
@@ -127,11 +127,11 @@ public class JoinController_hhj extends HttpServlet{
 		int n = dao.update(update);
 		
 		if(n>0) {
-			response.sendRedirect(request.getContextPath()+"/user/login_hhj.jsp");
+			request.setAttribute("result", "success");
 		}else {
-			request.setAttribute("fail", "수정실패");
-			request.getRequestDispatcher("/users/result.jsp").forward(request, response);
+			request.setAttribute("result", "fail");
 		}
+		request.getRequestDispatcher("/user/updateResult.jsp").forward(request, response);
 	}
 
 	
@@ -196,9 +196,7 @@ public class JoinController_hhj extends HttpServlet{
 		}else {
 			request.setAttribute("result", "fall");
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/user/성공?");
-		rd.forward(request,response);
-		
+		request.getRequestDispatcher("/user/joinResult.jsp").forward(request, response);
 	}
 	
 	
