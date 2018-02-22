@@ -224,6 +224,7 @@ function naming(name,sfieldnum){
 													<li><a href="javascript:selectNeck();">목걸이 ></a></li>	
 													<li><a href="javascript:selectEar();">반지 ></a></li>
 													<li><a href="javascript:selectCoup();">커플링 ></a></li>
+													
 												</ul>
 											</div>
 										</td>
