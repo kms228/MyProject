@@ -231,10 +231,10 @@ function file_change2(file2){
 											<div class="list">
 												<ul>
 												<!-- li{list-style:none} -->
-													<li><a id="ring1" href="javascript:selectRing();">반&nbsp;&nbsp;&nbsp;지 ></a></li>
-													<li><a href="javascript:selectNeck();">목걸이 ></a></li>	
-													<li><a href="javascript:selectEar();">귀걸이 ></a></li>
-													<li><a href="javascript:selectCoup();">커플링 ></a></li>
+													<li onclick="selectRing()">반&nbsp;&nbsp;&nbsp;지 ></li>
+													<li onclick="selectNeck()">목걸이 ></li>	
+													<li onclick="selectEar()">귀걸이 ></li>
+													<li onclick="selectCoup()">커플링 ></li>
 													
 												</ul>
 											</div>

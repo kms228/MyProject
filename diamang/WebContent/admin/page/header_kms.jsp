@@ -79,7 +79,6 @@ function list2(){
 	<a href="#">배송관리</a><span>|&nbsp;</span>
 	<a href="#">게시판관리</a>
 	
-	<br>
+	
 	<div id="menuList"></div>
-	<br>
 </div>

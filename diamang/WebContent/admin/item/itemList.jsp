@@ -162,7 +162,7 @@ function newPage(pnum){
 </script>
 <form method="post" action="<c:url value='/item?cmd=listOk'/>">
 	<input type="hidden" name="fieldnum" id="fieldnum">
-	<h1>상품관리 > 상품수정</h1><br>
+	<h2>상품관리 > 상품수정</h2><br>
 	<!-- 기본정보/상품명/상세설명 -->
 	
 	<!--  판매정보/판매가격 -->
@@ -193,11 +193,10 @@ function newPage(pnum){
 											<div class="list">
 												<ul>
 												<!-- li{list-style:none} -->
-													<li><a href="javascript:selectRing();">반&nbsp;&nbsp;&nbsp;지 ></a></li>
-													<li><a href="javascript:selectNeck();">목걸이 ></a></li>	
-													<li><a href="javascript:selectEar();">귀걸이 ></a></li>
-													<li><a href="javascript:selectCoup();">커플링 ></a></li>
-													
+													<li onclick="selectRing()">반&nbsp;&nbsp;&nbsp;지 ></li>
+													<li onclick="selectNeck()">목걸이 ></li>	
+													<li onclick="selectEar()">귀걸이 ></li>
+													<li onclick="selectCoup()">커플링 ></li>
 												</ul>
 											</div>
 										</td>

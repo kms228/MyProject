@@ -32,6 +32,7 @@
 	<div id="header">
 		<jsp:include page="page/header_kms.jsp"></jsp:include>
 	</div>
+	<br>
 	<div id="body">
 		<jsp:include page="${spage }"></jsp:include>
 	</div>
