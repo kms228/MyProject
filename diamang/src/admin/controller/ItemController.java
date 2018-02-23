@@ -46,9 +46,71 @@ public class ItemController extends HttpServlet {
 		
 		}else if(cmd.equals("listOk")) {
 			itemList(request,response);
+		
+		}else if(cmd.equals("detail")) {
+			detail(request,response);
+		
+		}else if(cmd.equals("update")) {
+			update(request,response);
 		}
 	}
 	
+	private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("itemController : itemInsert");
+		request.setCharacterEncoding("UTF-8");
+		String uploadPath = request.getServletContext().getRealPath("/upload");
+		MultipartRequest mr=new MultipartRequest(
+	            request, //request객체
+	            uploadPath,   //업로드할 파일 경로
+	            1024*1024*20,   //최대 업로드 크기(바이트 단위로 설정)
+	            "utf-8",   //인코딩방식
+	            new DefaultFileRenamePolicy());
+		
+		String item_name = mr.getParameter("item_name");
+		int price = Integer.parseInt(mr.getParameter("price"));
+		int stock = Integer.parseInt(mr.getParameter("stock"));
+		int fieldnum = Integer.parseInt(mr.getParameter("fieldnum"));
+		ItemVo vo = new ItemVo(0, item_name, price, null, stock, fieldnum);
+		ItemDao dao = ItemDao.getInstance();
+
+		//방금 insert한 상품의 pnum구하기
+		int pnum = dao.itemInsert(vo);
+		ItemImg1Dao imgDao = ItemImg1Dao.getInstance();
+		String savefilename1 = mr.getFilesystemName("file1");
+		ItemImg1Vo imgvo1 = new ItemImg1Vo(0, pnum, savefilename1);
+		int i = imgDao.itemImg1Insert(imgvo1);
+		
+		ItemImg2Dao imgDao2 = ItemImg2Dao.getInstance();
+		String savefilename2 = mr.getFilesystemName("file2");
+		ItemImg2Vo imgvo2 = new ItemImg2Vo(0, pnum, savefilename2);
+		int j = imgDao2.itemImg2Insert(imgvo2);
+		
+		if(i>0 && j>0) {
+			response.sendRedirect(request.getContextPath()+"/item?cmd=insert");
+			System.out.println("파일수정성공");
+			
+		}else {
+			System.out.println("파일수정실패");
+		}
+			
+	}
+	private void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int num = Integer.parseInt(request.getParameter("pnum"));
+		
+		ItemDao dao = ItemDao.getInstance();
+		ItemImg1Dao img1dao = ItemImg1Dao.getInstance();
+		ItemImg2Dao img2dao = ItemImg2Dao.getInstance();
+		
+		ItemVo vo = dao.getinfo(num);
+		ItemImg1Vo img1vo = img1dao.getinfo(num);
+		ItemImg2Vo img2vo = img2dao.getinfo(num);
+		
+		request.setAttribute("vo", vo);
+		request.setAttribute("img1vo", img1vo);
+		request.setAttribute("img2vo", img2vo);
+		request.getRequestDispatcher("/admin/item/detail.jsp").forward(request, response);
+		
+	}
 	private void itemList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//페이지번호 얻어오기
 		String spageNum = request.getParameter("pageNum");
@@ -56,25 +118,25 @@ public class ItemController extends HttpServlet {
 		if(spageNum!=null) {
 			pageNum=Integer.parseInt(spageNum);
 		}
-		int startRow=(pageNum-1)*5+1;//시작행번호
-		int endRow=startRow+4;//끝행번호
+		int startRow=(pageNum-1)*10+1;//시작행번호
+		int endRow=startRow+9;//끝행번호
 		ItemListDao dao = new ItemListDao();
 		
 		System.out.println(request.getParameter("fieldnum"));
 		int fieldnum = Integer.parseInt(request.getParameter("fieldnum"));
-		System.out.println(3);
+		
 		ArrayList<ItemVo> list = dao.list(startRow, endRow ,fieldnum);
-		System.out.println(4);
+		
 		//전체 페이지 갯수
-		int pageCount=(int)Math.ceil(dao.getCount()/5.0);//ceil : 올림
+		int pageCount=(int)Math.ceil(dao.getCount()/10.0);//ceil : 올림
 		int startPage=((pageNum-1)/10*10)+1;//시작페이지
 		int endPage=startPage+9;//끝페이지
 		if(pageCount<endPage) {
 			endPage=pageCount;
 		}
-		System.out.println(5);
+		
 		request.setAttribute("list", list);
-		System.out.println("list 보냄?");
+		
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
