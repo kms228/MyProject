@@ -10,14 +10,32 @@
 </head>
 <body>
 <div id="wrap">
+	 
+	<div id="ad">
+	<input type="button" value="▲" id="butten1" name="up">
+		<div id="ad1">
+		<p>이곳은 사이드바 1</p>
+		</div>
+		<div id="ad2">
+		<p>이곳은 사이드바 2</p>
+		</div>
+		<div id="ad3">
+		<p>이곳은 사이드바 3</p>
+		</div>
+	<input type="button" value="▼" id="butten2" name="up">
+	</div>
+
 	<div id="header">
 		<jsp:include page="page/header_kdy.jsp"></jsp:include>
 	</div>
+	
+
 	<div id="content">
 		<jsp:include page="${cmd }"></jsp:include>
 		<% String a= (String)request.getAttribute("cmd");
 			System.out.println(a);%>
 	</div>
+	
 	<div id="footer">
 		<jsp:include page="page/footer_kdy.jsp"></jsp:include>	
 	</div>
