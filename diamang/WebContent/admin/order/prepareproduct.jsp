@@ -10,6 +10,9 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	window.onload = function(){
+		if(!("${msg}"==="")){
+			alert("${msg}");
+		}
 		var optName = "${search.optName}";
 		if(!(optName==="")){			
 			document.getElementById(optName).setAttribute("selected","selected");			
@@ -19,26 +22,59 @@
 			document.getElementById(buy_date).setAttribute("selected","selected");
 		}
 	}
-	var page = function(num){
-		var url = "prepareProduct.do?cmd=search&pageNum="+ num;
-		
-		var optValue = "${search.optValue}";
+	//페이지 이동 이나 기타 조건시 검색조건 받기위한 메소드
+	var getSearch = function(){
+		var url = "";		
 		var buy_date = "${search.buy_date}";
-		var item_name = "${search.item_name}";				
-		url = url+"&optName=${search.optName}";
-		url = url+"&optValue=${search.optValue}";				
-		url = url+"&item_name=${search.item_name}";			
+		var optValue = "${search.optValue}";
+								
+		url = url+"&item_name=${search.item_name}";
+		if(!(optValue === "")){
+			url = url+"&optName=${search.optName}";
+			url = url+"&optValue=${search.optValue}";
+		} else {
+			url = url+"&optName=";
+			url = url+"&optValue=";
+		}
 		if(!(buy_date === "")){
 			url = url+"&buy_date=${search.buy_date}";	
 		} else {
 			url = url+"&buy_date=nothing"
 		}
+		return url;
+	}
+	
+	var page = function(num){
+		var url = "order.do?cmd=prepsearch&pageNum="+ num;
+			
+		url = url + getSearch();
+		//alert(url);
 		location.href=url;
+	}
+	var uptShippedend = function(num){		
+		var pageNum = "${pageVo.pageNum}";
+		if( pageNum ===""){
+			pageNum = "1";
+		}
+		var url = "order.do?cmd=uptShippedend&pageNum="+pageNum+"&buy_num="+num;
+		url = url + getSearch();
+		//alert(url);
+		location.href = url;
+	}
+	var uptShippedCAN = function(num){		
+		var pageNum = "${pageVo.pageNum}";
+		if( pageNum ===""){
+			pageNum = "1";
+		}
+		var url = "order.do?cmd=uptShippedCAN&pageNum="+pageNum+"&buy_num="+num;
+		url = url + getSearch();
+		//alert(url);
+		location.href = url;
 	}
 </script>
 </head>
 <body>
-	<form method="post" action="<%=request.getContextPath()%>/admin/prepareProduct.do?cmd=search">
+	<form method="post" action="<%=request.getContextPath()%>/admin/order.do?cmd=prepsearch">
 		<table>
 			<tbody>
 				<tr>
@@ -78,7 +114,7 @@
 	<tbody>	
 		<c:if test="${list == null }">
 		<tr>
-			<td colspan="10" align="center">검색된 주문내역이 없습니다.</td>	
+			<td colspan="11" align="center">검색된 주문내역이 없습니다.</td>	
 		</tr>
 		</c:if>				
 		<c:set var="n" value="-1"/>
@@ -87,7 +123,11 @@
 		<tr>
 		<c:choose>			
 			<c:when test="${n != vo.buy_num && vo.ordercnt != 0}">				
-				<td rowspan="${vo.ordercnt+1 }">${vo.buy_date }</td><td rowspan="${vo.ordercnt+1 }">${vo.buy_num}</td><td rowspan="${vo.ordercnt+1 }">${vo.name }</td><td>${vo.order_num }</td><td>${vo.pnum }</td><td>${vo.item_name }</td><td>${vo.amount }</td><td>${vo.price }</td><td rowspan="${vo.ordercnt+1 }">${vo.accprice }</td><td align="center" rowspan="${vo.ordercnt+1 }"><input type="button" value="배송중"></td><td align="center" rowspan="${vo.ordercnt+1 }"><input type="button" value="배송취소"></td>
+				<td rowspan="${vo.ordercnt+1 }">${vo.buy_date }</td><td rowspan="${vo.ordercnt+1 }">${vo.buy_num}</td>
+				<td rowspan="${vo.ordercnt+1 }">${vo.name }</td><td>${vo.order_num }</td><td>${vo.pnum }</td><td>${vo.item_name }</td>
+				<td>${vo.amount }</td><td>${vo.price }</td><td rowspan="${vo.ordercnt+1 }">${vo.accprice }</td>
+				<td align="center" rowspan="${vo.ordercnt+1 }"><input type="button" value="배송중" onclick="uptShippedend('${vo.buy_num}')"></td>
+				<td align="center" rowspan="${vo.ordercnt+1 }"><input type="button" value="배송취소" onclick="uptShippedCAN('${vo.buy_num}')"></td>
 				<c:set var="n" value="${vo.buy_num }"/>
 				<c:set var="cnt" value="${vo.ordercnt }"/>
 			</c:when>	

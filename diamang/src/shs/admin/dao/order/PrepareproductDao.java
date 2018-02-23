@@ -6,14 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import admin.vo.ItemVo;
 import diamang.dbcp.DbcpBean;
 import shs.admin.vo.order.PrepProdVo;
-import shs.admin.vo.order.SearchOptionVo;
+import shs.admin.vo.order.OrderSearchVo;
 import shs.admin.vo.paging.PagingVo;
 
 public class PrepareproductDao {
 	// 전체 글의 갯수 구하기
-	public int getCount(SearchOptionVo vo) {
+	public int getCount(OrderSearchVo vo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -114,7 +115,7 @@ public class PrepareproductDao {
 //			DbcpBean.closeConn(con, pstmt, rs);
 //		}
 //	}
-	public ArrayList<PrepProdVo> search(SearchOptionVo vo, PagingVo pagingVo){
+	public ArrayList<PrepProdVo> search(OrderSearchVo vo, PagingVo pagingVo){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -199,5 +200,39 @@ public class PrepareproductDao {
 		} finally {
 			DbcpBean.closeConn(con, pstmt, rs);
 		}
+	}
+	public int uptShippedend(String buy_num) {				
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			System.out.println("buy_num : "+buy_num);
+			String sql = "UPDATE BUYBOARD SET STATE='배송중' WHERE BUY_NUM=?";
+			con = DbcpBean.getConn();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, buy_num);				
+			return pstmt.executeUpdate();												 							
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			DbcpBean.closeConn(con, pstmt, null);
+		}	
+	}
+	public int uptShippedCAN(String buy_num) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			System.out.println("buy_num : "+buy_num);
+			String sql = "UPDATE BUYBOARD SET STATE='배송취소' WHERE BUY_NUM=?";
+			con = DbcpBean.getConn();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, buy_num);				
+			return pstmt.executeUpdate();												 							
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			DbcpBean.closeConn(con, pstmt, null);
+		}	
 	}
 }
