@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import diamang.dbcp.DbcpBean;
 import user.vo.MembersVo_kdy;
 import user.vo.RvBoardVo_kdy;
+import user.vo.RvImageVo_kdy;
 
 public class RvBoardDao_kdy {
 	
@@ -122,7 +123,9 @@ public class RvBoardDao_kdy {
 				int lev=rs.getInt("lev");
 				int step=rs.getInt("step");
 				int star=rs.getInt("star");
-				RvBoardVo_kdy vo2 = new RvBoardVo_kdy(rv_num, mnum, title, writer, content, regdate, hit, ref, lev, step, star,null);
+				int pnum=rs.getInt("pnum");
+				String savename = getImgPath(pnum);
+				RvBoardVo_kdy vo2 = new RvBoardVo_kdy(rv_num, mnum, title, writer, content, regdate, hit, ref, lev, step, star,null,savename,pnum);
 				list.add(vo2);
 			}
 			return list;
@@ -158,7 +161,7 @@ public class RvBoardDao_kdy {
 			lev = lev+1;
 			step = step+1;
 			}
-			String sql2="insert into review  values(?,?,?,?,sysdate,?,?,?,?,?,?)";
+			String sql2="insert into review  values(?,?,?,?,sysdate,?,?,?,?,?,?,?)";
 			pstmt2=con.prepareStatement(sql2);
 			pstmt2.setInt(1, boardNum);
 			pstmt2.setInt(2, vo.getMnum());
@@ -170,6 +173,7 @@ public class RvBoardDao_kdy {
 			pstmt2.setInt(8, step);
 			pstmt2.setInt(9, vo.getStar());
 			pstmt2.setString(10, vo.getPwd());
+			pstmt2.setInt(11, vo.getPnum());
 			return pstmt2.executeUpdate();
 			
 		}catch(SQLException se) {
@@ -181,6 +185,22 @@ public class RvBoardDao_kdy {
 		}
 	}
 	
+	public void reviewOk(int pnum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DbcpBean.getConn();
+			String sql = "update orderlist set review=1 where pnum=?";
+			pstmt= con.prepareStatement(sql);
+			pstmt.setInt(1, pnum);
+			pstmt.executeQuery();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+		}
+	}
+	
+	//조회수
 	public void updateHit(int rv_num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -198,16 +218,64 @@ public class RvBoardDao_kdy {
 		}
 	}
 	
+	//대표 이미지 경로 구하는 메소드
+	public String getImgPath(int pnum) {
+		Connection con = null;
+		PreparedStatement pstmt =null;
+		ResultSet rs= null;
+		
+		try {
+			con = DbcpBean.getConn();
+			String sql = "select savename from itemimg1 where pnum=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pnum);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				String savename = rs.getString("savename");
+				return savename;
+			}else {
+				return null;
+			}
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		}finally {
+			DbcpBean.closeConn(con, pstmt, rs);
+		}
+	}
+	
+	//이미지 업로드할 때 db에 저장하는 메소드
+	public void imgUpload(RvImageVo_kdy vo){
+		Connection con =null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = DbcpBean.getConn();
+			String sql = "insert into image values(image_seq.nextval,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, vo.getRv_num());
+			pstmt.setString(2, vo.getSavename());
+			pstmt.executeQuery();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+		}finally {
+			DbcpBean.closeConn(con, pstmt, null);
+		}
+		
+	}
 	
 	//rv_num 으로 모든 정보를 조회하는 메소드
 	public RvBoardVo_kdy getInfo(int rv_num) {
 		Connection con =null;
 		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
 		ResultSet rs= null;
+		ResultSet rs2= null;
 		
 		try {
 			con = DbcpBean.getConn();
-			String sql = "select * from review where rv_num=?";
+			String sql = "select * from review r,image i where r.rv_num=? and r.rv_num=i.rv_num";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, rv_num);
 			rs = pstmt.executeQuery();
@@ -225,17 +293,44 @@ public class RvBoardDao_kdy {
 				int step = rs.getInt("step");
 				int star = rs.getInt("star");
 				String pwd = rs.getString("pwd");
+				int pnum = rs.getInt("pnum");
+				String savename = rs.getString("savename");
 				RvBoardVo_kdy vo2=new RvBoardVo_kdy(rv_num, mnum, title, writer, content, regdate, hit, ref, lev,
-						step, star, pwd);
+						step, star, pwd, savename, pnum);
 				return vo2;
 			}else {
-				return null;
+				String sql2 ="select * from review where rv_num=?";
+				pstmt2= con.prepareStatement(sql2);
+				pstmt2.setInt(1, rv_num);
+				rs2=pstmt2.executeQuery();
+				if(rs2.next()) {
+					int mnum = rs2.getInt("mnum");
+					MembersDao_kdy dao =new MembersDao_kdy();
+					MembersVo_kdy vo = dao.MembersInfo(mnum);
+					String writer = vo.getName();
+					String title = rs2.getString("title");
+					String content = rs2.getString("content");
+					Date regdate = rs2.getDate("regdate");
+					int hit = rs2.getInt("hit");
+					int ref = rs2.getInt("ref");
+					int lev = rs2.getInt("lev");
+					int step = rs2.getInt("step");
+					int star = rs2.getInt("star");
+					String pwd = rs2.getString("pwd");
+					int pnum = rs2.getInt("pnum");
+					RvBoardVo_kdy vo2=new RvBoardVo_kdy(rv_num, mnum, title, writer, content, regdate, hit, ref, lev,
+							step, star, pwd, null, pnum);
+					return vo2;
+				}
 			}
+			return null;
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
 			return null;
 		}finally {
 			DbcpBean.closeConn(con, pstmt, rs);
+			DbcpBean.closeConn(con, pstmt2, rs2);
 		}
 	}
+	
 }
