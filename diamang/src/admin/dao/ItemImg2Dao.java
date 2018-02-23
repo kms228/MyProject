@@ -70,7 +70,7 @@ public class ItemImg2Dao {
 		PreparedStatement pstmt = null;
 		try {
 			con = DbcpBean.getConn();
-			String sql = "delete from itemImg2 where num=?";
+			String sql = "delete from itemImg2 where pnum=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			return pstmt.executeUpdate();
@@ -88,7 +88,7 @@ public class ItemImg2Dao {
 		ResultSet rs = null;
 		try {
 			con = DbcpBean.getConn();
-			String sql = "select * from itemImg2 where num=?";
+			String sql = "select * from itemImg2 where pnum=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs=pstmt.executeQuery();
@@ -113,7 +113,7 @@ public class ItemImg2Dao {
 		PreparedStatement pstmt = null;
 		try {
 			con = DbcpBean.getConn();
-			String sql = "update itemImg2 set pnum=?,savefilename=? where num=?";
+			String sql = "update itemImg2 set pnum=?,savefilename=? where pnum=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, vo.getPnum());
 			pstmt.setString(2, vo.getSavefilename());

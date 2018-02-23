@@ -152,10 +152,22 @@ function naming(name,sfieldnum){
 	fieldnum.setAttribute("value", sfieldnum);
 	//console.log(sfieldnum);
 }
+
+function file_change1(file1){
+	var str=file1.lastIndexOf("\\")+1;	//파일 마지막 "\" 루트의 길이 이후부터 글자를 잘라 파일명만 가져온다.
+	file1 = file1.substring(str, file1.length);
+	document.getElementById('fileName1').value=file1;
+}
+
+function file_change2(file2){
+	var str=file2.lastIndexOf("\\")+1;	//파일 마지막 "\" 루트의 길이 이후부터 글자를 잘라 파일명만 가져온다.
+	file2 = file2.substring(str, file2.length);
+	document.getElementById('fileName2').value=file2;
+}
 </script>
 <form method="post" action="<c:url value='/item?cmd=itemInsert'/>" enctype="multipart/form-data">
 	<input type="hidden" name="fieldnum" id="fieldnum">
-	<h1>상품관리 > 상품등록</h1><br>
+	<h2>상품관리 > 상품등록</h2><br>
 	<!-- 기본정보/상품명/상세설명 -->
 	<div id="qa1" class="section">
 		
@@ -163,7 +175,7 @@ function naming(name,sfieldnum){
 			<h3>기본 정보</h3>
 		</div>
 		<div class="sectionArea">
-			<table border="1">
+			<table border="1" id="insertTable">
 				<tbody>
 					<tr>
 						<th scope="row">상품명</th>
@@ -199,7 +211,7 @@ function naming(name,sfieldnum){
 		<div class="sectionBar"><br>
 			<h3>표시 정보</h3>
 		</div>
-		<div class="sectionArea">
+		<div class="sectionArea2">
 			<table border="1">
 				<tbody>
 					<tr>
@@ -207,11 +219,10 @@ function naming(name,sfieldnum){
 						<td>
 						<div class="searchSelect">
 							<table border="1">
-								
 								<thead>
 									<tr>
-										<th scope="col">대분류</th>
-										<th scope="col">중분류</th>
+										<th scope="col" class="dd">대분류</th>
+										<th scope="col" class="dd">중분류</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -220,7 +231,7 @@ function naming(name,sfieldnum){
 											<div class="list">
 												<ul>
 												<!-- li{list-style:none} -->
-													<li><a href="javascript:selectRing();">반&nbsp;&nbsp;&nbsp;지 ></a></li>
+													<li><a id="ring1" href="javascript:selectRing();">반&nbsp;&nbsp;&nbsp;지 ></a></li>
 													<li><a href="javascript:selectNeck();">목걸이 ></a></li>	
 													<li><a href="javascript:selectEar();">귀걸이 ></a></li>
 													<li><a href="javascript:selectCoup();">커플링 ></a></li>
@@ -256,18 +267,22 @@ function naming(name,sfieldnum){
 		<div class="sectionArea">
 			<table border="1">
 				<tbody>
-					<tr>
+					<tr class="filebox">
 						<th>대표 이미지</th>
-						<td><input type="file" name="file1"></td>
+						<td><input type="text" class="filename" id="fileName1" readonly="readonly" >
+					<label for="file1" class="btn_label">파일찾기</label>
+					<input type="file" id="file1" name="file1" class="realfile" onchange="javascript:file_change1(this.value);"></td>
 					</tr>
-					<tr>
+					<tr class="filebox">
 						<th>상세 이미지</th>
-						<td><input type="file" name="file2"></td>
+						<td><input type="text" class="filename" id="fileName2" readonly="readonly">
+					<label for="file2" class="btn_label">파일찾기</label>
+					<input type="file" id="file2" name="file2" class="realfile" onchange="javascript:file_change2(this.value);"></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
 	<br>
-	<div align="center"><input type="submit" value="등록"> <input type="reset" value="취소"></div>
+	<div align="center"><input type="submit" value="등록" class="basicbtn"> <input type="reset" value="취소"  class="basicbtn"></div>
 </form>

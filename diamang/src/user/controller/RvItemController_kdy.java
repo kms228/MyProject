@@ -23,7 +23,6 @@ public class RvItemController_kdy extends HttpServlet{
 		String id = (String)session.getAttribute("id");
 		MembersDao_kdy dao=new MembersDao_kdy();
 		int mnum = dao.searchMnum(id);
-		System.out.println(mnum);
 		RvItemDao_kdy dao2=new RvItemDao_kdy();
 		ArrayList<RvItemVo_kdy> list = new ArrayList<>();
 		list = dao2.itemInfo(mnum);

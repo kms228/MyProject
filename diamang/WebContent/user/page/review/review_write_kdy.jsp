@@ -15,20 +15,23 @@
 	<%-- 글쓰기 폼 --%>
 	<form method="post" action="<%=request.getContextPath() %>/imgUpload.do" enctype="multipart/form-data"
 			onsubmit="return check()">
+	<c:if test="${empty param.rv_num}">
 	<div id="iteminfo">
-	<input type="button" value="상품정보선택" onclick="itemInfo()"><br>
-	<div id="img">
+		<input type="button" value="상품정보선택" onclick="itemInfo()"><br>
+			<div id="img">
+			</div>
+			<div id="info">
+			<%--<p>상품 이름</p>
+				<p>가격</p>
+				<p>버튼</p>
+				<input type="button" value="상품상세보기"  onclick = "itemInfo()" id="button1">
+				<input type="button" value="상품정보선택"  onclick = "itemInfo()" id="button2">
+				 --%>
+			</div>
 	</div>
-	<div id="info">
-	<%--<p>상품 이름</p>
-		<p>가격</p>
-		<p>버튼</p>
-		<input type="button" value="상품상세보기"  onclick = "itemInfo()" id="button1">
-		<input type="button" value="상품정보선택"  onclick = "itemInfo()" id="button2">
-		 --%>
-	</div>
+	</c:if>
 	
-	</div>
+	<input type="hidden" name="hidPnum" value="${param.pnum }">
 	<!-- 부모 글에 대한 정보 !-->
 	<input type="hidden" name="rv_num" value="${param.rv_num }">
 	<input type="hidden" name="ref" value="${param.ref }">
@@ -36,16 +39,21 @@
 	<input type="hidden" name="step" value="${param.step }">
 	<div>
 		제목<input type="text" name="title"><br>
-		작성자<input type="hidden" name="writer"><br>
-		비밀번호<input type="hidden" name="pwd"><br>
+		<label id="lwriter"></label><input type="hidden" name="writer" id="writer"><br>
+		<label id="lpwd"></label><input type="hidden" name="pwd" id="pwd">
 		<c:if test="${empty sessionScope.id }">
 			<script>
-				var writer = document.getElementsByClassName("writer")[0];
-				var pwd = document.getElementsByClassName("pwd")[0];
+				var writer = document.getElementById("writer");
+				var pwd = document.getElementById("pwd");
+				var lwriter = document.getElementById("lwriter");
+				var lpwd = document.getElementById("lpwd");
+				lwriter.innerHTML="작성자";
+				lpwd.innerHTML="비밀번호";
+				
 				writer.type="text";
 				pwd.type="password";
 			</script>
-		</c:if><br>
+		</c:if>
 		별점
 		<input type="radio" name="star" value="1">☆
 		<input type="radio" name="star" value="2">☆☆

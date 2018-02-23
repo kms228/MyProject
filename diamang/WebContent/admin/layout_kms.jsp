@@ -16,7 +16,7 @@
 
 <body>
 <%--
-	tring spage=request.getParameter("page");
+	String spage=request.getParameter("page");
 	if(spage==null){
 		spage="page/home_kms.jsp";		
 	}

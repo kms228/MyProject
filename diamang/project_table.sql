@@ -62,7 +62,6 @@ CREATE TABLE image
 (
 	num number NOT NULL,
 	rv_num number NOT NULL constraint FK_image references review(rv_num) on delete cascade,
-	orgname varchar2(30),
 	savename varchar2(70),
 	PRIMARY KEY (num)
 );
@@ -129,6 +128,7 @@ CREATE TABLE review
 (
 	rv_num number NOT NULL,
 	mnum number NOT NULL constraint FK_review references members(mnum) on delete cascade,
+	pnum number NOT NULL constraint FK_review2 references item(pnum) on delete cascade,
 	title varchar2(30),
 	content varchar2(500),
 	regdate date,
