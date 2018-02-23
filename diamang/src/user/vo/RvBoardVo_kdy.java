@@ -15,11 +15,13 @@ public class RvBoardVo_kdy {
 	private int star;
 	private String writer;
 	private String pwd;
+	private int pnum;
+	private String savename;
 	
 	public RvBoardVo_kdy() {}
 
 	public RvBoardVo_kdy(int rv_num, int mnum, String title, String content, Date regdate, int hit, int ref, int lev,
-			int step, int star,String pwd) {
+			int step, int star,String pwd,int pnum) {
 		super();
 		this.rv_num = rv_num;
 		this.mnum = mnum;
@@ -32,10 +34,11 @@ public class RvBoardVo_kdy {
 		this.step = step;
 		this.star = star;
 		this.pwd=pwd;
+		this.pnum=pnum;
 	}
 	
 	public RvBoardVo_kdy(int rv_num, int mnum, String title, String writer, String content, Date regdate, int hit, int ref, int lev,
-			int step, int star,String pwd) {
+			int step, int star,String pwd, String savename,int pnum) {
 		super();
 		this.rv_num = rv_num;
 		this.mnum = mnum;
@@ -49,6 +52,8 @@ public class RvBoardVo_kdy {
 		this.step = step;
 		this.star = star;
 		this.pwd=pwd;
+		this.savename=savename;
+		this.pnum=pnum;
 	}
 
 	public int getRv_num() {
@@ -144,5 +149,21 @@ public class RvBoardVo_kdy {
 	
 	public void setPwd(String pwd) {
 		this.pwd=pwd;
+	}
+	
+	public int getPnum() {
+		return pnum;
+	}
+	
+	public void setPnum(int pnum) {
+		this.pnum=pnum;
+	}
+	
+	public String getSavename() {
+		return savename;
+	}
+	
+	public void setSavename(String savename) {
+		this.savename=savename;
 	}
 }

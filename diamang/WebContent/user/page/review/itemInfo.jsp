@@ -9,6 +9,7 @@
 <style type="text/css">
 	#menu p{display:inline;margin:50px;}
 	#list p{display: inline-block;margin:50px;}
+	#list span{display:block;}
 </style>
 </head>
 <script type="text/javascript">
@@ -19,36 +20,38 @@
 			img.removeChild(img.firstChild);
 		}
 		var info = window.opener.document.getElementById("info"); //부모창에서 정보 들어갈 곳의 div 가져오기
+		var hidePnum=window.opener.document.getElementsByName("hidPnum")[0]; //부모창에서 상품 번호 저장할 히든 input 가져오기
 		while(info.hasChildNodes()){
 			info.removeChild(info.firstChild);
 		}
 		
 		var pimg = window.opener.document.createElement("p"); //이미지 들어갈 곳의 p
 		var pitem_name = window.opener.document.createElement("p"); //상품 이름 들어갈 곳의 p
+		var pprice = window.opener.document.createElement("p"); //가격 들어갈 곳의 p
 		var pbutton = window.opener.document.createElement("p"); //버튼 들어갈 곳의 p
 		
 		var value= div.parentNode.parentElement.firstChild.nextSibling.innerHTML; //상품 이미지 
-		var value2 = div.parentNode.parentElement.firstChild.nextSibling.nextElementSibling.innerHTML; //상품 이름,가격
-		var button1 = window.opener.document.createElement("input");
-		var button2 = window.opener.document.createElement("input");
+		var value2 = div.parentNode.parentElement.firstChild.nextSibling.nextElementSibling.firstChild.innerHTML; //상품 이름
+		var value3 = div.parentNode.parentElement.firstChild.nextSibling.nextElementSibling.firstChild.nextSibling.innerHTML; //가격
+		var pnum = div.parentNode.firstChild.value; //상품 번호
+		var button1 = window.opener.document.createElement("input"); //버튼 만들기
 		
+		//속성 지정
 		button1.type="button";
 		button1.value="상품상세보기"
-		button2.type="button";
-		button2.value="상품정보선택";
-		button2.onclick="itemInfo()";
-		
-		pbutton.appendChild(button1);
-		pbutton.appendChild(button2);
-		
-		pimg.innerHTML=value;
+		pimg.innerHTML=value; 
 		pitem_name.innerHTML=value2;
+		pprice.innerHTML = value3;
+		hidePnum.value=pnum;
+		
+		//부모창에 있는 태그에 붙이기
 		img.appendChild(pimg);
+		pbutton.appendChild(button1);
 		info.appendChild(pitem_name);
+		info.appendChild(pprice);
 		info.appendChild(pbutton);
 		
-		console.log(button1);
-		
+		//window.close();
 	}
 </script>
 <body>
@@ -64,9 +67,9 @@
 	<c:forEach var="vo" items="${list }">
 		<div>
 		<p>${vo.savename }</p>
-		<p>${vo.item_name }<br>${vo.price }</p>
-		
-		<p><input type="button" value="선택" onclick="send(event)"></p>
+		<p><span>${vo.item_name }</span><span>${vo.price }</span></p>
+		<p><input type="hidden" value="${vo.pnum }" name="pnum">
+		<input type="button" value="선택" onclick="send(event)"></p>
 		</div>
 	</c:forEach>
 	</div>

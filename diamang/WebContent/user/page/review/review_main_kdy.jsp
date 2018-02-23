@@ -14,7 +14,7 @@
 	<c:forEach var="vo" items="${list }">
 		<tr>
 			<td>${vo.rv_num }</td>
-			<td>null</td> <%-- 선택한 상품의 이미지 --%>
+			<td>${vo.savename }</td> <%-- 선택한 상품의 이미지 --%>
 			<td>
 			<c:if test="${vo.lev>0}">
 				<%-- 답글인 경우 들여쓰기 하기 --%>
@@ -23,7 +23,7 @@
 				</c:forEach>
 				[re]
 			</c:if>
-			<a href="<%=request.getContextPath()%>/rv_detail.do?rv_num=${vo.rv_num }">${vo.title }</a>
+			<a href="<%=request.getContextPath()%>/rv_detail.do?rv_num=${vo.rv_num }&pnum=${vo.pnum }">${vo.title }</a>
 			</td>
 			<td>${vo.writer }</td>
 			<td>${vo.regdate }</td>

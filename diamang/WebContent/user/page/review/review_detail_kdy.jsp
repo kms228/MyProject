@@ -4,7 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <style>
-	#iteminfo{width:100%; height:100px;border:1px solid gray;}
+	#iteminfo{width:100%;border:1px solid gray;}
+	#iteminfo div{display:inline-block;}
 </style>
 <script>
 	var xhr=null;
@@ -189,7 +190,13 @@
 <body onload="getlist()">
 <div>
 	<div id="iteminfo">
-	<input type="button" value="상품상세보기">
+		<div id="img">
+		</div>
+			<div id="info">
+				<p>${vo2.item_name }</p>
+				<p>${vo2.price }</p>
+				<p><input type="button" value="상품상세보기"  onclick = "" id="button1"></p>
+			</div>
 	</div>
 	<div>
 		<table>
@@ -206,17 +213,22 @@
 				<th>조회수</th><td>${vo.hit }</td>
 			</tr>
 			<tr>
-				<td colspan="2">${vo.content }</td>
+				<td colspan="2">
+				<c:if test="${not empty vo.savename }">
+					<img src="<%=request.getContextPath() %>/user/upload/${vo.savename }"><br>
+				</c:if>
+				${vo.content }</td>
 			</tr>
 			<tr>
-				<th>첨부파일	</th><td>?</td>
+				<th>첨부파일	</th><td>${vo.savename}</td>
 			</tr>
 			<tr>
 				<th>비밀번호</th><td><input type="password" name="pwd"></td>
 			</tr>
 		</table>
 		<a href="<%=request.getContextPath()%>/review_list.do">목록</a>&nbsp;&nbsp;	
-		<a href="<%=request.getContextPath()%>/imgUpload.do?rv_num=${vo.rv_num}&ref=${vo.ref}&lev=${vo.lev}&step=${vo.step}">답글</a>
+		<a href="<%=request.getContextPath()%>/imgUpload.do?rv_num=${vo.rv_num}&ref=${vo.ref}
+		&lev=${vo.lev}&step=${vo.step}&pnum=${vo.pnum}">답글</a>
 	</div>
 	<div id="commList"></div>
 	<div id="commAdd">
