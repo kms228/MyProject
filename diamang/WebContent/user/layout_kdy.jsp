@@ -22,7 +22,7 @@
 		<div id="ad3">
 		<p>이곳은 사이드바 3</p>
 		</div>
-	<input type="button" value="▼" id="butten2" name="up">
+	<input type="button" value="▼" id="butten2" name="up"> 
 	</div>
 
 	<div id="header">
