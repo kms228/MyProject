@@ -2,8 +2,6 @@ package admin.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -15,11 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import admin.dao.IteamImageDao;
 import admin.dao.ItemDao;
-import admin.vo.ItemImageVo;
+import admin.dao.ItemImg1Dao;
+import admin.dao.ItemImg2Dao;
+import admin.dao.ItemListDao;
+import admin.vo.ItemImg1Vo;
+import admin.vo.ItemImg2Vo;
 import admin.vo.ItemVo;
-import diamang.dbcp.DbcpBean;
 
 
 @WebServlet("/item")
@@ -37,10 +37,52 @@ public class ItemController extends HttpServlet {
 		}else if(cmd.equals("itemInsert")) {
 			System.out.println("itemController:itemInsert");
 			itemInsert(request, response);
-		}
 		
+		}else if(cmd.equals("list")) {
+			response.sendRedirect(request.getContextPath()+"/admin/layout_kms.jsp?page=item/itemList.jsp");
+		
+		}else if(cmd.equals("del")) {
+			response.sendRedirect(request.getContextPath()+"/admin/layout_kms.jsp?page=item/deleteItem.jsp");
+		
+		}else if(cmd.equals("listOk")) {
+			itemList(request,response);
+		}
 	}
 	
+	private void itemList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//페이지번호 얻어오기
+		String spageNum = request.getParameter("pageNum");
+		int pageNum=1;
+		if(spageNum!=null) {
+			pageNum=Integer.parseInt(spageNum);
+		}
+		int startRow=(pageNum-1)*5+1;//시작행번호
+		int endRow=startRow+4;//끝행번호
+		ItemListDao dao = new ItemListDao();
+		
+		System.out.println(request.getParameter("fieldnum"));
+		int fieldnum = Integer.parseInt(request.getParameter("fieldnum"));
+		System.out.println(3);
+		ArrayList<ItemVo> list = dao.list(startRow, endRow ,fieldnum);
+		System.out.println(4);
+		//전체 페이지 갯수
+		int pageCount=(int)Math.ceil(dao.getCount()/5.0);//ceil : 올림
+		int startPage=((pageNum-1)/10*10)+1;//시작페이지
+		int endPage=startPage+9;//끝페이지
+		if(pageCount<endPage) {
+			endPage=pageCount;
+		}
+		System.out.println(5);
+		request.setAttribute("list", list);
+		System.out.println("list 보냄?");
+		request.setAttribute("pageCount", pageCount);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("pageNum", pageNum);
+		request.getRequestDispatcher("/admin/layout_kms.jsp?page=item/itemList.jsp").forward(request, response);
+		
+	}
+
 	private void itemMenu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/xml;charset=utf-8");
 		PrintWriter pw = response.getWriter();
@@ -68,14 +110,15 @@ public class ItemController extends HttpServlet {
 
 		//방금 insert한 상품의 pnum구하기
 		int pnum = dao.itemInsert(vo);
-		IteamImageDao imgDao = IteamImageDao.getInstance();
+		ItemImg1Dao imgDao = ItemImg1Dao.getInstance();
 		String savefilename1 = mr.getFilesystemName("file1");
-		ItemImageVo imgvo1 = new ItemImageVo(0, pnum, savefilename1);
-		int i = imgDao.itemImageInsert(imgvo1);
+		ItemImg1Vo imgvo1 = new ItemImg1Vo(0, pnum, savefilename1);
+		int i = imgDao.itemImg1Insert(imgvo1);
 		
+		ItemImg2Dao imgDao2 = ItemImg2Dao.getInstance();
 		String savefilename2 = mr.getFilesystemName("file2");
-		ItemImageVo imgvo2 = new ItemImageVo(0, pnum, savefilename2);
-		int j = imgDao.itemImageInsert(imgvo2);
+		ItemImg2Vo imgvo2 = new ItemImg2Vo(0, pnum, savefilename2);
+		int j = imgDao2.itemImg2Insert(imgvo2);
 		
 		if(i>0 && j>0) {
 			response.sendRedirect(request.getContextPath()+"/item?cmd=insert");

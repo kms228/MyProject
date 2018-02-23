@@ -1,13 +1,13 @@
 package admin.vo;
 
-public class ItemImageVo {
+public class ItemImg1Vo {
 	private int num;
 	private int pnum;
 	private String savefilename;
 	
-	public ItemImageVo() {}
+	public ItemImg1Vo() {}
 
-	public ItemImageVo(int num, int pnum, String savefilename) {
+	public ItemImg1Vo(int num, int pnum, String savefilename) {
 		super();
 		this.num = num;
 		this.pnum = pnum;

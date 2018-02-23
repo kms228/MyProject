@@ -4,14 +4,16 @@ public class RvItemVo_kdy {
 	private int pnum;
 	private String item_name;
 	private int price;
+	private String savename;
 	
 	public RvItemVo_kdy() {}
 
-	public RvItemVo_kdy(int pnum, String item_name, int price) {
+	public RvItemVo_kdy(int pnum, String item_name, int price,String savename) {
 		super();
 		this.pnum = pnum;
 		this.item_name = item_name;
 		this.price = price;
+		this.savename=savename;
 	}
 
 	public int getPnum() {
@@ -38,5 +40,12 @@ public class RvItemVo_kdy {
 		this.price = price;
 	}
 	
+	public String getSavename() {
+		return savename;
+	}
+	
+	public void setSavename(String savename) {
+		this.savename=savename;
+	}
 	
 }

@@ -150,54 +150,23 @@ function naming(name,sfieldnum){
 	resultOf3.innerHTML=name;
 	var fieldnum = document.getElementById("fieldnum");
 	fieldnum.setAttribute("value", sfieldnum);
-	//console.log(sfieldnum);
+	console.log(sfieldnum);
+	console.log(fieldnum.value);
 }
+
+
 </script>
-<form method="post" action="<c:url value='/item?cmd=itemInsert'/>" enctype="multipart/form-data">
+<form method="post" action="<c:url value='/item?cmd=listOk'/>">
 	<input type="hidden" name="fieldnum" id="fieldnum">
-	<h1>상품관리 > 상품등록</h1><br>
+	<h1>상품관리 > 상품수정</h1><br>
 	<!-- 기본정보/상품명/상세설명 -->
-	<div id="qa1" class="section">
-		
-		<div class="sectionBar">
-			<h3>기본 정보</h3>
-		</div>
-		<div class="sectionArea">
-			<table border="1">
-				<tbody>
-					<tr>
-						<th scope="row">상품명</th>
-						<td><input type="text" name="item_name"  placeholder="예시) 18k 1g 정수 심플링 반지" style="width: 340px;"></td>
-					</tr>
-					<tr>
-						<th scope="row">수량</th>
-						<td><input type="text" name="stock" placeholder="예시) 8">EA</td>
-					</tr>	
-				</tbody>
-			</table>
-		</div>
-	</div>
+	
 	<!--  판매정보/판매가격 -->
-	<div id="qa2" class="section">
-		<div class="sectionBar"><br>
-			<h3>판매 정보</h3>
-		</div>
-		<div class="sectionArea">
-			<table border="1">
-				<tbody>
-					<tr>
-						<th scope="row">판매 가격</th>
-						<td><input type="text" name="price" placeholder="예시) 55000" style="width: 140px;">KRW</td>
-					</tr>
-					
-				</tbody>
-			</table>
-		</div>
-	</div>
+	
 	<!-- 표시설정/상품분류 -->
 	<div id="qa3" class="section">
 		<div class="sectionBar"><br>
-			<h3>표시 정보</h3>
+			<h3>상품 찾기</h3>
 		</div>
 		<div class="sectionArea">
 			<table border="1">
@@ -240,6 +209,7 @@ function naming(name,sfieldnum){
 							</table>
 							<div id="resultOf1"><span style="font-weight: bold"> 선택된 상품분류 </span>
 								<span id="resultOf2"></span><span id="resultOf3"></span>
+								<span><input type="submit" value="찾기"></span>
 							</div>
 						</div>
 						</td>
@@ -249,25 +219,70 @@ function naming(name,sfieldnum){
 		</div>
 	</div>
 	<!-- 이미지정보/상품이미지등록 -->
-	<div id="qa4" class="section">
-		<div class="sectionBar"><br>
-			<h3>이미지 정보</h3>
-		</div>
-		<div class="sectionArea">
-			<table border="1">
-				<tbody>
-					<tr>
-						<th>대표 이미지</th>
-						<td><input type="file" name="file1"></td>
-					</tr>
-					<tr>
-						<th>상세 이미지</th>
-						<td><input type="file" name="file2"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
+	
 	<br>
-	<div align="center"><input type="submit" value="등록"> <input type="reset" value="취소"></div>
+	
+</form>
+<br>
+<h3>상품 리스트</h3>
+<form>
+	<table id="itemListTable" border="1">
+		<tr>
+			<th>상품분류</th><th>상품번호</th><th>상품이름</th><th>가격</th><th>등록일</th><th>재고</th>
+		</tr>
+		<c:forEach var="vo" items="${list }">
+			<c:if test="${vo.fieldnum eq 11}"><c:set var="fnum" value="반지 > 14k/18k"/></c:if>
+			<c:if test="${vo.fieldnum eq 12}"><c:set var="fnum" value="반지 > 다이아"/></c:if>
+			<c:if test="${vo.fieldnum eq 13}"><c:set var="fnum" value="반지 > 탄생석"/></c:if>
+			<c:if test="${vo.fieldnum eq 14}"><c:set var="fnum" value="반지 > 실버"/></c:if>
+			<c:if test="${vo.fieldnum eq 21}"><c:set var="fnum" value="반지 > 14k/18k"/></c:if>
+			<c:if test="${vo.fieldnum eq 22}"><c:set var="fnum" value="반지 > 다이아"/></c:if>
+			<c:if test="${vo.fieldnum eq 23}"><c:set var="fnum" value="반지 > 탄생석"/></c:if>
+			<c:if test="${vo.fieldnum eq 31}"><c:set var="fnum" value="반지 > 14k/18k"/></c:if>
+			<c:if test="${vo.fieldnum eq 32}"><c:set var="fnum" value="반지 > 탄생석"/></c:if>
+			<c:if test="${vo.fieldnum eq 41}"><c:set var="fnum" value="반지 > 14k/18k"/></c:if>
+			<c:if test="${vo.fieldnum eq 42}"><c:set var="fnum" value="반지 > 실버"/></c:if>
+			<c:if test="${vo.fieldnum eq 43}"><c:set var="fnum" value="반지 > 다이아"/></c:if>
+			<tr>
+				<td style="width: 250px;">${fnum }</td>
+				<td style="width: 75px;">${vo.pnum }</td>
+				<td style="width: 225px;"><a href="">${vo.item_name }</a></td>
+				<td style="width: 150px;">${vo.price }</td>
+				<td style="width: 200px;">${vo.regdate }</td>
+				<td style="width: 100px;">${vo.stock }</td>
+			</tr>
+		</c:forEach>
+	</table>
+<%--	
+	<!-- 페이지처리 -->
+<div>
+	<c:choose>
+		<c:when test="${startPage>10 }">
+			<a href="<%=request.getContextPath()%>/board/list.do?pageNum=${startPage-1}">[이전]</a>
+		</c:when>
+		<c:otherwise>
+			[이전]
+		</c:otherwise>
+	</c:choose>
+	<c:forEach var="i" begin="${startPage }" end="${endPage }">
+		<c:choose>
+			<c:when test="${pageNum==i }">
+				<a href="<%=request.getContextPath()%>/board/list.do?pageNum=${i}"><span style="color:blue">[${i }]</span></a>
+			</c:when>
+			<c:otherwise>
+				<a href="<%=request.getContextPath()%>/board/list.do?pageNum=${i}"><span style="color:gray">[${i }]</span></a>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+	<c:choose>
+		<c:when test="${endPage<pageCount }">
+			<a href="<%=request.getContextPath()%>/board/list.do?pageNum=${endPage+1}">[다음]</a>
+		</c:when>
+		<c:otherwise>
+			[다음]
+		</c:otherwise>
+	</c:choose>
+</div>
+ --%>
+ 
 </form>
