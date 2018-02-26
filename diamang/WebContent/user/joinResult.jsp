@@ -10,7 +10,7 @@
 <c:choose>
 <c:when test="${result=='success'}">
 <h2>회원가입을 축하드립니다!!</h2>
-<a href="<%=request.getContextPath()%>/user/login_hhj.jsp">로그인하러가기</a>
+<a href="<%=request.getContextPath()%>/move.do?cmd=login">로그인페이지</a>
 </c:when>
 
 <c:when test="${result=='fail'}">

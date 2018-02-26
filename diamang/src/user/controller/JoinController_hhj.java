@@ -1,11 +1,13 @@
 package user.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,7 +36,7 @@ public class JoinController_hhj extends HttpServlet{
 		}else if (cmd.equals("logout")) {
 			HttpSession session = request.getSession();
 			session.invalidate();
-			response.sendRedirect(request.getContextPath()+"/user/login_hhj.jsp");
+			response.sendRedirect(request.getContextPath()+"/move.do?cmd=main");
 		}else if (cmd.equals("update")) {
 			update(request,response);
 		}else if(cmd.equals("updateOk")) {
@@ -167,13 +169,13 @@ public class JoinController_hhj extends HttpServlet{
 			HttpSession session = request.getSession();  
 			session.setAttribute("id", id);
 			//이동할곳 향후수정
-			response.sendRedirect("user/login_hhj.jsp");  
+			response.sendRedirect(request.getContextPath()+"/move.do?cmd=main");  
 		}else if(n==0) {	//회원X
 			request.setAttribute("errmsg", "아이디 또는 비밀번호가 존재하지 않습니다.");
-			request.getRequestDispatcher("회원X오류 페이지이동").forward(request,response);
+			request.getRequestDispatcher("move.do?cmd=login").forward(request,response);
 		}else { //오류데쓰네
 			request.setAttribute("errMsg","오류로 인해 로그인에 실패하였습니다.");
-			request.getRequestDispatcher("회원X오류 페이지이동").forward(request, response);
+			request.getRequestDispatcher("move.do?cmd=login").forward(request, response);
 		}
 	}
 	
