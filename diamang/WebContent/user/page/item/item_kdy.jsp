@@ -42,7 +42,7 @@
 	</table>
 	<c:forEach var="vo" items="${list }">
 		<div id="item">
-			<a href=""><img src="<%=request.getContextPath() %>/admin/upload/${vo.savename }"></a><br>
+			<a href=""><img src="<%=request.getServletContext().getRealPath("admin/upload")%>/${vo.savename }"></a><br>
 			${vo.item_name }<br>
 			${vo.price }
 		</div>
