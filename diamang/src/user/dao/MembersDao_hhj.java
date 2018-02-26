@@ -9,6 +9,7 @@ import java.util.HashMap;
 
 import diamang.dbcp.DbcpBean;
 import oracle.jdbc.proxy.annotation.Pre;
+import shs.admin.etc.DefaultGrade;
 import user.vo.MemversVo;
 public class MembersDao_hhj {
 	
@@ -145,7 +146,7 @@ public class MembersDao_hhj {
 	public int insert(MemversVo user) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String sql = "insert into members values(mnum.nextval,?,?,?,?,?,?,?,1,SYSDATE)";
+		String sql = "insert into members values(mnum.nextval,?,?,?,?,?,?,?,?,SYSDATE)";
 		try {
 			con=DbcpBean.getConn();
 			pstmt=con.prepareStatement(sql);
@@ -156,6 +157,7 @@ public class MembersDao_hhj {
 			pstmt.setString(5,user.getEmail());
 			pstmt.setString(6,user.getAddress());
 			pstmt.setString(7,user.getPhone());
+			pstmt.setInt(8, Integer.parseInt(DefaultGrade.GNUM));
 			return pstmt.executeUpdate();
 		}catch (SQLException se) {
 			System.out.println(se.getMessage());

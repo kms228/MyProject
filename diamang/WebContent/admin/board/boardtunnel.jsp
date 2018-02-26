@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="<%=request.getContextPath()%>/admin/board?cmd=boardnotice">공지사항 관리</a>
-<a href="<%=request.getContextPath()%>/admin/board?cmd=boardqna">qna 관리</a>
-<a href="<%=request.getContextPath()%>/admin/board?cmd=boardreview">후기게시판 관리</a>
+<a href="<%=request.getContextPath()%>/admin/board.do?cmd=boardnotice">공지사항 관리</a>
+<a href="<%=request.getContextPath()%>/admin/board.do?cmd=boardqna">qna 관리</a>
+<a href="<%=request.getContextPath()%>/admin/board.do?cmd=boardreview">후기게시판 관리</a>
 </body>
 </html>
