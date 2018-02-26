@@ -40,6 +40,28 @@ public class ItemListDao {
 				con = DbcpBean.getConn();
 				String sql = "select NVL(count(pnum),0) cnt from item";
 				pstmt = con.prepareStatement(sql);
+				
+				rs = pstmt.executeQuery();
+				rs.next();
+				int cnt = rs.getInt("cnt");
+				return cnt;
+			}catch(SQLException se) {
+				System.out.println(se.getMessage());
+				return -1;
+			}finally {
+				DbcpBean.closeConn(con, pstmt, rs);
+			}
+		}
+		
+		public int getCount(int fnum) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				con = DbcpBean.getConn();
+				String sql = "select NVL(count(pnum),0) cnt from item where fieldnum=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, fnum);
 				rs = pstmt.executeQuery();
 				rs.next();
 				int cnt = rs.getInt("cnt");
@@ -53,7 +75,7 @@ public class ItemListDao {
 		}
 		
 		public ArrayList<ItemVo> list(int startRow,int endRow,int fnum){
-			String sql="select * from ( select pnum,item_name,price,regdate,stock,fieldnum,rownum rnum from item where fieldnum=?) where rnum>=? and rnum<=?";
+			String sql="select * from (select pnum,item_name,price,regdate,stock,fieldnum,rownum rnum from item where fieldnum=?) where rnum>=? and rnum<=?";
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
