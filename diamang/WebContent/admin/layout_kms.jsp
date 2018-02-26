@@ -28,7 +28,6 @@
 <c:if test="${empty spage }">
 	<c:set var="spage" value="page/home_kms.jsp"/>
 </c:if>
-
 	<div id="header">
 		<jsp:include page="page/header_kms.jsp"></jsp:include>
 	</div>
