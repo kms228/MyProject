@@ -61,7 +61,7 @@ public class ItemController extends HttpServlet {
 		System.out.println("지우러옴2");
 		int pnum = Integer.parseInt(request.getParameter("pnum"));
 		
-		String uploadPath = request.getServletContext().getRealPath("/upload");
+		String uploadPath = request.getServletContext().getRealPath("admin/upload");
 		//삭제할이미지정보 얻어오기
 		//대표이미지 삭제
 		ItemImg1Dao img1dao = ItemImg1Dao.getInstance();
@@ -97,7 +97,7 @@ public class ItemController extends HttpServlet {
 	private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("itemController : itemInsert");
 		request.setCharacterEncoding("UTF-8");
-		String uploadPath = request.getServletContext().getRealPath("/upload");
+		String uploadPath = request.getServletContext().getRealPath("admin/upload");
 		//이미지업로드
 		MultipartRequest mr=new MultipartRequest(
 	            request, //request객체
@@ -224,7 +224,7 @@ public class ItemController extends HttpServlet {
 	private void itemInsert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("itemController : itemInsert");
 		request.setCharacterEncoding("UTF-8");
-		String uploadPath = request.getServletContext().getRealPath("/upload");
+		String uploadPath = request.getServletContext().getRealPath("admin/upload");
 		MultipartRequest mr=new MultipartRequest(
 	            request, //request객체
 	            uploadPath,   //업로드할 파일 경로
