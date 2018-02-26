@@ -21,7 +21,6 @@
 		spage="page/home_kms.jsp";		
 	}
 --%>
-
 <div id="wrap">	
 <c:set var="spage" value="${param.page }"/>
 <c:set var="errMsg" value="${param.errMsg }"/>
