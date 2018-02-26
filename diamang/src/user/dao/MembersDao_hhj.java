@@ -8,8 +8,65 @@ import java.util.HashMap;
 
 
 import diamang.dbcp.DbcpBean;
+import oracle.jdbc.proxy.annotation.Pre;
 import user.vo.MemversVo;
 public class MembersDao_hhj {
+	
+	public String findpwd(HashMap<String,String>map2) {
+		String id = map2.get("id");
+		String name = map2.get("name");
+		String email = map2.get("email");
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con=DbcpBean.getConn();
+			String sql = "select pwd from members where id=? and name=? and email=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1,id);
+			pstmt.setString(2,name);
+			pstmt.setString(3,email);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				String pwd = rs.getString("pwd");
+				return pwd;
+			}
+			return null;
+		}catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		}finally {
+			DbcpBean.closeConn(con, pstmt, rs);
+		}
+	}
+	
+	public String findid(HashMap<String, String>map1) {
+		String name=map1.get("name");
+		String email=map1.get("email");
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con=DbcpBean.getConn();
+			String sql = "select id from members where name=? and email=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1,name);
+			pstmt.setString(2,email);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				String id=rs.getString("id");
+				return id;				
+			}
+			return null;
+		}catch(SQLException se){
+			System.out.println(se.getMessage());
+			return null;
+		}finally {
+			DbcpBean.closeConn(con, pstmt, rs);
+		}
+	}
+	
 	
 	public int delete(int mnum) {
 		Connection con =null;

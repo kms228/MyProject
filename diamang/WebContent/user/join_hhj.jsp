@@ -10,12 +10,18 @@
 		//아이디검사
 		var id=document.frm.id;
 		var regid=/^[A-Za-z0-9+]*$/;
+		var reg2=/^[0-9]*$/;
 		var pwd=document.frm.pwd;
 		var pwd2=document.frm.pwd2;
 		var name=document.frm.name;
 		var birthday=document.frm.birthday;
 		var email=document.frm.email;
+		var phone=document.frm.phone;
 
+		
+	
+		
+		
 		//아이디 공백검사
 		if(id.value.length==0){
 			alert("아이디를 입력해주세요.");
@@ -53,8 +59,8 @@
 			return false;
 		}
 		//생년월일 빈칸검사
-		if(birthday.value.length==0){
-			alert("생년월일을 입력하세요.");
+		if(birthday.value.length!=6){
+			alert("주민등록번호 앞6자리를 써주세요.");
 			birthday.focus();
 			return false;
 		}
@@ -80,7 +86,7 @@
 			return false;
 		}
 		//핸드폰검사	
-		if(phone.value.length==0 && phone.value.length<10){
+		if(phone.value.length==0 || phone.value.length<10){
 			alert("핸드폰번 11자리 이상 입력하세요");
 			phone.focus();
 			return false;
@@ -109,8 +115,10 @@
 			console.log(json.using);
 			if(json.using==true){
 				idsapn.innerHTML="중복된 아이디입니다.";
+				return false;
 			}else if(id.value.length<5){
 				idsapn.innerHTML="아이디는 6자리이상 영문+숫자로 입력해주세요.";
+				return false;
 			}else{
 				idsapn.innerHTML="사용가능한 아이디입니다.";
 			}
@@ -132,10 +140,12 @@
 			console.log(json1.using2);
 			if(json1.using2==true){
 				emailsapn.innerHTML="중복된이메일 입니다.";
+				return false;
 			}else if(email.value.indexOf("@")==-1||email.value.indexOf(".")==-1){
 				emailsapn.innerHTML="@와.이 포함된 형식의 이메일을 입력해주세요.";
+				return false;
 			}else{
-				emailsapn.innerHTML="사용가능한 이메일입니다ㅋ.";
+				emailsapn.innerHTML="사용가능한 이메일입니다!!";
 			}
 		}
 	}
@@ -150,7 +160,7 @@
 <p><label for="id">아이디 </label><input type="text" name="id" id="id"  onkeyup="idcheck()">
 <span id="idsapn" style="font-size: 12px;color:red"></span></p>
 
-<p><label for="pwd">비밀번호 </label><input type="password" name="pwd" id="pwd"><span id="pwdsapn"></span></p>
+<p><label for="pwd">비밀번호 </label><input type="password" name="pwd" placeholder="영문,숫자로 10자이상" id="pwd"><span id="pwdsapn"></span></p>
 <p><label for="pwd2">비밀번호 확인 </label><input type="password" name="pwd2"></p>
 <p><label for="name">이름 </label><input type="text" name="name" id="name" placeholder="예시)이나영"></p>
 <p><label for="birthday">생일년월일</label><input type="text" name="birthday" id="birthday" placeholder="예시) 920228"></p>
