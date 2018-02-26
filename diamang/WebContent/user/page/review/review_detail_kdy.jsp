@@ -11,7 +11,7 @@
 	var xhr=null;
 	function add(){
 		var rv_num = <%=request.getAttribute("rv_num")%>
-		var commId = <%=(String)session.getAttribute("id")%>;
+		var commId = "<%=(String)session.getAttribute("id")%>";
 		var commPwd = "";
 		if(commId==null){
 			commId = document.getElementById("commId").value;
@@ -88,8 +88,10 @@
 				div.appendChild(p);
 				div.appendChild(p2);
 				div.appendChild(p3);
+				if("<%=(String)session.getAttribute("id")%>"==json.list[i].commId){
 				div.innerHTML+="<a href=\"javascript:remove('"+num+"')\">삭제</a>&nbsp;"+
 								"<a href=\"javascript:change('"+num+"','"+rv_num+"')\">수정</a>";
+				}
 				commList.appendChild(div);
 			}
 		}
@@ -185,7 +187,7 @@
 			}
 		}
 	}
-
+	
 </script>
 <body onload="getlist()">
 <div>
@@ -229,18 +231,33 @@
 		<a href="<%=request.getContextPath()%>/review_list.do">목록</a>&nbsp;&nbsp;	
 		<a href="<%=request.getContextPath()%>/imgUpload.do?rv_num=${vo.rv_num}&ref=${vo.ref}
 		&lev=${vo.lev}&step=${vo.step}&pnum=${vo.pnum}">답글</a>
+		<c:choose>
+			<c:when test="${not empty sessionScope.id }">
+				<c:if test="${sessionScope.id eq id }">
+					<a href="<%=request.getContextPath()%>/rv_update.do?cmd=update&rv_num=${rv_num}&pnum=${vo.pnum}">수정</a>
+					<a href="<%=request.getContextPath()%>/rv_delete.do?cmd=delete&rv_num=${rv_num}&pnum=${vo.pnum}">삭제</a>
+				</c:if>	
+			</c:when>
+		</c:choose>
 	</div>
 	<div id="commList"></div>
 	<div id="commAdd">
-			아이디<input type="hidden" id="commId">&nbsp;&nbsp;비밀번호<input type="hidden" id="commPwd">
+			<label id="lid"></label><input type="hidden" id="commId">&nbsp;&nbsp;
+			<label id="lpwd"></label><input type="hidden" id="commPwd">
 	<c:if test="${empty sessionScope.id }">
 			<script>
 				var id = document.getElementById("commId");
 				id.type="text";
 				var pwd = document.getElementById("commPwd");
 				pwd.type="password";
+				
+				var lid = document.getElementById("lid");
+				lid.innerHTML="아이디";
+				var lpwd = document.getElementById("lpwd");
+				lpwd.innerHTML="비밀번호";
 			</script>
-		</c:if><br>
+		</c:if>
+		<br>
 		<textarea rows="4" cols="120" id="comments"></textarea>
 		<input type="button" value="등록" onclick="add()">
 	</div>

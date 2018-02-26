@@ -51,7 +51,7 @@
 		info.appendChild(pprice);
 		info.appendChild(pbutton);
 		
-		//window.close();
+		window.close();
 	}
 </script>
 <body>
