@@ -18,8 +18,7 @@ function list1(){
 		menuList.innerHTML="";
 		var xml = xhr1.responseXML;
 		menuList.innerHTML="<a href='<%=request.getContextPath()%>/item?cmd=insert'>상품등록</a>|&nbsp;"+
-							"<a href='<%=request.getContextPath()%>/item?cmd=list'>&nbsp;상품수정</a>|&nbsp;"+
-							"<a href='<%=request.getContextPath()%>/item?cmd=del'>&nbsp;상품삭제</a>";
+							"<a href='<%=request.getContextPath()%>/item?cmd=list'>&nbsp;상품수정 및 삭제</a>";
 	}
 }
 
