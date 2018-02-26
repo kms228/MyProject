@@ -7,6 +7,45 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+<script type="text/javascript">
+window.onload = function(){
+	/* if(!("${msg}"==="")){
+		alert("${msg}");
+	} */
+	var optName = "${search.optName}";
+	if(!(optName==="")){	
+		document.getElementById(optName).setAttribute("selected","selected");			
+	}
+	var gnum = "${search.gnum}";
+	if(!(gnum==="")){
+		document.getElementById(gnum).setAttribute("selected","selected");
+	}
+}
+//페이지 이동 이나 기타 조건시 검색조건 받기위한 메소드
+var getSearch = function(){
+	var url = "";		
+	var gnum = "${search.gnum}";
+	var optValue = "${search.optValue}";
+							
+	url = url+"&grade=${search.gnum}";
+	if(!(optValue === "")){
+		url = url+"&optName=${search.optName}";
+		url = url+"&optValue=${search.optValue}";
+	} else {
+		url = url+"&optName=";
+		url = url+"&optValue=";
+	}	
+	return url;
+}
+
+var page = function(num){
+	var url = "members.do?cmd=infosearch&pageNum="+ num;
+		
+	url = url + getSearch();
+	//alert(url);
+	location.href=url;
+}
+</script>
 <body>
 <h1>회원정보 조회</h1>
 <h2>검색조건설정</h2>
@@ -14,7 +53,7 @@
 <table border="1" width="100%">
 	<tbody>
 	<tr>
-		<th>개인정보</th><td><select id="optName" name="optName"><option value="id">아이디</option><option value="name">이름</option><option value="email">이메일</option></select>&nbsp;&nbsp;<input type="text" id="optValue" name="optValue"></td>
+		<th>개인정보</th><td><select id="optName" name="optName"><option value="">전체<option value="id" id="id">아이디</option><option value="name" id="name">이름</option><option value="email" id="email">이메일</option></select>&nbsp;&nbsp;<input type="text" id="optValue" name="optValue" value="${search.optValue }"></td>
 	</tr>
 	<tr>
 		<th>회원등급</th>
@@ -22,7 +61,7 @@
 			<select id="grade" name="grade"> <!-- document.getElementById("grade").value; -->
 				<option value="">전체</option>
 				<c:forEach var="vo" items="${grade }">				
-				<option value="${vo.gnum }">${vo.grade }</option>
+				<option value="${vo.gnum }" id="${vo.gnum }">${vo.grade }</option>
 				</c:forEach>
 			</select>
 		</td>
