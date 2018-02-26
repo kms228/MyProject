@@ -43,21 +43,19 @@ function list2(){
 }
 </script>
 <div>
-	<h1 align="center">쇼핑몰관리24</h1>
-	<br>
-	<a href="javascript:addMenu2()" onmouseover="addMenu2()">상점관리</a><span>|&nbsp;</span>
-	<a href="#">고객관리</a><span>|&nbsp;</span>
-	<a href="javascript:addMenu1()" onmouseover="addMenu1()">상품관리</a><span>|&nbsp;</span>
-	<a href="#">배송관리</a><span>|&nbsp;</span>
-	<a href="#">게시판관리</a>
+<br>
 	<c:choose >
 		<c:when test="${empty sessionScope.id }">
 			<div id="login">
-				<h3>로그인</h3>
 				<form action="<c:url value='/login.do?cmd=login'/>" method="post">
 					<table>
-						<tr><th>아이디</th><td><input type="text" name="id"></td><td id="loginbutton" rowspan="2"><input type="submit" value="로그인"></td></tr>
-						<tr><th>비밀번호</th><td><input type="text" name="pwd"></td></tr>	
+						<tr>
+							<th>아이디</th><td><input type="text" name="id"></td>
+							<th>비밀번호</th><td><input type="text" name="pwd"></td>
+							<td id="loginbutton" rowspan="2">
+								<input class="basicbtn" type="submit" value="로그인">
+							</td>
+						</tr>	
 					</table>
 				</form>
 			</div>
@@ -73,5 +71,14 @@ function list2(){
 		</c:otherwise>
 	</c:choose>
 	<br>
+	<h1 align="center">쇼핑몰관리24</h1>
+	<br>
+	<a href="javascript:addMenu2()" onmouseover="addMenu2()">상점관리</a><span>|&nbsp;</span>
+	<a href="#">고객관리</a><span>|&nbsp;</span>
+	<a href="javascript:addMenu1()" onmouseover="addMenu1()">상품관리</a><span>|&nbsp;</span>
+	<a href="#">배송관리</a><span>|&nbsp;</span>
+	<a href="#">게시판관리</a>
+	
+	
 	<div id="menuList"></div>
 </div>

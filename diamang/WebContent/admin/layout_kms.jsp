@@ -16,7 +16,7 @@
 
 <body>
 <%--
-	tring spage=request.getParameter("page");
+	String spage=request.getParameter("page");
 	if(spage==null){
 		spage="page/home_kms.jsp";		
 	}
@@ -32,6 +32,7 @@
 	<div id="header">
 		<jsp:include page="page/header_kms.jsp"></jsp:include>
 	</div>
+	<br>
 	<div id="body">
 		<jsp:include page="${spage }"></jsp:include>
 	</div>

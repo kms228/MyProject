@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="<%=request.getContextPath()%>/admin/prepareProduct.do">상품준비중</a>
+<a href="<%=request.getContextPath()%>/admin/order.do?cmd=prepareproduct">상품준비중</a>
+<a href="<%=request.getContextPath()%>/admin/order.do?cmd=shippedend">배송중</a>
+<a href="<%=request.getContextPath()%>/admin/order.do?cmd=shippedcomplete">배송완료</a>
+<a href="<%=request.getContextPath()%>/admin/order.do?cmd=ordercancel">배송취소</a>
 </body>
 </html>

@@ -29,10 +29,10 @@ public class MembersgradeDao {
 				int drate=rs.getInt("drate");				
 				int gnumcnt=rs.getInt("gnumcnt");				
 				MembersgradeVo gradeVo = new MembersgradeVo(gnum, grade, drate, gnumcnt);
-				list.add(gradeVo);
-				return list;
+				System.out.println(gnum);
+				list.add(gradeVo);				
 			}
-			return null;
+			return list;
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
 			return null;

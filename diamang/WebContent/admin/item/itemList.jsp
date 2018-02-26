@@ -153,12 +153,16 @@ function naming(name,sfieldnum){
 	console.log(sfieldnum);
 	console.log(fieldnum.value);
 }
+var newWindow;
+function newPage(pnum){
+	newWindow = window.open("<%=request.getContextPath()%>/item?cmd=detail&pnum="+pnum, "", "width=600, height=580, left=500, top=100,scrollbars=1, location=1");
+}
 
 
 </script>
 <form method="post" action="<c:url value='/item?cmd=listOk'/>">
 	<input type="hidden" name="fieldnum" id="fieldnum">
-	<h1>상품관리 > 상품수정</h1><br>
+	<h2>상품관리 > 상품수정</h2><br>
 	<!-- 기본정보/상품명/상세설명 -->
 	
 	<!--  판매정보/판매가격 -->
@@ -189,11 +193,10 @@ function naming(name,sfieldnum){
 											<div class="list">
 												<ul>
 												<!-- li{list-style:none} -->
-													<li><a href="javascript:selectRing();">반&nbsp;&nbsp;&nbsp;지 ></a></li>
-													<li><a href="javascript:selectNeck();">목걸이 ></a></li>	
-													<li><a href="javascript:selectEar();">귀걸이 ></a></li>
-													<li><a href="javascript:selectCoup();">커플링 ></a></li>
-													
+													<li onclick="selectRing()">반&nbsp;&nbsp;&nbsp;지 ></li>
+													<li onclick="selectNeck()">목걸이 ></li>	
+													<li onclick="selectEar()">귀걸이 ></li>
+													<li onclick="selectCoup()">커플링 ></li>
 												</ul>
 											</div>
 										</td>
@@ -209,7 +212,7 @@ function naming(name,sfieldnum){
 							</table>
 							<div id="resultOf1"><span style="font-weight: bold"> 선택된 상품분류 </span>
 								<span id="resultOf2"></span><span id="resultOf3"></span>
-								<span><input type="submit" value="찾기"></span>
+								<span><input type="submit" value="찾기" class="basicbtn"></span>
 							</div>
 						</div>
 						</td>
@@ -224,11 +227,13 @@ function naming(name,sfieldnum){
 	
 </form>
 <br>
-<h3>상품 리스트</h3>
+<div class="sectionBar"><br>
+	<h3>상품 리스트</h3>
+</div>
 <form>
 	<table id="itemListTable" border="1">
 		<tr>
-			<th>상품분류</th><th>상품번호</th><th>상품이름</th><th>가격</th><th>등록일</th><th>재고</th>
+			<th>상품분류</th><th>상품번호</th><th>상품이름</th><th>재고</th><th>가격</th><th>등록일</th>
 		</tr>
 		<c:forEach var="vo" items="${list }">
 			<c:if test="${vo.fieldnum eq 11}"><c:set var="fnum" value="반지 > 14k/18k"/></c:if>
@@ -243,46 +248,44 @@ function naming(name,sfieldnum){
 			<c:if test="${vo.fieldnum eq 41}"><c:set var="fnum" value="반지 > 14k/18k"/></c:if>
 			<c:if test="${vo.fieldnum eq 42}"><c:set var="fnum" value="반지 > 실버"/></c:if>
 			<c:if test="${vo.fieldnum eq 43}"><c:set var="fnum" value="반지 > 다이아"/></c:if>
-			<tr>
+			<tr class="tr1">
 				<td style="width: 250px;">${fnum }</td>
 				<td style="width: 75px;">${vo.pnum }</td>
-				<td style="width: 225px;"><a href="">${vo.item_name }</a></td>
+				<td style="width: 225px;"><a href="javascript:newPage(${vo.pnum })">${vo.item_name }</a></td>
+				<td style="width: 100px;">${vo.stock }</td>
 				<td style="width: 150px;">${vo.price }</td>
 				<td style="width: 200px;">${vo.regdate }</td>
-				<td style="width: 100px;">${vo.stock }</td>
 			</tr>
 		</c:forEach>
 	</table>
-<%--	
+	<br>
 	<!-- 페이지처리 -->
-<div>
-	<c:choose>
-		<c:when test="${startPage>10 }">
-			<a href="<%=request.getContextPath()%>/board/list.do?pageNum=${startPage-1}">[이전]</a>
-		</c:when>
-		<c:otherwise>
-			[이전]
-		</c:otherwise>
-	</c:choose>
-	<c:forEach var="i" begin="${startPage }" end="${endPage }">
+	<div id='pageText'>
 		<c:choose>
-			<c:when test="${pageNum==i }">
-				<a href="<%=request.getContextPath()%>/board/list.do?pageNum=${i}"><span style="color:blue">[${i }]</span></a>
+			<c:when test="${startPage>10 }">
+				<a href="<%=request.getContextPath()%>/item?cmd=listOk&pageNum=${startPage-1}">[이전]</a>
 			</c:when>
 			<c:otherwise>
-				<a href="<%=request.getContextPath()%>/board/list.do?pageNum=${i}"><span style="color:gray">[${i }]</span></a>
+				[이전]
 			</c:otherwise>
 		</c:choose>
-	</c:forEach>
-	<c:choose>
-		<c:when test="${endPage<pageCount }">
-			<a href="<%=request.getContextPath()%>/board/list.do?pageNum=${endPage+1}">[다음]</a>
-		</c:when>
-		<c:otherwise>
-			[다음]
-		</c:otherwise>
-	</c:choose>
-</div>
- --%>
- 
+		<c:forEach var="i" begin="${startPage }" end="${endPage }">
+			<c:choose>
+				<c:when test="${pageNum==i }">
+					<a href="<%=request.getContextPath()%>/item?cmd=listOk&pageNum=${i}"><span style="color:blue">[${i }]</span></a>
+				</c:when>
+				<c:otherwise>
+					<a href="<%=request.getContextPath()%>/item?cmd=listOk&pageNum=${i}"><span style="color:gray">[${i }]</span></a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		<c:choose>
+			<c:when test="${endPage<pageCount }">
+				<a href="<%=request.getContextPath()%>/item?cmd=listOk&pageNum=${endPage+1}">[다음]</a>
+			</c:when>
+			<c:otherwise>
+				[다음]
+			</c:otherwise>
+		</c:choose>
+	</div>
 </form>

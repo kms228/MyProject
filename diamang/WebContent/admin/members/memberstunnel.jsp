@@ -8,7 +8,7 @@
 </head>
 <body>
 <a href="<%=request.getContextPath() %>/admin/members.do?cmd=membersmain">회원관리 메인</a>
-<a href="<%=request.getContextPath() %>/admin/members.do?cmd=memberssearch">회원정보조회</a>
+<a href="<%=request.getContextPath() %>/admin/members.do?cmd=membersinfo">회원정보조회</a>
 <a href="<%=request.getContextPath() %>/admin/members.do?cmd=membersgrade">회원등급 관리</a>
 </body>
 </html>

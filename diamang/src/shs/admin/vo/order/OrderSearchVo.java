@@ -1,12 +1,12 @@
 package shs.admin.vo.order;
 
-public class SearchOptionVo {
+public class OrderSearchVo {
 	private String optName;
 	private String optValue;
 	private String buy_date;
 	private String item_name;
 	
-	public SearchOptionVo(String optName, String optValue, String buy_date, String item_name) {
+	public OrderSearchVo(String optName, String optValue, String buy_date, String item_name) {
 		this.optName = optName;
 		this.optValue = optValue;
 		this.buy_date = buy_date;

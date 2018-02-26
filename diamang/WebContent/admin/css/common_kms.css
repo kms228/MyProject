@@ -9,16 +9,38 @@
    #header h1{padding: 30px;}
    #header a:hover{font-weight: bold;}
    
-#body{width:100%;height:700px;background-color:#f2f2f2; border : 1px solid #000000}
+#body{width:100%;height:800px;background-color:#f2f2f2; border : 1px solid #000000}
    #body a{text-decoration: none;margin-right: 15px; color: black;}
+   #body a:hover{color:color :#ffffff;}
    #body li{list-style: none; text-align: center;}
-   .list ul :hover{ background-color:#ffffff; font-weight: bold;}
+   .list li:hover{ background-color:#0000ff57; color :#ffffff; cursor: pointer; }
    .searchSelect table{margin : 10px; height: 120px;}
    .sectionBar {margin: 0 0 -1px 0; border: 1px solid #cdcdcd; background-color: #f7f7f7;}
    .sectionArea table tbody tr th{width : 250px;}
    .sectionArea table tbody tr td{width : 750px;}
+   .sectionArea2 table tbody tr th{width : 250px;}
+   .sectionArea2 table tbody tr td{width : 750px;}
+   .sectionArea tr{height:50px;}
+   .sectionArea2 tr{height:50px;}
+   .sectionArea2 td{height:100px;}
+   .list ul li{padding:3px}
    #resultOf1{margin : 10px;}
    #itemListTable{width : 1000px;}
    #itemListTable tr td{text-align: center;}
+   #itemListTable .tr1:hover{background-color:#0000ff57; color :#ffffff;  }
+   #itemListTable tr{height: 25px;}
+   #pageText{text-align: center;}
+   #body input[type=text]{margin:10px;}
    
+
+.basicbtn{display:inline-block;border:1px solid #00000042;font-size:0.8em; width:70px; background-color:#0000ff57; color:white; line-height:20px;}
+.filebox .btn_label {display:inline-block;border:1px solid #00000042;font-size:0.8em; width:70px; height:20px; background-color:#0000ff57; color:white; line-height:20px;text-align:center;vertical-align:middle}
+.filebox .realfile {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);border:0}
+#opentable tr{height:50px;}
+#opentable th{width:100px;}
+#opentable td{width:450px;}
+#opentable input[type=text]{margin:10px}
+#openWrap {background-color: #f7f7f7; border: 1px solid #cdcdcd; margin:auto; width:550px; }
+
+
 #footer{width:100%;height:200px; background-color:#ffffff; }
