@@ -34,6 +34,7 @@
    #p_name:hover{cursor: pointer; }
 
 .basicbtn{display:inline-block;border:1px solid #00000042;font-size:0.8em; width:70px; background-color:#0000ff57; color:white; line-height:20px;}
+.basicbtn:hover{cursor:pointer;}
 .filebox .btn_label {display:inline-block;border:1px solid #00000042;font-size:0.8em; width:70px; height:20px; background-color:#0000ff57; color:white; line-height:20px;text-align:center;vertical-align:middle}
 .filebox .realfile {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);border:0}
 #opentable tr{height:50px;}

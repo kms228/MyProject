@@ -75,7 +75,17 @@ public class ItemListDao {
 		}
 		
 		public ArrayList<ItemVo> list(int startRow,int endRow,int fnum){
-			String sql="select * from (select pnum,item_name,price,regdate,stock,fieldnum,rownum rnum from item where fieldnum=?) where rnum>=? and rnum<=?";
+			String sql="select * from\r\n" + 
+					"    (\r\n" + 
+					"    select a.*,rownum rnum  from \r\n" + 
+					"        (\r\n" + 
+					"            select pnum,item_name,price,regdate,stock,fieldnum\r\n" + 
+					"            from item \r\n" + 
+					"            where fieldnum=?" + 
+					"            order by pnum desc\r\n" + 
+					"        )a\r\n" + 
+					"    )\r\n" + 
+					"where rnum>=? and rnum<=?";
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;

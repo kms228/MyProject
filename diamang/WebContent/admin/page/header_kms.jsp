@@ -64,7 +64,7 @@ function list2(){
 			<div id="logout">
 				<div>
 					${id }님 환영합니다.
-					<a href="<c:url value='/login.do?cmd=logout'/>">로그아웃</a>
+					<input class="basicbtn" type="button" value="로그아웃" onclick="location.href='<%=request.getContextPath()%>/login.do?cmd=logout'">
 				</div> 
 			</div>
 		</c:otherwise>
