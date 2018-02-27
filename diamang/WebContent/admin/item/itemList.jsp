@@ -151,7 +151,7 @@ function coup(){
 function naming(name,sfieldnum){
 	var resultOf3 = document.getElementById("resultOf3");
 	resultOf3.innerHTML="";
-	resultOf3.innerHTML=name;
+	resultOf3.innerHTML="(중분류)"+name;
 	var fieldnum = document.getElementById("fieldnum");
 	fieldnum.setAttribute("value", sfieldnum);
 }
@@ -160,8 +160,16 @@ function newPage(pnum){
 	newWindow = window.open("<%=request.getContextPath()%>/item?cmd=detail&pnum="+pnum, "", "width=600, height=580, left=500, top=100,scrollbars=1, location=1");
 }
 
+function del(pnum,fieldnum){
+	var con = confirm("삭제하시겠습니까?");
+	if(con==true){
+		console.log(con);
+		location.href="<%=request.getContextPath()%>/item?cmd=del&pnum="+pnum+"&fieldnum="+fieldnum;
+	}
+}
 
 </script>
+
 <form method="post" action="<c:url value='/item?cmd=listOk'/>">
 	<input type="hidden" name="fieldnum" id="fieldnum">
 	<h2>상품관리 > 상품수정</h2><br>
@@ -229,69 +237,8 @@ function newPage(pnum){
 	
 </form>
 <br>
-<div class="sectionBar"><br>
+<div class="sectionBar"><br>	
 	<h3>상품 리스트</h3>
 </div>
-<form>
-	<table id="itemListTable" border="1">
-		<tr>
-			<th>상품분류</th><th>상품번호</th><th>상품이름</th><th>재고</th><th>가격</th><th>등록일</th>
-		</tr>
-		<c:forEach var="vo" items="${list }">
-			<c:if test="${vo.fieldnum eq 11}"><c:set var="fnum" value="반지 > 14k/18k"/></c:if>
-			<c:if test="${vo.fieldnum eq 12}"><c:set var="fnum" value="반지 > 다이아"/></c:if>
-			<c:if test="${vo.fieldnum eq 13}"><c:set var="fnum" value="반지 > 탄생석"/></c:if>
-			<c:if test="${vo.fieldnum eq 14}"><c:set var="fnum" value="반지 > 실버"/></c:if>
-			<c:if test="${vo.fieldnum eq 21}"><c:set var="fnum" value="목걸이 > 14k/18k"/></c:if>
-			<c:if test="${vo.fieldnum eq 22}"><c:set var="fnum" value="목걸이 > 다이아"/></c:if>
-			<c:if test="${vo.fieldnum eq 23}"><c:set var="fnum" value="목걸이 > 탄생석"/></c:if>
-			<c:if test="${vo.fieldnum eq 31}"><c:set var="fnum" value="귀걸이 > 14k/18k"/></c:if>
-			<c:if test="${vo.fieldnum eq 32}"><c:set var="fnum" value="귀걸이 > 탄생석"/></c:if>
-			<c:if test="${vo.fieldnum eq 41}"><c:set var="fnum" value="커플링 > 14k/18k"/></c:if>
-			<c:if test="${vo.fieldnum eq 42}"><c:set var="fnum" value="커플링 > 다이아"/></c:if>
-			<c:if test="${vo.fieldnum eq 43}"><c:set var="fnum" value="커플링 > 실버"/></c:if>
-			<tr class="tr1">
-				<td style="width: 250px;">${fnum }</td>
-				<td style="width: 75px;">${vo.pnum }</td>
-				<td style="width: 225px;">
-					<ul>
-						<li onclick="newPage(${vo.pnum })">${vo.item_name }</li>
-					</ul>
-				</td>
-				<td style="width: 100px;">${vo.stock }</td>
-				<td style="width: 150px;">${vo.price }</td>
-				<td style="width: 200px;">${vo.regdate }</td>
-			</tr>
-		</c:forEach>
-	</table>
-	<br>
-	<!-- 페이지처리 -->
-	<div id='pageText'>
-		<c:choose>
-			<c:when test="${startPage>10 }">
-				<a href="<%=request.getContextPath()%>/item?cmd=listOk&pageNum=${startPage-1}">[이전]</a>
-			</c:when>
-			<c:otherwise>
-				[이전]
-			</c:otherwise>
-		</c:choose>
-		<c:forEach var="i" begin="${startPage }" end="${endPage }">
-			<c:choose>
-				<c:when test="${pageNum==i }">
-					<a href="<%=request.getContextPath()%>/item?cmd=listOk&pageNum=${i}&fieldnum=${requestScope.fieldnum}"><span style="color:blue">[${i }]</span></a>
-				</c:when>
-				<c:otherwise>
-					<a href="<%=request.getContextPath()%>/item?cmd=listOk&pageNum=${i}&fieldnum=${requestScope.fieldnum}"><span style="color:gray">[${i }]</span></a>
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
-		<c:choose>
-			<c:when test="${endPage<pageCount }">
-				<a href="<%=request.getContextPath()%>/item?cmd=listOk&pageNum=${endPage+1}">[다음]</a>
-			</c:when>
-			<c:otherwise>
-				[다음]
-			</c:otherwise>
-		</c:choose>
-	</div>
-</form>
+<c:set var="spage" value="${page }"/>
+<jsp:include page="${spage }"></jsp:include>

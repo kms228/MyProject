@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -29,7 +30,14 @@ public class ItemController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cmd = (String)request.getParameter("cmd");
 		if(cmd.equals("insert")) {
-			response.sendRedirect(request.getContextPath()+"/admin/layout_kms.jsp?page=item/insertItem_kms.jsp");
+			HttpSession session = request.getSession();
+			String id = (String)session.getAttribute("id");
+			if(id==null) {
+				request.setAttribute("errMsg", "로그인 후 이용가능합니다.");
+				request.getRequestDispatcher("/admin/layout_kms.jsp?page=page/home_kms.jsp").forward(request, response);
+			}else {
+				response.sendRedirect(request.getContextPath()+"/admin/layout_kms.jsp?page=item/insertItem_kms.jsp");
+			}
 			
 		}else if(cmd.equals("itemMenu")) {
 			System.out.println("itemController:itemMenu");
@@ -40,8 +48,14 @@ public class ItemController extends HttpServlet {
 			itemInsert(request, response);
 		
 		}else if(cmd.equals("list")) {
-			response.sendRedirect(request.getContextPath()+"/admin/layout_kms.jsp?page=item/itemList.jsp");
-		
+			HttpSession session = request.getSession();
+			String id = (String)session.getAttribute("id");
+			if(id==null) {
+				request.setAttribute("errMsg", "로그인 후 이용가능합니다.");
+				request.getRequestDispatcher("/admin/layout_kms.jsp?page=page/home_kms.jsp").forward(request, response);
+			}else {
+				response.sendRedirect(request.getContextPath()+"/admin/layout_kms.jsp?page=item/itemList.jsp");
+			}
 		}else if(cmd.equals("del")) {
 			System.out.println("지우러옴");
 			del(request,response);
@@ -53,6 +67,7 @@ public class ItemController extends HttpServlet {
 			detail(request,response);
 		
 		}else if(cmd.equals("update")) {
+
 			update(request,response);
 		}
 	}
@@ -60,7 +75,7 @@ public class ItemController extends HttpServlet {
 	private void del(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("지우러옴2");
 		int pnum = Integer.parseInt(request.getParameter("pnum"));
-		
+		int fieldnum = Integer.parseInt(request.getParameter("fieldnum"));
 		String uploadPath = request.getServletContext().getRealPath("admin/upload");
 		//삭제할이미지정보 얻어오기
 		//대표이미지 삭제
@@ -92,6 +107,9 @@ public class ItemController extends HttpServlet {
 		if(n>0) {
 			System.out.println("delete controller : db정보 삭제 성공");
 		}
+		request.setAttribute("fieldnum", fieldnum);
+		//request.getRequestDispatcher("/admin/layout_kms.jsp?page=item/itemList.jsp?page=selectItemList&?fieldnum="+fieldnum).forward(request, response);
+		itemList(request,response);
 	}
 	
 	private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -161,7 +179,8 @@ public class ItemController extends HttpServlet {
 		if(del2) {
 			System.out.println("기존 상세이미지 삭제");
 		}
-			
+		//request.getRequestDispatcher("/admin/layout_kms.jsp?page=item/itemList.jsp").forward(request, response);
+		request.getRequestDispatcher("/admin/item/result.jsp").forward(request, response); 
 	}
 	private void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int num = Integer.parseInt(request.getParameter("pnum"));
@@ -210,8 +229,8 @@ public class ItemController extends HttpServlet {
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageNum", pageNum);
-		request.getRequestDispatcher("/admin/layout_kms.jsp?page=item/itemList.jsp").forward(request, response);
-		
+		request.setAttribute("page", "selectItemList.jsp?fieldnum="+fieldnum);
+		request.getRequestDispatcher("/admin/layout_kms.jsp?page=item/itemList.jsp?page=selectItemList").forward(request, response);
 	}
 
 	private void itemMenu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

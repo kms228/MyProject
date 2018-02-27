@@ -70,7 +70,7 @@ function list2(){
 		</c:otherwise>
 	</c:choose>
 	<br>
-	<h1 align="center">쇼핑몰관리24</h1>
+	<h1 align="center" onclick="location.href='<%=request.getContextPath()%>/admin/layout_kms.jsp'">쇼핑몰관리24</h1>
 	<br>
 	<a href="javascript:addMenu2()" onmouseover="addMenu2()">상점관리</a><span>|&nbsp;</span>
 	<a href="#">고객관리</a><span>|&nbsp;</span>
