@@ -40,6 +40,66 @@ function list2(){
 							"<a href='<%=request.getContextPath()%>/item?cmd=update'>&nbsp;이용약관설정</a>";
 	}
 }
+
+var xhr3=null
+function addMenu3(){	
+	xhr3=new XMLHttpRequest();	
+	xhr3.onreadystatechange=list3;	
+	xhr3.open('get','<%=request.getContextPath()%>/item?cmd=1',true);
+	xhr3.send();
+}
+function list3(){
+	if(xhr3.readyState==4 && xhr3.status==200){
+		//alert("success");
+		var menuList = document.getElementById("menuList");
+		//기존메뉴지우기
+		menuList.innerHTML="";
+		var xml = xhr3.responseXML;
+		menuList.innerHTML="<a href='<%=request.getContextPath() %>/admin/members.do?cmd=membersmain'>회원관리메인</a>|&nbsp;"+
+							"<a href='<%=request.getContextPath() %>/admin/members.do?cmd=membersinfo'>회원정보조회</a>|&nbsp;"+
+							"<a href='<%=request.getContextPath() %>/admin/members.do?cmd=membersgrade'>&nbsp;회원등급관리</a>";
+	}
+}
+
+var xhr4=null
+function addMenu4(){	
+	xhr4=new XMLHttpRequest();	
+	xhr4.onreadystatechange=list4;	
+	xhr4.open('get','<%=request.getContextPath()%>/item?cmd=2',true);
+	xhr4.send();
+}
+function list4(){
+	if(xhr4.readyState==4 && xhr4.status==200){
+		//alert("success");
+		var menuList = document.getElementById("menuList");
+		//기존메뉴지우기
+		menuList.innerHTML="";
+		var xml = xhr4.responseXML;
+		menuList.innerHTML="<a href='<%=request.getContextPath()%>/admin/order.do?cmd=prepareproduct'>상품준비중</a>|&nbsp;&nbsp;"+
+							"<a href='<%=request.getContextPath()%>/admin/order.do?cmd=shippedend'>배송중</a>|&nbsp;&nbsp;"+
+							"<a href='<%=request.getContextPath()%>/admin/order.do?cmd=shippedcomplete'>배송완료</a>|&nbsp;&nbsp;"+
+							"<a href='<%=request.getContextPath()%>/admin/order.do?cmd=ordercancel'>&nbsp;배송취소</a>";
+	}
+}
+
+var xhr5=null
+function addMenu5(){	
+	xhr5=new XMLHttpRequest();	
+	xhr5.onreadystatechange=list5;	
+	xhr5.open('get','<%=request.getContextPath()%>/item?cmd=3',true);
+	xhr5.send();
+}
+function list5(){
+	if(xhr5.readyState==4 && xhr5.status==200){
+		//alert("success");
+		var menuList = document.getElementById("menuList");
+		//기존메뉴지우기
+		menuList.innerHTML="";
+		var xml = xhr5.responseXML;
+		menuList.innerHTML="<a href='<%=request.getContextPath()%>/admin/board.do?cmd=boardqna'>QnA 관리</a>|&nbsp;"+
+							"<a href='<%=request.getContextPath()%>/admin/board.do?cmd=boardreview'>&nbsp;후기게시판 관리</a>";
+	}
+}
 </script>
 <div>
 <br>
@@ -73,10 +133,10 @@ function list2(){
 	<h1 align="center" onclick="location.href='<%=request.getContextPath()%>/admin/layout_kms.jsp'">쇼핑몰관리24</h1>
 	<br>
 	<a href="javascript:addMenu2()" onmouseover="addMenu2()">상점관리</a><span>|&nbsp;</span>
-	<a href="#">고객관리</a><span>|&nbsp;</span>
+	<a href="javascript:addMenu3()" onmouseover="addMenu3()">고객관리</a><span>|&nbsp;</span>
 	<a href="javascript:addMenu1()" onmouseover="addMenu1()">상품관리</a><span>|&nbsp;</span>
-	<a href="#">배송관리</a><span>|&nbsp;</span>
-	<a href="#">게시판관리</a>
+	<a href="javascript:addMenu4()" onmouseover="addMenu4()">주문관리</a><span>|&nbsp;</span>
+	<a href="javascript:addMenu5()" onmouseover="addMenu5()">게시판관리</a>
 	
 	
 	<div id="menuList"></div>
