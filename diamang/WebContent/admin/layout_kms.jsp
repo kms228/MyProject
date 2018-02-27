@@ -21,14 +21,12 @@
 		spage="page/home_kms.jsp";		
 	}
 --%>
-
 <div id="wrap">	
 <c:set var="spage" value="${param.page }"/>
 <c:set var="errMsg" value="${param.errMsg }"/>
 <c:if test="${empty spage }">
 	<c:set var="spage" value="page/home_kms.jsp"/>
 </c:if>
-
 	<div id="header">
 		<jsp:include page="page/header_kms.jsp"></jsp:include>
 	</div>

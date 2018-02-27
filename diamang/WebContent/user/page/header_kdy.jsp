@@ -30,7 +30,7 @@
 </div>
 <div id="mainmenu">
 <ul>
-	<li><a href="">귀걸이</a></li>
+	<li><a href="<%=request.getContextPath()%>/itemList.do?cmd=earing">귀걸이</a></li>
 	<li><a href="">목걸이</a></li>
 	<li><a href="">반지</a></li>
 	<li><a href="">커플</a></li>

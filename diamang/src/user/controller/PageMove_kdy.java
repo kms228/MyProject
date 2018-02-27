@@ -49,6 +49,12 @@ public class PageMove_kdy extends HttpServlet {
 			url = "join_hhj.jsp";
 			req.setAttribute("cmd", url);
 			req.getRequestDispatcher("/user/layout_kdy.jsp").forward(req, resp);
+		}else if(cmd.equals("review_update")) {
+			req.getRequestDispatcher("/user/page/review/review_update_kdy.jsp").forward(req, resp);
+		}else if(cmd.equals("earing")) {	//귀걸이 페이지로
+			url = "page/item/item_kdy.jsp";
+			req.setAttribute("cmd", url);
+			req.getRequestDispatcher("/user/layout_kdy.jsp").forward(req, resp);
 		}
 	}
 }

@@ -113,10 +113,10 @@ public class ItemImg1Dao {
 		PreparedStatement pstmt = null;
 		try {
 			con = DbcpBean.getConn();
-			String sql = "update itemImg1 set pnum=?,savefilename=? where pnum=?";
+			String sql = "update itemImg1 set savename=? where pnum=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, vo.getPnum());
-			pstmt.setString(2, vo.getSavefilename());
+			pstmt.setInt(2, vo.getPnum());
+			pstmt.setString(1, vo.getSavefilename());
 			
 			return pstmt.executeUpdate();
 		}catch(SQLException se) {

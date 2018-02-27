@@ -31,7 +31,7 @@
    #itemListTable tr{height: 25px;}
    #pageText{text-align: center;}
    #body input[type=text]{margin:10px;}
-   
+   #p_name:hover{cursor: pointer; }
 
 .basicbtn{display:inline-block;border:1px solid #00000042;font-size:0.8em; width:70px; background-color:#0000ff57; color:white; line-height:20px;}
 .filebox .btn_label {display:inline-block;border:1px solid #00000042;font-size:0.8em; width:70px; height:20px; background-color:#0000ff57; color:white; line-height:20px;text-align:center;vertical-align:middle}

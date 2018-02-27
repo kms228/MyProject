@@ -91,6 +91,80 @@ public class RvBoardDao_kdy {
 		}
 	}
 	
+	public int update (RvBoardVo_kdy vo) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try{
+			con = DbcpBean.getConn();
+			String sql = "update review set title=?,content=?,star=? where rv_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContent());
+			pstmt.setInt(3, vo.getStar());
+			pstmt.setInt(4, vo.getRv_num());
+			return pstmt.executeUpdate();
+			
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			DbcpBean.closeConn(con, pstmt, null);
+		}
+	}
+	
+	public void delete(int rv_num) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DbcpBean.getConn();
+			String sql = "delete from review where rv_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, rv_num);
+			pstmt.executeQuery();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+		}finally {
+			DbcpBean.closeConn(con, pstmt, null);
+		}
+	}
+	
+	public void deleteOk(int buy_num, int pnum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DbcpBean.getConn();
+			String sql = "update orderlist set review=0 where buy_num=? and pnum=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, buy_num);
+			pstmt.setInt(2, pnum);
+			pstmt.executeQuery();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+		}finally {
+			DbcpBean.closeConn(con, pstmt, null);
+		}
+	}
+	
+	public void commDelete(int rv_num) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DbcpBean.getConn();
+			String sql = "delete from rv_comments where rv_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, rv_num);
+			pstmt.executeQuery();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+		}finally {
+			DbcpBean.closeConn(con, pstmt, null);
+		}
+	}
+	
 	//리스트 보여주는 메소드
 	public ArrayList<RvBoardVo_kdy> list(int startRow, int endRow){
 

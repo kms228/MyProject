@@ -36,7 +36,7 @@ public class BoardqnaDao {
 		ResultSet rs=null;
 		try {
 			con=DbcpBean.getConn();
-			String sql="SELECT * FROM QNA"; 
+			String sql="SELECT * FROM QNA";
 			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			ArrayList<BoardqnaVo> list = new ArrayList<>();

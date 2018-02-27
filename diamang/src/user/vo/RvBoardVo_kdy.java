@@ -55,6 +55,14 @@ public class RvBoardVo_kdy {
 		this.savename=savename;
 		this.pnum=pnum;
 	}
+	
+	public RvBoardVo_kdy(int rv_num, String title, String content, int star) {
+		this.rv_num=rv_num;
+		this.title=title;
+		this.content=content;
+		this.star=star;
+	}
+	
 
 	public int getRv_num() {
 		return rv_num;

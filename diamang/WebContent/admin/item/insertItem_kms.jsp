@@ -24,22 +24,25 @@ function ring(){
 		listOf.innerHTML="";
 		
 		var li1 = document.createElement("li");
-		var label = document.createElement("label");
-		label.setAttribute("onclick", "naming('14k/18k',11)");
-		var labelText = document.createTextNode("14k/18k");
-	    listOf.appendChild(li1).appendChild(label).appendChild(labelText);
+		
+		li1.setAttribute("onclick", "naming('14k/18k',11)");
+		var li1Text = document.createTextNode("14k/18k");
+	    listOf.appendChild(li1).appendChild(li1Text);
 	    
 		
 	    var li2 = li1.cloneNode(true);
-	    li2.innerHTML="<label onclick='naming(\"다이아\",12)'>다이아</label>"
+	    li2.setAttribute("onclick", "naming('다이아',12)");
+	    li2.innerHTML="다이아"
 	    listOf.appendChild(li2);
 	    
 	    var li3 = li1.cloneNode(true);
-	    li3.innerHTML="<label onclick='naming(\"탄생석\",13)'>탄생석</label>"
+	    li3.setAttribute("onclick", "naming('탄생석',13)");
+	    li3.innerHTML="탄생석"
 	    listOf.appendChild(li3);
 	    
 	    var li4 = li1.cloneNode(true);
-	    li4.innerHTML="<label onclick='naming(\"실버\",14)'>실버</label>"
+	    li4.setAttribute("onclick", "naming('실버',14)");
+	    li4.innerHTML="실버"
 	    listOf.appendChild(li4);
 	}
 }
@@ -64,17 +67,18 @@ function neck(){
 		listOf.innerHTML="";
 		
 		var li1 = document.createElement("li");
-		var label = document.createElement("label");
-		label.setAttribute("onclick", "naming('14k/18k',21)");
-		var labelText = document.createTextNode("14k/18k");
-	    listOf.appendChild(li1).appendChild(label).appendChild(labelText);
+		li1.setAttribute("onclick", "naming('14k/18k',21)");
+		var li1Text = document.createTextNode("14k/18k");
+	    listOf.appendChild(li1).appendChild(li1Text);
 		
 	    var li2 = li1.cloneNode(true);
-	    li2.innerHTML="<label onclick='naming(\"다이아\",22)'>다이아</label>"
+	    li2.setAttribute("onclick", "naming('다이아',22)");
+	    li2.innerHTML="다이아"
 	    listOf.appendChild(li2);
 	    
 	    var li3 = li1.cloneNode(true);
-	    li3.innerHTML="<label onclick='naming(\"탄생석\",23)'>탄생석</label>"
+	    li3.setAttribute("onclick", "naming('탄생석',23)");
+	    li3.innerHTML="탄생석"
 	    listOf.appendChild(li3);
 	    
 	}
@@ -100,13 +104,13 @@ function ear(){
 		listOf.innerHTML="";
 		
 		var li1 = document.createElement("li");
-		var label = document.createElement("label");
-		label.setAttribute("onclick", "naming('14k/18k',31)");
-		var labelText = document.createTextNode("14k/18k");
-	    listOf.appendChild(li1).appendChild(label).appendChild(labelText);
+		li1.setAttribute("onclick", "naming('14k/18k',31)");
+		var li1Text = document.createTextNode("14k/18k");
+	    listOf.appendChild(li1).appendChild(li1Text);
 	    
 	    var li2 = li1.cloneNode(true);
-	    li2.innerHTML="<label onclick='naming(\"탄생석\",32)'>탄생석</label>"
+	    li2.setAttribute("onclick", "naming('탄생석',32)");
+	    li2.innerHTML="탄생석"
 	    listOf.appendChild(li2);
 	}
 }
@@ -129,18 +133,18 @@ function coup(){
 		listOf.innerHTML="";
 		
 		var li1 = document.createElement("li");
-		var label = document.createElement("label");
-		label.setAttribute("onclick", "naming('14k/18k',41)");
-		//label.onclick=naming("14k/18k");
-		var labelText = document.createTextNode("14k/18k");
-	    listOf.appendChild(li1).appendChild(label).appendChild(labelText);
+		li1.setAttribute("onclick", "naming('14k/18k',41)");
+		var li1Text = document.createTextNode("14k/18k");
+	    listOf.appendChild(li1).appendChild(li1Text);
 		
 	    var li2 = li1.cloneNode(true);
-	    li2.innerHTML="<label onclick='naming(\"다이아\",42)'>다이아</label>"
+	    li2.setAttribute("onclick", "naming('다이아',42)");
+	    li2.innerHTML="다이아"
 	    listOf.appendChild(li2);
 	    
 	    var li3 = li1.cloneNode(true);
-	    li3.innerHTML="<label onclick='naming(\"실버\",43)'>실버</label>"
+	    li3.setAttribute("onclick", "naming('실버',43)");
+	    li3.innerHTML="실버"
 	    listOf.appendChild(li3);
 	}
 }
