@@ -29,7 +29,7 @@ font-family:tahoma;
 
 <c:when test="${result=='success'}">
 <h2>정보수정 완료 </h2>
-<a href="<%=request.getContextPath()%>/user/login_hhj.jsp">로그인하러가기</a>
+<a href="<%=request.getContextPath()%>/move.do?cmd=main">메인화면으로가기</a>
 </c:when>
 
 <c:when test="${result=='fail'}">

@@ -111,7 +111,7 @@ font-family:tahoma;
 </head>
 <body>
 <div id="form" class="joinlayout">
-<h1>Member 정보 수정</h1>
+<h1>${user.name }님 정보 </h1>
 
 <form method="post" name="frm" onsubmit="return update()" action="<%=request.getContextPath()%>/JoinController.do?cmd=updateOk">
 <input type="hidden" value="${user.mnum}" name="mnum">
@@ -119,6 +119,8 @@ font-family:tahoma;
 <p><label for="name">이름 </label><input type="text" value="${user.name}" name="name" readonly="readonly"></p>
 <p><label for="birthday">생년월일 </label><input type="text" value="${user.birthday }" name="birthday" readonly="readonly"></p>
 <p><label for="joindate">가입일 </label><input type="text" value="${user.joindate }" name="joindate" readonly="readonly"></p>
+<hr>
+<h5 style="margin-left: 150px;">개인정보수정</h5>
 <p><label for="pwd">비밀번호</label><input type="password" name="pwd" id="pwd"></p>
 <p><label for="pwd2">비밀번호확인</label><input type="password" name="pwd2" id="pwd2"></p>
 <p><label for="email">이메일</label><input type="text" value="${user.email }" name="email" id="email"></p>

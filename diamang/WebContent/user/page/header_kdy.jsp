@@ -16,12 +16,13 @@
 		</c:when>
 		<c:otherwise>
 		<li><a href="<%=request.getContextPath()%>/JoinController.do?cmd=logout">로그아웃</a></li>
+		<li><a href="<%=request.getContextPath()%>/JoinController.do?cmd=update&id=${sessionScope.id}">마이페이지</a></li>
 		</c:otherwise>
 	</c:choose>
 		<li><a href="<%=request.getContextPath()%>/move.do?cmd=join">회원가입</a></li>
 		<li><a href="">주문/배송 조회</a></li>
 		<li><a href="">장바구니</a></li>
-		<li><a href="">마이페이지</a></li>
+		
 	</ul>
 </div>
 <div>
