@@ -3,11 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+
 <script type="text/javascript">
 	window.onload = function(){
 		if(!("${msg}"==="")){
@@ -72,8 +68,8 @@
 		location.href = url;
 	}
 </script>
-</head>
-<body>
+
+
 	<form method="post" action="<%=request.getContextPath()%>/admin/order.do?cmd=prepsearch">
 		<table>
 			<tbody>
@@ -101,7 +97,7 @@
 			</tbody>
 		</table>
 		<div>
-			<input type="submit" value="검색"><input type="reset"
+			<input class="basicbtn" type="submit" value="검색"><input class="basicbtn" type="reset"
 				value="초기화">
 		</div>
 	</form>
@@ -126,8 +122,8 @@
 				<td rowspan="${vo.ordercnt+1 }">${vo.buy_date }</td><td rowspan="${vo.ordercnt+1 }">${vo.buy_num}</td>
 				<td rowspan="${vo.ordercnt+1 }">${vo.name }</td><td>${vo.order_num }</td><td>${vo.pnum }</td><td>${vo.item_name }</td>
 				<td>${vo.amount }</td><td>${vo.price }</td><td rowspan="${vo.ordercnt+1 }">${vo.accprice }</td>
-				<td align="center" rowspan="${vo.ordercnt+1 }"><input type="button" value="배송중" onclick="uptShippedend('${vo.buy_num}')"></td>
-				<td align="center" rowspan="${vo.ordercnt+1 }"><input type="button" value="배송취소" onclick="uptShippedCAN('${vo.buy_num}')"></td>
+				<td align="center" rowspan="${vo.ordercnt+1 }"><input class="basicbtn" type="button" value="배송중" onclick="uptShippedend('${vo.buy_num}')"></td>
+				<td align="center" rowspan="${vo.ordercnt+1 }"><input class="basicbtn" type="button" value="배송취소" onclick="uptShippedCAN('${vo.buy_num}')"></td>
 				<c:set var="n" value="${vo.buy_num }"/>
 				<c:set var="cnt" value="${vo.ordercnt }"/>
 			</c:when>	
@@ -184,5 +180,3 @@
 	<li>이 화면은 도움말입니다. 나중에 내용을 적어넣어봐요.</li>
 </ul>
 </div>
-</body>
-</html>
