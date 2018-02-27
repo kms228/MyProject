@@ -6,7 +6,22 @@
 
 <head>
 <style type="text/css">
-		p label {width: 70px; display: inline-block;}
+		p label {width: 100px; display: inline-block;}
+		.joinlayout{margin-left: 300px; margin-top: 5px; width: 525px;padding: 14px;}
+#form{border: solid 2px #b7ddf2; background:#ebf4fb;}
+#but{
+clear:both;
+margin-left:10px;
+width:100px;
+height:30px;
+text-align:center;
+line-height:31px;
+background-color:#000;
+color:#FFFFFF;
+font-size:13px;
+font-weight:bold;
+font-family:tahoma;
+}
 </style>
 <script type="text/javascript">
 
@@ -95,6 +110,7 @@
 </script>
 </head>
 <body>
+<div id="form" class="joinlayout">
 <h1>Member 정보 수정</h1>
 
 <form method="post" name="frm" onsubmit="return update()" action="<%=request.getContextPath()%>/JoinController.do?cmd=updateOk">
@@ -108,13 +124,14 @@
 <p><label for="email">이메일</label><input type="text" value="${user.email }" name="email" id="email"></p>
 <p><label for="address">주소</label><input type="text" value="${user.address }" name="address" id="address"></p>
 <p><label for="phone">휴대폰번호</label><input type="text" value="${user.phone}" name="phone" id="phone"></p>
-<input type="submit" value="회원 정보수정" > 
-<input type="reset" value="취소"><br><br>
-<input type="button" onclick="del()" value="회원탈퇴하기" >
+<input type="submit" id="but" value="회원 정보수정" > 
+<input type="reset" id="but" value="취소"><br><br>
+<input type="button" id="but" onclick="del()" value="회원탈퇴하기" >
 </form>
 
 <span id="pwdspan" style="font-size: 12px;color:red"></span>
 
+</div>
 </body>
 
 

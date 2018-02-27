@@ -4,9 +4,22 @@
    
 <html>
 <style type="text/css">
-
-		p label {width: 70px; display: inline-block;}
-		
+p label {width: 70px; display: inline-block;}
+.joinlayout{margin-left: 300px; margin-top: 5px; width: 525px;padding: 14px;}
+#form{border: solid 2px #b7ddf2; background:#ebf4fb;}
+#but{
+clear:both;
+margin-left:10px;
+width:90px;
+height:30px;
+text-align:center;
+line-height:31px;
+background-color:#000;
+color:#FFFFFF;
+font-size:13px;
+font-weight:bold;
+font-family:tahoma;
+}
 </style>
  
 <script type="text/javascript">
@@ -33,12 +46,13 @@
 <head>
 </head>
 <body>
+<div id="form" class="joinlayout">
 <h1>아이디를 찾아봅시다.</h1>
 <form method="post" name="frm" onsubmit="return find()" action="<%=request.getContextPath()%>/JoinController.do?cmd=findid" >
 <P><label for="name">이름</label><input type="text" name="name" id="name"></P>
 <P><label for="email">이메일</label><input type="text" name="email" id="email"></P>
-<input type="submit" value="확인">
-<input type="reset" value="취소">
+<input type="submit" id="but"; value="확인">
+<input type="reset" id="but"; value="취소">
 
 </form>
 
@@ -57,12 +71,8 @@
 
 
 </c:choose>
-
-
+</div>
 </body>
-<script type="text/javascript">
- 
-</script>
 </html>
 
 
