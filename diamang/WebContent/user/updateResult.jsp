@@ -34,7 +34,7 @@ font-family:tahoma;
 
 <c:when test="${result=='fail'}">
 <h2>정보수정 실패</h2> 
-<a href="<%=request.getContextPath()%>/user/login_hhj.jsp">다시쓰러가기</a>
+<a href="javascript:history.go(-1)">다시쓰러가기</a>
 </c:when>
 
 

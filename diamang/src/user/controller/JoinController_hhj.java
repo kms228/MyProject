@@ -1,24 +1,20 @@
 package user.controller;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import shs.admin.vo.members.MembersVo;
 import user.dao.MembersDao_hhj;
 import user.vo.MemversVo;
 @WebServlet("/JoinController.do")
 public class JoinController_hhj extends HttpServlet{
-	private static final String String = null;
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) 
@@ -27,6 +23,8 @@ public class JoinController_hhj extends HttpServlet{
 		String cmd = request.getParameter("cmd");
 		String context = request.getContextPath();//컨텍스트
 		System.out.println("context:" + context);
+		String id = request.getParameter("id");
+		//System.out.println(id);
 		if (cmd.equals("insert")) {
 			response.sendRedirect(context + "/user/join.jsp");
 		}else if(cmd.equals("insertOk")) {
@@ -166,6 +164,7 @@ public class JoinController_hhj extends HttpServlet{
 		int n = dao.login(map);
 		
 		if(n==1) {	//회원O
+			System.out.println(id+"날짜");
 			HttpSession session = request.getSession();  
 			session.setAttribute("id", id);
 			//이동할곳 향후수정
@@ -177,6 +176,7 @@ public class JoinController_hhj extends HttpServlet{
 			request.setAttribute("errMsg","오류로 인해 로그인에 실패하였습니다.");
 			request.getRequestDispatcher("move.do?cmd=login").forward(request, response);
 		}
+		
 	}
 	
 	private void insert(HttpServletRequest request, HttpServletResponse response) 
