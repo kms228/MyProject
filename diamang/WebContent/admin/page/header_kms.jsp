@@ -36,8 +36,7 @@ function list2(){
 		//기존메뉴지우기
 		menuList.innerHTML="";
 		var xml = xhr2.responseXML;
-		menuList.innerHTML="<a href='<%=request.getContextPath()%>/item?cmd=insert'>기본정보설정</a>|&nbsp;"+
-							"<a href='<%=request.getContextPath()%>/item?cmd=update'>&nbsp;이용약관설정</a>";
+		menuList.innerHTML="<a href='<%=request.getContextPath()%>/store?cmd=basicInfo'>기본정보설정</a>";
 	}
 }
 
@@ -133,7 +132,7 @@ function list5(){
 	<h1 align="center" onclick="location.href='<%=request.getContextPath()%>/admin/layout_kms.jsp'">쇼핑몰관리24</h1>
 	<br>
 	<a href="javascript:addMenu2()" onmouseover="addMenu2()">상점관리</a><span>|&nbsp;</span>
-	<a href="javascript:addMenu3()" onmouseover="addMenu3()">고객관리</a><span>|&nbsp;</span>
+	<a href="javascript:addMenu3()" onmouseover="addMenu3()">회원관리</a><span>|&nbsp;</span>
 	<a href="javascript:addMenu1()" onmouseover="addMenu1()">상품관리</a><span>|&nbsp;</span>
 	<a href="javascript:addMenu4()" onmouseover="addMenu4()">주문관리</a><span>|&nbsp;</span>
 	<a href="javascript:addMenu5()" onmouseover="addMenu5()">게시판관리</a>

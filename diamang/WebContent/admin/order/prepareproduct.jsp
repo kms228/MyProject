@@ -68,10 +68,14 @@
 		location.href = url;
 	}
 </script>
+<h2>주문관리 > 상품준비중</h2><br>
+<div class="sectionBar">
+	<h3>주문 검색</h3>
+</div>
 
 
 	<form method="post" action="<%=request.getContextPath()%>/admin/order.do?cmd=prepsearch">
-		<table>
+		<table border="1" class="ord">
 			<tbody>
 				<tr>
 					<th>검색어</th>
@@ -92,16 +96,21 @@
 				</tr>
 				<tr>
 					<th>상품명</th>
-					<td><input type="text" size="30" name="item_name" value="${search.item_name }"></td>
+					<td><input type="te	xt" size="30" name="item_name" value="${search.item_name }"></td>
 				</tr>
 			</tbody>
 		</table>
-		<div>
-			<input class="basicbtn" type="submit" value="검색"><input class="basicbtn" type="reset"
-				value="초기화">
+		<br>
+		<div align="center">
+			<input class="basicbtn" type="submit" value="검색">
+			<input class="basicbtn" type="reset" value="초기화">
 		</div>
 	</form>
-	<table border="1">
+	<br>
+	<div class="sectionBar">
+		<h3>검색 결과</h3>
+	</div>
+	<table border="1" class="ord2">
 	<thead>
 		<tr>
 			<th>주문일</th><th>주문번호</th><th>주문자</th><th>구매번호</th><th>상품번호</th><th>상품명</th><th>수량</th><th>상품구매금액</th><th>총금액</th><th>배송중 처리</th><th>배송취소 처리</th>
@@ -143,7 +152,7 @@
 </table>
 <!-- 페이징처리 -->
 <c:if test="${pageVo!=null }">
-<div>
+<div align="center">
 	<c:choose>
 		<c:when test="${pageVo.startPage>pageVo.currentPageVolume }">
 			<a href="javascript:page(${pageVo.startPage-1})">[이전]</a>

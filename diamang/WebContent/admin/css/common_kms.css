@@ -3,36 +3,49 @@
 #wrap{width:1000px;margin:auto;}
 
 #header{width:100%;height:200px; background-color:#ffffff; }
-   #header a{text-decoration: none;margin-right: 15px; color: black;}
-   #header #login{float: right;}
-   #header #logout{float:right;}
-   #header h1{padding: 30px;}
-   #header a:hover{font-weight: bold;}
-  
+	#header a{text-decoration: none;margin-right: 15px; color: black;}
+	#header #login{float: right;}
+	#header #logout{float:right;}
+	#header h1{padding: 30px;}
+	#header a:hover{font-weight: bold;}
+	  
 #body{width:100%; padding-bottom:10px; background-color:#f2f2f2; border : 1px solid #000000}
-   #body a{text-decoration: none;margin-right: 15px; color: black;}
-   #body a:hover{color:color :#ffffff;}
-   #body li{list-style: none; text-align: center;}
-   .list li:hover{ background-color:#0000ff57; color :#ffffff; cursor: pointer; }
-   .searchSelect table{margin : 10px; height: 120px;}
-   .sectionBar {margin: 0 0 -1px 0; border: 1px solid #cdcdcd; background-color: #f7f7f7;}
-   .sectionArea table tbody tr th{width : 250px;}
-   .sectionArea table tbody tr td{width : 750px;}
-   .sectionArea2 table tbody tr th{width : 250px;}
-   .sectionArea2 table tbody tr td{width : 750px;}
-   .sectionArea tr{height:50px;}
-   .sectionArea2 tr{height:50px;}
-   .sectionArea2 td{height:100px;}
-   .list ul li{padding:3px}
-   #resultOf1{margin : 10px;}
-   #itemListTable{width : 1000px;}
-   #itemListTable tr td{text-align: center;}
-   #itemListTable .tr1:hover{background-color:#0000ff57; color :#ffffff;  }
-   #itemListTable tr{height: 25px;}
-   #pageText{text-align: center;}
-   #body input[type=text]{margin:10px;}
-   #p_name:hover{cursor: pointer; }
-
+	#body a{text-decoration: none;margin-right: 15px; color: black;}
+	#body a:hover{color:color :#ffffff;}
+	#body li{list-style: none; text-align: center;}
+	.list li:hover{ background-color:#0000ff57; color :#ffffff; cursor: pointer; }
+	.searchSelect table{margin : 10px; height: 120px;}
+	.sectionBar {margin: 0 0 -1px 0; border: 1px solid #cdcdcd; background-color: #f7f7f7;}
+	.sectionArea table tbody tr th{width : 250px;}
+	.sectionArea table tbody tr td{width : 750px;}
+	.sectionArea2 table tbody tr th{width : 250px;}
+	.sectionArea2 table tbody tr td{width : 750px;}
+	.sectionArea tr{height:50px;}
+	.sectionArea2 tr{height:50px;}
+	.sectionArea2 td{height:100px;}
+	.list ul li{padding:3px}
+	#resultOf1{margin : 10px;}
+	#itemListTable{width : 100%;}
+	#itemListTable tr td{text-align: center;}
+	#itemListTable .tr1:hover{background-color:#0000ff57; color :#ffffff;  }
+	#itemListTable tr{height: 25px;}
+	#pageText{text-align: center;}
+	#body input[type=text]{margin:10px;}
+	#p_name:hover{cursor: pointer; }
+ 	.ipText{margin-right:15px; margin-left:15px; margin-bottom:15px}
+	#addText{margin-top:5px}
+   	#btn1{margin-right:6px;}
+	.mem tbody tr:hover{background-color:#0000ff57; color :#ffffff; }
+	.mem tbody tr td{text-align:center;}
+	.mem{width: 100%;}
+	.mem2{width: 100%;}
+	.mem2 td{padding-left : 10px; height:50px;}
+	.mem3{width:100%;}
+	
+	.ord{width:100%;}
+	.ord th{width:250px;}
+	.ord td{padding-left : 10px; height:50px;}
+	.ord2{width:100%;}
 .basicbtn{display:inline-block;border:1px solid #00000042;font-size:0.8em; width:70px; background-color:#0000ff57; color:white; line-height:20px;cursor:pointer;}
 
 .filebox .btn_label {cursor:pointer;display:inline-block;border:1px solid #00000042;font-size:0.8em; width:70px; height:20px; background-color:#0000ff57; color:white; line-height:20px;text-align:center;vertical-align:middle}
