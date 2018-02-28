@@ -59,6 +59,10 @@ public class PageMove_kdy extends HttpServlet {
 			url = "page/item/item_detail_kdy.jsp";
 			req.setAttribute("cmd", url);
 			req.getRequestDispatcher("/user/layout_kdy.jsp").forward(req, resp);
+		}else if(cmd.equals("orderCheck")) {
+			url = "page/order/order_kdy.jsp";
+			req.setAttribute("cmd", url);
+			req.getRequestDispatcher("/user/layout_kdy.jsp").forward(req, resp);
 		}
 	}
 }

@@ -2,22 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
-<style type="text/css">
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;   
-}
-caption {
-	text-align: left;
-}
-</style>
+
 
 <div class="article">
-<table border="1" width="100%">
+<h2>회원관리 > 회원관리 메인</h2><br>
+	<div class="sectionBar">
+		<h3>회원현황</h3>
+	</div>
+<table border="1" class="mem3" >
 	<thead>
-	<tr>
-		<th colspan="2">회원현황</th>
-	</tr>
+	
 	<tr>
 		<th>신규회원(한달내)</th><th>총회원</th></tr>
 	</thead>
@@ -27,8 +21,11 @@ caption {
 	</tr>
 	</tbody>
 </table>
-<table border="1" width="100%">
-<caption>-최근 가입 회원</caption>
+<br>
+<div class="sectionBar">
+	<h3>-최근 가입 회원</h3>
+</div>
+<table border="1" class="mem3">
 	<thead>
 	<tr>
 		<th>가입일시</th><th>아이디</th><th>이메일</th><th>이름</th><th>등급</th>

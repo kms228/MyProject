@@ -18,28 +18,39 @@
 </script>
 
 <input type="hidden" value="" id="selectedGrade">
-<h1>회원등급관리</h1>
-<h2>회원 등급목록</h2>
-<table border="1" width="100%">
+<h2>회원관리 > 회원등급관리</h2><br>
+<div class="sectionBar">
+	<h3>회원 등급목록</h3>
+</div>
+<table border="1" class="mem">
 	<thead>
 	<tr>
-		<th>번호</th><th>등급명</th><th>할인율</th><th>회원수</th>
+		<th>번호</th><th>등급명</th><th>할인율(%)</th><th>회원수</th><th>수정</th>
 	</tr>
 	</thead>
 	<tbody>
 	<c:forEach var="vo" items="${list }">
 		<tr>
-			<td>${vo.gnum }</td><td><a href="javascript:uptGrade('${ vo.gnum}','${vo.grade }')" id="${ vo.gnum}">${vo.grade }</a></td><td>${vo.drate }</td><td>${vo.gnumcnt }</td>
+			<td>${vo.gnum }</td>
+			<td>${vo.grade }</td>
+			<td style="display: none;"><a href="javascript:uptGrade('${ vo.gnum}','${vo.grade }')" id="${ vo.gnum}">${vo.grade }</a></td>
+			<td>${vo.drate }</td>
+			<td>${vo.gnumcnt }</td>
+			<td><input type="button" class="basicbtn" value="수정" onclick="uptGrade('${ vo.gnum}','${vo.grade }')"></td>
 		</tr>
 	</c:forEach>
 	</tbody>
-	<tfoot>
-		<tr><td colspan="4"><input type="button" value="등급 추가" onclick="addGrade()" class="basicbtn"></td></tr>
-	</tfoot>
 </table>
-<h2>회원가입 시 회원등급 기본설정</h2>
+<div align="center">
+	<br>
+	<input type="button" value="등급 추가" onclick="addGrade()" class="basicbtn">
+</div>
+<br>
+<div class="sectionBar">
+	<h3>회원가입 시 회원등급 기본설정</h3>
+</div>
 <form method="post" action="<%=request.getContextPath()%>/admin/members.do?cmd=defaultGrade">
-<table border="1" width="100%">
+<table border="1" class="mem">
 	<thead>
 		<tr>
 			<th>회원등급 기본설정</th>
@@ -53,7 +64,10 @@
 		</tr>
 	</thead>
 </table>
-<input type="submit" value="설정" class="basicbtn">
+<div align="center">
+	<br>
+	<input type="submit" value="설정" class="basicbtn">
+</div>
 </form>
 <h2>도움말</h2>
 <ul>
