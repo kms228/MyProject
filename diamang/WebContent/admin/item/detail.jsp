@@ -227,14 +227,6 @@ function naming(val){
 	
 }
 
-function del(pnum){
-	var con = confirm("삭제하시겠습니까?");
-	if(con==true){
-		alert("삭제되었습니다.");
-		location.href="<%=request.getContextPath()%>/item?cmd=del&pnum="+pnum;
-	}
-}
-
 </script>
 <body>
 <div id="openWrap">
@@ -280,7 +272,11 @@ function del(pnum){
 				<th>상품번호</th><td colspan="2"><input type="text" name="pnum" value="${vo.pnum }" readonly="readonly"><span style="font-size: small;">수정불가</span></td>
 			</tr>
 			<tr>
-				<th>상품이름</th><td colspan="2" id="p_name"><input type="text" name="item_name"value="${vo.item_name }" placeholder="예시) 18k 1g 정수 심플링 반지"></td>
+				<th>상품이름</th>
+				<td colspan="2" id="p_name">
+					<input type="text" name="item_name" value="${vo.item_name }" placeholder="예시) 18k 1g 정수 심플링 반지" >
+					
+				</td>
 			</tr>
 			<tr class="filebox">
 				<th>대표이미지</th>
@@ -313,7 +309,6 @@ function del(pnum){
 		<br>
 		<div align="center">
 			<input type="submit" value="수정" class="basicbtn">
-			<input type="button" class="basicbtn" value="삭제" onclick="location.href='<%=request.getContextPath()%>/item?cmd=del&pnum=${vo.pnum }'">
 		</div>
 		<br>
 	</form>

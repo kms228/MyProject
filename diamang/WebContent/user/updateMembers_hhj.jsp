@@ -6,7 +6,22 @@
 
 <head>
 <style type="text/css">
-		p label {width: 70px; display: inline-block;}
+		p label {width: 100px; display: inline-block;}
+		.joinlayout{margin-left: 300px; margin-top: 5px; width: 525px;padding: 14px;}
+#form{border: solid 2px #b7ddf2; background:#ebf4fb;}
+#but{
+clear:both;
+margin-left:10px;
+width:100px;
+height:30px;
+text-align:center;
+line-height:31px;
+background-color:#000;
+color:#FFFFFF;
+font-size:13px;
+font-weight:bold;
+font-family:tahoma;
+}
 </style>
 <script type="text/javascript">
 
@@ -95,7 +110,8 @@
 </script>
 </head>
 <body>
-<h1>Member 정보 수정</h1>
+<div id="form" class="joinlayout">
+<h1>${user.name }님 정보 </h1>
 
 <form method="post" name="frm" onsubmit="return update()" action="<%=request.getContextPath()%>/JoinController.do?cmd=updateOk">
 <input type="hidden" value="${user.mnum}" name="mnum">
@@ -103,18 +119,21 @@
 <p><label for="name">이름 </label><input type="text" value="${user.name}" name="name" readonly="readonly"></p>
 <p><label for="birthday">생년월일 </label><input type="text" value="${user.birthday }" name="birthday" readonly="readonly"></p>
 <p><label for="joindate">가입일 </label><input type="text" value="${user.joindate }" name="joindate" readonly="readonly"></p>
+<hr>
+<h5 style="margin-left: 150px;">개인정보수정</h5>
 <p><label for="pwd">비밀번호</label><input type="password" name="pwd" id="pwd"></p>
 <p><label for="pwd2">비밀번호확인</label><input type="password" name="pwd2" id="pwd2"></p>
 <p><label for="email">이메일</label><input type="text" value="${user.email }" name="email" id="email"></p>
 <p><label for="address">주소</label><input type="text" value="${user.address }" name="address" id="address"></p>
 <p><label for="phone">휴대폰번호</label><input type="text" value="${user.phone}" name="phone" id="phone"></p>
-<input type="submit" value="회원 정보수정" > 
-<input type="reset" value="취소"><br><br>
-<input type="button" onclick="del()" value="회원탈퇴하기" >
+<input type="submit" id="but" value="회원 정보수정" > 
+<input type="reset" id="but" value="취소"><br><br>
+<input type="button" id="but" onclick="del()" value="회원탈퇴하기" >
 </form>
 
 <span id="pwdspan" style="font-size: 12px;color:red"></span>
 
+</div>
 </body>
 
 

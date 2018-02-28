@@ -168,8 +168,37 @@ function file_change2(file2){
 	file2 = file2.substring(str, file2.length);
 	document.getElementById('fileName2').value=file2;
 }
+
+var xhr5 = null;
+function itemcheck() {
+	var item_name = document.getElementsByName("item_name")[0].value;
+	xhr5=new XMLHttpRequest();
+	xhr5.onreadystatechange=callback1;
+	xhr5.open("get","item/itemNameCheck.jsp?item_name="+item_name,true);
+	xhr5.send();
+	
+}
+function callback1(){
+	if(xhr5.readyState==4 && xhr5.status==200){
+		var result=xhr5.responseText;
+		var json=eval('('+result+')');
+		var itemSpan=document.getElementById("itemSpan");
+		console.log(json.using);
+		if(json.using==true){
+			itemSpan.innerHTML="상품등록불가 : 중복된 상품명입니다.";
+			return false;
+		}else{
+			itemSpan.innerHTML="등록가능한 상품명입니다.";
+		}
+	}
+}
+function subm(){
+	alert("상품등록완료");
+}
+
 </script>
-<form method="post" action="<c:url value='/item?cmd=itemInsert'/>" enctype="multipart/form-data">
+
+<form onsubmit="subm()" method="post" action="<c:url value='/item?cmd=itemInsert'/>" enctype="multipart/form-data">
 	<input type="hidden" name="fieldnum" id="fieldnum">
 	<h2>상품관리 > 상품등록</h2><br>
 	<!-- 기본정보/상품명/상세설명 -->
@@ -183,7 +212,10 @@ function file_change2(file2){
 				<tbody>
 					<tr>
 						<th scope="row">상품명</th>
-						<td><input type="text" name="item_name"  placeholder="예시) 18k 1g 정수 심플링 반지" style="width: 340px;"></td>
+						<td>
+							<input type="text" name="item_name"  placeholder="예시) 18k 1g 정수 심플링 반지" style="width: 340px;" onkeyup="itemcheck()">
+							<span id="itemSpan" style="font-size: 12px;color:red"></span>
+						</td>
 					</tr>
 					<tr>
 						<th scope="row">수량</th>

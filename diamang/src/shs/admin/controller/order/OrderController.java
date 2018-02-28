@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import shs.admin.dao.order.OrderCancelDao;
 import shs.admin.dao.order.PrepareproductDao;
@@ -24,28 +25,43 @@ public class OrderController extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		String cmd = req.getParameter("cmd");
-		if(cmd.equals("prepareproduct")) {			
-			resp.sendRedirect(req.getContextPath()+"/admin/order/prepareproduct.jsp");			
-		} else if(cmd.equals("shippedend")) {
-			resp.sendRedirect(req.getContextPath()+"/admin/order/shippedend.jsp");
-		} else if(cmd.equals("shippedcomplete")) {
-			resp.sendRedirect(req.getContextPath()+"/admin/order/shippedcomplete.jsp");
-		} else if(cmd.equals("ordercancel")) {
-			resp.sendRedirect(req.getContextPath()+"/admin/order/ordercancel.jsp");
-		} else if(cmd.equals("prepsearch")) {
-			prepSearch(req,resp);
-		} else if(cmd.equals("uptShippedend")) {
-			uptShippedend(req,resp);
-		} else if(cmd.equals("uptShippedCAN")) {
-			uptShippedCAN(req,resp);
-		} else if(cmd.equals("shippedendSearch")) {
-			shippedendSearch(req,resp);
-		} else if(cmd.equals("shippedCompleteSearch")) {
-			shippedCompleteSearch(req,resp);
-		} else if(cmd.equals("orderCANSearch")) {
-			orderCANSearch(req,resp);
-		}
+		HttpSession session = req.getSession();
+		String id = (String)session.getAttribute("id");
+		if(id==null) {
+			req.setAttribute("errMsg", "로그인 후 이용가능합니다.");
+			req.getRequestDispatcher("/admin/layout_kms.jsp?page=page/home_kms.jsp").forward(req, resp);
 		
+		}else {
+			if(cmd.equals("prepareproduct")) {			
+				resp.sendRedirect(req.getContextPath()+"/admin/layout_kms.jsp?page=order/prepareproduct.jsp");			
+			} else if(cmd.equals("shippedend")) {
+				resp.sendRedirect(req.getContextPath()+"/admin/layout_kms.jsp?page=order/shippedend.jsp");
+			
+			} else if(cmd.equals("shippedcomplete")) {
+				resp.sendRedirect(req.getContextPath()+"/admin/layout_kms.jsp?page=order/shippedcomplete.jsp");
+			
+			} else if(cmd.equals("ordercancel")) {
+				resp.sendRedirect(req.getContextPath()+"/admin/layout_kms.jsp?page=order/ordercancel.jsp");
+			
+			} else if(cmd.equals("prepsearch")) {
+				prepSearch(req,resp);
+			
+			} else if(cmd.equals("uptShippedend")) {
+				uptShippedend(req,resp);
+			
+			} else if(cmd.equals("uptShippedCAN")) {
+				uptShippedCAN(req,resp);
+			
+			} else if(cmd.equals("shippedendSearch")) {
+				shippedendSearch(req,resp);
+			
+			} else if(cmd.equals("shippedCompleteSearch")) {
+				shippedCompleteSearch(req,resp);
+			
+			} else if(cmd.equals("orderCANSearch")) {
+				orderCANSearch(req,resp);
+			}
+		}
 	}		
 
 	private void uptShippedCAN(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

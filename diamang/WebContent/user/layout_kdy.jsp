@@ -11,7 +11,7 @@
 <body>
 <div id="wrap">
 	 
-	<div id="ad">
+	<!--<div id="ad">
 	<input type="button" value="▲" id="butten1" name="up">
 		<div id="ad1">
 		<p>이곳은 사이드바 1</p>
@@ -23,7 +23,7 @@
 		<p>이곳은 사이드바 3</p>
 		</div>
 	<input type="button" value="▼" id="butten2" name="up"> 
-	</div>
+	</div> -->
 
 	<div id="header">
 		<jsp:include page="page/header_kdy.jsp"></jsp:include>

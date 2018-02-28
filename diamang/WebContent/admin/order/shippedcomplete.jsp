@@ -3,11 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+
 <script type="text/javascript">
 	window.onload = function(){
 		if(!("${msg}"==="")){
@@ -52,8 +48,8 @@
 		location.href=url;
 	}	
 </script>
-</head>
-<body>
+
+
 	<form method="post" action="<%=request.getContextPath()%>/admin/order.do?cmd=shippedCompleteSearch">
 		<table>
 			<tbody>
@@ -81,7 +77,7 @@
 			</tbody>
 		</table>
 		<div>
-			<input type="submit" value="검색"><input type="reset"
+			<input class="basicbtn" type="submit" value="검색"><input class="basicbtn" type="reset"
 				value="초기화">
 		</div>
 	</form>
@@ -162,5 +158,3 @@
 	<li>이 화면은 도움말입니다. 나중에 내용을 적어넣어봐요.</li>
 </ul>
 </div>
-</body>
-</html>
