@@ -9,13 +9,26 @@ public class MemversVo {
 	private String email;
 	private String address;
 	private String phone;
-	private String gNum;
+	private String gnum; 
 	private String joindate;
-	
+	private String grade;
+
 	public MemversVo () {}
+
+	@Override
+	public String toString() {
+		return "MemversVo [mnum=" + mnum + ", id=" + id + ", pwd=" + pwd + ", name=" + name + ", birthday=" + birthday
+				+ ", email=" + email + ", address=" + address + ", phone=" + phone + ", gnum=" + gnum + ", joindate="
+				+ joindate + ", grade=" + grade + "]";
+	}
 	
+	
+	
+	
+
+
 	public MemversVo(int mnum, String id, String pwd, String name, String birthday, String email, String address,
-			String phone, String gNum, String joindate) {
+			String phone, String gNum, String joindate,String grade) {
 		super();
 		this.mnum = mnum;
 		this.id = id;
@@ -25,8 +38,9 @@ public class MemversVo {
 		this.email = email;
 		this.address = address;
 		this.phone = phone;
-		this.gNum = gNum;
+		this.gnum = gNum;
 		this.joindate = joindate;
+		this.grade=grade;
 	}
 	public int getMnum() {
 		return mnum;
@@ -76,12 +90,6 @@ public class MemversVo {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getGNum() {
-		return gNum;
-	}
-	public void setGNum(String gNum) {
-		this.gNum = gNum;
-	}
 
 	public String getJoindate() {
 		return joindate;
@@ -89,8 +97,20 @@ public class MemversVo {
 	public void setJoindate(String joindate) {
 		this.joindate = joindate;
 	}
-	
-	
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+	public String getGnum() {
+		return gnum;
+	}
+	public void setGnum(String gnum) {
+		this.gnum = gnum;
+	}
+
 	
 	
 }
