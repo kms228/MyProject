@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import diamang.dbcp.DbcpBean;
 import user.vo.BuyBoardVo_kdy;
+import user.vo.GradeVo_kdy;
 import user.vo.MembersVo_kdy;
 import user.vo.RvBoardVo_kdy;
 
@@ -94,6 +95,34 @@ public class MembersDao_kdy {
 					int accprice = rs.getInt("accprice");
 					int drate = rs.getInt("drate");
 					BuyBoardVo_kdy vo=new BuyBoardVo_kdy(buy_num,mnum,buy_date,state,addr,caddr,accprice,drate);
+					return vo;
+				}else {
+					return null;
+				}
+			}catch (SQLException se) {
+				System.out.println(se.getMessage());
+				return null;
+			}finally {
+				DbcpBean.closeConn(con,pstmt,rs);
+			}
+		}
+		
+		//gnum으로 grade 정보 조회
+		public GradeVo_kdy gradeInfo(int gnum) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				con = DbcpBean.getConn();
+				String sql = "select * from grade where gnum=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, gnum);
+				rs= pstmt.executeQuery();
+				if(rs.next()) {
+					String grade = rs.getString("grade");
+					int drate = rs.getInt("drate");
+					GradeVo_kdy vo=new GradeVo_kdy(gnum, grade, drate);
 					return vo;
 				}else {
 					return null;

@@ -24,6 +24,7 @@ CREATE TABLE buyboard
 	mnum number NOT NULL CONSTRAINT FK_buyboard REFERENCES members(mnum) on delete cascade,
 	buy_date date NOT NULL,
 	state varchar2(20),
+	name varchar2(30) NOT NULL,
 	addr nvarchar2(120),
 	caddr varchar2(45),
 	accprice number,

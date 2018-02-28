@@ -16,6 +16,7 @@
 		
 	</div>
 	<div id="orderInfo">
+	<form method="post" action="<%=request.getContextPath()%>/order.do?cmd=orderCheck">
 		<div style="width:50%;float:left;">
 		<div id="box">
 			<div>
@@ -25,16 +26,20 @@
 				가격 : ${vo.price }
 			</div>
 			<div>
-			<input type="number" value="1" step="1" min="1" max="1000" name="number">
+			
+			<input type="number" value="1" step="1" min="1" max="1000" name="amount">
 			</div>
 		</div>
 		</div>
 		<div style="float:left;position:relative;margin-top:100px;">
-		<form method="post" action="<%=request.getContextPath()%>/order.do">
+		
 		<input type="hidden" value="${vo.pnum }" name="pnum">
+		<input type="hidden" value="${vo.savename }" name="savename">
+		<input type="hidden" value="${vo.item_name }" name="item_name">
+		<input type="hidden" value="${vo.price }" name="price">
 		<input type="submit" value="구매하기"><input type="button" value="장바구니">
-		</form>
 		</div>
+		</form>
 	</div>
 </div>
 <div id="detail">
