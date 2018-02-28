@@ -68,7 +68,7 @@ var page = function(num){
 	<tfoot>
 	<tr>
 		<td colspan="4">
-		<input type="submit" value="검색" class="basicbtn">
+		<input class="basicbtn" type="submit" value="검색" class="basicbtn">
 		</td>
 	</tr>
 	
