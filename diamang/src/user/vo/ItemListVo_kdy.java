@@ -10,6 +10,7 @@ public class ItemListVo_kdy {
 	private int stock;
 	private int fieldnum;
 	private String savename;
+	private String detailImg;
 	
 	public ItemListVo_kdy() {}
 
@@ -21,6 +22,17 @@ public class ItemListVo_kdy {
 		this.regdate = regdate;
 		this.stock = stock;
 		this.savename=savename;
+	}
+	
+	public ItemListVo_kdy(int pnum, String item_name, int price, Date regdate, int stock, String savename, String detailImg) {
+		super();
+		this.pnum = pnum;
+		this.item_name = item_name;
+		this.price = price;
+		this.regdate = regdate;
+		this.stock = stock;
+		this.savename=savename;
+		this.detailImg=detailImg;
 	}
 
 	public int getPnum() {
@@ -78,4 +90,13 @@ public class ItemListVo_kdy {
 	public void setSavename(String savename) {
 		this.savename = savename;
 	}
+	
+	public String getDetailImg() {
+		return detailImg;
+	}
+
+	public void setDetailImg(String detailImg) {
+		this.detailImg=detailImg;
+	}
+	
 }

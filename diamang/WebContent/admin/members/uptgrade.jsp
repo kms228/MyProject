@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/admin/css/common_kms.css?ver=1">
 </head>
 <script type="text/javascript">
 	window.onload = function(){
@@ -28,7 +29,7 @@
 			<th>할인율</th><td><input type="text" size="15" name="drate" value="${grade.drate }"></td>
 		</tr>
 	</table>
-	<input type="submit" value="등급수정"><input type="button"  onclick="self.close()" value="닫기">
+	<input class="basicbtn" type="submit" value="등급수정"><input class="basicbtn" type="button"  onclick="self.close()" value="닫기">
 	</form>	
 </body>
 </html>
