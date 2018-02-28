@@ -13,7 +13,7 @@ public class PagingBot {
 		this.currentPageVolume = currentPageVolume;
 	}	
 	//페이징
-	public PagingVo calPaging(String pageNum, int boardCount) {//pageNum: 해당 페이지. rowCount: 게시판의 글 개수.
+	public PagingVo calPaging(String pageNum, int boardCount) {//pageNum: 해당 페이지. boardCount: 게시판의 모든 글 개수.
 		//파라미터로 pageNum을 받았다면 대입함.
 		int integerPageNum = 1;
 		if(pageNum != null) {

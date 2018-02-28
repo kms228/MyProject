@@ -10,16 +10,16 @@
 		var msg = "${msg}";
 		if(!(msg==="")){
 			self.close();
-			var url = "<%=request.getContextPath()%>/admin/board.do?cmd=boardreview";
+			var url = "<%=request.getContextPath()%>/admin/board.do?cmd=boardqna";
 			window.opener.location.href=url;
 		}		
 	}
 </script>
 </head>
 <body>
-<form method="post"  action="<%=request.getContextPath()%>/admin/board.do?cmd=fillupReview">
-<input type="hidden" name="ref" value="${param.ref }">
-<input type="hidden" name="rv_num" value="${param.rv_num }">
+<form method="post"  action="<%=request.getContextPath()%>/admin/board.do?cmd=fillupQna">
+<input type="hidden" name="refer" value="${param.refer }">
+<input type="hidden" name="qnum" value="${param.qnum }">
 <input type="hidden" name="lev" value="${param.lev }">
 <input type="hidden" name="step" value="${param.step }">
 <table>
@@ -29,9 +29,6 @@
 	</tr>
 	<tr>
 		<th>내용</th><td><textarea rows="15" cols="40" name="content"></textarea></td>
-	</tr>
-	<tr>
-		<th>비밀번호</th><td><input type="password" size="30" name="pwd"></td>
 	</tr>
 	</tbody>
 	<tfoot>

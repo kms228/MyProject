@@ -10,10 +10,30 @@ import shs.admin.etc.PagingBot;
 import shs.admin.vo.paging.PagingVo;
 
 public class BoardqnaTest {
+	public BoardqnaTest() {}	
 	private BoardqnaDao dao;
 	
+//	@BeforeClass
+//	public static void setUpClass() {
+//		try {
+//			System.setProperty(Context.INITIAL_CONTEXT_FACTORY, 
+//					"org.apache.naming.java.JavaURLContextFactory");
+//			System.setProperty(Context.URL_PKG_PREFIXES, 
+//					"org.apache.naming");
+//			InitialContext ic = new InitialContext();
+//			
+//			ic.createSubcontext("java:");
+//			ic.createSubcontext("java:/comp");
+//			ic.createSubcontext("java:/comp/env");
+//			ic.createSubcontext("java:/comp/env/jdbc");
+//			
+//			ic.bind("java:/comp/env/jdbc/myoracle",DbcpBean.ds);						
+//		} catch (NamingException ex) {
+//			ex.getMessage();
+//		}		
+//	}
 	@Before
-	public void setUp() {				
+	public void setDao() {
 		dao = new BoardqnaDao();
 	}
 	@Test

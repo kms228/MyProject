@@ -16,6 +16,7 @@ public class BoardReviewVo {
 	private String id;
 	private String item_name;
 	private int rvcnt;
+	private String pwd;
 	
 	//constructor
 	public BoardReviewVo() {}
@@ -37,9 +38,10 @@ public class BoardReviewVo {
 		this.item_name =item_name;
 		this.rvcnt = rvcnt;
 	}			
-	public BoardReviewVo(int rv_num, String title, String regdate, int hit, int star, String savename,String id, String item_name, int rvcnt, int ref, int lev, int step) {
+	public BoardReviewVo(int rv_num, String title, String content, String regdate, int hit, int star, String savename,String id, String item_name, int rvcnt, int ref, int lev, int step) {
 		this.rv_num = rv_num;
 		this.title = title;
+		this.content = content;
 		this.regdate = regdate;
 		this.hit = hit;
 		this.star = star;
@@ -51,7 +53,7 @@ public class BoardReviewVo {
 		this.lev = lev;
 		this.step = step;
 	}	
-	public BoardReviewVo(int rv_num, String title, String regdate, String content, int hit, int star, String savename,String id, String item_name, int rvcnt, int ref, int lev, int step) {
+	public BoardReviewVo(int rv_num, String title, String regdate, String content, int hit, int star, String savename,String id, String item_name, int rvcnt, int ref, int lev, int step, String pwd) {
 		this.rv_num = rv_num;
 		this.title = title;
 		this.regdate = regdate;
@@ -65,6 +67,7 @@ public class BoardReviewVo {
 		this.ref = ref;
 		this.lev = lev;
 		this.step = step;
+		this.pwd = pwd;
 	}
 	public BoardReviewVo(int rv_num, String title, int hit) {
 		this.rv_num = rv_num;
@@ -171,6 +174,12 @@ public class BoardReviewVo {
 
 	public void setRvcnt(int rvcnt) {
 		this.rvcnt = rvcnt;
+	}
+	public String getPwd() {
+		return pwd;
+	}
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}	
 	
 }

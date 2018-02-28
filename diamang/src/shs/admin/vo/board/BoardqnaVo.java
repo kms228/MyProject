@@ -10,10 +10,12 @@ public class BoardqnaVo {
 	private int refer;
 	private int lev;
 	private int step;
+	private String id;
+	private int qcnt;
 	
 	public BoardqnaVo() {};
 	public BoardqnaVo(int mnum, int qnum, String title, String content, String regdate, int hit, int refer, int lev,
-			int step) {
+			int step, String id, int qcnt) {
 		this.mnum = mnum;
 		this.qnum = qnum;
 		this.title = title;
@@ -23,8 +25,17 @@ public class BoardqnaVo {
 		this.refer = refer;
 		this.lev = lev;
 		this.step = step;
+		this.id = id;
+		this.qcnt = qcnt;
+	}		
+	public BoardqnaVo(int mnum, String title, String content, int refer, int lev, int step) {
+		this.mnum = mnum;
+		this.title = title;
+		this.content = content;
+		this.refer = refer;
+		this.lev = lev;
+		this.step = step;
 	}
-	
 	public int getMnum() {
 		return mnum;
 	}
@@ -78,5 +89,18 @@ public class BoardqnaVo {
 	}
 	public void setStep(int step) {
 		this.step = step;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public int getQcnt() {
+		return qcnt;
+	}
+	public void setQcnt(int qcnt) {
+		this.qcnt = qcnt;
 	}	
+	
 }
