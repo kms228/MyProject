@@ -1,12 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
+
 <script type="text/javascript">
 window.onload = function(){
 	/* if(!("${msg}"==="")){
@@ -46,7 +41,7 @@ var page = function(num){
 	location.href=url;
 }
 </script>
-<body>
+
 <h1>회원정보 조회</h1>
 <h2>검색조건설정</h2>
 <form method="post" action="<%=request.getContextPath()%>/admin/members.do?cmd=infosearch">
@@ -73,7 +68,7 @@ var page = function(num){
 	<tfoot>
 	<tr>
 		<td colspan="4">
-		<input type="submit" value="검색">
+		<input class="basicbtn" type="submit" value="검색" class="basicbtn">
 		</td>
 	</tr>
 	
@@ -132,5 +127,3 @@ var page = function(num){
 	<li>아래 화면은 도움말입니다. 나중에 내용을 적어넣어봐요.</li>
 	<li>아래 화면은 도움말입니다. 나중에 내용을 적어넣어봐요.</li>
 </ul>
-</body>
-</html>

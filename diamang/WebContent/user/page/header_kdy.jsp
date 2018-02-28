@@ -31,10 +31,10 @@
 </div>
 <div id="mainmenu">
 <ul>
-	<li><a href="<%=request.getContextPath()%>/itemList.do?cmd=earing">귀걸이</a></li>
-	<li><a href="">목걸이</a></li>
-	<li><a href="">반지</a></li>
-	<li><a href="">커플</a></li>
+	<li><a href="<%=request.getContextPath()%>/itemList.do?cmd=earring">귀걸이</a></li>
+	<li><a href="<%=request.getContextPath()%>/itemList.do?cmd=necklace">목걸이</a></li>
+	<li><a href="<%=request.getContextPath()%>/itemList.do?cmd=ring">반지</a></li>
+	<li><a href="<%=request.getContextPath()%>/itemList.do?cmd=couple">커플</a></li>
 	<li><a href="<%=request.getContextPath() %>/review_list.do">리뷰</a></li>
 </ul>
 	<br>

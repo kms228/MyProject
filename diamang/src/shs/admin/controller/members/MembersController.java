@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import shs.admin.dao.members.MembersgradeDao;
 import shs.admin.dao.members.MembersinfoDao;
@@ -26,27 +27,34 @@ public class MembersController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {		
 		req.setCharacterEncoding("utf-8");
-		String cmd = req.getParameter("cmd");
-		System.out.println("cmd :"+cmd);
-		if(cmd.equals("membersmain")) {			
-			goMain(req,resp);
-		} else if(cmd.equals("membersgrade")) {
-			goGrade(req,resp);
-		} else if(cmd.equals("membersinfo")) {
-			goSearch(req,resp);
-		} else if(cmd.equals("infosearch")) {
-			infoSearch(req,resp);
-		} else if(cmd.equals("goupdate")) {
-			goGradeupdate(req,resp);
-		} else if(cmd.equals("updateGrade")) {
-			updateGrade(req,resp);
-		} else if(cmd.equals("addgrade")) {
-			addGrade(req,resp);			
-		} else if(cmd.equals("defaultGrade")) {
-			String gnum = req.getParameter("gnum");
-			String realPath = getServletContext().getRealPath("");
-			DefaultGrade.setDefaultGrade(gnum, realPath);
-			goGrade(req, resp);
+		HttpSession session = req.getSession();
+		String id = (String)session.getAttribute("id");
+		if(id==null) {
+			req.setAttribute("errMsg", "로그인 후 이용가능합니다.");
+			req.getRequestDispatcher("/admin/layout_kms.jsp?page=page/home_kms.jsp").forward(req, resp);
+		}else {
+			String cmd = req.getParameter("cmd");
+			System.out.println("cmd :"+cmd);
+			if(cmd.equals("membersmain")) {			
+				goMain(req,resp);//
+			} else if(cmd.equals("membersgrade")) {
+				goGrade(req,resp);//
+			} else if(cmd.equals("membersinfo")) {
+				goSearch(req,resp);//
+			} else if(cmd.equals("infosearch")) {
+				infoSearch(req,resp);
+			} else if(cmd.equals("goupdate")) {
+				goGradeupdate(req,resp);
+			} else if(cmd.equals("updateGrade")) {
+				updateGrade(req,resp);
+			} else if(cmd.equals("addgrade")) {
+				addGrade(req,resp);			
+			} else if(cmd.equals("defaultGrade")) {
+				String gnum = req.getParameter("gnum");
+				String realPath = getServletContext().getRealPath("");
+				DefaultGrade.setDefaultGrade(gnum, realPath);
+				goGrade(req, resp);
+			}
 		}
 	}					
 	//membersinfo.jsp
@@ -54,7 +62,8 @@ public class MembersController extends HttpServlet{
 		MembersinfoDao dao = new MembersinfoDao();
 		ArrayList<MembersgradeVo> grade = dao.getGrade();		
 		req.setAttribute("grade", grade);		
-		req.getRequestDispatcher("/admin/members/membersinfo.jsp").forward(req, resp);
+		req.getRequestDispatcher("/admin/layout_kms.jsp?page=members/membersinfo.jsp").forward(req, resp);
+		
 	}
 	private void infoSearch(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String optName = req.getParameter("optName");
@@ -81,7 +90,7 @@ public class MembersController extends HttpServlet{
 		req.setAttribute("vo1", vo1);
 		req.setAttribute("list", list);
 		
-		req.getRequestDispatcher("/admin/members/membersmain.jsp").forward(req, resp);
+		req.getRequestDispatcher("/admin/layout_kms.jsp?page=members/membersmain.jsp").forward(req, resp);
 	}
 	//membersgrade.jsp
 	private void goGrade(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -90,7 +99,7 @@ public class MembersController extends HttpServlet{
 		ArrayList<MembersgradeVo> list = dao.getGradeinfo();
 		req.setAttribute("list", list);
 		req.setAttribute("defaultGnum", DefaultGrade.GNUM);
-		req.getRequestDispatcher("/admin/members/membersgrade.jsp").forward(req, resp);
+		req.getRequestDispatcher("/admin/layout_kms.jsp?page=members/membersgrade.jsp").forward(req, resp);
 	}
 	private void goGradeupdate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {		
 		String gnum = req.getParameter("gnum");
