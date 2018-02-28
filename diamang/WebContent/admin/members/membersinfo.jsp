@@ -42,13 +42,24 @@ var page = function(num){
 }
 </script>
 
-<h1>회원정보 조회</h1>
-<h2>검색조건설정</h2>
+<h2>회원관리 > 회원정보 조회</h2><br>
+<div class="sectionBar">
+	<h3>검색조건설정</h3>
+</div>
 <form method="post" action="<%=request.getContextPath()%>/admin/members.do?cmd=infosearch">
-<table border="1" width="100%">
+<table border="1" class="mem2">
 	<tbody>
 	<tr>
-		<th>개인정보</th><td><select id="optName" name="optName"><option value="">전체<option value="id" id="id">아이디</option><option value="name" id="name">이름</option><option value="email" id="email">이메일</option></select>&nbsp;&nbsp;<input type="text" id="optValue" name="optValue" value="${search.optValue }"></td>
+		<th>개인정보</th>
+		<td>
+			<select id="optName" name="optName">
+				<option value="">전체</option>
+				<option value="id" id="id">아이디</option>
+				<option value="name" id="name">이름</option>
+				<option value="email" id="email">이메일</option>
+			</select>&nbsp;&nbsp;
+			<input type="text" id="optValue" name="optValue" value="${search.optValue }">
+		</td>
 	</tr>
 	<tr>
 		<th>회원등급</th>
@@ -56,7 +67,7 @@ var page = function(num){
 			<select id="grade" name="grade"> <!-- document.getElementById("grade").value; -->
 				<option value="">전체</option>
 				<c:forEach var="vo" items="${grade }">				
-				<option value="${vo.gnum }" id="${vo.gnum }">${vo.grade }</option>
+					<option value="${vo.gnum }" id="${vo.gnum }">${vo.grade }</option>
 				</c:forEach>
 			</select>
 		</td>
@@ -65,18 +76,18 @@ var page = function(num){
 		<th>주문상품</th><td><input type="text" name="good"><input type="button" value="상품검색" id="good"></td>
 	</tr> -->
 	</tbody>
-	<tfoot>
-	<tr>
-		<td colspan="4">
-		<input class="basicbtn" type="submit" value="검색" class="basicbtn">
-		</td>
-	</tr>
-	
-	</tfoot>	
 </table>
+<br>
+<div align="center">
+	<input class="basicbtn" type="submit" value="검색" class="basicbtn">
+</div>
+<br>
 </form>
-<h2>회원목록</h2>
-<table border="1" width="100%">
+<div class="sectionBar">
+	
+	<h3>회원목록</h3>
+</div>
+<table border="1" class="mem">
 	<thead>
 		<tr>
 			<th>가입일</th><th>이름</th><th>아이디</th><th>등급</th><th>전화번호</th><th>이메일</th><th>주소</th>
@@ -92,7 +103,7 @@ var page = function(num){
 </table>
 <!-- 페이징처리 -->
 <c:if test="${pageVo!=null }">
-<div>
+<div align="center">
 	<c:choose>
 		<c:when test="${pageVo.startPage>pageVo.currentPageVolume }">
 			<a href="javascript:page(${pageVo.startPage-1})">[이전]</a>

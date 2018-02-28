@@ -105,7 +105,7 @@ public class OrderController extends HttpServlet{
 			req.setAttribute("list", list);
 			req.setAttribute("pageVo", pageVo);
 		}
-		req.getRequestDispatcher("/admin/order/prepareproduct.jsp").forward(req, resp);
+		req.getRequestDispatcher("/admin/layout_kms.jsp?page=order/prepareproduct.jsp").forward(req, resp);
 	}
 	private void shippedendSearch(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String optName = req.getParameter("optName");
@@ -123,7 +123,7 @@ public class OrderController extends HttpServlet{
 			req.setAttribute("list", list);
 			req.setAttribute("pageVo", pageVo);
 		}		
-		req.getRequestDispatcher("/admin/order/shippedend.jsp").forward(req, resp);
+		req.getRequestDispatcher("/admin/layout_kms.jsp?page=order/shippedend.jsp").forward(req, resp);
 	}
 	private void shippedCompleteSearch(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String optName = req.getParameter("optName");
@@ -141,7 +141,7 @@ public class OrderController extends HttpServlet{
 			req.setAttribute("list", list);
 			req.setAttribute("pageVo", pageVo);
 		}		
-		req.getRequestDispatcher("/admin/order/shippedcomplete.jsp").forward(req, resp);
+		req.getRequestDispatcher("/admin/layout_kms.jsp?page=order/shippedcomplete.jsp").forward(req, resp);
 	}
 	
 	private void orderCANSearch(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {	
@@ -155,6 +155,7 @@ public class OrderController extends HttpServlet{
 			req.setAttribute("list", list);
 			req.setAttribute("pageVo", pageVo);
 		}
-		req.getRequestDispatcher("/admin/order/ordercancel.jsp").forward(req, resp);
+		req.getRequestDispatcher("/admin/layout_kms.jsp?page=order/ordercancel.jsp").forward(req, resp);
 	}
+	
 }
