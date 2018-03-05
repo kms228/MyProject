@@ -18,7 +18,7 @@ public class BoardqnaDao {
 		ResultSet rs = null;
 		try {
 			con = DbcpBean.getConn();
-			String sql = "SELECT NVL(COUNT(*),0) CNT FROM QNA WHERE MNUM != 10000 AND REGDATE >= SYSDATE -5";
+			String sql = "SELECT NVL(COUNT(*),0) CNT FROM QNA WHERE MNUM != 10000 AND REGDATE >= SYSDATE -20";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			rs.next();
@@ -44,7 +44,7 @@ public class BoardqnaDao {
 					"                                    FROM QNA Q1, QNA Q2 " + 
 					"                                    WHERE Q1.QNUM = Q2.REFER AND Q2.MNUM = 10000 " + 
 					"                                    GROUP BY Q1.QNUM) Q3 " + 
-					"            WHERE Q.MNUM = M.MNUM AND Q.QNUM=Q3.QNUM(+) AND Q.MNUM != 10000 AND REGDATE >= SYSDATE -5 " + 
+					"            WHERE Q.MNUM = M.MNUM AND Q.QNUM=Q3.QNUM(+) AND Q.MNUM != 10000 AND REGDATE >= SYSDATE -20 " + 
 					"            ORDER BY REFER DESC, STEP ASC) QNA " + 
 					"      ) " + 
 					"WHERE RNUM >=? AND RNUM <=?";
