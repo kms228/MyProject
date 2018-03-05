@@ -23,7 +23,7 @@
 		border-collapse : collapse;
 		width : 100%;
 	}
-	table tr:hover{background-color: #f5f5f5;}
+	table tr:hover{background-color: #0000ff57;}
 	
 	table, td, th {
 		border : 1px solid gray;		
