@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 <style type="text/css">
 	/* .row {		
 		width : 100%;
@@ -35,7 +30,7 @@
 	}	
 	table th {
 		height : 40px;
-		background-color: #4CAF50;
+		background-color: #0000ff57;
 		color : white;			
 	}	
 }
@@ -65,11 +60,12 @@
 		location.href=url;
 	} */
 </script>
-</head>
-<body>
-<h1>QNA게시판 관리</h1>
+<h2>게시판관리 > QNA게시판 관리</h2><br>
 <div>
-<h2>게시물 관리</h2>
+<div class="sectionBar"><br>
+	<h3>게시물 관리</h3>
+</div>
+
 <table>
 	<thead>
 	<tr>
@@ -137,5 +133,3 @@
 	<li>이 화면은 도움말입니다. 나중에 내용을 적어넣어봐요.</li>
 	<li>이 화면은 도움말입니다. 나중에 내용을 적어넣어봐요.</li>
 </ul>
-</body>
-</html>
