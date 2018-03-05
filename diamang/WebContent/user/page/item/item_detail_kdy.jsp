@@ -10,13 +10,28 @@
 	#box div{border-bottom: 1px dotted gray;width:300px;margin:10px;padding-bottom:10px;}
 	#detail img{margin:auto;}
 </style>
+<script>
+	function order(){
+		var frm = document.form;
+		frm.method="post";
+		frm.action="<%=request.getContextPath()%>/order.do?cmd=orderCheck";
+		frm.submit();
+	}
+	
+	function cart(){
+		var frm = document.form;
+		frm.method="post";
+		frm.action="<%=request.getContextPath()%>/cart.do?cmd=cartCheck";
+		frm.submit();
+	}
+</script>
 <div id="item_main">
 	<div id="imgInfo">
 		<img src="<%=request.getContextPath() %>/admin/upload/${vo.savename}" style="width:400px;" alt="대표이미지">
 		
 	</div>
 	<div id="orderInfo">
-	<form method="post" action="<%=request.getContextPath()%>/order.do?cmd=orderCheck">
+	<form method="post" action="<%=request.getContextPath()%>/order.do?cmd=orderCheck" name="form">
 		<div style="width:50%;float:left;">
 		<div id="box">
 			<div>
@@ -37,7 +52,7 @@
 		<input type="hidden" value="${vo.savename }" name="savename">
 		<input type="hidden" value="${vo.item_name }" name="item_name">
 		<input type="hidden" value="${vo.price }" name="price">
-		<input type="submit" value="구매하기"><input type="button" value="장바구니">
+		<input type="button" value="구매하기" onclick="order()"><input type="button" value="장바구니" onclick="cart()">
 		</div>
 		</form>
 	</div>
