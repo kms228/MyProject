@@ -12,6 +12,7 @@ import user.vo.ItemListVo_kdy;
 
 public class ItemDao_kdy {
 	
+	//pnum으로 상품 정보 조회
 	public ItemListVo_kdy itemDetail(int pnum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;

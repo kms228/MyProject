@@ -146,7 +146,13 @@ public class ItemListController_kdy extends HttpServlet {
 			req.setAttribute("item_num", item_num);
 			req.setAttribute("item", cmd);
 			itemList(req,resp);
+		}else if(cmd.equals("main")) {
+			
 		}
+	}
+	
+	private void mainList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 	}
 	
 	private void itemList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

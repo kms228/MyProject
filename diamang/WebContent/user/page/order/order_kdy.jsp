@@ -27,7 +27,7 @@
 <div id="orderInfo">
 	<table>
 		<tr>
-			<th>이미지</th><th style="width:500px;">상품명</th><th>판매가</th><th>회원등급</th><th>수량</th><th>배송비</th><th>합계</th>
+			<th>이미지</th><th style="width:500px;">상품명</th><th>판매가</th><th>회원등급</th><th>수량</th><th>합계</th>
 		</tr>
 		<tr>
 			<td colspan="7"><hr></td>
@@ -40,10 +40,13 @@
 			<td>${vo.price }원</td>
 			<td>${vo.grade }</td>
 			<td>${vo.amount }</td>
-			<td>3000원</td>
 			<td>${vo.total }원</td>
 		</tr>
 		<tr><td colspan="7"><hr style="color: gray;"></td></tr>
+		<c:set var="list" value="${list }" scope="request" /> 
+		<input type="hidden" value="${vo.pnum }" name="pnum">
+		<input type="hidden" value="${vo.amount }" name="amount">
+		<input type="hidden" value="${vo.total }" name="price">
 		</c:forEach>
 	</table>
 </div>
@@ -108,7 +111,6 @@
 <input type="hidden" value="${mem.mnum }" name="mnum">
 <input type="hidden" value="${grade.drate }" name="drate">
 <input type="hidden" value="${list }" name="list">
-<c:set var="list" value="${list}" scope="request"/>
 
 <div id="button">
 <input type="submit" value="결제하기">
