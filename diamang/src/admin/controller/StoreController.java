@@ -46,6 +46,9 @@ public class StoreController extends HttpServlet {
 			
 			}else if(cmd.equals("del")) {
 				del(request,response);
+			}else if(cmd.equals("getlist2")) {
+				getlist2(request,response);
+				
 			}
 		}
 	}
@@ -96,6 +99,14 @@ public class StoreController extends HttpServlet {
 		infoList = dao.getInfo();
 		request.setAttribute("list", infoList);
 		request.getRequestDispatcher("/admin/layout_kms.jsp?page=store/basicInfo.jsp").forward(request, response);
+	}
+	
+	private void getlist2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ArrayList<BasicInfoVo> infoList2 = new ArrayList<>();
+		BasicInfoDao dao = BasicInfoDao.getInstance();
+		infoList2 = dao.getInfo();
+		request.setAttribute("list2", infoList2);
+		request.getRequestDispatcher("/user/page/footer_kdy.jsp").forward(request, response);
 	}
 	
 	private void storeMenu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

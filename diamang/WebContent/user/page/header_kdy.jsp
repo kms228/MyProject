@@ -20,13 +20,12 @@
 		</c:otherwise>
 	</c:choose>
 		<li><a href="<%=request.getContextPath()%>/move.do?cmd=join">회원가입</a></li>
-		<li><a href="">주문/배송 조회</a></li>
+		<li><a href="<%=request.getContextPath()%>/order.do?cmd=orderList">주문/배송 조회</a></li>
 		<li><a href="<%=request.getContextPath()%>/cart.do?cmd=cartList">장바구니</a></li>
-		
 	</ul>
 </div>
 <div>
-	<a href="<%=request.getContextPath()%>/move.do?cmd=main">
+	<a href="<%=request.getContextPath()%>/main.do">
 	<img src="<%=request.getContextPath() %>/user/images/header.jpg" alt="jewely header" height="200px" width="300px"></a>
 </div>
 <div id="mainmenu">

@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<style>
+	#itemImg{width:50px;height:50px;}
+	td{height:50px;}
+</style>
 <div>
 <h1>REVIEW</h1>
 <hr>
@@ -14,7 +18,10 @@
 	<c:forEach var="vo" items="${list }">
 		<tr>
 			<td>${vo.rv_num }</td>
-			<td>${vo.savename }</td> <%-- 선택한 상품의 이미지 --%>
+			<td>
+			<c:if test="${vo.lev==0 }">
+				<img src="<%=request.getContextPath() %>/admin/upload/${vo.savename }" id="itemImg">
+			</c:if></td> <%-- 선택한 상품의 이미지 --%>
 			<td>
 			<c:if test="${vo.lev>0}">
 				<%-- 답글인 경우 들여쓰기 하기 --%>
@@ -32,23 +39,23 @@
 	</c:forEach>
 </table>
 <!-- 페이징 -->
-<c:forEach var="i" begin="${startPage }"  end="${endPage }">
 		<c:choose>
 			<c:when test="${startPage>10 }">
-				<a href="<%=request.getContextPath()%>/board/list.do?pageNum=${startPage-1}">이전</a>
+				<a href="<%=request.getContextPath()%>/review_list.do?pageNum=${startPage-1}">[이전]</a>
 			</c:when>
 			<c:otherwise>
 				[이전]
 			</c:otherwise>
 		</c:choose>
+	<c:forEach var="i" begin="${startPage }"  end="${endPage }">
 		<c:choose>
 			<c:when test="${pageNum==i }">
-				<a href="<%=request.getContextPath()%>/board/list.do?pageNum=${i}">
+				<a href="<%=request.getContextPath()%>/review_list.do?pageNum=${i}">
 				<span style="color:blue">[${i }]</span>
 				</a>
 			</c:when>
 			<c:otherwise>
-				<a href="<%=request.getContextPath()%>/board/list.do?pageNum=${i}">
+				<a href="<%=request.getContextPath()%>/review_list.do?pageNum=${i}">
 				<span style="color:gray">[${i }]</span>
 				</a>
 			</c:otherwise>
@@ -62,4 +69,5 @@
 			[다음]
 		</c:otherwise>
 	</c:choose>
+
 </div>

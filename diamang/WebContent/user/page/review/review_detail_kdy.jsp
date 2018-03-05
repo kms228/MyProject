@@ -6,6 +6,7 @@
 <style>
 	#iteminfo{width:100%;border:1px solid gray;}
 	#iteminfo div{display:inline-block;}
+	#img img{width:90px;height:90px}
 </style>
 <script>
 	var xhr=null;
@@ -193,6 +194,7 @@
 <div>
 	<div id="iteminfo">
 		<div id="img">
+			<img src="<%=request.getContextPath()%>/admin/upload/${vo2.savename}">
 		</div>
 			<div id="info">
 				<p>${vo2.item_name }</p>

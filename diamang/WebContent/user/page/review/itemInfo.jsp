@@ -10,6 +10,7 @@
 	#menu p{display:inline;margin:50px;}
 	#list p{display: inline-block;margin:50px;}
 	#list span{display:block;}
+	#list img{width:90px;height:90px;}
 </style>
 </head>
 <script type="text/javascript">
@@ -30,7 +31,7 @@
 		var pprice = window.opener.document.createElement("p"); //가격 들어갈 곳의 p
 		var pbutton = window.opener.document.createElement("p"); //버튼 들어갈 곳의 p
 		
-		var value= div.parentNode.parentElement.firstChild.nextSibling.innerHTML; //상품 이미지 
+		var value= div.parentNode.parentElement.firstChild.nextSibling.innerHTML; //상품 이미지
 		var value2 = div.parentNode.parentElement.firstChild.nextSibling.nextElementSibling.firstChild.innerHTML; //상품 이름
 		var value3 = div.parentNode.parentElement.firstChild.nextSibling.nextElementSibling.firstChild.nextSibling.innerHTML; //가격
 		var pnum = div.parentNode.firstChild.value; //상품 번호
@@ -66,7 +67,7 @@
 	<div id="list">
 	<c:forEach var="vo" items="${list }">
 		<div>
-		<p>${vo.savename }</p>
+		<p><img src="<%=request.getContextPath() %>/admin/upload/${vo.savename }" alt="상품이미지"></p>
 		<p><span>${vo.item_name }</span><span>${vo.price }</span></p>
 		<p><input type="hidden" value="${vo.pnum }" name="pnum">
 		<input type="button" value="선택" onclick="send(event)"></p>

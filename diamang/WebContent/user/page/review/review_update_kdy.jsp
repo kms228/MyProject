@@ -4,15 +4,21 @@
 <style>
 	#iteminfo{width:100%;border:1px solid gray;}
 	#iteminfo div{display:inline-block;}
+	#img img{width:90px;height:90px;}
 </style>
 <div>
 	<%-- 글쓰기 폼 --%>
 	<form method="post" action="<%=request.getContextPath() %>/rv_update.do?cmd=updateOk" onsubmit="return check()">
+	<div id="iteminfo">
+	<div id="img">
+		<img src="<%=request.getContextPath()%>/admin/upload/${vo2.savename}">
+	</div>
 	<div id="info">
 			<p>${vo2.item_name }</p>
 			<p>${vo2.price }</p>
 			<p><input type="button" value="상품상세보기"  onclick = "" id="button1">
 			</p>
+	</div>
 	</div>
 	<div>
 		제목<input type="text" name="title" value="${vo.title }"><br>

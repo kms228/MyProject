@@ -37,7 +37,7 @@
 	</div>
 	
 	<div id="footer">
-		<jsp:include page="page/footer_kdy.jsp"></jsp:include>	
+		<jsp:include page="page/footer_kdy.jsp"></jsp:include>
 	</div>
 </div>
 </body>

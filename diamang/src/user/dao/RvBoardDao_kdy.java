@@ -38,39 +38,7 @@ public class RvBoardDao_kdy {
 	}
 	
 	//전체 글 갯수 구하는 메소드
-	public int getCount() {
-		
-//		Connection con = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs= null;
-//		
-//		try {
-//			Class.forName("oracle.jdbc.OracleDriver");
-//			String url="jdbc:oracle:thin:@localhost:1521:xe";
-//			con=DriverManager.getConnection(url,"scott","tiger");
-//			
-//			String sql = "select NVL(count(rv_num),0) cnt from review";
-//			pstmt = con.prepareStatement(sql);
-//			rs=pstmt.executeQuery();
-//			rs.next();
-//			int cnt=rs.getInt("cnt");
-//			return cnt;
-//		}catch (ClassNotFoundException ce) {
-//			System.out.println((ce.getMessage()));
-//			return -1;
-//		}catch (SQLException se) {
-//			System.out.println(se.getMessage());
-//			return -1;
-//		}finally {
-//			try {
-//				if(rs!=null) rs.close();
-//				if(pstmt!=null) pstmt.close();
-//				if(con!=null) con.close();
-//			}catch(SQLException se) {
-//				System.out.println(se.getMessage());
-//			}
-//		}
-		
+	public int getCount() {			
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs= null;
@@ -271,6 +239,8 @@ public class RvBoardDao_kdy {
 			pstmt.executeQuery();
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
+		}finally {
+			DbcpBean.closeConn(con,pstmt,null);
 		}
 	}
 	
