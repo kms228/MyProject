@@ -67,7 +67,6 @@ public class ItemController extends HttpServlet {
 			detail(request,response);
 		
 		}else if(cmd.equals("update")) {
-
 			update(request,response);
 		}
 	}
@@ -134,35 +133,39 @@ public class ItemController extends HttpServlet {
 		//db정보 업데이트저장
 		ItemDao dao = ItemDao.getInstance();
 		int n = dao.update(vo);
+		int i=0;
+		int j=0;
+		boolean del1=false;
+		boolean del2=false;
 		//대표이미지 db 업데이트저장
 		String savefilename1 = mr.getFilesystemName("file1");
-		ItemImg1Vo imgvo1 = new ItemImg1Vo(0, pnum, savefilename1);
-		ItemImg1Dao img1dao = ItemImg1Dao.getInstance();
-		//신규이미지 업로드
-		
-		//이미지1db업뎃
-		int i = img1dao.update(imgvo1);
-		
+		if(savefilename1!=null) {
+			ItemImg1Vo imgvo1 = new ItemImg1Vo(0, pnum, savefilename1);
+			ItemImg1Dao img1dao = ItemImg1Dao.getInstance();
+			//신규이미지 업로드
+			
+			//이미지1db업뎃
+			i = img1dao.update(imgvo1);
+			String delFile1 = mr.getParameter("delFile1");
+			//기존이미지삭제
+			File myFile1 = new File(uploadPath+"/"+delFile1);
+			del1 = myFile1.delete();
+		}
 		//상세이미지 db 업데이트저장
 		String savefilename2 = mr.getFilesystemName("file2");
-		ItemImg2Vo imgvo2 = new ItemImg2Vo(0, pnum, savefilename2);
-		ItemImg2Dao img2dao = ItemImg2Dao.getInstance();
-		//신규이미지 업로드
-		
-		//이미지2db업뎃
-		int j = img2dao.update(imgvo2);
-		
+		if(savefilename2!=null) {
+			ItemImg2Vo imgvo2 = new ItemImg2Vo(0, pnum, savefilename2);
+			ItemImg2Dao img2dao = ItemImg2Dao.getInstance();
+			//신규이미지 업로드
+			
+			//이미지2db업뎃
+			j = img2dao.update(imgvo2);
+			//기존이미지삭제
+			String delFile2 = mr.getParameter("delFile2");
+			File myFile2 = new File(uploadPath+"/"+delFile2);
+			del2 = myFile2.delete();
+		}
 		//삭제할이미지정보 얻어오기
-		String delFile1 = mr.getParameter("delFile1");
-		String delFile2 = mr.getParameter("delFile2");
-		System.out.println(delFile1);
-		System.out.println(delFile2);
-		//대표이미지 삭제
-		File myFile1 = new File(uploadPath+"/"+delFile1);
-		boolean del1 = myFile1.delete();
-		//상세이미지 삭제
-		File myFile2 = new File(uploadPath+"/"+delFile2);
-		boolean del2 = myFile2.delete();
 		
 		if(n>0) {
 			System.out.println("db정보수정완료");
@@ -255,6 +258,7 @@ public class ItemController extends HttpServlet {
 		int price = Integer.parseInt(mr.getParameter("price"));
 		int stock = Integer.parseInt(mr.getParameter("stock"));
 		int fieldnum = Integer.parseInt(mr.getParameter("fieldnum"));
+		
 		ItemVo vo = new ItemVo(0, item_name, price, null, stock, fieldnum);
 		ItemDao dao = ItemDao.getInstance();
 

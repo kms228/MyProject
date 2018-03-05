@@ -7,8 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import diamang.dbcp.DbcpBean;
-import shs.admin.vo.order.PrepProdVo;
 import shs.admin.vo.order.OrderSearchVo;
+import shs.admin.vo.order.PrepProdVo;
+import shs.admin.vo.order.SwitchShippedLogVo;
 import shs.admin.vo.paging.PagingVo;
 
 public class ShippedCompleteDao {
@@ -65,7 +66,7 @@ public class ShippedCompleteDao {
 			con = DbcpBean.getConn();
 			String appendSql = "";
 			if (!vo.getItem_name().equals("")) {
-				appendSql = appendSql + "AND ITEM_NAME =? ";
+				appendSql = appendSql + "AND ITEM_NAME LIKE '%'||?||'%' ";
 			}
 			if (!vo.getOptValue().equals("")) {
 				appendSql = appendSql + "AND " + vo.getOptName() + " =? ";
@@ -88,7 +89,7 @@ public class ShippedCompleteDao {
 					+ "GROUP BY BUY_NUM) A2 " + "WHERE A2.BUY_NUM=A3.BUY_NUM AND RNUM>=? AND RNUM<=? "
 					+ "ORDER BY BUY_NUM DESC";
 			pstmt = con.prepareStatement(bodySql + desinenceSql);
-			if (!vo.getItem_name().equals("")) {
+			if (!vo.getItem_name().equals("")) {				
 				pstmt.setString(n++, vo.getItem_name());
 			}
 			if (!vo.getOptValue().equals("")) {
@@ -134,6 +135,52 @@ public class ShippedCompleteDao {
 			return null;
 		} finally {
 			DbcpBean.closeConn(con, pstmt, rs);
+		}
+	}
+	//배송완료 배치
+	public ArrayList<SwitchShippedLogVo> getShippedComplete(){
+		Connection con = null;
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
+		ResultSet rs = null;
+		ArrayList<SwitchShippedLogVo> list = new ArrayList<>();
+		int n = 1;
+		try {
+			con = DbcpBean.getConn();
+			String sql = "UPDATE BUYBOARD SET STATE = '배송완료' WHERE BUY_DATE>=SYSDATE-1 AND STATE = '배송중'";
+			pstmt1 = con.prepareStatement(sql);						
+			pstmt1.executeUpdate();
+			sql = "SELECT * FROM BUYBOARD WHERE BUY_DATE>=SYSDATE-1 AND STATE = '배송완료'";
+			pstmt2 = con.prepareStatement(sql);						
+			rs = pstmt2.executeQuery();
+			while (rs.next()) {
+				int buy_num = rs.getInt("buy_num");
+				int mnum = rs.getInt("mnum");
+				String buy_date = rs.getString("buy_date");				
+				String name = rs.getString("name");
+				String addr = rs.getString("addr");
+				String state = rs.getString("state");
+				String caddr = rs.getString("caddr");
+				int accprice = rs.getInt("accprice");																
+				SwitchShippedLogVo logVo = new SwitchShippedLogVo();
+				logVo.setBuy_num(buy_num);
+				logVo.setMnum(mnum);
+				logVo.setBuy_date(buy_date);
+				logVo.setName(name);
+				logVo.setAddr(addr);
+				logVo.setCaddr(caddr);
+				logVo.setAccprice(accprice);
+				logVo.setState(state);
+				
+				list.add(logVo);
+			}
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			DbcpBean.closeConn(null, pstmt1, null);
+			DbcpBean.closeConn(con, pstmt2, rs);
 		}
 	}
 }

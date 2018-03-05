@@ -11,7 +11,7 @@
 		var msg = "${msg}";
 		if(!(msg==="")){
 			self.close();
-			window.opener.alert(msg);
+			/* window.opener.alert(msg); */
 			window.opener.location.href="/diamang/admin/members.do?cmd=membersgrade";
 		}		
 	}

@@ -65,7 +65,7 @@ public class OrderCancelDao {
 			con = DbcpBean.getConn();
 			String appendSql = "";
 			if (!vo.getItem_name().equals("")) {
-				appendSql = appendSql + "AND ITEM_NAME =? ";
+				appendSql = appendSql + "AND ITEM_NAME LIKE '%'||?||'%' ";
 			}
 			if (!vo.getOptValue().equals("")) {
 				appendSql = appendSql + "AND " + vo.getOptName() + " =? ";

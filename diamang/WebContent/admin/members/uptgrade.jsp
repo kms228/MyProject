@@ -11,8 +11,8 @@
 	window.onload = function(){
 		var msg = "${msg}";
 		if(!(msg==="")){
-			self.close();
-			window.opener.alert(msg);				
+			self.close();			
+			window.opener.location.href="/diamang/admin/members.do?cmd=membersgrade";
 		}		
 	}
 </script>

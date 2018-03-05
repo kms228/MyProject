@@ -12,12 +12,12 @@
 	#sort ul{margin:0px;padding:0px;}
 	#sort ul li{display:inline;list-style:none;padding-right: 10px;}
 	a{text-decoration: none;}
-	table{width:100%;text-align: center;height:30px;}
-	table tr{background-color: gray;}
-	table td{width:20%;}
+	table{width:100%;text-align: center;height:30px;background-color: gray;}
+	table tr{}
+	table td{width:20%;border-right:1px solid white;border-left:1px solid white;}
 	
-	#iwrap{width:100%;height:auto;border-left: 1px solid gray;border-bottom: 1px solid gray;}
-	#item{float:left;width:249px;border-right:1px solid gray;text-align: center;}
+	#iwrap{width:100%;height:auto;border-left: 1px solid gray;border-top: 1px solid gray;overflow: hidden;margin-top:20px;}
+	#item{float:left;width:249px;height:370px;border-right:1px solid gray;border-bottom:1px solid gray;text-align: center;}
 	img{width:249px;height:300px;}
 </style>
 <h2>BEST</h2>
@@ -35,6 +35,7 @@
 	</div>
 </div>
 <div id="main">
+<!-- 상품 분류 메뉴 -->
 	<table>
 		<tr>
 			<td><a href="<%=request.getContextPath()%>/itemList.do?cmd=all&item_num=${item_num}">전체보기</a></td>
@@ -50,6 +51,7 @@
 			</c:if>
 		</tr>
 	</table>
+<!-- 상품 표시 div -->
 	<div id="iwrap">
 	<c:forEach var="vo" items="${list }" varStatus="status">	
 		<div id="item">

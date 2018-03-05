@@ -4,16 +4,12 @@
 
 <script type="text/javascript">
 	var addGrade = function(){
-		myWindow = window.open("<%=request.getContextPath()%>/admin/members/addgrade.jsp","_blank","width=250, height=170");		
-		
+		window.open("<%=request.getContextPath()%>/admin/members/addgrade.jsp","_blank","width=250, height=170");				
 	}
 	var uptGrade = function(gnum,grade){
-		var selectedGrade = document.getElementById("selectedGrade");
-		
-		selectedGrade = document.getElementById("1").text;
-		
+		var selectedGrade = document.getElementById("selectedGrade");		
+		selectedGrade = document.getElementById("1").text;		
 		window.open("/diamang/admin/members.do?cmd=goupdate&gnum="+gnum,"_blank","width=250, height=170");
-		myWindow.document.getElementByid("grade").value = gnum;
 	}
 </script>
 
@@ -51,11 +47,12 @@
 </div>
 <form method="post" action="<%=request.getContextPath()%>/admin/members.do?cmd=defaultGrade">
 <table border="1" class="mem">
+<caption style="text-align : left;"><span style="color: navy;">현재 설정된 기본등급은 ${defaultGrade } 입니다.</span></caption>
 	<thead>
 		<tr>
 			<th>회원등급 기본설정</th>
 			<th>회원가입 시 회원등급을 
-				<select name="gnum">							
+				<select name="gnum">					
 				<c:forEach var="vo" items="${list }">				
 					<option value="${vo.gnum }">${vo.grade }</option>
 				</c:forEach>				
