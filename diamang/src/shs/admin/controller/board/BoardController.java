@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import shs.admin.dao.board.BoardReviewDao;
 import shs.admin.dao.board.BoardqnaDao;
@@ -21,34 +22,43 @@ public class BoardController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
-		String cmd = req.getParameter("cmd");
-		if(cmd.equals("boardnotice")) {
-			
-		} else if(cmd.equals("boardqna")) {
-			goQna(req,resp);
-			
-		} else if(cmd.equals("boardreview")) {
-			goReview(req,resp);
-			
-		} else if(cmd.equals("fillUp")) {
-			String ref = req.getParameter("ref");
-			String rv_num = req.getParameter("rv_num");
-			String lev = req.getParameter("lev");
-			String step = req.getParameter("step");
-			resp.sendRedirect(req.getContextPath()+"/admin/board/fillupReview.jsp?ref="+ ref+"&rv_num="+rv_num+"&lev="+lev+"&step="+step);			
+		HttpSession session = req.getSession();
+		String id = (String)session.getAttribute("id");
+		if(id==null) {
+			req.setAttribute("errMsg", "로그인 후 이용가능합니다.");
+			req.getRequestDispatcher("/admin/layout_kms.jsp?page=page/home_kms.jsp").forward(req, resp);
 		
-		} else if(cmd.equals("fillUp1")) {
-			String refer = req.getParameter("refer");
-			String qnum = req.getParameter("qnum");
-			String lev = req.getParameter("lev");
-			String step = req.getParameter("step");
-			resp.sendRedirect(req.getContextPath()+"/admin/board/fillupQna.jsp?refer="+ refer+"&qnum="+qnum+"&lev="+lev+"&step="+step);			
+		}else {
 		
-		} else if(cmd.equals("fillupReview")) {
-			fillupReview(req,resp);
-		
-		} else if(cmd.equals("fillupQna")) {
-			fillupQna(req,resp);
+			String cmd = req.getParameter("cmd");
+			if(cmd.equals("boardnotice")) {
+				
+			} else if(cmd.equals("boardqna")) {
+				goQna(req,resp);
+				
+			} else if(cmd.equals("boardreview")) {
+				goReview(req,resp);
+				
+			} else if(cmd.equals("fillUp")) {
+				String ref = req.getParameter("ref");
+				String rv_num = req.getParameter("rv_num");
+				String lev = req.getParameter("lev");
+				String step = req.getParameter("step");
+				resp.sendRedirect(req.getContextPath()+"/admin/board/fillupReview.jsp?ref="+ ref+"&rv_num="+rv_num+"&lev="+lev+"&step="+step);			
+			
+			} else if(cmd.equals("fillUp1")) {
+				String refer = req.getParameter("refer");
+				String qnum = req.getParameter("qnum");
+				String lev = req.getParameter("lev");
+				String step = req.getParameter("step");
+				resp.sendRedirect(req.getContextPath()+"/admin/board/fillupQna.jsp?refer="+ refer+"&qnum="+qnum+"&lev="+lev+"&step="+step);			
+			
+			} else if(cmd.equals("fillupReview")) {
+				fillupReview(req,resp);
+			
+			} else if(cmd.equals("fillupQna")) {
+				fillupQna(req,resp);
+			}
 		}
 	}		
 	
