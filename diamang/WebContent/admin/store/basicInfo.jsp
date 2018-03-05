@@ -45,11 +45,6 @@ function addT(){
 		ipSub.setAttribute("id", "btn1");
 		ipSub.setAttribute("onclick", "insertText()");
 		
-		ipBtn.type="button";
-		ipBtn.value="줄삭제(-)"
-		ipBtn.setAttribute("class", "basicbtn");
-		ipSub.setAttribute("onclick", "delLine()");
-		
 		div.appendChild(lab);
 		div.appendChild(ipText);
 		div.appendChild(ipHdn);
@@ -61,13 +56,20 @@ function addT(){
 }
 
 function insertText(){
+	
 	var insertT = document.getElementById("text"+snum);
 	var insertVal = insertT.value;
 	location.href="<%=request.getContextPath()%>/store?cmd=insert&info1="+insertVal;
 }
-function delText(num){
+function delText(num){	
 	location.href="<%=request.getContextPath()%>/store?cmd=del&num="+num;
 	
+}
+function upText(num,index){
+	var info = document.getElementsByName("info")[index].value;
+	alert(num);
+	alert(info);
+	location.href="<%=request.getContextPath()%>/store?cmd=goChange&num="+num+"&info="+info;
 }
 
 </script>
@@ -79,7 +81,7 @@ function delText(num){
 	<table>
 		<c:forEach var="vo" items="${list }">
 			<tr>
-				<td>${vo.info }</td>
+				<td>&nbsp;${vo.info }</td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -93,9 +95,9 @@ function delText(num){
 		<c:forEach var="vo" items="${list }" varStatus="idx">
 			&nbsp; <label>${idx.index+1 }번째줄</label>
 			<c:set var="inNum" value="${idx.index+2 }"/>
-			<input style="width: 70%;" type="text" name="info" value="${vo.info }">
+			<input style="width: 70%;" type="text" id="info" name="info" value="${vo.info }">
 			<input type="hidden" name="num" value="${vo.num }">
-			<input type="submit" value="수정하기" class="basicbtn">
+			<input type="button" value="수정하기" class="basicbtn" onclick="upText(${vo.num},${idx.index })">	
 			<input type="button" value="내용삭제" class="basicbtn" onclick="delText(${vo.num })">
 			<br>
 		</c:forEach>

@@ -63,6 +63,18 @@ public class PageMove_kdy extends HttpServlet {
 			url = "page/order/order_kdy.jsp";
 			req.setAttribute("cmd", url);
 			req.getRequestDispatcher("/user/layout_kdy.jsp").forward(req, resp);
+		}else if(cmd.equals("cartCheck")) { //카트에 상품 담김 확인 페이지
+			url = "page/cart/cartOk_kdy.jsp";
+			req.setAttribute("cmd", url);
+			req.getRequestDispatcher("/user/layout_kdy.jsp").forward(req, resp);
+		}else if(cmd.equals("cartList")) {
+			url = "page/cart/cart_kdy.jsp";
+			req.setAttribute("cmd", url);
+			req.getRequestDispatcher("/user/layout_kdy.jsp").forward(req, resp);
+		}else if(cmd.equals("orderResult")) { //주문완료 페이지
+			url = "page/order/orderResult_kdy.jsp";
+			req.setAttribute("cmd", url);
+			req.getRequestDispatcher("/user/layout_kdy.jsp").forward(req, resp);
 		}
 	}
 }

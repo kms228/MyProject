@@ -23,7 +23,7 @@
 	#button{padding-left:90%;margin-top:50px;width:100%;margin-bottom:30px;}
 </style>
 <h2>ORDER</h2>
-
+<form method="post" action="<%=request.getContextPath()%>/order.do?cmd=orderOk">
 <div id="orderInfo">
 	<table>
 		<tr>
@@ -32,6 +32,7 @@
 		<tr>
 			<td colspan="7"><hr></td>
 		</tr>
+		<!-- list에 담긴 상품 정보 가져오기 -->
 		<c:forEach var="vo" items="${list }">
 		<tr>
 			<td><img src="<%=request.getContextPath()%>/admin/upload/${vo.savename}" alt="대표이미지"></td>
@@ -72,7 +73,7 @@
 	<p>저희 쇼핑몰을 이용해주셔서 감사합니다. ${mem.name}님은 [${grade.grade}] 등급 회원입니다.</p> 
 </div>
 
-<form method="post" action="<%=request.getContextPath()%>/order.do?cmd=orderOk">
+
 <div id="addInfo">
 배송지 정보<br><br>
 <table>
@@ -106,6 +107,8 @@
 <input type="hidden" value="${total }" name="payPrice">
 <input type="hidden" value="${mem.mnum }" name="mnum">
 <input type="hidden" value="${grade.drate }" name="drate">
+<input type="hidden" value="${list }" name="list">
+<c:set var="list" value="${list}" scope="request"/>
 
 <div id="button">
 <input type="submit" value="결제하기">

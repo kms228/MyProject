@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import user.dao.MembersDao_kdy;
+import user.dao.OrderDao_kdy;
+import user.vo.BuyBoardVo_kdy;
 import user.vo.GradeVo_kdy;
 import user.vo.MembersVo_kdy;
 import user.vo.OrderVo_kdy;
@@ -31,8 +33,30 @@ public class OrderController_kdy extends HttpServlet {
 				req.setAttribute("id", id);
 				orderCheck(req,resp);
 			}
+		}else if(cmd.equals("orderOk")) {
+			orderOk(req,resp);
 		}
 	}
+	
+	private void orderOk(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		int mnum = Integer.parseInt(req.getParameter("mnum"));
+		String addr = req.getParameter("address");
+		String name = req.getParameter("name");
+		String phone = req.getParameter("phone");
+		int accprice = Integer.parseInt(req.getParameter("payPrice"));
+		int drate = Integer.parseInt(req.getParameter("drate"));
+		BuyBoardVo_kdy vo = new BuyBoardVo_kdy(0,mnum,null,null,name,addr,phone,accprice,drate);
+		OrderDao_kdy dao=new OrderDao_kdy();
+		int n = dao.OrderOk(vo);
+		if(n>0) {
+			
+			req.getRequestDispatcher("/move.do?cmd=orderResult").forward(req, resp);
+		}
+		
+		
+	}
+	
 	
 	private void orderCheck(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String id = (String)req.getAttribute("id");
@@ -52,7 +76,7 @@ public class OrderController_kdy extends HttpServlet {
 		int total = (int) (price-drate)+3000;
 		
 		ArrayList<OrderVo_kdy> list=new ArrayList<>();
-		OrderVo_kdy vo3 = new OrderVo_kdy(item_name, savename, price, vo2.getGrade(), amount, total);
+		OrderVo_kdy vo3 = new OrderVo_kdy(pnum,item_name, savename, price, vo2.getGrade(), amount, total);
 		list.add(vo3);
 		req.setAttribute("mem", vo);
 		req.setAttribute("list", list);
