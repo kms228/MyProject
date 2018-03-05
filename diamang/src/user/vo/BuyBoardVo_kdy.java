@@ -7,6 +7,7 @@ public class BuyBoardVo_kdy {
 	private int mnum;
 	private Date buy_date;
 	private String state;
+	private String name;
 	private String addr;
 	private String caddr;
 	private int accprice;
@@ -14,16 +15,25 @@ public class BuyBoardVo_kdy {
 	
 	public BuyBoardVo_kdy() {}
 
-	public BuyBoardVo_kdy(int buy_num, int mnum, Date buy_date, String state, String addr, String caddr, int accprice, int drate) {
+	public BuyBoardVo_kdy(int buy_num, int mnum, Date buy_date, String state, String name, String addr, String caddr, int accprice, int drate) {
 		super();
 		this.buy_num = buy_num;
 		this.mnum = mnum;
 		this.buy_date=buy_date;
 		this.state = state;
+		this.name=name;
 		this.addr = addr;
 		this.caddr = caddr;
 		this.accprice = accprice;
 		this.drate = drate;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public int getBuy_num() {

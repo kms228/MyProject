@@ -1,6 +1,7 @@
 package user.vo;
 
 public class OrderVo_kdy {
+	private int pnum;
 	private String item_name;
 	private String savename;
 	private int price;
@@ -10,14 +11,21 @@ public class OrderVo_kdy {
 	
 	public OrderVo_kdy() {}
 	
-	public OrderVo_kdy(String item_name, String savename, int price, String grade, int amount, int total) {
+	public OrderVo_kdy(int pnum,String item_name, String savename, int price, String grade, int amount, int total) {
 		super();
+		this.pnum=pnum;
 		this.item_name = item_name;
 		this.savename=savename;
 		this.price = price;
 		this.grade = grade;
 		this.amount = amount;
 		this.total = total;
+	}
+	public int getPnum() {
+		return pnum;
+	}
+	public void setPnum(int pnum) {
+		this.pnum = pnum;
 	}
 	public String getItem_name() {
 		return item_name;

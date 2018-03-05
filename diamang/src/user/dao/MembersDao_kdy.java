@@ -90,11 +90,12 @@ public class MembersDao_kdy {
 					int buy_num=rs.getInt("buy_num");
 					Date buy_date = rs.getDate("buy_date");
 					String state = rs.getString("state");
+					String name = rs.getString("name");
 					String addr = rs.getString("addr");
 					String caddr = rs.getString("caddr");
 					int accprice = rs.getInt("accprice");
 					int drate = rs.getInt("drate");
-					BuyBoardVo_kdy vo=new BuyBoardVo_kdy(buy_num,mnum,buy_date,state,addr,caddr,accprice,drate);
+					BuyBoardVo_kdy vo=new BuyBoardVo_kdy(buy_num,mnum,buy_date,state, name, addr,caddr,accprice,drate);
 					return vo;
 				}else {
 					return null;
