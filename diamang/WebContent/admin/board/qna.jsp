@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 <style type="text/css">
 	/* .row {		
 		width : 100%;
@@ -28,14 +23,14 @@
 		border-collapse : collapse;
 		width : 100%;
 	}
-	table tr:hover{background-color: #f5f5f5;}
+	table tr:hover{background-color: #0000ff57;}
 	
 	table, td, th {
 		border : 1px solid gray;		
 	}	
 	table th {
 		height : 40px;
-		background-color: #4CAF50;
+		background-color: #0000ff57;
 		color : white;			
 	}	
 }
@@ -65,11 +60,12 @@
 		location.href=url;
 	} */
 </script>
-</head>
-<body>
-<h1>QNA게시판 관리</h1>
+<h2>게시판관리 > QNA게시판 관리</h2><br>
 <div>
-<h2>게시물 관리</h2>
+<div class="sectionBar"><br>
+	<h3>게시물 관리</h3>
+</div>
+
 <table>
 	<thead>
 	<tr>
@@ -133,9 +129,7 @@
 </c:if>
 <h2>도움말</h2>
 <ul>
-	<li>이 화면은 도움말입니다. 나중에 내용을 적어넣어봐요.</li>
-	<li>이 화면은 도움말입니다. 나중에 내용을 적어넣어봐요.</li>
-	<li>이 화면은 도움말입니다. 나중에 내용을 적어넣어봐요.</li>
+	<li>표에 있는 게시물을 클릭해서 간단하게 작성한 내용을 확인할 수 있습니다.</li>
+	<li>운영자의 답변여부를 확인하고 답변이 없을시 답변하기 탭을 클릭해서 답변을 달 수 있어요.</li>
+	<li>게시물은 20일 내에 올라온것만 보여줍니다.</li>
 </ul>
-</body>
-</html>

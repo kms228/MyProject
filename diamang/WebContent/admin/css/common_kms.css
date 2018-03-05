@@ -6,7 +6,7 @@
 	#header a{text-decoration: none;margin-right: 15px; color: black;}
 	#header #login{float: right;}
 	#header #logout{float:right;}
-	#header h1{padding: 30px;}
+	#header h1{padding: 30px; cursor: pointer;}
 	#header a:hover{font-weight: bold;}
 	  
 #body{width:100%; padding-bottom:10px; background-color:#f2f2f2; border : 1px solid #000000}
@@ -58,3 +58,10 @@
 #popup{margin:200px; background-color:#80808045}
 
 #footer{width:100%;height:200px; background-color:#ffffff; }
+
+#box0:after {content: "";display: table;clear: both;}
+.box1 {	float : left;width : 32%;height : 230px;border : 1px solid #cdcdcd;	margin : 5px;}
+.box1:hover{border : 1px solid black;}
+.box1 ul li:hover{background-color:#0000ff57;cursor:pointer;}
+.box1 h2{text-align:center;}
+

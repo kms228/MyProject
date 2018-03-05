@@ -80,7 +80,8 @@
 		</table>
 		<br>
 		<div align="center">
-			<input class="basicbtn" type="submit" value="검색"><input class="basicbtn" type="reset"
+			<input class="basicbtn" type="submit" value="검색">
+			<input class="basicbtn" type="reset"
 				value="초기화">
 		</div>
 	</form>
@@ -160,8 +161,6 @@
 <div>
 <h2>도움말</h2>
 <ul>
-	<li>이 화면은 도움말입니다. 나중에 내용을 적어넣어봐요.</li>
-	<li>이 화면은 도움말입니다. 나중에 내용을 적어넣어봐요.</li>
-	<li>이 화면은 도움말입니다. 나중에 내용을 적어넣어봐요.</li>
+	<li>배송취소된 상품들을 검색할 수 있습니다.</li>	
 </ul>
 </div>

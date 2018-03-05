@@ -96,7 +96,7 @@
 				</tr>
 				<tr>
 					<th>상품명</th>
-					<td><input type="te	xt" size="30" name="item_name" value="${search.item_name }"></td>
+					<td><input type="text" size="30" name="item_name" value="${search.item_name }"></td>
 				</tr>
 			</tbody>
 		</table>
@@ -184,8 +184,9 @@
 <div>
 <h2>도움말</h2>
 <ul>
-	<li>이 화면은 도움말입니다. 나중에 내용을 적어넣어봐요.</li>
-	<li>이 화면은 도움말입니다. 나중에 내용을 적어넣어봐요.</li>
-	<li>이 화면은 도움말입니다. 나중에 내용을 적어넣어봐요.</li>
+	<li>상품준비중 --> 배송중 --> 배송완료 과정을 확인합니다.</li>
+	<li>실제 배송을 한 상품들의 상태를 바꿀수 있습니다.</li>
+	<li>검색어와 기간, 상품명을 지정해 검색을 원활히 할 수 있습니다.</li>
+	<li>배송이 불가능한 상품들은 배송취소 처리를 해줍니다.</li>
 </ul>
 </div>

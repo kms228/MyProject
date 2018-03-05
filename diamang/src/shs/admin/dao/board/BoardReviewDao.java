@@ -18,7 +18,7 @@ public class BoardReviewDao {
 		ResultSet rs = null;
 		try {
 			con = DbcpBean.getConn();
-			String sql = "SELECT NVL(COUNT(*),0) CNT FROM REVIEW WHERE MNUM != 10000 AND REGDATE >= SYSDATE -5";									
+			String sql = "SELECT NVL(COUNT(*),0) CNT FROM REVIEW WHERE MNUM != 10000 AND REGDATE >= SYSDATE -20";									
 			pstmt = con.prepareStatement(sql);													
 			rs = pstmt.executeQuery();
 			int cnt = -1;
@@ -42,7 +42,7 @@ public class BoardReviewDao {
 			con = DbcpBean.getConn();
 			String sql = "SELECT RV_NUM, TITLE, HIT " + 
 						 "FROM REVIEW R " + 
-						 "WHERE TO_CHAR(R.REGDATE,'YYYYMMDD')=TO_CHAR(SYSDATE,'YYYYMMDD') AND ROWNUM <= 5 " + 
+						 "WHERE TO_CHAR(R.REGDATE,'YYYYMMDD')=TO_CHAR(SYSDATE,'YYYYMMDD') AND ROWNUM <= 5 AND R.MNUM != 10000 " + 
 						 "ORDER BY HIT DESC";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -69,7 +69,7 @@ public class BoardReviewDao {
 			con = DbcpBean.getConn();
 			String sql = "SELECT RV_NUM, TITLE, HIT " + 
 						 "FROM REVIEW R " + 
-						 "WHERE R.REGDATE >= (SYSDATE-8) AND ROWNUM <= 5 " + 
+						 "WHERE R.REGDATE >= (SYSDATE-8) AND ROWNUM <= 5 AND R.MNUM != 10000 " + 
 						 "ORDER BY HIT DESC";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -126,7 +126,7 @@ public class BoardReviewDao {
 					 										"FROM REVIEW R1, REVIEW R2 " + 
 					 										"WHERE R1.RV_NUM = R2.REF AND R2.MNUM = 10000 " + 
 					 										"GROUP BY R1.RV_NUM) R3 " + 
-					 			 "WHERE R.MNUM=M.MNUM AND R.RV_NUM=R3.RV_NUM(+) AND R.MNUM != 10000 AND REGDATE >= SYSDATE -5 " + 
+					 			 "WHERE R.MNUM=M.MNUM AND R.RV_NUM=R3.RV_NUM(+) AND R.MNUM != 10000 AND REGDATE >= SYSDATE -20 " + 
 					 			 "ORDER BY REF DESC, STEP ASC"
 					 		   + ") R4 " + 
 					 	   ") " + 
