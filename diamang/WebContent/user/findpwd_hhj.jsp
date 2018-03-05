@@ -73,7 +73,7 @@ font-family:tahoma;
 
 <c:when test="${pwd!=null}">
 <h3>회원님의 비밀번호를 이메일로 전송하였습니다. </h3> <!-- <label for="pwd">${pwd} 입니다.</label> --><br>
-<a href="<%=request.getContextPath()%>/move.do?cmd=main">로그인페이지</a>
+<a href="<%=request.getContextPath()%>/move.do?cmd=login">로그인페이지</a>
 </c:when>
 
 

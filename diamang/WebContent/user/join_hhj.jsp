@@ -31,7 +31,6 @@ font-size:12px;
 font-weight:bold;
 font-family:tahoma;
 }
-
 </style>
 <script type="text/javascript">
 	function join() {
@@ -110,7 +109,7 @@ font-family:tahoma;
 			email.focus();
 			return false;
 		}
-		if(emch=1){
+		if(emch!=0){
 			alert("이메일중복검사를 확인해주세요.");
 			email.focus();
 			return false;
