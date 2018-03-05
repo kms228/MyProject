@@ -101,9 +101,11 @@ public class OrderController extends HttpServlet{
 		PagingVo pageVo =  bot.calPaging(pageNum, dao.getCount(vo));
 		ArrayList<PrepProdVo> list = dao.search(vo, pageVo);		
 		req.setAttribute("search", vo);		
-		if(list.size()>0) {
-			req.setAttribute("list", list);
-			req.setAttribute("pageVo", pageVo);
+		if(list!=null) {
+			if(list.size()>0) {
+				req.setAttribute("list", list);
+				req.setAttribute("pageVo", pageVo);
+			}
 		}
 		req.getRequestDispatcher("/admin/layout_kms.jsp?page=order/prepareproduct.jsp").forward(req, resp);
 	}
@@ -119,9 +121,11 @@ public class OrderController extends HttpServlet{
 		PagingVo pageVo =  bot.calPaging(pageNum, dao.getCount(vo));
 		ArrayList<PrepProdVo> list = dao.search(vo, pageVo);				
 		req.setAttribute("search", vo);
-		if(list.size()>0) {
-			req.setAttribute("list", list);
-			req.setAttribute("pageVo", pageVo);
+		if(list!=null) {
+			if(list.size()>0) {
+				req.setAttribute("list", list);
+				req.setAttribute("pageVo", pageVo);
+			}
 		}		
 		req.getRequestDispatcher("/admin/layout_kms.jsp?page=order/shippedend.jsp").forward(req, resp);
 	}
@@ -137,9 +141,11 @@ public class OrderController extends HttpServlet{
 		PagingVo pageVo =  bot.calPaging(pageNum, dao.getCount(vo));
 		ArrayList<PrepProdVo> list = dao.search(vo, pageVo);				
 		req.setAttribute("search", vo);
-		if(list.size()>0) {
-			req.setAttribute("list", list);
-			req.setAttribute("pageVo", pageVo);
+		if(list!=null) {
+			if(list.size()>0) {
+				req.setAttribute("list", list);
+				req.setAttribute("pageVo", pageVo);
+			}
 		}		
 		req.getRequestDispatcher("/admin/layout_kms.jsp?page=order/shippedcomplete.jsp").forward(req, resp);
 	}
@@ -151,10 +157,12 @@ public class OrderController extends HttpServlet{
 		PagingVo pageVo =  bot.calPaging(req.getParameter("pageNum"), dao.getCount(vo));
 		ArrayList<PrepProdVo> list = dao.search(vo, pageVo);
 		req.setAttribute("search", vo);
-		if(list.size()>0) {
-			req.setAttribute("list", list);
-			req.setAttribute("pageVo", pageVo);
-		}
+		if(list!=null) {
+			if(list.size()>0) {
+				req.setAttribute("list", list);
+				req.setAttribute("pageVo", pageVo);
+			}
+		}	
 		req.getRequestDispatcher("/admin/layout_kms.jsp?page=order/ordercancel.jsp").forward(req, resp);
 	}
 	

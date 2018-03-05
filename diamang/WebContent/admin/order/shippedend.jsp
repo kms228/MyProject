@@ -61,7 +61,6 @@
 					<td><select name="optName" id="optName">
 							<option value="order_num" id="order_num">주문번호</option>
 							<option value="name" id="name">주문자명</option>
-							<option value="id" id="id">주문자아이디</option>
 					</select><input type="text" size="30" name="optValue" value="${search.optValue }"></td>
 				</tr>
 				<tr>

@@ -66,7 +66,7 @@ public class ShippedEndDao {
 			con = DbcpBean.getConn();
 			String appendSql = "";
 			if(!vo.getItem_name().equals("")) {
-				appendSql = appendSql + "AND ITEM_NAME =? ";				
+				appendSql = appendSql + "AND ITEM_NAME LIKE '%'||?||'%' ";				
 			}
 			if(!vo.getOptValue().equals("")) {
 				appendSql = appendSql +"AND "+ vo.getOptName()+" =? " ;			
@@ -117,6 +117,7 @@ public class ShippedEndDao {
 			pstmt.setInt(n++, pagingVo.getEndRow());
 			pstmt.setInt(n++, pagingVo.getStartRow());
 			pstmt.setInt(n++, pagingVo.getEndRow());
+			System.out.println(bodySql+desinenceSql);
 			rs = pstmt.executeQuery();			
 			while(rs.next()) {
 				int buy_num = rs.getInt("buy_num");
