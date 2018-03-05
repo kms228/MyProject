@@ -96,7 +96,7 @@
 				</tr>
 				<tr>
 					<th>상품명</th>
-					<td><input type="te	xt" size="30" name="item_name" value="${search.item_name }"></td>
+					<td><input type="text" size="30" name="item_name" value="${search.item_name }"></td>
 				</tr>
 			</tbody>
 		</table>

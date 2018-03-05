@@ -58,3 +58,9 @@
 #popup{margin:200px; background-color:#80808045}
 
 #footer{width:100%;height:200px; background-color:#ffffff; }
+
+#box0:after {content: "";display: table;clear: both;}
+.box1 {	float : left;width : 32%;height : 230px;border : 1px solid #cdcdcd;	margin : 5px;}
+.box1:hover{border : 1px solid black;}
+.box1 ul li:hover{background-color:#0000ff57;}
+.box1 h2{text-align:center;}

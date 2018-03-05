@@ -81,8 +81,8 @@
 		</table>
 		<br>
 		<div align="center">
-			<input class="basicbtn" type="submit" value="검색"><input class="basicbtn" type="reset"
-				value="초기화">
+			<input class="basicbtn" type="submit" value="검색">
+			<input class="basicbtn" type="reset"value="초기화">
 		</div>
 	</form>
 	<br>

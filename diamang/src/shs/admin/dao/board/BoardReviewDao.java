@@ -42,7 +42,7 @@ public class BoardReviewDao {
 			con = DbcpBean.getConn();
 			String sql = "SELECT RV_NUM, TITLE, HIT " + 
 						 "FROM REVIEW R " + 
-						 "WHERE TO_CHAR(R.REGDATE,'YYYYMMDD')=TO_CHAR(SYSDATE,'YYYYMMDD') AND ROWNUM <= 5 " + 
+						 "WHERE TO_CHAR(R.REGDATE,'YYYYMMDD')=TO_CHAR(SYSDATE,'YYYYMMDD') AND ROWNUM <= 5 AND R.MNUM != 10000 " + 
 						 "ORDER BY HIT DESC";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -69,7 +69,7 @@ public class BoardReviewDao {
 			con = DbcpBean.getConn();
 			String sql = "SELECT RV_NUM, TITLE, HIT " + 
 						 "FROM REVIEW R " + 
-						 "WHERE R.REGDATE >= (SYSDATE-8) AND ROWNUM <= 5 " + 
+						 "WHERE R.REGDATE >= (SYSDATE-8) AND ROWNUM <= 5 AND R.MNUM != 10000 " + 
 						 "ORDER BY HIT DESC";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
