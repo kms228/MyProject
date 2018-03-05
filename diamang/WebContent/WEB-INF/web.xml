@@ -6,7 +6,13 @@
   </welcome-file-list>
   <listener>
 	<listener-class>shs.admin.etc.DefaultGrade</listener-class> 
-  </listener>  
+  </listener>    
+  <listener>
+     <listener-class>user.bat.logInOutBat_hhj</listener-class>
+  </listener>
+  <listener>
+     <listener-class>shs.admin.etc.BatchSwitchShippedComplete</listener-class>
+  </listener>
 <resource-ref>
  <description>Oracle Datasource example</description>
  <res-ref-name>jdbc/myoracle</res-ref-name>

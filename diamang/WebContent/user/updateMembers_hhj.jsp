@@ -119,6 +119,7 @@ font-family:tahoma;
 <p><label for="name">이름 </label><input type="text" value="${user.name}" name="name" readonly="readonly"></p>
 <p><label for="birthday">생년월일 </label><input type="text" value="${user.birthday }" name="birthday" readonly="readonly"></p>
 <p><label for="joindate">가입일 </label><input type="text" value="${user.joindate }" name="joindate" readonly="readonly"></p>
+<p><label for="grade">회원등급</label><input type="text" value="${user.grade}" name="grade" readonly="readonly"></p>
 <hr>
 <h5 style="margin-left: 150px;">개인정보수정</h5>
 <p><label for="pwd">비밀번호</label><input type="password" name="pwd" id="pwd"></p>

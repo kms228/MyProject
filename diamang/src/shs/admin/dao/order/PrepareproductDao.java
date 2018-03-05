@@ -25,7 +25,7 @@ public class PrepareproductDao {
 					+ "FROM ORDERLIST O, ITEM I, BUYBOARD B, MEMBERS M "
 					+ "WHERE O.PNUM=I.PNUM AND O.BUY_NUM=B.BUY_NUM AND B.MNUM=M.MNUM AND STATE='상품준비중'";			
 			if(!vo.getItem_name().equals("")) {
-				sql = sql + " AND ITEM_NAME =?";				
+				sql = sql + " AND ITEM_NAME LIKE '%'||?||'%' ";				
 			}
 			if(!vo.getOptValue().equals("")) {
 				sql = sql +" AND "+ vo.getOptName()+" =?" ;

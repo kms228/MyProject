@@ -125,13 +125,13 @@
 <table>
 	<thead>
 	<tr>
-		<th>글번호</th><th>상품이름</th><th>별점</th><th>제목</th><th>작성자</th><th>작성일</th><th>답변상태</th><th>답변하기</th>
+		<th>글번호</th><!-- <th>상품이름</th> --><th>별점</th><th>제목</th><th>작성자</th><th>작성일</th><th>답변상태</th><th>답변하기</th>
 	</tr>
 	</thead>
 	<tbody>
 	<c:forEach var="reviews" items="${list }">	
 	<tr>
-		<td>${reviews.rv_num }</td><td></td><td>${reviews.star }</td><td><a href="javascript:toggleContent('${reviews.rv_num }')">${reviews.title }</a></td><td>${reviews.id }</td><td>${reviews.regdate }</td>
+		<td>${reviews.rv_num }</td><!-- <td></td> --><td>${reviews.star }</td><td><a href="javascript:toggleContent('${reviews.rv_num }')">${reviews.title }</a></td><td>${reviews.id }</td><td>${reviews.regdate }</td>
 		<c:choose>
 			<c:when test="${reviews.rvcnt>0 }">
 				<td>답변완료</td><td>-</td>	

@@ -193,12 +193,21 @@ function callback1(){
 	}
 }
 function subm(){
-	alert("상품등록완료");
+	var fieldnum = document.getElementById("fieldnum").value;
+	if(fieldnum!=null && fieldnum!=""){
+		alert("상품등록성공");
+		return true;
+	}else{	
+		alert("상품분류확인하세요.");
+		return false;
+	}
+	
+	
 }
 
 </script>
 
-<form onsubmit="subm()" method="post" action="<c:url value='/item?cmd=itemInsert'/>" enctype="multipart/form-data">
+<form onsubmit="return subm();" method="post" action="<c:url value='/item?cmd=itemInsert'/>" enctype="multipart/form-data">
 	<input type="hidden" name="fieldnum" id="fieldnum">
 	<h2>상품관리 > 상품등록</h2><br>
 	<!-- 기본정보/상품명/상세설명 -->
@@ -213,13 +222,13 @@ function subm(){
 					<tr>
 						<th scope="row">상품명</th>
 						<td>
-							<input type="text" name="item_name"  placeholder="예시) 18k 1g 정수 심플링 반지" style="width: 340px;" onkeyup="itemcheck()">
+							<input type="text" name="item_name"  placeholder="예시) 18k 1g 정수 심플링 반지" style="width: 340px;" onkeyup="itemcheck()" required="required">
 							<span id="itemSpan" style="font-size: 12px;color:red"></span>
 						</td>
 					</tr>
 					<tr>
 						<th scope="row">수량</th>
-						<td><input type="text" name="stock" placeholder="예시) 8">EA</td>
+						<td><input type="text" name="stock" placeholder="예시) 8"required="required">EA</td>
 					</tr>	
 				</tbody>
 			</table>
@@ -235,7 +244,7 @@ function subm(){
 				<tbody>
 					<tr>
 						<th scope="row">판매 가격</th>
-						<td><input type="text" name="price" placeholder="예시) 55000" style="width: 140px;">KRW</td>
+						<td><input type="text" name="price" placeholder="예시) 55000" style="width: 140px;"required="required">KRW</td>
 					</tr>
 					
 				</tbody>
@@ -307,13 +316,13 @@ function subm(){
 						<th>대표 이미지</th>
 						<td><input type="text" class="filename" id="fileName1" readonly="readonly" >
 					<label for="file1" class="btn_label">파일찾기</label>
-					<input type="file" id="file1" name="file1" class="realfile" onchange="javascript:file_change1(this.value);"></td>
+					<input type="file" id="file1" name="file1" class="realfile" onchange="javascript:file_change1(this.value);"required="required"></td>
 					</tr>
 					<tr class="filebox">
 						<th>상세 이미지</th>
 						<td><input type="text" class="filename" id="fileName2" readonly="readonly">
 					<label for="file2" class="btn_label">파일찾기</label>
-					<input type="file" id="file2" name="file2" class="realfile" onchange="javascript:file_change2(this.value);"></td>
+					<input type="file" id="file2" name="file2" class="realfile" onchange="javascript:file_change2(this.value);"required="required"></td>
 					</tr>
 				</tbody>
 			</table>

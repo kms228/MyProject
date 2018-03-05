@@ -4,12 +4,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.naming.Context;
+
+import com.sun.org.apache.regexp.internal.recompile;
 
 import diamang.dbcp.DbcpBean;
 import oracle.jdbc.proxy.annotation.Pre;
 import shs.admin.etc.DefaultGrade;
+import shs.admin.vo.members.MembersVo;
 import user.vo.MemversVo;
 public class MembersDao_hhj {
 	
@@ -115,7 +120,7 @@ public class MembersDao_hhj {
 		ResultSet rs=null;
 		try {
 			con=DbcpBean.getConn();
-			String sql = "select * from members where id=?";
+			String sql = "select * from members m join grade g on m.gnum=g.gnum where id=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1,id);
 			rs=pstmt.executeQuery();
@@ -129,7 +134,9 @@ public class MembersDao_hhj {
 				String phone=rs.getString("phone");
 				String gnum=rs.getString("gnum");
 				String joindate=rs.getString("joindate");
-				MemversVo user = new MemversVo(mnum, id, pwd, name, birthday, email, address, phone, gnum, joindate);
+				String grade=rs.getString("grade");
+				System.out.println(mnum+id+pwd+name+birthday+email+address+phone+gnum+joindate+grade);
+				MemversVo user = new MemversVo(mnum, id, pwd, name, birthday, email, address, phone,gnum,joindate,grade);
 				return user;
 			}
 			return null;
@@ -141,7 +148,33 @@ public class MembersDao_hhj {
 		}
 	}
 	
-	
+	public ArrayList<MembersVo>date(String date){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con=DbcpBean.getConn();
+			String sql = "select id,joindate from members where joindate between TO_DATE(?,'YYYY/MM/DD HH24:MI') and TO_DATE(?,'YYYY/MM/DD HH24:MI')";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1,date+" 00:00");
+			pstmt.setString(2,date+" 23:59");
+			rs=pstmt.executeQuery();
+			ArrayList<MembersVo> list=new ArrayList<>();
+			while(rs.next()) {
+				String id=rs.getString("id");
+				String joindate=rs.getString("joindate");
+				MembersVo user = new MembersVo(id,joindate);
+				list.add(user);
+			}
+			return list;
+		}catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		}finally {
+			DbcpBean.closeConn(con, pstmt, rs);
+		}
+	}
 	
 	public int insert(MemversVo user) {
 		Connection con = null;

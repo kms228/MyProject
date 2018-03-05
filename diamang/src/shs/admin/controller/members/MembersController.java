@@ -98,7 +98,8 @@ public class MembersController extends HttpServlet{
 		MembersgradeDao dao = new MembersgradeDao();
 		ArrayList<MembersgradeVo> list = dao.getGradeinfo();
 		req.setAttribute("list", list);
-		req.setAttribute("defaultGnum", DefaultGrade.GNUM);
+		MembersgradeVo defaultGrade = dao.getGrade(DefaultGrade.GNUM);
+		req.setAttribute("defaultGrade", defaultGrade.getGrade());
 		req.getRequestDispatcher("/admin/layout_kms.jsp?page=members/membersgrade.jsp").forward(req, resp);
 	}
 	private void goGradeupdate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {		

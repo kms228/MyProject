@@ -25,6 +25,7 @@
 	<input type="button" value="▼" id="butten2" name="up"> 
 	</div> -->
 
+
 	<div id="header">
 		<jsp:include page="page/header_kdy.jsp"></jsp:include>
 	</div>

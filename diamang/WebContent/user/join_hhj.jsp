@@ -18,7 +18,19 @@ font-size:13px;
 font-weight:bold;
 font-family:tahoma;
 }
-
+#but1{
+clear:both;
+margin-left:10px;
+width:70px;
+height:25px;
+text-align:center;
+line-height:20px;
+background-color:#000;
+color:#FFFFFF;
+font-size:12px;
+font-weight:bold;
+font-family:tahoma;
+}
 </style>
 <script type="text/javascript">
 	function join() {
@@ -46,6 +58,11 @@ font-family:tahoma;
 		//아이디 한글X
 		if(!regid.test(id.value)){
 			alert("아이디는 영어와 숫자로 입력해주세요.");
+			id.focus();
+			return false;
+		}
+		if(idch!=0){
+			alert("아이디중복을 확인해주세요.");
 			id.focus();
 			return false;
 		}
@@ -92,7 +109,11 @@ font-family:tahoma;
 			email.focus();
 			return false;
 		}
-		
+		if(emch!=0){
+			alert("이메일중복검사를 확인해주세요.");
+			email.focus();
+			return false;
+		}
 		
 		//집주소검사 향후 바뀔수있슴
 		if(address.value.length==0){
@@ -115,11 +136,12 @@ font-family:tahoma;
 	
 	//////////////ajax
 	var xhr = null;
+	var idch=0;
 	function idcheck() {
 		var id = document.getElementsByName("id")[0].value;
 		xhr=new XMLHttpRequest();
 		xhr.onreadystatechange=callback1;
-		xhr.open("get","idcheck.jsp?id="+id,true);
+		xhr.open("get","<%=request.getContextPath()%>/user/idcheck.jsp?id="+id,true);
 		xhr.send();
 	}
 	function callback1(){
@@ -130,21 +152,23 @@ font-family:tahoma;
 			console.log(json.using);
 			if(json.using==true){
 				idsapn.innerHTML="중복된 아이디입니다.";
-				return false;
+				idch=1;
 			}else if(id.value.length<5){
 				idsapn.innerHTML="아이디는 6자리이상 영문+숫자로 입력해주세요.";
-				return false;
+				
 			}else{
 				idsapn.innerHTML="사용가능한 아이디입니다.";
+				idch=0;
 			}
 		}
 	}
 	var xhr2 = null;
+	var emch=0;
 	function emailcheck() {
 		var email = document.getElementsByName("email")[0].value;
 		xhr2=new XMLHttpRequest();
 		xhr2.onreadystatechange=callback;
-		xhr2.open("get","emailcheck.jsp?email="+email,true);
+		xhr2.open("get","<%=request.getContextPath()%>/user/emailcheck.jsp?email="+email,true);
 		xhr2.send();
 	}
 	function callback(){
@@ -155,15 +179,62 @@ font-family:tahoma;
 			console.log(json1.using2);
 			if(json1.using2==true){
 				emailsapn.innerHTML="중복된이메일 입니다.";
-				return false;
+				emch=1;
 			}else if(email.value.indexOf("@")==-1||email.value.indexOf(".")==-1){
 				emailsapn.innerHTML="@와.이 포함된 형식의 이메일을 입력해주세요.";
-				return false;
+				
 			}else{
 				emailsapn.innerHTML="사용가능한 이메일입니다!!";
+				emch=0;
 			}
 		}
 	}
+</script>
+
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script>
+var postcode = function(){
+	new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+            // 예제를 참고하여 다양한 활용법을 확인해 보세요. 
+            // http://postcode.map.daum.net/guide
+
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var fullAddr = ''; // 최종 주소 변수
+            var extraAddr = ''; // 조합형 주소 변수
+
+            // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                fullAddr = data.roadAddress;
+
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                fullAddr = data.jibunAddress;
+            }
+
+            // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+            if(data.userSelectedType === 'R'){
+                //법정동명이 있을 경우 추가한다.
+                if(data.bname !== ''){
+                    extraAddr += data.bname;
+                }
+                // 건물명이 있을 경우 추가한다.
+                if(data.buildingName !== ''){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('address').value = fullAddr;
+
+            // 커서를 상세주소 필드로 이동한다.
+            document.getElementById('address').focus();
+        }
+    }).open();
+}    
 </script>
 
 </head>
@@ -176,6 +247,7 @@ font-family:tahoma;
 		<th style="width: 200px;">아이디</th> 
 		<td>
 			<input type="text" name="id" id="id" onkeyup="idcheck()" >
+			<br>
 			<span id="idsapn" style="font-size: 12px;color:red; "></span>
 		</td>
 	</tr>
@@ -197,12 +269,13 @@ font-family:tahoma;
 </tr>
 
 <tr>
-<th>이메일주소</th> <td><input type="text" name="email" id="email" placeholder="ex)test@naver.com" onkeyup="emailcheck()" ><span id="emailsapn" style="font-size: 12px;color:red"></span></td>
-
+<th>이메일주소</th> <td><input type="text" name="email" id="email" placeholder="ex)test@naver.com" onkeyup="emailcheck()" >
+<br>
+<span id="emailsapn" style="font-size: 12px;color:red"></span></td>
 </tr>
  
 <tr>
-<th>집주소</th> <td><input type="text" name="address" id="address" placeholder="ex)서울시 의정부 의정부동 213-12"></td>
+<th>집주소</th> <td><input type="text" name="address" id="address" placeholder="ex)서울시 의정부 의정부동 213-12"> <input type="button" onclick="postcode()" value="주소찾기" id="but1"></td>
 </tr>
 
 <tr>

@@ -13,6 +13,8 @@ function selectRing(){
 	resultOf3.innerHTML="";
 	resultOf2.innerHTML="";
 	resultOf2.innerHTML="(대분류)반지 > ";
+	var fieldnum = document.getElementById("fieldnum");
+	fieldnum.setAttribute("value", "10");
 	
 }
 function ring(){
@@ -58,6 +60,8 @@ function selectNeck(){
 	resultOf3.innerHTML="";
 	resultOf2.innerHTML="";
 	resultOf2.innerHTML="(대분류)목걸이 > ";
+	var fieldnum = document.getElementById("fieldnum");
+	fieldnum.setAttribute("value", "20");
 }
 function neck(){
 	if(xhr2.readyState==4 && xhr2.status==200){
@@ -95,6 +99,8 @@ function selectEar(){
 	resultOf3.innerHTML="";
 	resultOf2.innerHTML="";
 	resultOf2.innerHTML="(대분류)귀걸이 > ";
+	var fieldnum = document.getElementById("fieldnum");
+	fieldnum.setAttribute("value", "30");
 }
 function ear(){
 	if(xhr3.readyState==4 && xhr3.status==200){
@@ -124,6 +130,8 @@ function selectCoup(){
 	var resultOf2 = document.getElementById("resultOf2");
 	resultOf2.innerHTML="";
 	resultOf2.innerHTML="(대분류)커플링 > ";
+	var fieldnum = document.getElementById("fieldnum");
+	fieldnum.setAttribute("value", "40");
 }
 function coup(){
 	if(xhr4.readyState==4 && xhr4.status==200){
