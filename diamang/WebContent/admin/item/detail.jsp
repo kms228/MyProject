@@ -14,6 +14,7 @@ function file_change1(file1){
 	var str=file1.lastIndexOf("\\")+1;	//파일 마지막 "\" 루트의 길이 이후부터 글자를 잘라 파일명만 가져온다.
 	file1 = file1.substring(str, file1.length);
 	document.getElementById('fileName1').value=file1;
+	
 }
 
 function file_change2(file2){
@@ -281,7 +282,7 @@ function naming(val){
 			<tr class="filebox">
 				<th>대표이미지</th>
 				<td>
-					<input type="text" class="filename" value="${img1vo.savefilename }" id="fileName1" readonly="readonly" >
+					<input type="text" class="filename" value="${img1vo.savefilename }" id="fileName1" readonly="readonly">
 					<label for="file1" class="btn_label">파일찾기</label>
 					<input type="file" id="file1" name="file1" class="realfile" onchange="javascript:file_change1(this.value);">
 					<input type="hidden" name="delFile1" value="${img1vo.savefilename} ">
@@ -291,6 +292,7 @@ function naming(val){
 				<th>상세이미지</th>
 				<td>
 					<input type="text" class="filename" value="${img2vo.savefilename }" id="fileName2" readonly="readonly">
+					
 					<label for="file2" class="btn_label">파일찾기</label>
 					<input type="file" id="file2" name="file2" class="realfile" onchange="javascript:file_change2(this.value);">
 					<input type="hidden" name="delFile2" value="${img2vo.savefilename} ">
