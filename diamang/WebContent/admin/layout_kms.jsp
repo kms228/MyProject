@@ -34,6 +34,7 @@
 	<div id="body">
 		<jsp:include page="${spage }"></jsp:include>
 	</div>
+	<br>
 	<div id="footer">
 		<jsp:include page="page/footer_kms.jsp"></jsp:include>	
 	</div>
