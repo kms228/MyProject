@@ -4,7 +4,7 @@
 
 <script type="text/javascript">
 	
-</script>
+</script> 
 
 <div id="box0">
 	<div class="box1">
