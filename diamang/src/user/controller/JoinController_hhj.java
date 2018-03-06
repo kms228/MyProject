@@ -35,7 +35,8 @@ public class JoinController_hhj extends HttpServlet {
 			HttpSession session = request.getSession();
 			System.out.println(session+ "로그아웃한 날자/시간");
 			session.invalidate();
-			response.sendRedirect(request.getContextPath() + "/move.do?cmd=main");
+			//response.sendRedirect(request.getContextPath() + "/move.do?cmd=main");
+			request.getRequestDispatcher("main.do").forward(request, response);
 		} else if (cmd.equals("update")) {
 			update(request, response);
 		} else if (cmd.equals("updateOk")) {
@@ -164,7 +165,8 @@ public class JoinController_hhj extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
 			// 이동할곳 향후수정
-			response.sendRedirect(request.getContextPath() + "/move.do?cmd=main");
+			//response.sendRedirect(request.getContextPath() + "/move.do?cmd=main");
+			request.getRequestDispatcher("main.do").forward(request, response);
 		} else if (n == 0) { // 회원X
 			request.setAttribute("errmsg", "아이디 또는 비밀번호가 존재하지 않습니다.");
 			request.getRequestDispatcher("move.do?cmd=login").forward(request, response);

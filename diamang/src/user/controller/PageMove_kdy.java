@@ -1,6 +1,7 @@
 package user.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import admin.dao.BasicInfoDao;
+import admin.vo.BasicInfoVo;
+
 @WebServlet("/move.do")
 public class PageMove_kdy extends HttpServlet {
 	@Override
@@ -16,6 +20,10 @@ public class PageMove_kdy extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 		String cmd = req.getParameter("cmd");
 		String url = "page/main_kdy.jsp";
+		ArrayList<BasicInfoVo> infoList2 = new ArrayList<>();
+		BasicInfoDao dao = BasicInfoDao.getInstance();
+		infoList2 = dao.getInfo();
+		req.setAttribute("list2", infoList2);
 		if(cmd==null) { //처음 접속할 때
 			req.getRequestDispatcher("/main.do").forward(req, resp);
 		}else if(cmd.equals("main")){//메인으로 돌아올 때

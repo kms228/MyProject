@@ -9,5 +9,4 @@
 	         </tr>
       </c:forEach>
    </table>	
-   <h2>footer</h2>
 </div>
