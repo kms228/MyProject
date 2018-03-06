@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
+	#mainmenu ul{padding-bottom:3px;}
 	#mainmenu ul li{float:left;list-style:none;padding-right: 10px;}
 	#mainmenu ul li a{text-decoration: none;}
 	#topmenu ul li{float:right;list-style:none;padding-right: 10px;}
@@ -26,15 +27,17 @@
 </div>
 <div>
 	<a href="<%=request.getContextPath()%>/main.do">
-	<img src="<%=request.getContextPath() %>/user/images/header.jpg" alt="jewely header" height="200px" width="300px"></a>
+	<img src="<%=request.getContextPath() %>/user/images/header.jpg" alt="jewely header" height="280px" width="300px"></a>
 </div>
 <div id="mainmenu">
+<hr>
 <ul>
 	<li><a href="<%=request.getContextPath()%>/itemList.do?cmd=earring">귀걸이</a></li>
 	<li><a href="<%=request.getContextPath()%>/itemList.do?cmd=necklace">목걸이</a></li>
 	<li><a href="<%=request.getContextPath()%>/itemList.do?cmd=ring">반지</a></li>
 	<li><a href="<%=request.getContextPath()%>/itemList.do?cmd=couple">커플</a></li>
 	<li><a href="<%=request.getContextPath() %>/review_list.do">리뷰</a></li>
+	<li><a href="<%=request.getContextPath()%>/qna_list.do">Q&A</a></li>
 </ul>
 	<br>
 </div>

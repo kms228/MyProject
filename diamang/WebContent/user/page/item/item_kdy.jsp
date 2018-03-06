@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <style>
 	#menu{width:100%;height:50px;}
-	#main{width:100%;float:left;}
+	#main{width:100%;float:left;margin-bottom:20px;}
 	#page{text-align: center;}
 	#menu div{float:left;}
 	#total{margin:0px;padding:0px;width:30%;}
@@ -12,16 +13,21 @@
 	#sort ul{margin:0px;padding:0px;}
 	#sort ul li{display:inline;list-style:none;padding-right: 10px;}
 	a{text-decoration: none;}
-	table{width:100%;text-align: center;height:30px;background-color: gray;}
-	table tr{}
-	table td{width:20%;border-right:1px solid white;border-left:1px solid white;}
+	#main table{width:100%;text-align: center;height:30px;background-color: #A6A6A6;}
+	#main table tr{}
+	#main table td{width:20%;border-right:1px solid white;border-left:1px solid white;}
 	
 	#iwrap{width:100%;height:auto;border-left: 1px solid gray;border-top: 1px solid gray;overflow: hidden;margin-top:20px;}
 	#item{float:left;width:249px;height:370px;border-right:1px solid gray;border-bottom:1px solid gray;text-align: center;}
-	img{width:249px;height:300px;}
+	#item img{width:249px;height:300px;}
+	#itemName{text-align: center;}
+	#page{margin-bottom:30px;}
 </style>
-<h2>BEST</h2>
 
+<div id="itemName">
+<c:set var="item" value="${item }"/>
+<h2>${fn:toUpperCase(item)}</h2>
+</div>
 
 <div id="menu">
 	<div id="total">TOTAL ${cnt} ITEMS;</div>

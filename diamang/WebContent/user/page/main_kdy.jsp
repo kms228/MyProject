@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 	#mainImg img{width:100%;margin-top:30px;}
-	h2{width:100%;height:32px;background-color:#E1E1E1;}
+	#mwrap h2{width:100%;height:32px;background-color:#E1E1E1;}
 	#item{float:left;width:249px;height:370px;border-right:1px solid gray;border-bottom:1px solid gray;text-align: center;}
 	#item img{width:249px;height:300px;}
 	#mwrap{overflow:hidden;height:auto;}
@@ -12,7 +12,7 @@
 	#neck{overflow:hidden;height:auto;}
 	#ring{overflow:hidden;height:auto;}
 	#couple{overflow:hidden;height:auto;}
-	.iwrap{overflow:hidden;height:auto;}
+	.iwrap{width:100%;height:auto;border-left: 1px solid gray;border-top: 1px solid gray;overflow: hidden;margin-top:20px;}
 	#earring a{float:right;}
 	#neck a{float:right;}
 	#ring a{float:right;}
@@ -23,8 +23,9 @@
 		<img src="<%=request.getContextPath() %>/user/images/main.png" alt="메인이미지">
 	</div>
 	<div id="new">
+		
+			<h2>&nbsp;&nbsp;NEW</h2>
 		<div class="iwrap">
-			<h2>NEW</h2>
 		<c:forEach var="vo" items="${list }" varStatus="status">	
 		<div id="item">
 			<a href="<%=request.getContextPath()%>/itemDetail.do?pnum=${vo.pnum}"><img src="<%=request.getContextPath() %>/admin/upload/${vo.savename }"></a><br>
@@ -35,8 +36,9 @@
 		</div>
 	</div>
 	<div id="earring">
+		
+			<h2>&nbsp;&nbsp;EARRING</h2>
 		<div class="iwrap">
-			<h2>EARRING</h2>
 		<c:forEach var="vo2" items="${list1 }" varStatus="status">	
 			<div id="item">
 				<a href="<%=request.getContextPath()%>/itemDetail.do?pnum=${vo2.pnum}"><img src="<%=request.getContextPath() %>/admin/upload/${vo2.savename }"></a><br>
@@ -48,8 +50,9 @@
 		<a href="<%=request.getContextPath()%>/itemList.do?cmd=earring">더보기</a>
 	</div>
 	<div id="neck">
+		
+			<h2>&nbsp;&nbsp;NECKLACE</h2>
 		<div class="iwrap">
-			<h2>NECKLACE</h2>
 		<c:forEach var="vo2" items="${list3 }" varStatus="status">	
 			<div id="item">
 				<a href="<%=request.getContextPath()%>/itemDetail.do?pnum=${vo2.pnum}"><img src="<%=request.getContextPath() %>/admin/upload/${vo2.savename }"></a><br>
@@ -61,8 +64,9 @@
 		<a href="<%=request.getContextPath()%>/itemList.do?cmd=necklace">더보기</a>
 	</div>
 	<div id="ring">
+		
+			<h2>&nbsp;&nbsp;RING</h2>
 		<div class="iwrap">
-			<h2>RING</h2>
 		<c:forEach var="vo2" items="${list4 }" varStatus="status">	
 			<div id="item">
 				<a href="<%=request.getContextPath()%>/itemDetail.do?pnum=${vo2.pnum}"><img src="<%=request.getContextPath() %>/admin/upload/${vo2.savename }"></a><br>
@@ -74,8 +78,9 @@
 		<a href="<%=request.getContextPath()%>/itemList.do?cmd=ring">더보기</a>
 	</div>
 	<div id="couple">
+		
+			<h2>&nbsp;&nbsp;COUPLE</h2>
 		<div class="iwrap">
-			<h2>COUPLE</h2>
 		<c:forEach var="vo2" items="${list5 }" varStatus="status">	
 			<div id="item">
 				<a href="<%=request.getContextPath()%>/itemDetail.do?pnum=${vo2.pnum}"><img src="<%=request.getContextPath() %>/admin/upload/${vo2.savename }"></a><br>

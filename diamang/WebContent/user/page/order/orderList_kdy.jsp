@@ -2,10 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
+	#title{text-align: center;margin-bottom:40px;}
 	#list{width:100%;}
-	#list table{width:100%;text-align: center;}
+	#list table{width:100%;text-align: center;margin-bottom:30px;}
 </style>
-<div>
+<div id="title">
 	<h2>ORDER LIST</h2>
 </div>
 <div id="list">
@@ -28,7 +29,7 @@
 							<td>${vo.item_name }</td>
 						</c:otherwise>
 					</c:choose>
-					<td>${vo.accprice }</td><td>${vo.state }</td>
+					<td>${vo.accprice }원</td><td>${vo.state }</td>
 				</tr>
 			</c:forEach>
 	</table>
