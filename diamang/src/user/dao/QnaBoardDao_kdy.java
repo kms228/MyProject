@@ -10,10 +10,12 @@ import java.util.ArrayList;
 
 import diamang.dbcp.DbcpBean;
 import user.vo.MembersVo_kdy;
+import user.vo.QnaBoardVo_kdy;
+import user.vo.QnaImgVo_kdy;
 import user.vo.RvBoardVo_kdy;
 import user.vo.RvImageVo_kdy;
 
-public class RvBoardDao_kdy {
+public class QnaBoardDao_kdy {
 	
 	// 전체 글 번호 중 가장 큰 수 구하는 메소드
 	public int getMaxNum() {
@@ -23,7 +25,7 @@ public class RvBoardDao_kdy {
 		
 		try {
 			con = DbcpBean.getConn();
-			String sql = "select NVL(max(rv_num),0) maxnum from review";
+			String sql = "select NVL(max(qnum),0) maxnum from qna";
 			pstmt = con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			rs.next();
@@ -45,7 +47,7 @@ public class RvBoardDao_kdy {
 		
 		try {
 			con = DbcpBean.getConn();
-			String sql = "select NVL(count(rv_num),0) cnt from review";
+			String sql = "select NVL(count(qnum),0) cnt from qna";
 			pstmt = con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			rs.next();
@@ -59,18 +61,17 @@ public class RvBoardDao_kdy {
 		}
 	}
 	
-	public int update (RvBoardVo_kdy vo) {
+	public int update (QnaBoardVo_kdy vo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
 		try{
 			con = DbcpBean.getConn();
-			String sql = "update review set title=?,content=?,star=? where rv_num=?";
+			String sql = "update qna set title=?,content=? where qnum=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getContent());
-			pstmt.setInt(3, vo.getStar());
-			pstmt.setInt(4, vo.getRv_num());
+			pstmt.setInt(3, vo.getQnum());
 			return pstmt.executeUpdate();
 			
 		}catch(SQLException se) {
@@ -81,15 +82,15 @@ public class RvBoardDao_kdy {
 		}
 	}
 	
-	public void delete(int rv_num) {
+	public void delete(int qnum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
 		try {
 			con = DbcpBean.getConn();
-			String sql = "delete from review where rv_num=?";
+			String sql = "delete from qna where qnum=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, rv_num);
+			pstmt.setInt(1, qnum);
 			pstmt.executeQuery();
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
@@ -98,33 +99,15 @@ public class RvBoardDao_kdy {
 		}
 	}
 	
-	public void deleteOk(int buy_num, int pnum) {
+	public void commDelete(int qnum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
 		try {
 			con = DbcpBean.getConn();
-			String sql = "update orderlist set review=0 where buy_num=? and pnum=?";
+			String sql = "delete from qnacomm where qnum=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, buy_num);
-			pstmt.setInt(2, pnum);
-			pstmt.executeQuery();
-		}catch(SQLException se) {
-			System.out.println(se.getMessage());
-		}finally {
-			DbcpBean.closeConn(con, pstmt, null);
-		}
-	}
-	
-	public void commDelete(int rv_num) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			con = DbcpBean.getConn();
-			String sql = "delete from rv_comments where rv_num=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, rv_num);
+			pstmt.setInt(1, qnum);
 			pstmt.executeQuery();
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
@@ -134,7 +117,7 @@ public class RvBoardDao_kdy {
 	}
 	
 	//리스트 보여주는 메소드
-	public ArrayList<RvBoardVo_kdy> list(int startRow, int endRow){
+	public ArrayList<QnaBoardVo_kdy> list(int startRow, int endRow){
 
 		Connection con = null;
 		PreparedStatement pstmt=null;
@@ -144,15 +127,15 @@ public class RvBoardDao_kdy {
 			con=DbcpBean.getConn();
 			String sql = "select * from(" + 
 					"select aa.*, rownum rnum from(" + 
-					"select * from review order by ref desc,step asc)aa" + 
+					"select * from qna order by ref desc,step asc)aa" + 
 					") where rnum>=? and rnum<=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
 			rs=pstmt.executeQuery();	
-			ArrayList<RvBoardVo_kdy> list=new ArrayList<>();
+			ArrayList<QnaBoardVo_kdy> list=new ArrayList<>();
 			while(rs.next()) {
-				int rv_num=rs.getInt("rv_num");
+				int qnum=rs.getInt("qnum");
 				int mnum = rs.getInt("mnum");
 				MembersDao_kdy dao = new MembersDao_kdy();
 				MembersVo_kdy vo = dao.MembersInfo(mnum);
@@ -164,10 +147,8 @@ public class RvBoardDao_kdy {
 				int ref=rs.getInt("ref");
 				int lev=rs.getInt("lev");
 				int step=rs.getInt("step");
-				int star=rs.getInt("star");
-				int pnum=rs.getInt("pnum");
-				String savename = getImgPath(pnum);
-				RvBoardVo_kdy vo2 = new RvBoardVo_kdy(rv_num, mnum, title, writer, content, regdate, hit, ref, lev, step, star,null,savename,pnum);
+				
+				QnaBoardVo_kdy vo2 = new QnaBoardVo_kdy(qnum,mnum,title,writer,content,regdate,hit,ref,lev,step);
 				list.add(vo2);
 			}
 			return list;
@@ -180,7 +161,7 @@ public class RvBoardDao_kdy {
 	}
 	
 	//업로드할 글 내용 DB에 삽입하는 메소드
-	public int insert(RvBoardVo_kdy vo) {
+	public int insert(QnaBoardVo_kdy vo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		PreparedStatement pstmt2 = null;
@@ -188,14 +169,14 @@ public class RvBoardDao_kdy {
 		try {
 			con = DbcpBean.getConn();
 			int boardNum=getMaxNum()+1;
-			int Rv_num=vo.getRv_num();
+			int qnum=vo.getQnum();
 			int ref=vo.getRef();
 			int lev=vo.getLev();
 			int step=vo.getStep();
-			if(Rv_num==0) {//새글인 경우
+			if(qnum==0) {//새글인 경우
 				ref=boardNum;
 			}else{
-			String sql1 = "update review set step=step+1 where ref=? and step>?";
+			String sql1 = "update qna set step=step+1 where ref=? and step>?";
 			pstmt = con.prepareStatement(sql1);
 			pstmt.setInt(1, ref);
 			pstmt.setInt(2, step);
@@ -203,7 +184,7 @@ public class RvBoardDao_kdy {
 			lev = lev+1;
 			step = step+1;
 			}
-			String sql2="insert into review  values(?,?,?,?,sysdate,?,?,?,?,?,?,?)";
+			String sql2="insert into qna  values(?,?,?,?,sysdate,?,?,?,?)";
 			pstmt2=con.prepareStatement(sql2);
 			pstmt2.setInt(1, boardNum);
 			pstmt2.setInt(2, vo.getMnum());
@@ -213,9 +194,6 @@ public class RvBoardDao_kdy {
 			pstmt2.setInt(6, ref);
 			pstmt2.setInt(7, lev);
 			pstmt2.setInt(8, step);
-			pstmt2.setInt(9, vo.getStar());
-			pstmt2.setString(10, vo.getPwd());
-			pstmt2.setInt(11, vo.getPnum());
 			return pstmt2.executeUpdate();
 			
 		}catch(SQLException se) {
@@ -227,33 +205,16 @@ public class RvBoardDao_kdy {
 		}
 	}
 	
-	public void reviewOk(int pnum) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			con = DbcpBean.getConn();
-			String sql = "update orderlist set review=1 where pnum=?";
-			pstmt= con.prepareStatement(sql);
-			pstmt.setInt(1, pnum);
-			pstmt.executeQuery();
-		}catch(SQLException se) {
-			System.out.println(se.getMessage());
-		}finally {
-			DbcpBean.closeConn(con,pstmt,null);
-		}
-	}
-	
 	//조회수
-	public void updateHit(int rv_num) {
+	public void updateHit(int qnum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
 		try {
 			con = DbcpBean.getConn();
-			String sql = "update review set hit=hit+1 where rv_num=?";
+			String sql = "update qna set hit=hit+1 where qnum=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, rv_num);
+			pstmt.setInt(1, qnum);
 			pstmt.executeUpdate();
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
@@ -262,43 +223,17 @@ public class RvBoardDao_kdy {
 		}
 	}
 	
-	//대표 이미지 경로 구하는 메소드
-	public String getImgPath(int pnum) {
-		Connection con = null;
-		PreparedStatement pstmt =null;
-		ResultSet rs= null;
-		
-		try {
-			con = DbcpBean.getConn();
-			String sql = "select savename from itemimg1 where pnum=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, pnum);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				String savename = rs.getString("savename");
-				return savename;
-			}else {
-				return null;
-			}
-		}catch(SQLException se) {
-			System.out.println(se.getMessage());
-			return null;
-		}finally {
-			DbcpBean.closeConn(con, pstmt, rs);
-		}
-	}
-	
 	//이미지 업로드할 때 db에 저장하는 메소드
-	public void imgUpload(RvImageVo_kdy vo){
+	public void imgUpload(QnaImgVo_kdy vo){
 		Connection con =null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		try {
 			con = DbcpBean.getConn();
-			String sql = "insert into image values(image_seq.nextval,?,?)";
+			String sql = "insert into qnaimage values(qnaimage_seq.nextval,?,?)";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, vo.getRv_num());
+			pstmt.setInt(1, vo.getQnum());
 			pstmt.setString(2, vo.getSavename());
 			pstmt.executeQuery();
 		}catch(SQLException se) {
@@ -309,8 +244,8 @@ public class RvBoardDao_kdy {
 		
 	}
 	
-	//rv_num 으로 모든 정보를 조회하는 메소드
-	public RvBoardVo_kdy getInfo(int rv_num) {
+	//qnum 으로 모든 정보를 조회하는 메소드
+	public QnaBoardVo_kdy getInfo(int qnum) {
 		Connection con =null;
 		PreparedStatement pstmt = null;
 		PreparedStatement pstmt2 = null;
@@ -319,9 +254,9 @@ public class RvBoardDao_kdy {
 		
 		try {
 			con = DbcpBean.getConn();
-			String sql = "select * from review r,image i where r.rv_num=? and r.rv_num=i.rv_num";
+			String sql = "select * from qna q,qnaimage i where q.qnum=? and q.qnum=i.qnum";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, rv_num);
+			pstmt.setInt(1, qnum);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				int mnum = rs.getInt("mnum");
@@ -335,17 +270,13 @@ public class RvBoardDao_kdy {
 				int ref = rs.getInt("ref");
 				int lev = rs.getInt("lev");
 				int step = rs.getInt("step");
-				int star = rs.getInt("star");
-				String pwd = rs.getString("pwd");
-				int pnum = rs.getInt("pnum");
 				String savename = rs.getString("savename");
-				RvBoardVo_kdy vo2=new RvBoardVo_kdy(rv_num, mnum, title, writer, content, regdate, hit, ref, lev,
-						step, star, pwd, savename, pnum);
+				QnaBoardVo_kdy vo2 = new QnaBoardVo_kdy(qnum, mnum, title, writer, content, regdate, hit, ref, lev, step, savename);
 				return vo2;
 			}else {
-				String sql2 ="select * from review where rv_num=?";
+				String sql2 ="select * from qna where qnum=?";
 				pstmt2= con.prepareStatement(sql2);
-				pstmt2.setInt(1, rv_num);
+				pstmt2.setInt(1, qnum);
 				rs2=pstmt2.executeQuery();
 				if(rs2.next()) {
 					int mnum = rs2.getInt("mnum");
@@ -359,11 +290,7 @@ public class RvBoardDao_kdy {
 					int ref = rs2.getInt("ref");
 					int lev = rs2.getInt("lev");
 					int step = rs2.getInt("step");
-					int star = rs2.getInt("star");
-					String pwd = rs2.getString("pwd");
-					int pnum = rs2.getInt("pnum");
-					RvBoardVo_kdy vo2=new RvBoardVo_kdy(rv_num, mnum, title, writer, content, regdate, hit, ref, lev,
-							step, star, pwd, null, pnum);
+					QnaBoardVo_kdy vo2 = new QnaBoardVo_kdy();
 					return vo2;
 				}
 			}

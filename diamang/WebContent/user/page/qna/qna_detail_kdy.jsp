@@ -4,22 +4,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <style>
-	#iteminfo{width:100%;border:1px solid gray; margin-top:20px;}
+	#iteminfo{width:100%;border:1px solid gray;}
 	#iteminfo div{display:inline-block;}
 	#img img{width:90px;height:90px}
-	#table table{width:100%;text-align: left;}
+	#table table{width:100%;text-align: left; margin-top:20px;}
 	#table table td{height:30px;}
 	#table table th{width:200px;}
 	#commAdd{overflow: hidden;height: auto;margin-bottom:20px;}
 	#commAdd #button{height:50px;}
 	#commList{margin-top:20px;}
 	.comm p{margin-left:20px;}
-	.comm{padding-bottom:10px;}
+	.comm{padding-bottom:10px;margin-bottom:10px;}
 </style>
 <script>
 	var xhr=null;
 	function add(){
-		var rv_num = <%=request.getAttribute("rv_num")%>
+		var qnum = <%=request.getAttribute("qnum")%>
 		var commId = "<%=(String)session.getAttribute("id")%>";
 		var commPwd = "";
 		if(commId==null){
@@ -30,18 +30,19 @@
 				return;
 			}
 		}
-	
+		
 		var comments = document.getElementById("comments").value;
 		if(comments.trim()==""||comments==null){
 			alert("내용을 입력해주세요.");
 			return;
 		}
+		
 		xhr=new XMLHttpRequest();
 		xhr.onreadystatechange=insert;
-		var url = "<%=request.getContextPath()%>/comm.do?cmd=insert";
+		var url = "<%=request.getContextPath()%>/qna_comm.do?cmd=insert";
 		xhr.open('post',url,true);
 		xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-		var params = "rv_num="+rv_num+"&commId="+commId+"&commPwd="+commPwd+"&comments="+comments;
+		var params = "qnum="+qnum+"&commId="+commId+"&commPwd="+commPwd+"&comments="+comments;
 		xhr.send(params);
 	}
 	function insert(){
@@ -65,7 +66,7 @@
 	function getlist(){
 		xhr1=new XMLHttpRequest();
 		xhr1.onreadystatechange=list;
-		var url = "<%=request.getContextPath()%>/comm.do?cmd=list&rv_num=<%=request.getAttribute("rv_num")%>";
+		var url = "<%=request.getContextPath()%>/qna_comm.do?cmd=list&qnum=<%=request.getAttribute("qnum")%>";
 		xhr1.open('get',url,true);
 		xhr1.send();
 	}
@@ -80,7 +81,7 @@
 			for(var i=0;i<json.list.length;i++){
 				var div = document.createElement("div");
 				var num = json.list[i].num;
-				var rv_num = json.list[i].rv_num;
+				var qnum = json.list[i].qnum;
 				var id = json.list[i].commId;
 				var p = document.createElement("p");
 				p.style.fontSize="20px";
@@ -101,7 +102,7 @@
 				div.appendChild(p3);
 				if("<%=(String)session.getAttribute("id")%>"==json.list[i].commId){
 				div.innerHTML+="<a href=\"javascript:remove('"+num+"')\">삭제</a>&nbsp;"+
-								"<a href=\"javascript:change('"+num+"','"+rv_num+"')\">수정</a>";
+								"<a href=\"javascript:change('"+num+"','"+qnum+"')\">수정</a>";
 				}
 				commList.appendChild(div);
 			}
@@ -111,7 +112,7 @@
 	function remove(num){
 		xhr2=new XMLHttpRequest();
 		xhr2.onreadystatechange=removeComm;
-		var url = "<%=request.getContextPath()%>/comm.do?cmd=remove&num="+num;
+		var url = "<%=request.getContextPath()%>/qna_comm.do?cmd=remove&num="+num;
 		xhr2.open('get',url,true);
 		xhr2.send();
 	}
@@ -128,10 +129,10 @@
 		}
 	}
 	var xhr3=null;
-	function change(num, rv_num){
+	function change(num, qnum){
 		xhr3=new XMLHttpRequest();
 		xhr3.onreadystatechange=changeComm;
-		var url="<%=request.getContextPath()%>/comm.do?cmd=change&num="+num+"&rv_num="+rv_num;
+		var url="<%=request.getContextPath()%>/qna_comm.do?cmd=change&num="+num+"&qnum="+qnum;
 		xhr3.open('get',url,true);
 		xhr3.send();
 	}
@@ -181,7 +182,7 @@
 		}
 		xhr4=new XMLHttpRequest();
 		xhr4.onreadystatechange=updateOk;
-		var url = "<%=request.getContextPath()%>/comm.do?cmd=update";
+		var url = "<%=request.getContextPath()%>/qna_comm.do?cmd=update";
 		xhr4.open('post',url,true);
 		xhr4.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 		var params = "comment="+(comment.value)+"&num="+num;
@@ -202,16 +203,6 @@
 </script>
 <body onload="getlist()">
 <div>
-	<div id="iteminfo">
-		<div id="img">
-			<img src="<%=request.getContextPath()%>/admin/upload/${vo2.savename}">
-		</div>
-			<div id="info">
-				<p>${vo2.item_name }</p>
-				<p>${vo2.price }원</p>
-				<p><input type="button" value="상품상세보기"  onclick = "location.href='itemDetail.do?pnum=${vo.pnum}'" id="button1"></p>
-			</div>
-	</div>
 	<div id="table">
 		<table>
 			<tr>
@@ -234,17 +225,18 @@
 				${vo.content }</td>
 			</tr>
 			<tr>
-				<th>첨부파일	</th><td><c:if test="${empty vo.savename}">없음</c:if>${vo.savename}</td>
+				<th>첨부파일	</th><td>
+				<c:if test="${empty vo.savename}">없음</c:if>${vo.savename }</td>
 			</tr>
 		</table>
-		<a href="<%=request.getContextPath()%>/review_list.do">목록</a>
-		<a href="<%=request.getContextPath()%>/imgUpload.do?rv_num=${vo.rv_num}&ref=${vo.ref}
-		&lev=${vo.lev}&step=${vo.step}&pnum=${vo.pnum}">답글</a>
+		<a href="<%=request.getContextPath()%>/qna_list.do">목록</a>
+		<a href="<%=request.getContextPath()%>/qnaInsert.do?qnum=${vo.qnum}&ref=${vo.ref}
+		&lev=${vo.lev}&step=${vo.step}">답글</a>
 		<c:choose>
 			<c:when test="${not empty sessionScope.id }">
 				<c:if test="${sessionScope.id eq id }">
-					<a href="<%=request.getContextPath()%>/rv_update.do?cmd=update&rv_num=${rv_num}&pnum=${vo.pnum}">수정</a>
-					<a href="<%=request.getContextPath()%>/rv_delete.do?cmd=delete&rv_num=${rv_num}&pnum=${vo.pnum}">삭제</a>
+					<a href="<%=request.getContextPath()%>/qna_update.do?cmd=update&qnum=${qnum}">수정</a>
+					<a href="<%=request.getContextPath()%>/qna_delete.do?cmd=delete&qnum=${qnum}">삭제</a>
 				</c:if>	
 			</c:when>
 		</c:choose>
@@ -268,7 +260,7 @@
 		</c:if>
 		<br>
 		<textarea rows="4" cols="120" id="comments"></textarea>
-		<input type="button" value="등록" onclick="add()" id="button">
+		<input type="button" value="등록" onclick="add()">
 	</div>
 </div>
 </body>

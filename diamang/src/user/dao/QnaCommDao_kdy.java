@@ -1,7 +1,5 @@
 package user.dao;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -9,25 +7,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import diamang.dbcp.DbcpBean;
 import user.vo.QnaCommVo_kdy;
 import user.vo.RvCommVo_kdy;
 
-public class RvCommDao_kdy {
+public class QnaCommDao_kdy {
 	
 	public int updateOk(int num, String comment) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = DbcpBean.getConn();
-			String sql = "update rv_comments set comments=? where num=?";
+			String sql = "update qnacomm set comments=? where num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, comment);
 			pstmt.setInt(2, num);
@@ -41,16 +32,16 @@ public class RvCommDao_kdy {
 	}
 	
 	
-	public int update(int num, int rv_num) {
+	public int update(int num, int qnum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs=null;
 		try {
 			con = DbcpBean.getConn();
-			String sql = "select count(rownum) cnt from rv_comments where num<=? and rv_num=? order by num asc";
+			String sql = "select count(rownum) cnt from qnacomm where num<=? and qnum=? order by num asc";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
-			pstmt.setInt(2, rv_num);
+			pstmt.setInt(2, qnum);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				int index = rs.getInt("cnt");
@@ -71,7 +62,7 @@ public class RvCommDao_kdy {
 		PreparedStatement pstmt = null;
 		try {
 			con= DbcpBean.getConn();
-			String sql = "delete from rv_comments where num=?";
+			String sql = "delete from qnacomm where num=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			return pstmt.executeUpdate();
@@ -84,24 +75,24 @@ public class RvCommDao_kdy {
 		}
 	}
 	
-	public ArrayList<RvCommVo_kdy> list(int rv_num){
+	public ArrayList<QnaCommVo_kdy> list(int qnum){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<RvCommVo_kdy> list = new ArrayList<>();
+		ArrayList<QnaCommVo_kdy> list = new ArrayList<>();
 		try {
 			con=DbcpBean.getConn();
 			String sql = "select num,id,comments,to_char(regdate,'yyyy/mm/dd hh24:mi:ss')"
-					+ " reg from rv_comments where rv_num=? order by num";
+					+ " reg from qnacomm where qnum=? order by num";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, rv_num);
+			pstmt.setInt(1, qnum);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				int num = rs.getInt("num");
 				String commId = rs.getString("id");
 				String comments = rs.getString("comments");
 				String regdate = rs.getString("reg");
-				RvCommVo_kdy vo = new RvCommVo_kdy(num,commId,null,comments,regdate,rv_num);
+				QnaCommVo_kdy vo = new QnaCommVo_kdy(num,commId,null,comments,regdate,qnum);
 				list.add(vo);
 			}
 			return list;
@@ -112,20 +103,19 @@ public class RvCommDao_kdy {
 			DbcpBean.closeConn(con, pstmt, rs);
 		}
 	}
-
 	
-	public int insert(RvCommVo_kdy vo) {
+	public int insert(QnaCommVo_kdy vo) {
 		Connection con =null;
 		PreparedStatement pstmt=null;
 		
 		try {
 			con=DbcpBean.getConn();
-			String sql = "insert into rv_comments values(rv_comments_seq.nextval,?,?,?,sysdate,?)";
+			String sql = "insert into qnacomm values(qnacomm_seq.nextval,?,?,?,sysdate,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, vo.getId());
 			pstmt.setString(2, vo.getPwd());
 			pstmt.setString(3, vo.getComments());
-			pstmt.setInt(4, vo.getRv_num());
+			pstmt.setInt(4, vo.getQnum());
 			return pstmt.executeUpdate();
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());

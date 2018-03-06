@@ -18,6 +18,7 @@ import user.vo.BuyBoardVo_kdy;
 import user.vo.GradeVo_kdy;
 import user.vo.ItemListVo_kdy;
 import user.vo.MembersVo_kdy;
+import user.vo.OrderListVo_kdy;
 import user.vo.OrderVo_kdy;
 
 @WebServlet("/order.do")
@@ -38,7 +39,29 @@ public class OrderController_kdy extends HttpServlet {
 			}
 		}else if(cmd.equals("orderOk")) {
 			orderOk(req,resp);
+		}else if(cmd.equals("orderList")) {
+			HttpSession session=req.getSession();
+			String id = (String)session.getAttribute("id");
+			if(id==null) {
+				req.getRequestDispatcher("/move.do?cmd=login").forward(req, resp);
+			}else {
+				req.setAttribute("id", id);
+				orderList(req,resp);
+			}
 		}
+	}
+	private void orderList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String id = (String)req.getAttribute("id");
+		OrderDao_kdy dao2=new OrderDao_kdy();
+		MembersDao_kdy dao=new MembersDao_kdy();
+		
+		int mnum = dao.searchMnum(id); //id로 mnum 구하기
+		
+		
+		ArrayList<OrderListVo_kdy> list = dao2.buyBoardInfo(mnum); //mnum으로 주문 조회할 정보 구하기
+		
+		req.setAttribute("list", list);
+		req.getRequestDispatcher("/move.do?cmd=orderList").forward(req, resp);
 	}
 	
 	private void orderOk(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

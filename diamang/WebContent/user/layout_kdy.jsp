@@ -25,6 +25,7 @@
 	<input type="button" value="▼" id="butten2" name="up"> 
 	</div> -->
 
+
 	<div id="header">
 		<jsp:include page="page/header_kdy.jsp"></jsp:include>
 	</div>
@@ -37,7 +38,7 @@
 	</div>
 	
 	<div id="footer">
-		<jsp:include page="page/footer_kdy.jsp"></jsp:include>	
+		<jsp:include page="page/footer_kdy.jsp"></jsp:include>
 	</div>
 </div>
 </body>

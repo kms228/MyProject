@@ -167,8 +167,24 @@ CREATE TABLE itemImg2
 	PRIMARY KEY (num)
 );
 
+CREATE TABLE qnaimage
+(
+	num number NOT NULL,
+	qnum number NOT NULL constraint FK_qnaimage references qna(qnum) on delete cascade,
+	savename varchar2(70),
+	PRIMARY KEY (num)
+);
 
-
+CREATE TABLE qnacomm
+(
+	num number NOT NULL,
+    id varchar2(30) NOT NULL,
+    pwd varchar2(20),
+    comments varchar2(500) NOT NULL,
+    regdate date NOT NULL,
+	qnum number NOT NULL constraint FK_qnacomm references qna(qnum) on delete cascade,
+	PRIMARY KEY (num)
+);
 
 /* Create Foreign Keys */
 

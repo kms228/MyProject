@@ -28,6 +28,15 @@ public class MembersVo {
 		this.joindate = joindate;
 		this.grade = grade;
 	}
+	public MembersVo(String id2, String joindate2) {
+		id=id2;
+		joindate=joindate2;
+	}
+	
+	@Override
+	public String toString() {
+		return "MembersVo [id=" + id + ", joindate=" + joindate + "]";
+	}
 	//getter, setter
 	public int getMnum() {
 		return mnum;

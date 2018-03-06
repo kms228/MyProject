@@ -8,24 +8,20 @@
 	#list table{width:100%;margin-bottom:10px;overflow: hidden;height: auto;text-align: center;}
 	#page{text-align: center;}
 </style>
-<div id ="title">
-<h1>REVIEW</h1>
+<div id="title">
+<h1>Q&A</h1>
 <hr>
-<a href="<%=request.getContextPath() %>/move.do?cmd=review_write">글쓰기</a>
+<a href="<%=request.getContextPath() %>/move.do?cmd=qna_write">글쓰기</a>
 </div>
 <br>
 <div id="list">
 <table>
 	<tr style="background-color: pink">
-		<th>no</th><th>product</th><th style="width:500px">title</th><th>writer</th><th>date</th><th>hit</th>
+		<th>no</th><th style="width:500px">title</th><th>writer</th><th>date</th><th>hit</th>
 	</tr>
 	<c:forEach var="vo" items="${list }">
 		<tr>
-			<td>${vo.rv_num }</td>
-			<td>
-			<c:if test="${vo.lev==0 }">
-				<img src="<%=request.getContextPath() %>/admin/upload/${vo.savename }" id="itemImg">
-			</c:if></td> <%-- 선택한 상품의 이미지 --%>
+			<td>${vo.qnum }</td>
 			<td style="text-align: left;">
 			<c:if test="${vo.lev>0}">
 				<%-- 답글인 경우 들여쓰기 하기 --%>
@@ -34,7 +30,7 @@
 				</c:forEach>
 				[re]
 			</c:if>
-			<a href="<%=request.getContextPath()%>/rv_detail.do?rv_num=${vo.rv_num }&pnum=${vo.pnum }">${vo.title }</a>
+			<a href="<%=request.getContextPath()%>/qna_detail.do?qnum=${vo.qnum }&">${vo.title }</a>
 			</td>
 			<td>${vo.writer }</td>
 			<td>${vo.regdate }</td>
@@ -43,7 +39,7 @@
 	</c:forEach>
 </table>
 <!-- 페이징 -->
-		<div id="page">
+	<div id="page">
 		<c:choose>
 			<c:when test="${startPage>10 }">
 				<a href="<%=request.getContextPath()%>/review_list.do?pageNum=${startPage-1}">[이전]</a>

@@ -4,6 +4,7 @@
 <style>
 	#iteminfo{width:100%;border:1px solid gray;}
 	#iteminfo div{display:inline-block;}
+	#iteminfo img{width:90px;height:90px;}
 </style>
 <script>
 	<!-- 상품 정보 선택하는 팝업 열기 위한 스크립트 !-->
@@ -11,7 +12,7 @@
 		window.open("<%=request.getContextPath()%>/itemInfo.do","_blank","width=600px,height=400px");
 	}
 </script>
-<div>
+<div id="wrap">
 	<%-- 글쓰기 폼 --%>
 	<form method="post" action="<%=request.getContextPath() %>/imgUpload.do" enctype="multipart/form-data"
 			onsubmit="return check()">

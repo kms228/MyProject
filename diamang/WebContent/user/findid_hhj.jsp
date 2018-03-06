@@ -66,7 +66,7 @@ font-family:tahoma;
 
 <c:when test="${id!=null}">
 <h2>회원님의 아이디 </h2> <label for="id">${id}</label>
-<a href="<%=request.getContextPath()%>/move.do?cmd=main">로그인페이지</a>
+<a href="<%=request.getContextPath()%>/move.do?cmd=login">로그인페이지</a>
 </c:when>
 
 

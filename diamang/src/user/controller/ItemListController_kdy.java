@@ -147,7 +147,7 @@ public class ItemListController_kdy extends HttpServlet {
 			req.setAttribute("item", cmd);
 			itemList(req,resp);
 		}else if(cmd.equals("main")) {
-			
+			mainList(req,resp);
 		}
 	}
 	
