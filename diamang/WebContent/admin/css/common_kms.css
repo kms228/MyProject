@@ -64,4 +64,29 @@
 .box1:hover{border : 1px solid black;}
 .box1 ul li:hover{background-color:#0000ff57;cursor:pointer;}
 .box1 h2{text-align:center;}
-
+	
+	#menu{position: absolute;}
+	#dropdownmenu li.mainmenu{
+		float: left;
+		width: 200px;
+		list-style: none;
+	}
+	li.mainmenu ul{
+		list-style: none;
+		padding: 0px;
+		
+	}
+	li.mainmenu a{
+		display: block;
+		width: 180px;
+		padding: 10px;
+		text-decoration: none;
+		color: black;
+		font-weight: bold;
+		background-color: white;
+	}
+	li.mainmenu a:hover{
+		background-color:#cdcdcd;
+		color:white;
+	}
+	

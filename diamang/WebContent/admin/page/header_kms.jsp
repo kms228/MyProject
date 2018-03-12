@@ -1,8 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
- 
+
+
 <script type="text/javascript">
+$(document).ready(function(){
+	
+	$("li.mainmenu>a").css("background-color","white");
+	
+	$(".mainmenu ul").hide();
+	$(".mainmenu").hover(function(){
+		$(this).find("a:first").css("font-weight","bold");
+		$(this).find("ul").stop().show();
+	},function(){
+		$(this).find("a:first").css("font-weight","regular");
+		$(this).find("ul").stop().hide();
+	});
+	
+});
 var xhr1=null
 function addMenu1(){	
 	xhr1=new XMLHttpRequest();	
@@ -131,12 +146,48 @@ function list5(){
 	<br>
 	<h1 align="center" onclick="location.href='<%=request.getContextPath()%>/admin/layout_kms.jsp'">쇼핑몰관리24</h1>
 	<br>
-	<a href="javascript:addMenu2()" onmouseover="addMenu2()">상점관리</a><span>|&nbsp;</span>
-	<a href="javascript:addMenu3()" onmouseover="addMenu3()">회원관리</a><span>|&nbsp;</span>
-	<a href="javascript:addMenu1()" onmouseover="addMenu1()">상품관리</a><span>|&nbsp;</span>
-	<a href="javascript:addMenu4()" onmouseover="addMenu4()">주문관리</a><span>|&nbsp;</span>
-	<a href="javascript:addMenu5()" onmouseover="addMenu5()">게시판관리</a>
-	
 	
 	<div id="menuList"></div>
+	
+	<div id="menu">
+	<ul id="dropdownmenu">
+		<li class="mainmenu">
+			<a href="#">상점관리</a>
+			<ul>
+				<li><a href='<%=request.getContextPath()%>/store?cmd=basicInfo'>기본정보설정</a></li>
+			</ul>
+		</li>
+		<li class="mainmenu">
+			<a href="#">회원관리</a>
+			<ul>
+				<li><a href='<%=request.getContextPath() %>/admin/members.do?cmd=membersmain'>회원관리메인</a></li>
+				<li><a href='<%=request.getContextPath() %>/admin/members.do?cmd=membersinfo'>회원정보조회</a></li>
+				<li><a href='<%=request.getContextPath() %>/admin/members.do?cmd=membersgrade'>회원등급관리</a></li>
+			</ul>
+		</li>
+		<li class="mainmenu">
+			<a href="#">상품관리</a>
+			<ul>
+				<li><a href='<%=request.getContextPath()%>/item?cmd=insert'>상품등록</a></li>
+				<li><a href='<%=request.getContextPath()%>/item?cmd=list'>상품수정 및 삭제</a></li>
+			</ul>
+		</li>
+		<li class="mainmenu">
+			<a href="#">주문관리</a>
+			<ul>
+				<li><a href='<%=request.getContextPath()%>/admin/order.do?cmd=prepareproduct'>상품준비중</a></li>
+				<li><a href='<%=request.getContextPath()%>/admin/order.do?cmd=shippedend'>배송중</a></li>
+				<li><a href='<%=request.getContextPath()%>/admin/order.do?cmd=shippedcomplete'>배송완료</a></li>
+				<li><a href='<%=request.getContextPath()%>/admin/order.do?cmd=ordercancel'>배송취소</a></li>
+			</ul>
+		</li>
+		<li class="mainmenu">
+			<a href="#">게시판관리</a>
+			<ul>
+				<li><a href='<%=request.getContextPath()%>/admin/board.do?cmd=boardqna'>Q&A관리</a></li>
+				<li><a href='<%=request.getContextPath()%>/admin/board.do?cmd=boardreview'>후기게시판관리</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
 </div>

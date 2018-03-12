@@ -17,6 +17,7 @@ public class ItemDao {
 		return instance;
 	}
 	
+	
 	//상품추가
 	public int itemInsert(ItemVo vo) {
 		Connection con = null;
@@ -102,6 +103,40 @@ public class ItemDao {
 			DbcpBean.closeConn(con, pstmt, rs);
 		}
 	}
+	
+	//로그
+		public ArrayList<ItemVo> logList(String date){
+			ArrayList<ItemVo> list = new ArrayList<>();
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				con = DbcpBean.getConn();
+				String sql = "select * from item where regdate"
+						+ " between to_date(?, 'YYYYMMDD HH24:MI')"
+						+ " and to_date(?, 'YYYYMMDD HH24:MI')";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, date + " 00:00");
+				pstmt.setString(2, date + " 23:59");
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					int pnum = rs.getInt(1);
+					String item_name = rs.getString(2);
+					int price = rs.getInt(3);
+					Date regdate = rs.getDate(4);
+					int stock = rs.getInt(5);
+					ItemVo vo = new ItemVo(pnum, item_name, price, regdate, stock, 0);
+					list.add(vo);
+				}
+				return list;
+			}catch(SQLException se) {
+				System.out.println(se.getMessage());
+				return null;
+			}finally {
+				DbcpBean.closeConn(con, pstmt, rs);
+			}
+		}
+		
 	//상품삭제(상품번호)
 	public int delete(int pnum){
 		Connection con = null;

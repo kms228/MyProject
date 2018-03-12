@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/admin/css/common_kms.css?ver=1">
 <c:if test="${!empty errMsg }">
 	<script type="text/javascript">
@@ -13,7 +14,6 @@
 	</script>
 </c:if>
 </head>
-
 <body>
 <%--
 	String spage=request.getParameter("page");

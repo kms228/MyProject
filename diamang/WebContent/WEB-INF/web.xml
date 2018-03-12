@@ -13,6 +13,9 @@
   <listener>
      <listener-class>shs.admin.etc.BatchSwitchShippedComplete</listener-class>
   </listener>
+  <listener>
+	<listener-class>admin.batch.DeleteBatch</listener-class> 
+  </listener>
 <resource-ref>
  <description>Oracle Datasource example</description>
  <res-ref-name>jdbc/myoracle</res-ref-name>

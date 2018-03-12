@@ -72,7 +72,6 @@ public class ItemController extends HttpServlet {
 	}
 	
 	private void del(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Áö¿ì·¯¿È2");
 		int pnum = Integer.parseInt(request.getParameter("pnum"));
 		int fieldnum = Integer.parseInt(request.getParameter("fieldnum"));
 		String uploadPath = request.getServletContext().getRealPath("admin/upload");

@@ -15,6 +15,7 @@ import shs.admin.vo.order.SwitchShippedLogVo;
 public class BatchSwitchShippedComplete {
    public BatchSwitchShippedComplete() {
       System.out.println("batch 호출");
+      
       TimerTask task = new TimerTask() {
          @Override
          public void run() {
@@ -24,6 +25,7 @@ public class BatchSwitchShippedComplete {
          }
       };
       
+      
       Timer timer = new Timer(true);
       Calendar cal = Calendar.getInstance();
       // 1일에 한번 실행. 현재는 시연을 위해 주석으로 막아놓음
@@ -32,7 +34,7 @@ public class BatchSwitchShippedComplete {
 //      cal.set(Calendar.SECOND, 0);
 //      cal.add(Calendar.DATE, 1);	
       //scheduleAtFixedRate(수행할 작업, 최초시작시간, 반복주기)
-      timer.scheduleAtFixedRate(task, new Date(cal.getTimeInMillis()), /*1000 * 60 * 60 * 24*/1000*60);
+     // timer.scheduleAtFixedRate(task, new Date(cal.getTimeInMillis()), /*1000 * 60 * 60 * 24*/1000*60);
    }
 
    // 배치에서 실행될 메소드 정의
