@@ -14,11 +14,11 @@ import admin.vo.ItemVo;
 
 public class InsertBatch {
 	public InsertBatch() {
-		System.out.println("DeleteBatch 호출");
+		System.out.println("InsertBatch 호출");
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
-				System.out.println("DeleteBatch");
+				System.out.println("InsertBatch");
 				createInsertLog();
 			}
 		};
